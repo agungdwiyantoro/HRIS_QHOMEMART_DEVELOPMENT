@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/coor_detail_mtApprove"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/abu_abu"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:id="@+id/lin_form_izin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="53dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/lytoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+
+            <include
+                android:id="@+id/toolbar_izin_meninggalkan_tugas"
+                layout="@layout/toollbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:orientation="vertical"
+                >
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="10dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:orientation="vertical">
+
+                        <!--<TextView
+                            android:id="@+id/tgl"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="10-12-2020"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:layout_margin="8dp"
+                            />-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="NIK"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="2"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+
+                                android:textColor="@color/colorWhite" />
+
+                            <TextView
+                                android:id="@+id/txNik"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="________"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="1"
+                                android:paddingLeft="8dp"
+                                />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Nama"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="2"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+
+                                android:textColor="@color/colorWhite" />
+
+                            <TextView
+                                android:id="@+id/txNama"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="________"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="1"
+                                android:paddingLeft="8dp"
+                                />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Divisi"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="2"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+                                android:textColor="@color/colorWhite" />
+
+                            <TextView
+                                android:id="@+id/txDivisi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="________"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="1"
+                                android:paddingLeft="8dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/txNoDivisi"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Jam" />
+
+                    <EditText
+                        android:id="@+id/edjamMulai"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:textSize="12dp"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+
+
+                    <ImageButton
+                        android:id="@+id/btnJamMulai"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="-40dp"
+                        android:background="@color/float_transparent"
+                        android:src="@drawable/ic_navigate_down" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:text="s/d" />
+
+
+                    <EditText
+                        android:textSize="12dp"
+                        android:id="@+id/edjamSelesai"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+
+
+                    <ImageButton
+                        android:id="@+id/btnJamSelesai"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="-40dp"
+                        android:background="@color/float_transparent"
+                        android:src="@drawable/ic_navigate_down" />
+
+                </LinearLayout>
+
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Tanggal" />
+
+                    <EditText
+                        android:id="@+id/edTgl"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:textSize="12dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+
+
+                    <ImageButton
+                        android:id="@+id/btnTgl"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="-40dp"
+                        android:background="@color/float_transparent"
+                        android:src="@drawable/ic_date" />
+
+                </LinearLayout>
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Izin" />
+
+                    <EditText
+                        android:id="@+id/izin"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:textSize="12dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+
+
+
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Kepentingan" />
+
+                    <EditText
+                        android:textSize="12dp"
+                        android:id="@+id/edKepentingan"
+                        android:layout_width="0dp"
+                        android:padding="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:textColor="@color/black"
+                        android:focusableInTouchMode="true"
+                        android:inputType="textMultiLine"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_gravity="center"
+                    android:layout_width="150dp"
+                    android:src="@drawable/upload"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Foto Bukti Izin"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/blue"
+                    android:layout_margin="8dp"
+                    />
+
+                <LinearLayout
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <Button
+                        android:id="@+id/btnApprove"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input"
+                        android:backgroundTint="@color/btnPrimary"
+                        android:text="setuju"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:layout_marginTop="@dimen/padd_10"
+                        android:id="@+id/btnUnApprove"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input"
+                        android:backgroundTint="@color/red_btn_bg_pressed_color"
+                        android:text="tidak setuju"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

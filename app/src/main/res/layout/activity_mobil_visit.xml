@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".visitor.Mobil.MobilVisit">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <EditText
+                    android:id="@+id/etCariTgl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <Button
+                    android:id="@+id/btnCariTgl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cari"
+                    android:textColor="@color/colorWhite"
+                    android:background="@color/blue"
+                    />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMovilVisit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/list_mobil"
+            />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabBackToAddMobil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_baseline_history_white_24"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="89dp"
+        app:backgroundTint="@color/blue"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabToAddMobil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add_white_24dp"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/blue"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

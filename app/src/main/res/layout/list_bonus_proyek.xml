@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardListProyek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/tvCust"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tvWaktu"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/form_iklan_promo"
+                    android:textColor="@color/btnPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/opensans_regular"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvNamaProyek"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/tvStatusProyek"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:textSize="14sp"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/btn_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="10dp"
+                    android:textStyle="bold"
+                    android:text="@string/lihat"
+                    android:layout_marginEnd="@dimen/padd_10"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp" />
+                <TextView
+
+                    android:id="@+id/btn_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="10dp"
+                    android:textStyle="bold"
+                    android:text="@string/edit"
+                    android:layout_marginEnd="@dimen/padd_10"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:id="@+id/btnhapus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"
+                    android:text="Hapus"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="@dimen/padd_10"
+                    android:textColor="@color/red_btn_bg_pressed_color"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

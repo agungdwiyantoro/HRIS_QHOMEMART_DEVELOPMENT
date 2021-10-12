@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".fragment_report">
+
+    <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/abu_abu"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp">
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:elevation="8dp"
+                            app:cardCornerRadius="5dp"
+                            android:layout_margin="8dp"
+
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:background="@color/btnPrimary"
+                                >
+
+                                <android.support.design.widget.CoordinatorLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_margin="8dp"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        >
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:padding="2dp"
+                                            android:text="@string/dari_tgl"
+                                            android:textColor="@color/colorWhite"
+                                            android:layout_weight="2"
+                                            android:gravity="center|left"
+                                            android:textStyle="bold"
+                                            />
+
+                                        <EditText
+                                            android:id="@+id/tgl1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundededit"
+                                            android:inputType="text"
+                                            android:padding="13dp"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp"
+                                            android:layout_weight="1"
+                                            android:text="12/06/2020"
+                                            android:gravity="center"
+                                            />
+
+                                    </LinearLayout>
+
+                                    <ImageButton
+                                        android:id="@+id/btnCalender1"
+                                        android:layout_width="52dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/float_transparent"
+                                        android:src="@drawable/ic_date"
+                                        android:layout_gravity="right|center"
+                                        />
+
+                                </android.support.design.widget.CoordinatorLayout>
+                                <android.support.design.widget.CoordinatorLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_margin="8dp"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        >
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:padding="2dp"
+                                            android:text="@string/sampai_tgl"
+                                            android:textColor="@color/colorWhite"
+                                            android:layout_weight="2"
+                                            android:gravity="center|left"
+                                            android:textStyle="bold"
+                                            />
+
+                                        <EditText
+                                            android:id="@+id/tgl2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/roundededit"
+                                            android:inputType="text"
+                                            android:padding="13dp"
+                                            android:textColor="@color/black"
+                                            android:textSize="14sp"
+                                            android:layout_weight="1"
+                                            android:text="12/06/2020"
+                                            android:gravity="center"
+                                            />
+
+                                    </LinearLayout>
+
+                                    <ImageButton
+                                        android:id="@+id/btnCalender2"
+                                        android:layout_width="52dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/float_transparent"
+                                        android:src="@drawable/ic_date"
+                                        android:layout_gravity="right|center"
+                                        />
+
+                                </android.support.design.widget.CoordinatorLayout>
+
+
+
+                            </LinearLayout>
+
+
+
+                        </android.support.v7.widget.CardView>
+
+                        <LinearLayout
+                            android:id="@+id/rcLinear"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="50dp"
+                            android:orientation="vertical"
+                            android:background="@color/abu_abu"
+                            >
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="5dp"
+                                android:layout_margin="8dp"
+                                android:background="@color/colorWhite"
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:background="@color/colorWhite"
+                                    >
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:layout_weight="1"
+                                        android:text="Riwayat Presensi :"
+                                        android:textColor="@color/black"
+                                        android:textSize="16dp"
+                                        android:textStyle="bold" />
+
+
+
+
+
+
+
+
+                                </LinearLayout>
+
+                                <android.support.v4.widget.SwipeRefreshLayout
+                                    android:id="@+id/swiperefresh"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="20dp"
+                                    android:outlineAmbientShadowColor="@color/blue"
+                                    android:outlineSpotShadowColor="@color/blue"
+                                    tools:ignore="MissingConstraints">
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/rcRiwayatAbsen"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="24dp"
+                                        android:background="@color/colorWhite"
+                                        tools:listitem="@layout/layout_riwayat"
+
+                                        />
+
+                                </android.support.v4.widget.SwipeRefreshLayout>
+
+
+                            </android.support.v7.widget.CardView>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout
+          >
+
+</LinearLayout>
+

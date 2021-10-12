@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/lmenu"
+    android:background="@color/colorWhite"
+    tools:context=".kasbon.kasbon_karyawan">
+
+    <LinearLayout
+        android:id="@+id/lytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <include
+            android:id="@+id/toolbar_abs"
+            layout="@layout/toollbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+                    android:background="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                    android:background="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:layout_margin="16dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="8dp"
+                        >
+
+                        <LinearLayout
+                            android:background="#2291EA"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:orientation="vertical"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginBottom="@dimen/padd_10"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/colorWhite"
+                                    android:text="KASBON MINGGUAN"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:layout_margin="8dp"
+                                    />
+
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_margin="4dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/colorWhite"
+                                    android:text="Periode"
+                                    android:textStyle="bold"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/bg_input_rounded"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/sweet_dialog_bg_color_dark"
+                                    android:textStyle="bold"
+                                    android:textSize="15sp" />
+
+                                <ImageButton
+                                    android:id="@+id/btnTgl"
+                                    android:layout_width="52dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="-50dp"
+                                    android:background="@color/float_transparent"
+                                    android:src="@drawable/ic_date" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_margin="4dp"
+                                >
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/colorWhite"
+                                    android:text="Hutang"
+                                    android:textStyle="bold"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/txNominal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/bg_input_rounded"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="@color/sweet_dialog_bg_color_dark"
+                                    android:text="Rp 0"
+                                    android:textStyle="bold"
+                                    android:textSize="15sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:layout_margin="4dp">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/colorWhite"
+                                    android:text="Batas UM"
+                                    android:textStyle="bold"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/txUm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/bg_input_rounded"
+                                    android:textAlignment="textEnd"
+                                    android:textColor="@color/sweet_dialog_bg_color_dark"
+                                    android:text="Rp 0"
+                                    android:textStyle="bold"
+                                    android:textSize="15sp" />
+
+
+                            </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btnCari"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Cari"
+                                    android:textColor="@color/btnPrimary"
+                                    android:textSize="16sp"
+                                    android:background="@color/colorWhite"
+                                    android:layout_margin="4dp"
+                                    />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <LinearLayout
+                        android:id="@+id/rcLinear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:text="RIWAYAT UANG MINGGUAN"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+
+                            />
+
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:id="@+id/tvPromo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_input_rounded"
+                            android:backgroundTint="@color/btnWarning"
+                            android:drawableStart="@drawable/ic_info"
+                            android:textColor="@color/black"
+                            android:textStyle="italic"
+                            android:gravity="center_vertical|center"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="8dp"
+                            android:text="KET:HIJAU (ACC)/ MERAH (PENDING)"/>
+
+
+
+
+
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rcKasbon"
+                            android:layout_marginTop="@dimen/padd_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/gap"
+                            tools:listitem="@layout/list_kasbon"
+                            android:layout_marginEnd="@dimen/gap"
+                            android:layout_marginBottom="@dimen/gap"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/tambahPinjaman"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="right"
+        android:layout_marginLeft="10dp"
+        android:backgroundTint="@color/main_blue_color"
+        android:src="@drawable/ic_plus"
+        android:tint="@color/colorWhite"
+        app:fabSize="normal"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

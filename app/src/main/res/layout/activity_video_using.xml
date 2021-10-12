@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".VideoUsing">
+
+    <LinearLayout
+        android:id="@+id/RlVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <VideoView
+            android:id="@+id/video"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/RlVideo"
+        android:layout_margin="8dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perlu bantuan,"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/btnBantuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="klik disini"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/error_stroke_color"
+            android:layout_marginStart="@dimen/gap"/>
+    </LinearLayout>
+
+</RelativeLayout>

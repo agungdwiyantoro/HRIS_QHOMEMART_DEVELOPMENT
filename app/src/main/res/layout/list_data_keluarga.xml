@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:id="@+id/txtNamaKeluarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aviera"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/txtHubungan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Anak"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/txtNoHp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="08354844165"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:layout_weight="1"
+            />
+
+        <LinearLayout
+            android:id="@+id/lLDelKeluarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+
+            <ImageView
+                android:id="@+id/imgDelKeluarga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_remove_circle_outline_24"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#1976D2"
+        />
+
+</LinearLayout>

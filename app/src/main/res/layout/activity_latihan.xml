@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/coordinator"
+    tools:context=".training.soal_training.Latihan"
+    android:background="@color/btnPrimary"
+    >
+
+    <TextView
+        android:id="@+id/soal_temp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:visibility="visible"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:textColor="@color/colorWhite"
+        />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/jawaban_temp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="99/100"
+        android:visibility="visible"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:textColor="@color/colorWhite"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:id="@+id/txHitSoal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="99/100"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@color/colorWhite"
+            />
+
+
+        <TextView
+            android:id="@+id/txJmlSoal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Soal : 100"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:textColor="@color/colorWhite"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_info"
+            android:padding="8dp"
+            />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="60dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="8dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/txSoal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lorem_ipsum"
+                        android:textSize="24sp"
+                        android:padding="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:background="@color/colorWhite"
+                        android:fontFamily="@font/opensans_bold"
+                        />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:background="@color/colorWhite"
+                android:layout_weight="1"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorWhite"
+                    android:layout_margin="8dp">
+                    <LinearLayout
+                        android:id="@+id/cardLat_A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txA"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="A. Yogyakarta"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_margin="8dp"
+                            />
+
+                    </LinearLayout>
+
+
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorWhite"
+                    android:layout_margin="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/cardLat_B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txB"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="B. Surakarta"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_margin="8dp"
+                            />
+
+
+
+                    </LinearLayout>
+
+
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorWhite"
+                    android:layout_margin="8dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/cardLat_C"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="C. Klaten"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_margin="8dp"
+                            />
+
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorWhite"
+                    android:layout_margin="8dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/cardLat_D"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txD"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="D. Purwakarta"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"
+                            android:layout_margin="8dp"
+                            />
+
+
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@color/btnPrimary"
+        >
+
+        <Button
+            android:id="@+id/btn_prev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/prev"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:textColor="@color/btnPrimary"
+            android:layout_margin="4dp"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:id="@+id/btn_soal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/prev"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:textColor="@color/btnPrimary"
+            android:layout_margin="4dp"
+            android:visibility="visible"
+            />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:textColor="@color/btnPrimary"
+            android:layout_margin="4dp"
+            android:visibility="visible"
+            />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_group"
+        app:showAsAction="always"
+        android:title="" />
+
+
+    <item
+        android:id="@+id/logout"
+        android:enabled="true"
+        android:title="Logout"
+        app:showAsAction="never" />
+
+
+
+    <item
+        android:id="@+id/gantiPassword"
+        android:enabled="true"
+        android:title="Ganti Password"
+        app:showAsAction="never" />
+</menu>

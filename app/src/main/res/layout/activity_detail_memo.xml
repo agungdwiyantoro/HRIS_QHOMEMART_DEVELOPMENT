@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/lin_detail_memo"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        >
+
+        <include
+            android:id="@+id/toolbar_abs"
+            layout="@layout/toollbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:elevation="@dimen/padd_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="5dp"
+        >
+
+        <LinearLayout
+            android:background="@color/colorWhite"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:textAllCaps="true"
+                android:textAlignment="center"
+                android:id="@+id/tv_jenis_memo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/jenis_memo"
+                android:textColor="@color/grey_darken_4"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_marginEnd="@dimen/padd_10"
+                android:layout_marginStart="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/black" />
+
+            <TextView
+
+                android:id="@+id/tv_no_memo"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nomor_memo"
+                android:textColor="@color/grey_darken_4"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/lin_internal_memo"
+                android:layout_marginStart="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kepada_memo"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:id="@+id/tx_kepada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="________"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dari_memo"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:id="@+id/tx_dari"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="________"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hal_memo"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:id="@+id/tx_hal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="________"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tgl_memo"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:id="@+id/tx_tgl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="________"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_notulen"
+                android:layout_marginStart="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tgl_notulen"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:id="@+id/tgl_notulen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="________"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/waktu"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:id="@+id/waktu_notulen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="________"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tempat"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:id="@+id/tempat_notulen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="________"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/agenda"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:id="@+id/agenda_notulen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="________"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/peserta_rapat"
+                        android:textColor="@color/grey_darken_4"
+                        android:textSize="14dp"
+                        android:layout_weight="4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/grey_darken_4" />
+
+                    <TextView
+                        android:layout_marginEnd="150dp"
+                        android:id="@+id/tx_peserta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/klik"
+                        android:textStyle="bold"
+                        android:textColor="@color/blue"
+                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="8dp"
+                        />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lin_link"
+            android:layout_marginStart="@dimen/padd_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lampiran"
+                    android:textColor="@color/grey_darken_4"
+                    android:textSize="14dp"
+                    android:layout_weight="4"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textColor="@color/grey_darken_4"
+                    />
+
+                <TextView
+                    android:id="@+id/tx_lampiran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/klik"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue"
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="8dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lampiran_video"
+                    android:textColor="@color/grey_darken_4"
+                    android:textSize="14dp"
+                    android:layout_weight="4"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=":"
+                    android:textColor="@color/grey_darken_4" />
+
+                <TextView
+                    android:id="@+id/tx_lampiran_video"
+                    android:layout_marginEnd="150dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/klik"
+                    android:textStyle="bold"
+                    android:textColor="@color/blue"
+                    android:textSize="14dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="8dp"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_receipt_grey_24dp"
+            />
+
+        <TextView
+            android:textColor="@color/grey_darken_4"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:id="@+id/tv_containe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

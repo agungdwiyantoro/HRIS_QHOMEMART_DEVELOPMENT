@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardListProyek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvOwnerProyek"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:text="@string/owner_proyek"
+                    android:textSize="18sp"
+                    />
+
+
+
+                <Button
+                    android:id="@+id/btnhapus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:background="@drawable/bg_tag"
+                    android:backgroundTint="@color/btnDanger"
+                    android:text="Hapus"
+                    android:layout_marginEnd="@dimen/padd_10"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10sp" />
+
+
+                <Button
+                    style="@style/Widget.AppCompat.ImageButton"
+                    android:foreground="?android:selectableItemBackground"
+                    android:background="@drawable/bg_tag"
+                    android:backgroundTint="@color/gray_btn_bg_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="@color/black"
+                    android:id="@+id/btnStatus"
+                    android:text="@string/setuju"
+                    android:textSize="10sp"
+                    android:onClick="btnDiscover"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+
+
+                <TextView
+                    android:id="@+id/tvNamaProyek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textColor="@color/black"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ."
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

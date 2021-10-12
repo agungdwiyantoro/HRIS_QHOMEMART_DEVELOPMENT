@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/listtemposq"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    android:focusable="true">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvSQList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:background="@color/colorWhite"
+        android:focusable="true"
+        app:cardCornerRadius="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorWhite"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padd_10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtmerk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal       :  "
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/material_deep_teal_50" />
+
+                <TextView
+                    android:id="@+id/txTgl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:textSize="15dp"
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:text="2018-12-20" />
+
+            </LinearLayout>
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/abs_in"
+                    android:layout_width="90dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/bg_tag"
+                    android:backgroundTint="@color/btnPrimary"
+                    android:text="SCAN1: 08:04 AM"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="8sp" />
+
+                <Button
+                    android:id="@+id/abs_out_break"
+                    android:layout_width="90dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/bg_tag"
+                    android:backgroundTint="@color/btnDanger"
+                    android:text="Hapus"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp"/>
+
+                <Button
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/abs_over_in"
+                    android:layout_width="90dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/bg_tag"
+                    android:backgroundTint="@color/btnWarning"
+                    android:text="Edit SQ"
+                    android:textColor="@color/black"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/padd_10"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/abs_out"
+                    android:layout_width="90dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/bg_tag"
+                    android:backgroundTint="@color/btnPrimary"
+                    android:text="Aproval Hrg"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <Button
+                    android:id="@+id/abs_in_break"
+                    android:layout_width="90dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@drawable/bg_tag"
+                    android:backgroundTint="@color/btnDanger"
+                    android:text="Hapus"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <Button
+                    android:id="@+id/abs_over_out"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="90dp"
+                    android:layout_height="26dp"
+                    android:background="@drawable/bg_tag"
+                    android:backgroundTint="@color/btnWarning"
+                    android:text="Edit SQ"
+                    android:textColor="@color/black"
+                    android:textSize="8sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+</LinearLayout>

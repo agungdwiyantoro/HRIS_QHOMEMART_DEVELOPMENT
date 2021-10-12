@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".visitor.AddPengunjungVisit">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|center"
+                android:text="Pengunjung"
+                android:textSize="36sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/txtPengunjung"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="100dp"
+                android:textColor="@color/blue"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="60dp"
+                >
+
+                <Button
+                    android:id="@+id/btnRemovePengunjung"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:background="#f30101"
+                    android:text="-"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    />
+
+                <Button
+                    android:id="@+id/btnAddPengunjung"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="8dp"
+                    android:background="@color/blue"
+                    android:text="+"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnCOPengunjung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selesai"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="bottom"
+                android:layout_margin="8dp"
+                android:background="@color/main_orange_color"
+                />
+
+        </android.support.design.widget.CoordinatorLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

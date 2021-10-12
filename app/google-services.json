@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "47992353450",
+    "project_id": "hris-qhomemart",
+    "storage_bucket": "hris-qhomemart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47992353450:android:5cdcdb53353ef6489896d3",
+        "android_client_info": {
+          "package_name": "com.app.mobiledev.apphris"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47992353450-1mc02j6ie7f9vrvc7od0gd7669829ga1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.mobiledev.apphris",
+            "certificate_hash": "bcd93fe2bbc90758539d7cf09bc70635d0f98a7b"
+          }
+        },
+        {
+          "client_id": "47992353450-2gpc912n7jnmdvm54556uu9nb97nccti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbERhwr9SAGgP_vZhGB099sL9qi7ozlTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47992353450-2gpc912n7jnmdvm54556uu9nb97nccti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "47992353450-dphps4ohdnf4ea8lnf4b49ktle3bql6t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it-qhomemart.co.id.hris",
+                "app_store_id": "1554798486"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

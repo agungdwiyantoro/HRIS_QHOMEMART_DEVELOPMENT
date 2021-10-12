@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="53dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:id="@+id/lytoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"
+            >
+
+            <include
+                android:id="@+id/toolbar_abs"
+                layout="@layout/toollbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:backgroundTint="@color/colorWhite"
+                android:elevation="5dp"
+                android:orientation="vertical"
+                android:padding="@dimen/gap2">
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="16dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:orientation="vertical">
+
+                        <!--<TextView
+                            android:id="@+id/tgl"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="10-12-2020"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:layout_margin="8dp"
+                            />-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="NIK"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="2"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+
+                                android:textColor="@color/colorWhite" />
+
+                            <TextView
+                                android:id="@+id/txNik"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="________"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="1"
+                                android:paddingLeft="8dp"
+                                />
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Nama"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="2"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+
+                                android:textColor="@color/colorWhite" />
+
+                            <TextView
+                                android:id="@+id/txNama"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="________"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="1"
+                                android:paddingLeft="8dp"
+                                />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Divisi"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="2"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+
+                                android:textColor="@color/colorWhite" />
+
+                            <TextView
+                                android:id="@+id/txDivisi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="________"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="1"
+                                android:paddingLeft="8dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/txNoDivisi"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:text="TEST"
+                                android:textColor="@color/black"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Jabatan"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="2"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=":"
+
+                                android:textColor="@color/colorWhite" />
+
+                            <TextView
+                                android:id="@+id/txJabatan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="________"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16dp"
+                                android:layout_weight="1"
+                                android:paddingLeft="8dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/txNoJabatan"
+                                android:layout_width="100dp"
+                                android:layout_height="wrap_content"
+                                android:text="TEST"
+                                android:textColor="@color/black"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txNominal"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="No Hp" />
+
+                    <EditText
+                        android:id="@+id/edHp"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="number"
+                        android:paddingLeft="16dp"
+                        android:text="0"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Lama Cuti" />
+
+                    <EditText
+                        android:id="@+id/edLamacuti"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="number"
+                        android:paddingLeft="16dp"
+                        android:text="0"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Sisa Cuti" />
+
+                    <EditText
+                        android:id="@+id/edSisaCuti"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="number"
+                        android:paddingLeft="16dp"
+                        android:text="0"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Periode" />
+
+                    <EditText
+                        android:id="@+id/edPeriode"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Tanggal Mulai" />
+
+                    <EditText
+                        android:id="@+id/edTglMulai"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+
+
+                    <ImageButton
+                        android:id="@+id/btnTglMulai"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="-40dp"
+                        android:background="@color/float_transparent"
+                        android:src="@drawable/ic_navigate_next" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Tanggal Selesai" />
+
+                    <EditText
+                        android:id="@+id/edTglSelesai"
+                        android:layout_width="0dp"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="number"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+
+                    <ImageButton
+                        android:id="@+id/btnTglSelesai"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="-40dp"
+                        android:background="@color/float_transparent"
+                        android:src="@drawable/ic_navigate_next" />
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginBottom="16dp"
+                    >
+
+                    <TextView
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:textColor="@color/black"
+                        android:text="Alasan" />
+
+                    <EditText
+                        android:id="@+id/edAlasan"
+                        android:layout_width="0dp"
+                        android:padding="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:textColor="@color/black"
+                        android:focusableInTouchMode="true"
+                        android:inputType="textMultiLine"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp"
+                    >
+
+                    <Button
+                        android:id="@+id/btnSimpan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input"
+                        android:backgroundTint="@color/btnPrimary"
+                        android:text="SIMPAN"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp" />
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</LinearLayout>

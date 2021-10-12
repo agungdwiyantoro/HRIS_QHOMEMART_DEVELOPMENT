@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2FFFFFF"
+    android:orientation="vertical"
+    tools:context=".profil">
+
+    <LinearLayout
+        android:id="@+id/lytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <include
+            android:id="@+id/toolbar_abs"
+            layout="@layout/toollbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/lytoolbar" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilUbahPass"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:gravity="bottom"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_chevron_right_blue_24dp"
+            android:text="Ubah Password"
+            android:textColor="@color/blue"
+            android:textSize="16sp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/tilUbahPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.484"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="16dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="16dp"
+
+            >
+
+            <!--<TextView
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Foto Profil (Ketuk pada icon image)"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />-->
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/foto_profil"
+                    android:layout_width="120dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_user_account" />
+
+                <ImageButton
+                    android:id="@+id/ibUser"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom|right"
+                    android:background="@drawable/bg_profile"
+                    android:src="@drawable/ic_edit" />
+
+            </android.support.design.widget.CoordinatorLayout>
+
+            <TextView
+                android:id="@+id/txtNamaFull"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="Nama"
+                android:textColor="@color/btnPrimary"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/opensans_bold"
+                />
+
+            <TextView
+                android:id="@+id/txtNik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:drawableLeft="@drawable/ic_credit_card_blue_24dp"
+                android:drawablePadding="8dp"
+                android:text="NIK"
+                android:textColor="@color/btnPrimary"
+                android:textSize="16sp"
+                android:fontFamily="@font/opensans_regular"
+                />
+
+            <TextView
+                android:id="@+id/txtDivisi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:drawableLeft="@drawable/ic_account_balance_blue_24dp"
+                android:drawablePadding="8dp"
+                android:text="Divisi"
+                android:textColor="@color/btnPrimary"
+                android:textSize="16sp"
+                android:fontFamily="@font/opensans_regular"
+                />
+
+            <TextView
+                android:id="@+id/txtJabatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:drawableLeft="@drawable/ic_card_travel_blue_24dp"
+                android:drawablePadding="8dp"
+                android:text="Jabatan"
+                android:textColor="@color/btnPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtHastag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:drawableLeft="@drawable/ic_hastag_blue_24dp"
+                android:drawableRight="@drawable/ic_content_copy_blue_24dp"
+                android:drawablePadding="8dp"
+                android:text="Hastag"
+                android:textColor="@color/btnPrimary"
+                android:textIsSelectable="true"
+                android:textSize="16sp"
+                android:fontFamily="@font/opensans_regular"
+                />
+
+
+
+
+            <TextView
+                android:id="@+id/txtUpdateDataDiri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:drawableLeft="@drawable/ic_baseline_upgrade_24"
+                android:drawableTint="#E64A19"
+                android:drawablePadding="8dp"
+                android:text="Update Data Diri"
+                android:textColor="#E64A19"
+                android:textIsSelectable="true"
+                android:textSize="16sp"
+                android:fontFamily="@font/opensans_regular"
+                />
+
+            <!--<Button
+                    android:id="@+id/btnPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input"
+                    android:backgroundTint="@color/btnPrimary"
+                    android:text="Ubah Password"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:layout_marginTop="8dp"
+                    android:bottomRightRadius="10dp"
+                    android:bottomLeftRadius="10dp"
+                    android:topLeftRadius="10dp"
+                    android:topRightRadius="10dp"
+                    />-->
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+</android.support.constraint.ConstraintLayout>

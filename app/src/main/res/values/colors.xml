@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1e88e5</color>
+    <color name="colorPrimaryDark">#1565c0</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="inputborder">#89898A</color>
+    <color name="blue">#2980b9</color>
+
+
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="backgroundColor">#FCF3F3F3</color>
+    <color name="yellow">#FFD000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="black">#000000</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="main_blue_color">#2469df</color>
+    <color name="main_blue_stroke_color">#205ec7</color>
+    <color name="grey_darken_4">#212121</color>
+    <color name="light_grey">#8E8E8E</color>
+    <color name="abu_abu">#C1C0C7</color>
+
+
+
+
+    <color name="btnPrimary">#2196F3</color>
+    <color name="greennew">#00BFA6</color>
+
+    <color name="btnWarning">#FFD54F</color>
+    <color name="btnDanger">#F3110C</color>
+    <color name="place_autocomplete_search_text">@android:color/primary_text_dark</color>
+    <color name="place_autocomplete_search_hint">@android:color/secondary_text_dark</color>
+</resources>

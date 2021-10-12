@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.app.mobiledev.apphris">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+
+    <application
+        android:name=".notifikasi.MainApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_background"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_background_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
+        tools:replace="android:icon">
+        <activity android:name=".test.DownloadFile">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_hris" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/white" />
+
+        <activity android:name=".test.TestFCM">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+
+        <service
+            android:name=".notifikasi.MyFCMService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".profile.alamat.AlamatIndonesia" />
+        <!--
+<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        -->
+        <activity android:name=".profile.dataKeluarga.DataKeluarga" />
+        <activity android:name=".profile.alamat.Kelurahan" />
+        <activity android:name=".profile.alamat.Kecamatan" />
+        <activity android:name=".profile.alamat.KotaKab" />
+        <activity android:name=".profile.alamat.Provinsi">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".profile.UpdateDataDiri">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+
+        </activity>
+        <activity
+            android:name=".approve.adminIzinMt.detailIzinMtApprove"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".approve.adminIzinMt.listIzinMtApprove"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".approve.adminIzinDinas.detailListDinasApprove"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".approve.adminIzinDinas.listIzinDinasApprove"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".izin.izinMT.listIzinMt"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".approve.menu_approve" />
+        <activity
+            android:name=".izin.izinDinas.formDetailIzinDinas"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".izin.izinDinas.listDetailIzinDinas"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".izin.izinDinas.listIzinDinas"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".izin.izinDinas.riwayatIzinDinas" />
+        <activity
+            android:name=".izin.izinMT.form_izin_meninggalkan_tugas"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".izin.menu_izin"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".izin.izinDinas.map_place_picker_izin_lokasi"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".memo.DetailLampiranVideo" />
+        <activity
+            android:name=".memo.DetailLampiranMemo"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".memo.peserta.list_peserta"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".memo.listMemo.memo_list"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.TARGET_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".bonus.bonus_promosi_proyek.list_bonus_proyek"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".bonus.bonus_promosi_proyek.add_karyawan"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".bonus.bonus_promosi_proyek.form_bonus_proyek"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".bonus.menu_bonus"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".formKunjungan.form_kunjungan"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".training.soal_training.mulai_soal"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".training.menu_training"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".training.info_training.list_info_training"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".bonus.bonus_promosi_proyek.edit_form_bonus_proyek"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <service
+            android:name=".service.services_notif"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".service.MySimpleService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name=".training.soal_training.Latihan"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".formKunjungan.list_formKunjungan"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".profile.UbahPass"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".profile.UbahFoto"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".memo.DetailMemo"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".VideoUsing" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="face" />
+
+        <activity
+            android:name=".maps_location.maps_lokasi"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".lupa_password"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".bonus.bonus_promosi_iklan.add_bonus"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".bonus.bonus_promosi_iklan.bonus"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".izin.izinDinas.form_izin_dinas"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".update_layout"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".splashScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".login"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".register" />
+        <activity
+            android:name=".absensi_masuk"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".absensi_keluar"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".mulai_istirahat"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".selesai_istirahat"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".mulai_lembur"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".selesai_lembur"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".reportAbsensi"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".saldo"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".kasbon.kasbon_karyawan"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".menu_pinjaman"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".pinjaman.pinjamanUang"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".pinjaman.tambahPinjaman"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".kasbon.tambahKasbon"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".profile.profil"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".fragment_home"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="Instantiatable,LockedOrientationActivity" />
+        <activity
+            android:name=".main_fragment"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".fragment_report"
+            android:screenOrientation="portrait"
+            tools:ignore="Instantiatable,LockedOrientationActivity" />
+        <activity
+            android:name=".fragment_info"
+            android:screenOrientation="portrait"
+            tools:ignore="Instantiatable,LockedOrientationActivity" />
+        <activity
+            android:name=".cuti"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".form_cuti"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".visitor.Visitor" />
+        <activity android:name=".visitor.RiwayatVisit" />
+        <activity android:name=".visitor.AddPengunjungVisit" />
+        <activity android:name=".visitor.AddMobilMotorVisit" />
+    </application>
+
+</manifest>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Form Data Keluarga"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tIlNamaAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Keluarga"
+            >
+
+            <EditText
+                android:id="@+id/etNamaAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <!--<EditText
+            android:id="@+id/etHubungan"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="Hubungan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hubungan Keluarga"
+            android:layout_marginLeft="4dp"
+            android:textSize="13sp"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tIlspHubungan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Hubungan Keluarga"
+            >
+
+            <Spinner
+                android:id="@+id/spHubungan"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tIlNoHpAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="No Handphone"
+            >
+
+            <EditText
+                android:id="@+id/etNoHpAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="14"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            >
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#388E3C"
+                android:text="Tambah"
+                android:textColor="#fff"
+                />
+
+            <TextView
+                android:id="@+id/txtSelesaiAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selesai"
+                android:gravity="center"
+                android:padding="13dp"
+                android:textColor="#000"
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

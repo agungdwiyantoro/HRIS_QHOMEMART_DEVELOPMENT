@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="53dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-150dp"
+            android:background="@color/blue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/gap2"
+            android:paddingTop="@dimen/gap2"
+            android:paddingEnd="@dimen/gap2"
+            android:paddingBottom="150dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:contentDescription="Kembali"
+                android:src="@drawable/ic_keyboard_arrow_left_black_48dp"
+                android:tint="@color/colorWhite" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:textColor="@color/colorWhite"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/gap2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input"
+                android:backgroundTint="@color/colorWhite"
+                android:elevation="5dp"
+                android:layout_marginStart="@dimen/gap3"
+                android:layout_marginEnd="@dimen/gap3"
+                android:layout_marginBottom="@dimen/gap3"
+                android:orientation="vertical"
+                android:padding="@dimen/gap2">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/gap"
+                    android:textColor="@color/text_color"
+                    android:text="Detail Kasbon Mingguan:"
+                    android:textSize="20sp" />
+
+
+                <LinearLayout
+                    android:id="@+id/panelCust"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txcsano"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="NIP" />
+
+                    <EditText
+                        android:id="@+id/edNamaCust"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        android:text=""
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:id="@+id/panelKaryawan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txNama"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Nama" />
+
+                    <EditText
+                        android:id="@+id/edNama"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:id="@+id/panelDivisi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txDivisi"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Divisi" />
+
+                    <EditText
+                        android:id="@+id/edDivisi"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txJabatan"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Jabatan" />
+
+                    <EditText
+                        android:id="@+id/edJabatan"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txTgl"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Divisi" />
+
+                    <EditText
+                        android:id="@+id/edTgl"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txJenisKasbon"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Jenis Kasbon" />
+
+                    <EditText
+                        android:id="@+id/edJenisKasbon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txNominal"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Nominal" />
+
+                    <EditText
+                        android:id="@+id/edNominal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txAlasan"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Alasan" />
+
+                    <EditText
+                        android:id="@+id/edAlasan"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txStatus"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Status" />
+
+                    <EditText
+                        android:id="@+id/edStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/padd_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/txKeterangan"
+                        android:layout_width="88dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Keterangan" />
+
+                    <EditText
+                        android:id="@+id/edKeterangan"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_rounded"
+                        android:clickable="false"
+                        android:cursorVisible="true"
+                        android:focusableInTouchMode="true"
+                        android:inputType="text"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:selectAllOnFocus="true"
+                        tools:capitalize="characters" />
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/gap"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input"
+                        android:backgroundTint="@color/btnDanger"
+                        android:text="Login"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:id="@+id/btnRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input"
+                        android:backgroundTint="@color/btnPrimary"
+                        android:text="NEXT"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

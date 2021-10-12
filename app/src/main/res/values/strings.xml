@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HRIS MOBILE</string>
+
+    <string name="presensi_masuk">Presensi Masuk</string>
+    <string name="presensi_pulang">Presensi Pulang</string>
+    <string name="get_lokasi">Get Lokasi</string>
+    <string name="menu_training">Menu Training</string>
+    <string name="nama_test">Nama Test</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="waktu_mengerjakan">Waktu mengerjakan</string>
+    <string name="jumlah_soal">Jumlah soal</string>
+    <string name="token">Token</string>
+    <string name="mulai">Mulai</string>
+    <string name="form_kunjungan">Form Kunjungan</string>
+    <string name="bulan_kunjungan">Bulan Kunjungan</string>
+    <string name="bulan">Bulan</string>
+    <string name="bulan_bonus_proyek">Bulan Proyek</string>
+    <string name="list_peserta_memo">List Peserta Memo</string>
+    <string name="edit">Edit</string>
+    <string name="lihat">Lihat</string>
+    <string name="nama_proyek">Nama Proyek</string>
+    <string name="setuju">Setuju</string>
+    <string name="owner_proyek">Owner Proyek</string>
+    <string name="penanggung_jawab_proyek">Penanggung Jawab</string>
+    <string name="no_telp">No Telp</string>
+    <string name="jam_tgl">Jam/Tgl</string>
+    <string name="tahapan_proyek">Tahapan Proyek</string>
+    <string name="foto_so">Foto SO</string>
+    <string name="foto_proyek">Foto Proyek</string>
+    <string name="foto_detail_izin">Foto Detail Izin</string>
+    <string name="foto_dp">Foto Dp</string>
+    <string name="soal">Soal</string>
+    <string name="licensi">Saya tunduk dan patuh pada tata tertib selama melakukan test ini</string>
+    <string name="status_form_kunjungan">Keterangan: untuk melihat detail ketuk list  form kunjungan</string>
+    <string name="status_list_bonus_proyek">Keterangan: untuk melihat detail ketuk list  bonus proyek</string>
+    <string name="status_list_memo">Keterangan: untuk melihat memo ketuk list</string>
+
+
+    <!--Tambahkan Team-->
+    <string name="tambah_anggota">Tambah Anggota Team</string>
+    <string name="tambahkan">Tambah</string>
+    <string name="hapus">Hapus</string>
+    <string name="divisi">divisi</string>
+
+    <!--menu approve-->
+    <string name="menu_izin_dinas">izin dinas</string>
+    <string name="menu_izin_mt">izin meninggalkan tugas</string>
+    <string name="ket_menu_approve">Merupakan menu yang dapat\ndiakses oleh masing-masing\nhead divisi</string>
+
+
+    <!--menu info-->
+    <string name="new_icon">NEW</string>
+    <string name="menu_kasbon">kasbon</string>
+    <string name="menu_pinjaman">pinjaman</string>
+    <string name="menu_cuti">cuti</string>
+    <string name="menu_izin">izin</string>
+    <string name="menu_bonus">bonus</string>
+    <string name="menu_jadwal_masuk">jadwal masuk</string>
+    <string name="menu_proyek_manajemen">manajemen proyek</string>
+    <string name="menu_latihan">latihan</string>
+    <string name="menu_approve">Menu Approve</string>
+    <string name="menu_visitor">Pengunjung</string>
+    <string name="form_kunjungan_customer">form kunjungan customer</string>
+    <string name="form_iklan_promo">form iklan promo</string>
+    <string name="koneksi_bermaslah">Opps,,,, koneksi internet anda bermasalah</string>
+    <string name="close">Close</string>
+    <string name="informasi_memo">Memo :</string>
+    <string name="link_selengkapnya">Lihat Selengkapnya...</string>
+    <string name="jenis_notulen">Notulen Meeting</string>
+
+
+    <!--Form Login-->
+    <string name="lupa_password">Lupa Password?</string>
+    <string name="lupa_passwords">Lupa Password</string>
+    <string name="pindah_akun">Pindah Akun?</string>
+
+    <!--Form Memo-->
+    <string name="jenis_memo">NOTULEN MEETING</string>
+    <string name="nomor_memo">No. /HRD/XI/2020</string>
+    <string name="dari_memo">Dari</string>
+    <string name="kepada_memo">Kepada</string>
+    <string name="hal_memo">Hal</string>
+    <string name="tgl_memo">Tanggal</string>
+
+    <!--Form notulen Memo-->
+    <string name="tgl_notulen">Tanggal</string>
+    <string name="waktu">Waktu</string>
+    <string name="tempat">Tempat</string>
+    <string name="agenda">Agenda</string>
+    <string name="peserta_rapat">Peserta</string>
+    <string name="lampiran">Lampiran</string>
+    <string name="lampiran_video">Video</string>
+    <string name="lis">List</string>
+    <string name="klik">Lihat</string>
+
+
+    <!--Form bonusan proyek-->
+    <string name="team_survei">Team Survei</string>
+    <string name="kategori_cust">Kategori customer</string>
+    <string name="nama_cust">Customer</string>
+    <string name="alamat_lokasi">Alamat</string>
+    <string name="no_telp_owner">No telp Owner</string>
+    <string name="PIC">PIC/Logistik</string>
+    <string name="no_telp_pic">No telp PIC</string>
+    <string name="tahapan_progress">Tahapan</string>
+    <string name="status_proyek">Status proyek</string>
+    <string name="jenis_proyek">jenis proyek</string>
+    <string name="status_pembayaran">Status Pembayaran</string>
+    <string name="gambar">gambar</string>
+
+
+    <!--List Riwayat Absen-->
+    <string name="dari_tgl">DARI TANGGAL</string>
+    <string name="presensi_dari">Presensi dari:</string>
+    <string name="sampai_tgl">SAMPAI</string>
+    <string name="mulai_istirahat">Mulai Istirahat</string>
+    <string name="selesai_istirahat">Selesai Istirahat</string>
+
+
+    <!--form izin-->
+    <string name="lokasi_awal">Lokasi berangkat</string>
+    <string name="lokasi_tujuan">Lokasi tujuan</string>
+    <string name="status">Status</string>
+    <string name="detail">Detail klik disini</string>
+    <string name="status_approve">Status Approve</string>
+
+
+    <!--form map lokasi izin-->
+    <string name="set_lokasi">Set Location</string>
+
+
+    <string name="versi_project">copyright@IT Qhome V.0320</string>
+
+
+    <string name="lorem_ipsum">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ?"</string>
+
+    <string name="prev">Previous</string>
+    <string name="next">Next</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="hubungan">
+        <item>Suami</item>
+        <item>Istri</item>
+        <item>Anak</item>
+        <item>Ayah</item>
+        <item>Ibu</item>
+    </string-array>
+
+
+    <!-- data diri-->
+    <string name="pesan_data_diri">Data diri anda dapat diperbarui pada halaman profil anda, atau anda bisa menekan tombol Update dibawah ini</string>
+    <string name="pesan_data">(Pesan ini tidak akan muncul setelah mengisi data diri)</string>
+
+</resources>

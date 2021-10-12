@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".saldo">
+
+    <LinearLayout
+        android:id="@+id/lytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/toolbar_abs_masuk"
+            layout="@layout/toollbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/topBg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="110dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_user_account"
+                    android:textAlignment="center" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/txtusername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Welcome "
+                        android:textAlignment="center"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="#fff"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="What do you mean?"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textColor="#fff"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-110dp"
+            android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                android:background="@drawable/roundededit"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="10dp"
+                app:cardElevation="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_marginStart="@dimen/padd_10"
+                        android:layout_marginEnd="@dimen/padd_10"
+                        android:layout_gravity="bottom"
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@color/yellow"
+                        android:layout_height="280dp">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:backgroundTint="@color/btnWarning"
+                            android:background="@drawable/bg_tag">
+
+                            <TextView
+                                android:id="@+id/infopromo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableLeft="@drawable/ic_user"
+                                android:layout_marginLeft="8dp"
+                                android:text="Users"
+                                android:textStyle="italic|bold"
+                                android:visibility="visible" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_marginTop="@dimen/padd_10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="No Bayar               :"
+                                    android:textStyle="italic|bold"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_marginTop="@dimen/padd_10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="HR2001001-BY02"
+                                    android:textStyle="italic|bold"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_marginTop="@dimen/padd_10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="Tanggal Bayar      :"
+                                    android:textStyle="italic|bold"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_marginTop="@dimen/padd_10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="21-07-1995"
+                                    android:textStyle="italic|bold"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_marginTop="@dimen/padd_10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="Nominal Bayar     :"
+                                    android:textStyle="italic|bold"
+                                    android:visibility="visible" />
+
+                                <TextView
+                                    android:layout_marginTop="@dimen/padd_10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="Rp 10.000"
+                                    android:textStyle="italic|bold"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_marginTop="@dimen/padd_10"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="8dp"
+                                    android:text="Ket Bayar             :"
+                                    android:textStyle="italic|bold"
+                                    android:visibility="visible" />
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_marginTop="@dimen/padd_10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginLeft="8dp"
+                                android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam," />
+                                android:inputType="textMultiLine"
+                                android:textStyle="italic|bold"
+                                android:visibility="visible" />
+
+
+
+
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+
+
+
+                    <Button
+                        android:layout_marginTop="50dp"
+                        android:id="@+id/btnOpen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/gap"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input"
+                        android:backgroundTint="@color/btnDanger"
+                        android:text="CLOSE"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>
+

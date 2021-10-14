@@ -21,7 +21,7 @@ public class api {
     public static final String URL_getSaldoMingguan = ip.getIp() + "getSaldoMingguan/";
     public static final String URL_pinjaman = ip.getIp() + "pinjaman/";
     public static final String URL_totalPinjaman = ip.getIp() + "totalPinjaman/";
-    public static final String URL_informasiKaryawan = ip.getIp() + "informasiKaryawan/";
+    public static final String URL_informasiKaryawan = ip.getIp() + "informasiKaryawan2/";
     public static final String URL_pengajuanPinjaman = ip.getIp() + "pengajuanPinjaman/";
     public static final String URL_pengajuanKasbon = ip.getIp() + "pengajuanKasbon/";
     public static final String URL_totalBayarPinjaman = ip.getIp() + "totalBayarPinjaman/";

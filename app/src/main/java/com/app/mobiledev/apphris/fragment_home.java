@@ -3,7 +3,9 @@ package com.app.mobiledev.apphris;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
@@ -73,8 +75,9 @@ public class fragment_home extends Fragment {
     private TextView txthastag;
     private LinearLayout lmenu;
     private CircleImageView ic_user_account;
-    private TextView tx_lihat_selengkapnya, txtNanti, txtUpdate;
+    private TextView tx_lihat_selengkapnya, txtNanti, txtUpdate,info_update,txInfo,txtClose;
     private Boolean cek_memo=false;
+    private Boolean cek_info_update=false;
     //Memo
     private List<ModelMemo> mlistMemo;
     private RecyclerView rvMemo;
@@ -82,6 +85,7 @@ public class fragment_home extends Fragment {
     private boolean status_notif = true;
 
     Dialog dialogHubungan;
+    Dialog dialoginfoUpdate;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -121,6 +125,7 @@ public class fragment_home extends Fragment {
         mulai_istirahat=rootView.findViewById(R.id.mulaiIstirahat);
         selesai_istirahat=rootView.findViewById(R.id.selesaiIstirahat);
         tx_lihat_selengkapnya= rootView.findViewById(R.id.tx_lihat_selengkapnya);
+        helper.getLokasi(getActivity(),sessionmanager.getIdUser());
         tx_lihat_selengkapnya.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,10 +136,16 @@ public class fragment_home extends Fragment {
                 }
             }
         });
-        cekLokasi();
+        cekLokasiFakeGPS();
         getlImageProfil(kyano);
         getMemo();
         getabsen(kyano);
+        cek_info_update=sessionmanager.getUpdatePlayStore();
+        if(cek_info_update==true){
+            getMsetProg(getActivity(),"info_update_android");
+        }
+
+
 
         //memo
         mlistMemo = new ArrayList<>();
@@ -237,7 +248,7 @@ public class fragment_home extends Fragment {
         return rootView;
     };
 
-    public void cekLokasi(){
+    public void cekLokasiFakeGPS(){
     try {
         LocationUpdate gt = new LocationUpdate(getActivity());
         Location l = gt.getLocation();
@@ -677,5 +688,85 @@ public class fragment_home extends Fragment {
         });
 
         dialogHubungan.show();
+    }
+
+
+    private void notifDialogUpdate(String pesan_update) throws PackageManager.NameNotFoundException {
+        dialoginfoUpdate = new Dialog(getActivity());
+        dialoginfoUpdate.setContentView(R.layout.dialog_infoupdate);
+        dialoginfoUpdate.setCancelable(true);
+        dialoginfoUpdate.setCanceledOnTouchOutside(false);
+        dialoginfoUpdate.setTitle("Update data diri");
+        info_update = (TextView) dialoginfoUpdate.findViewById(R.id.info_update);
+        txInfo = (TextView) dialoginfoUpdate.findViewById(R.id.txInfo);
+        txtClose = (TextView) dialoginfoUpdate.findViewById(R.id.txtClose);
+        txInfo.setText(""+pesan_update);
+
+        PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+        String version = pInfo.versionName;
+        info_update.setText("Info Update "+version);
+        txtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialoginfoUpdate.dismiss();
+                sessionmanager.createStatusUpdatePlayStore(false);
+            }
+        });
+
+
+
+        dialoginfoUpdate.show();
+    }
+
+
+
+    public  void getMsetProg(final Context ctx, String setProg){
+        AndroidNetworking.post(api.URL_getmsetprog)
+                .addBodyParameter("key", api.key)
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            SessionManager msession=new SessionManager(ctx);
+                            Boolean success = response.getBoolean("success");
+                            if (success) {
+                                JSONArray jsonArray = response.getJSONArray("data");
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject data = jsonArray.getJSONObject(i);
+                                    String setano=data.getString("setano");
+                                    if(setano.equals(setProg)){
+                                        Log.d("JSONSETPROG", "onResponse: "+data.getString("setchar"));
+                                        notifDialogUpdate(""+data.getString("setchar"));
+                                    }
+
+                                }
+
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("JSONSETPROG", "onResponse: "+e);
+
+                        }catch (NumberFormatException e){
+                            Log.d("Number Format", "onResponse: "+e);
+                        } catch (PackageManager.NameNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d("JSONSETPROG", "onError: "+anError);
+
+
+
+                    }
+                });
     }
 }

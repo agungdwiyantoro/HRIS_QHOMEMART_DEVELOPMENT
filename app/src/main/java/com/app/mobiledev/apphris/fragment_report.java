@@ -59,10 +59,8 @@ public class fragment_report extends Fragment {
     private String kyano="";
     private View rootView;
     private RecyclerView rcRiwayatAbsen;
-
     private ProgressDialog mProgressDialog;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
     private Toolbar mToolbar;
 
     @Override
@@ -138,7 +136,6 @@ public class fragment_report extends Fragment {
                     String tgl_selesai=tgl2.getText().toString();
                     riwayatAbsen(kyano,tgl_mulai,tgl_selesai);
 
-
                 }
             }
 
@@ -153,8 +150,8 @@ public class fragment_report extends Fragment {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                tgl1.setText(""+dateFormatter.format(newDate.getTime()));
-                if(tgl1.equals(null)||tgl1.equals("")){
+                tgl2.setText(""+dateFormatter.format(newDate.getTime()));
+                if(tgl2.equals(null)||tgl2.equals("")){
                     helper.showMsg(getActivity(),"informasi","bulan selesai belum dipilih",helper.ERROR_TYPE);
                 }else{
                     String tgl_mulai=tgl1.getText().toString();

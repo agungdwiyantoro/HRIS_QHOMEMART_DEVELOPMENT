@@ -2,11 +2,14 @@ package com.app.mobiledev.apphris;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.content.IntentSender;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -61,7 +65,7 @@ import java.util.concurrent.TimeUnit;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.OkHttpClient;
 
-/*import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.InstallState;
@@ -70,7 +74,7 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
-import com.google.android.play.core.tasks.Task;*/
+import com.google.android.play.core.tasks.Task;
 
 public class main_fragment extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener  {
     private FragmentManager fragmentManager;
@@ -87,8 +91,10 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
     static set_ip ip = new set_ip();
     private String TAG="UPDATE_PLAY_STORE";
     private LinearLayout lytoolbar;
-    //private AppUpdateManager mAppUpdateManager;
+    private AppUpdateManager mAppUpdateManager;
     private static final int RC_APP_UPDATE=100;
+    private Dialog dialogResign;
+    private TextView txJudul,txInfo,txClose;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -107,7 +113,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         Log.d("TAG_UP", "onCreate: "+kyano+password);
         getToken(kyano, password);
 
-        /*mAppUpdateManager= AppUpdateManagerFactory.create(this);
+        mAppUpdateManager= AppUpdateManagerFactory.create(this);
         mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
             @Override
             public void onSuccess(AppUpdateInfo result) {
@@ -126,7 +132,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
 
 
             }
-        });*/
+        });
         //mAppUpdateManager.registerListener(installStateUpdatedListener);
         lytoolbar=findViewById(R.id.lytoolbar);
 
@@ -146,7 +152,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         stopService(background);
         startService(background);
         getInfoTraining(bottomNavigationView);
-        helper.getLokasi(main_fragment.this,sessionmanager.getIdUser());
+
         try {
             socket = IO.socket(ip.ip_notif);
             socket.connect();
@@ -443,7 +449,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("DATA_JSONEXCEPION", "onResponse: "+error);
-                        helper.showMsg(main_fragment.this, "Peringatan", ""+helper.PESAN_KONEKSI, helper.ERROR_TYPE);
+                      //  helper.showMsg(main_fragment.this, "Peringatan", ""+helper.PESAN_KONEKSI, helper.ERROR_TYPE);
                     }
                 }) {
             @Override
@@ -615,7 +621,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
                                             kystatus_kerja,kyalamat,kyhp,jbano,dvano,npwp,tgl_masuk,kyemail,kyalamat_skrang);
                                 }
                             }else{
-                                Log.d("DATA_BOOLEAN", "onResponse: "+success);
+                                notifDialogResign();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -635,7 +641,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
     protected void onResume() {
         super.onResume();
         helper.getLokasi(main_fragment.this, sessionmanager.getIdUser());
-       /* mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+       mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
             @Override
             public void onSuccess(AppUpdateInfo result) {
               //  helper.snackBar(lytoolbar,"CEK_VERSION= A="+UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS+" B="+result.updateAvailability());
@@ -653,7 +659,33 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
 
 
             }
-        });*/
+        });
+    }
+
+
+    private void notifDialogResign()  {
+        dialogResign = new Dialog(main_fragment.this);
+        dialogResign.setContentView(R.layout.dialogkaryawanresign);
+        dialogResign.setCancelable(true);
+
+        dialogResign.setCanceledOnTouchOutside(false);
+        txJudul = (TextView) dialogResign.findViewById(R.id.txJudul);
+        txInfo = (TextView) dialogResign.findViewById(R.id.txInfo);
+        txClose = (TextView) dialogResign.findViewById(R.id.txClose);
+        txClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogResign.dismiss();
+                sessionmanager.logout();
+                Intent intent3 = new Intent(main_fragment.this, login.class);
+                startActivity(intent3);
+                finish();
+            }
+        });
+
+
+
+        dialogResign.show();
     }
 
 }

@@ -329,6 +329,7 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
                         jarak_janti_lestari=distanceBetween(mylokasi,lokasi_janti_lestari);
                         jarak_piyungan=distanceBetween(mylokasi,lokasi_piyungan);
                         jarak_berbah=distanceBetween(mylokasi,lokasi_berbah);
+                        presensi_jarak=sessionmanager.getPresensiJarakJauh();
                         cekPresensiJarakJauh();
 
                     }catch (Exception e){
@@ -395,8 +396,15 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
     private void cekPresensiJarakJauh(){
         if((jarak_janti<=jarak)||(jarak_janti_lestari<=jarak)||(jarak_berbah<=jarak)||(jarak_piyungan<=jarak)){
             Log.d("CEK_cekPresensi2", "cekPresensiJarakJauh: "+presensi_jarak);
+            btnAbsen.setTextColor(Color.parseColor("#FFFFFF"));
+            btnAbsen.setBackgroundColor(Color.parseColor("#3B9C40"));
+            tvPesan.setVisibility(View.GONE);
+            btnAbsen.setEnabled(true);
+            image.setEnabled(true);
+
         }else{
             if(presensi_jarak.equals("0")) {
+                Log.d("cek_jarak_cek", "cekPresensiJarakJauh: "+presensi_jarak);
                 btnAbsen.setTextColor(Color.parseColor("#FFFFFF"));
                 btnAbsen.setBackgroundColor(Color.parseColor("#C1C0C7"));
                 tvPesan.setText("Anda berada di luar area yang ditetapkan, mohon berada di dalam area untuk melakukan presensi");
@@ -528,13 +536,14 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(10000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if(android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT){
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                 mMap.setMyLocationEnabled(true);
                mFusedLocationClient.requestLocationUpdates(mLocationRequest, locationCallback, Looper.myLooper());
+
                 Log.d("ENABLE_LOCATION", "onMapReady: ");
             }else{
                 new SweetAlertDialog(absensi_masuk.this, SweetAlertDialog.WARNING_TYPE)

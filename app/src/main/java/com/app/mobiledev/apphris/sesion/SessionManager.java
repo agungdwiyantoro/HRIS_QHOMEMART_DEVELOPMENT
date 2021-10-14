@@ -55,6 +55,7 @@ public class SessionManager {
     public static  final String KYEMAIL="KYEMAIL";
     public static  final String KYALAMAT_SKRANG="KYALAMAT_SKRANG";
     public static  final String ALAMAT_STATUS="ALAMAT_STATUS";
+    public static  final String INFO_UPDATE = "INFO_UPDATE";//untuk cek info update playstore
 
 
     public static String nama_user;
@@ -89,6 +90,8 @@ public class SessionManager {
     public static  String kyemail;
     public static  String kyalamat_skrang;
     public static  String presensi_jarak_jauh;
+    public static  Boolean info_update;
+
 
 
     public static String token;
@@ -200,6 +203,11 @@ public class SessionManager {
         }
 
         Log.d("CEK_LOKASI", "createLocation: "+lokasi_janti+" lokasi_JL"+lokasi_janti_lestari);
+        editor.apply();
+    }
+
+    public void createStatusUpdatePlayStore(Boolean nilai){
+        editor.putBoolean(INFO_UPDATE,nilai);
         editor.apply();
     }
 
@@ -456,6 +464,11 @@ public class SessionManager {
     public String getPresensiJarakJauh(){
         presensi_jarak_jauh=sharedPreferences.getString(PRESENSI_JARAK_JAUH,"");
         return presensi_jarak_jauh;
+    }
+
+    public Boolean getUpdatePlayStore(){
+        info_update=sharedPreferences.getBoolean(INFO_UPDATE,true);
+        return info_update;
     }
 
 }

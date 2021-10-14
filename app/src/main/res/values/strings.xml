@@ -30,6 +30,7 @@
     <string name="foto_proyek">Foto Proyek</string>
     <string name="foto_detail_izin">Foto Detail Izin</string>
     <string name="foto_dp">Foto Dp</string>
+    <string name="info_update">Info Karyawan</string>
     <string name="soal">Soal</string>
     <string name="licensi">Saya tunduk dan patuh pada tata tertib selama melakukan test ini</string>
     <string name="status_form_kunjungan">Keterangan: untuk melihat detail ketuk list  form kunjungan</string>
@@ -152,5 +153,11 @@
     <!-- data diri-->
     <string name="pesan_data_diri">Data diri anda dapat diperbarui pada halaman profil anda, atau anda bisa menekan tombol Update dibawah ini</string>
     <string name="pesan_data">(Pesan ini tidak akan muncul setelah mengisi data diri)</string>
+
+
+    <!-- karyawan resign-->
+    <string name="pesan_karyawan_resign">Mohon maaf anda sudah tidak terdaftar lagi sebagai pengguna di HRIS Mobile...!!</string>
+    <string name="OOPS">Oops,,,!!</string>
+
 
 </resources>

@@ -50,7 +50,8 @@ public class splashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         helper.requestPermissions(splashScreen.this);
         sessionmanager =new SessionManager(splashScreen.this);
-        helper.getMsetProg(splashScreen.this);
+        helper.getMsetProg(splashScreen.this,"no_hp_admi");
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -17,6 +17,7 @@ import android.location.Geocoder;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -39,6 +40,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
+import com.app.mobiledev.apphris.izin.menu_izin;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.update_layout;
 import com.google.android.gms.maps.model.BitmapDescriptor;
@@ -459,7 +461,7 @@ public class helper extends AsyncTask {
                     @Override
                     public void onError(ANError anError) {
                         Log.d("EROOR_UPDATE", "onError: " + anError);
-                        helper.showMsg(mctx, "informasi", "" + helper.PESAN_KONEKSI);
+                       // helper.showMsg(mctx, "informasi", "" + helper.PESAN_KONEKSI);
                     }
                 });
     }
@@ -472,10 +474,10 @@ public class helper extends AsyncTask {
         return  formattedDate;
     }
 
-    public static void cekAkses( final Context mctx, final View view) {
+    public static void cekAkses( final Context mctx, final View view ,String menu,Class classMenu) {
         AndroidNetworking.post(api.URL_getAksesMobile)
                 .addBodyParameter("key", api.key)
-                .addBodyParameter("menu_mobile", "projek_manage")
+                .addBodyParameter("menu_mobile", menu)
 
                 .setPriority(Priority.HIGH)
                 .build()
@@ -492,11 +494,30 @@ public class helper extends AsyncTask {
                                     sessionManager = new SessionManager(mctx);
                                     Log.d(TAG, "onResponse: Cek_Divisi_Session1 :"+sessionManager.getDivisi());
                                     Log.d(TAG, "onResponse: Cek_Divisi_Session2 :"+data.getString("divisi"));
-                                    if(sessionManager.getDivisi().equals(data.getString("divisi"))){
-                                        mctx.startActivity(new Intent(mctx, list_formKunjungan.class));
+                                    if(data.getString("status_menu").equals("open")){
+                                        if(sessionManager.getDivisi().equals(data.getString("divisi"))){
+                                            Intent intent = new Intent(mctx, classMenu);
+                                            Bundle x = new Bundle();
+                                            x.putString("lokasi_tujuan", "");
+                                            x.putString("lokasi_awal", "");
+                                            intent.putExtras(x);
+                                            mctx.startActivity( intent);
+                                        }
+                                        else if(data.getString("divisi").equals("all")){
+                                            Intent intent = new Intent(mctx, classMenu);
+                                            Bundle x = new Bundle();
+                                            x.putString("lokasi_tujuan", "");
+                                            x.putString("lokasi_awal", "");
+                                            intent.putExtras(x);
+                                            mctx.startActivity( intent);
+                                        }{
+                                            helper.snackBar(view,"anda tidak memiliki akses menu ini.....!!!!!!");
+                                        }
+
                                     }else{
-                                        helper.snackBar(view,"anda tidak memiliki akses menu ini.....!!!!!!");
+                                        helper.snackBar(view,"menu belum tersedia...!!!");
                                     }
+
                                 }
 
 
@@ -521,63 +542,6 @@ public class helper extends AsyncTask {
     }
 
 
-//    public static void cekAkses( final Context mctx, final View view, final String menu) {
-//        AndroidNetworking.post(api.URL_getAksesMobile)
-//                .addBodyParameter("key", api.key)
-//                .addBodyParameter("menu_mobile", menu)
-//                .setPriority(Priority.HIGH)
-//                .build()
-//                .getAsJSONObject(new JSONObjectRequestListener() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            Boolean success = response.getBoolean("success");
-//                            if (success) {
-//                                JSONArray jsonArray = response.getJSONArray("data");
-//                                String [] cek_jabatan;
-//                                for (int i = 0; i < jsonArray.length(); i++) {
-//                                    JSONObject data = jsonArray.getJSONObject(i);
-//                                    sessionManager = new SessionManager(mctx);
-//                                    cek_jabatan = data.getString("divisi").split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-//                                    Log.d("CEK_DIVISI", "onResponse: "+data.getString("divisi")+" getDivisi"+sessionManager.getDivisi());
-//                                    for(int j=0;j<cek_jabatan.length;j++){
-//                                        if(sessionManager.getDivisi().equals(cek_jabatan[j])){
-//                                            if(menu.equals("projek_manage")){
-//                                                mctx.startActivity(new Intent(mctx, list_formKunjungan.class));
-//
-//                                            }
-//                                            else if(menu.equals("visitor")){
-//                                                mctx.startActivity(new Intent(mctx, Visitor.class));
-//                                            }
-//
-//                                        }
-//
-//                                    }
-//
-//                                }
-//
-//
-//                            } else {
-//                                helper.snackBar(view,"anda tidak memiliki akses menu ini..!!");
-//                            }
-//                            Log.d("CEK_UPDATE", "onResponse: " + success);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                            showMsg(mctx, "informasi", "" + helper.PESAN_SERVER);
-//                            Log.d("JSONUPDATE", "onResponse: " + e);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(ANError anError) {
-//                        Log.d("EROOR_UPDATE", "onError: " + anError);
-//                        showMsg(mctx, "informasi", "" + helper.PESAN_KONEKSI);
-//
-//                    }
-//                });
-//
-//
-//    }
 
 
     public static String  getLokasi(double llat, double llon, Context mctx) {
@@ -668,7 +632,7 @@ public class helper extends AsyncTask {
         Toast.makeText(ctx,""+pesan,Toast.LENGTH_LONG).show();
     }
 
-    public static void getMsetProg(final Context ctx){
+    public static void getMsetProg(final Context ctx,String setProg){
         AndroidNetworking.post(api.URL_getmsetprog)
                 .addBodyParameter("key", api.key)
                 .setPriority(Priority.HIGH)
@@ -685,7 +649,7 @@ public class helper extends AsyncTask {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     String setano=data.getString("setano");
-                                    if(setano.equals("no_hp_admi")){
+                                    if(setano.equals(setProg)){
                                        msession.createNoHpAdmin(data.getString("setchar"));
                                     }
 

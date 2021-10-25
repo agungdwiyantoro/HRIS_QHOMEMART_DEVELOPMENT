@@ -32,7 +32,7 @@ public class TestFCM extends AppCompatActivity {
 
         //FirebaseMessaging.getInstance().subscribeToTopic("memo");
 
-        helper.ConfigFCM();
+
 
         /*FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {

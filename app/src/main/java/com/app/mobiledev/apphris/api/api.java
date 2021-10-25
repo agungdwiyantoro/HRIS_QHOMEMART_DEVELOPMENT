@@ -94,10 +94,13 @@ public class api {
     public static  final String URL_deleteHubungan_keluarga=ip.getIp()+"deleteHubungan_keluarga";
     public static  final String URL_up_ktps=ip.getIp()+"up_ktps";
     public static  final String URL_up_get_data_diri_temp=ip.getIp()+"get_data_diri_temp";
+    public static  final String URL_getRiwayatSlipGaji=ip.getIp()+"getRiwayatSlipGaji";
+    public static  final String URL_getSlipGaji=ip.getIp()+"getSlipGaji";
+    public static  final String URL_getSlipGaji2=ip.getIp()+"getSlipGaji2";
+
 
     //Get Token Alamat
     public static final String URL_getTokenAlamat="http://192.168.8.74/svn_all/hris/api_coba/Auth/login";
-
     public static final String URL_getProvinsi = "http://192.168.8.74/svn_all/hris/wilayah/provinsi";
     public static final String URL_getKabKot = "http://192.168.8.74/svn_all/hris/wilayah/kabupaten?kode=";
     public static final String URL_getKecamatan = "http://192.168.8.74/svn_all/hris/wilayah/kecamatan?kode=";

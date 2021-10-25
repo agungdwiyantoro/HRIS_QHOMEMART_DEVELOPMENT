@@ -71,7 +71,7 @@ public class login extends AppCompatActivity {
         checkBox.setChecked(false);
 
         //call FCM configuration
-        helper.ConfigFCM();
+
 
         lupa_password.setOnClickListener(new View.OnClickListener() {
             @Override

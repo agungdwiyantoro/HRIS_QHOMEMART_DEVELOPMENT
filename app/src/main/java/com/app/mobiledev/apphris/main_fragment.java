@@ -105,7 +105,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         sessionmanager = new SessionManager(main_fragment.this);
 
         //call FCM configuration
-        helper.ConfigFCM();
+        helper.ConfigFCM("slip_gaji");
 
         //Untuk mendapatkan token
         String kyano = sessionmanager.getIdUser();
@@ -148,9 +148,9 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         cekGps();
-        Intent background = new Intent(this, services_notif.class);
-        stopService(background);
-        startService(background);
+//        Intent background = new Intent(this, services_notif.class);
+//        stopService(background);
+//        startService(background);
         getInfoTraining(bottomNavigationView);
 
         try {

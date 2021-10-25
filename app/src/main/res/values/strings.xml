@@ -54,6 +54,7 @@
     <string name="new_icon">NEW</string>
     <string name="menu_kasbon">kasbon</string>
     <string name="menu_pinjaman">pinjaman</string>
+    <string name="menu_slip_gaji">Slip Gaji</string>
     <string name="menu_cuti">cuti</string>
     <string name="menu_izin">izin</string>
     <string name="menu_bonus">bonus</string>
@@ -69,6 +70,7 @@
     <string name="informasi_memo">Memo :</string>
     <string name="link_selengkapnya">Lihat Selengkapnya...</string>
     <string name="jenis_notulen">Notulen Meeting</string>
+    <string name="slip_gaji_karyawan">Slip Gaji Karyawan</string>
 
 
     <!--Form Login-->

@@ -18,6 +18,7 @@ import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.izin.menu_izin;
 import com.app.mobiledev.apphris.sesion.SessionManager;
+import com.app.mobiledev.apphris.slipGaji.riwayatSlipGaji;
 import com.app.mobiledev.apphris.training.menu_training;
 import com.app.mobiledev.apphris.training.soal_training.ModelLatihan;
 import com.app.mobiledev.apphris.helperPackage.DataSoalSQLite;
@@ -31,7 +32,7 @@ import java.util.List;
 public class fragment_info extends Fragment {
     public fragment_info(){}
     private View rootView;
-    private CardView pinjaman,kasbon,cuti,izin,bonus, latihan,projectManage,jadwalSales, visitor,cvApprove;
+    private CardView pinjaman,kasbon,cuti,izin,bonus, latihan,projectManage,jadwalSales, visitor,cvApprove,slipGaji;
     private DataSoalSQLite db;
     private List<ModelLatihan> modelLatihan;
     private  double lat=0,lon=0;
@@ -50,6 +51,7 @@ public class fragment_info extends Fragment {
         kasbon=rootView.findViewById(R.id.kasbon);
         cuti=rootView.findViewById(R.id.cuti);
         cvApprove=rootView.findViewById(R.id.cvApprove);
+        slipGaji=rootView.findViewById(R.id.slipGaji);
         projectManage=rootView.findViewById(R.id.projectManage);
         izin=rootView.findViewById(R.id.izin);
         bonus=rootView.findViewById(R.id.bonus);
@@ -144,6 +146,15 @@ public class fragment_info extends Fragment {
             @Override
             public void onClick(View v) {
                 helper.cekAkses(getActivity(),lmenu,"pengunjung", Visitor.class);
+
+            }
+        });
+
+
+        slipGaji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                helper.cekAkses(getActivity(),lmenu,"slip gaji", riwayatSlipGaji.class);
 
             }
         });

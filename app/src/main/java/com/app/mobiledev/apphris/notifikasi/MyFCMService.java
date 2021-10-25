@@ -15,12 +15,14 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Objects;
 
 public class MyFCMService extends FirebaseMessagingService {
+
 
     @Override
     public void onMessageSent(String s) {
@@ -31,62 +33,28 @@ public class MyFCMService extends FirebaseMessagingService {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        SessionManager msession=new SessionManager(this);
         Log.d("TAG_REMOTE_MESSAGE", "onMessageReceived: " + remoteMessage.getNotification());
 
         String title = Objects.requireNonNull(remoteMessage.getNotification()).getTitle();
         String body = Objects.requireNonNull(remoteMessage.getNotification()).getBody();
         String click_action = remoteMessage.getData().get("click_action");
+        String nik = remoteMessage.getData().get("nik");
+
+
 
         Log.d("TAG_REMOTE_MESSAGE0", "onMessageReceived: " + title);
         Log.d("TAG_REMOTE_MESSAGE1", "onMessageReceived: " + body);
         Log.d("TAG_REMOTE_MESSAGE2", "onMessageReceived: " + click_action);
 
-        //sendNotification(title, body, click_action);
-        //sendNotifL(title, body, click_action);
-        showNotificationMessage(title, body, click_action);
-    }
-
-    /*@RequiresApi(api = Build.VERSION_CODES.O)
-    public void sendNotification(String title, String body, String click_action) {
-
-        Intent intent = new Intent(click_action);
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(MainApplication.context, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(MainApplication.context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(title)
-                .setContentText(body)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager =
-                (NotificationManager) MainApplication.context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notificationBuilder.build());
+        if(msession.getNik().equals(nik)){
+            Log.d("TAG_REMOTE_MESSAGE3", "onMessageReceived: " + msession.getNik());
+            showNotificationMessage(title, body, click_action);
+        }
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void sendNotifL(String title, String body, String click_action) {
 
-        Intent intent = new Intent(click_action);
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(MainApplication.context, 0, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        Notification notification  = new Notification.Builder(this)
-                .setContentTitle(title)
-                .setContentText(body)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true).build();
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notification);
-    }*/
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void showNotificationMessage(String title, String body, String click_action) {

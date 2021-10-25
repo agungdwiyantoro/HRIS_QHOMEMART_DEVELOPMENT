@@ -1,50 +1,42 @@
 {
   "project_info": {
-    "project_number": "47992353450",
-    "project_id": "hris-qhomemart",
-    "storage_bucket": "hris-qhomemart.appspot.com"
+    "project_number": "296307497915",
+    "project_id": "hris-testing",
+    "storage_bucket": "hris-testing.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:47992353450:android:5cdcdb53353ef6489896d3",
+        "mobilesdk_app_id": "1:296307497915:android:11a552163bfc47f59dc29e",
         "android_client_info": {
           "package_name": "com.app.mobiledev.apphris"
         }
       },
       "oauth_client": [
         {
-          "client_id": "47992353450-1mc02j6ie7f9vrvc7od0gd7669829ga1.apps.googleusercontent.com",
+          "client_id": "296307497915-tbgpmkae662gn9794ubcrrcm8h3sf0n1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.app.mobiledev.apphris",
-            "certificate_hash": "bcd93fe2bbc90758539d7cf09bc70635d0f98a7b"
+            "certificate_hash": "698e05bf9496184daada2cc5572957a93262f746"
           }
         },
         {
-          "client_id": "47992353450-2gpc912n7jnmdvm54556uu9nb97nccti.apps.googleusercontent.com",
+          "client_id": "296307497915-83icgsac13smuvjlq2dvgq103dqt609v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAbERhwr9SAGgP_vZhGB099sL9qi7ozlTQ"
+          "current_key": "AIzaSyDaBWziVcwt-Hj67vwPwY9x--C2vZCLldI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "47992353450-2gpc912n7jnmdvm54556uu9nb97nccti.apps.googleusercontent.com",
+              "client_id": "296307497915-83icgsac13smuvjlq2dvgq103dqt609v.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "47992353450-dphps4ohdnf4ea8lnf4b49ktle3bql6t.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "it-qhomemart.co.id.hris",
-                "app_store_id": "1554798486"
-              }
             }
           ]
         }

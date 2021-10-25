@@ -51,9 +51,7 @@ public class DetailLampiranMemo extends AppCompatActivity {
         pdf_view=findViewById(R.id.pdfView);
         fileName = getIntent().getExtras().getString("file_lampiran");
         fileHal = getIntent().getExtras().getString("file_hal");
-
         fabDownload = findViewById(R.id.fabDownloadMemo);
-
         mToolbar = findViewById(R.id.toolbar_abs);
         mToolbar.setTitle(fileHal);
         setSupportActionBar(mToolbar);

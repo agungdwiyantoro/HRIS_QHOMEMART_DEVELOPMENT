@@ -34,13 +34,24 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
+        <activity
+            android:name=".slipGaji.detailSlipGaji"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
+        <activity
+            android:name=".slipGaji.riwayatSlipGaji"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="false" />
         <activity android:name=".test.DownloadFile">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <!--
      Set custom default icon. This is used when no icon is set for incoming notification messages.

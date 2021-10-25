@@ -752,13 +752,16 @@ public class helper extends AsyncTask {
         return hrSize;
     }
 
-    public static void ConfigFCM(){
+    public static void ConfigFCM(String topics){
         // to subscribe a topic from FCM
-        FirebaseMessaging.getInstance().subscribeToTopic("memo");
+        FirebaseMessaging.getInstance().subscribeToTopic(topics);
         // to get token new FCM version
         try{
             String fcmToken = FirebaseInstanceId.getInstance().getToken();
             Log.d("TAG_FCM_TOKEN", "onComplete: "+fcmToken);
+            String id=FirebaseInstanceId.getInstance().getId();
+            Log.d("TAG_FCM_TOKEN_ID", "onComplete: "+FirebaseMessaging.getInstance().subscribeToTopic(topics));
+
         } catch (Exception e){
             Log.d("TAG_FCM_TOKEN_FAILED", "onComplete: "+e);
         }

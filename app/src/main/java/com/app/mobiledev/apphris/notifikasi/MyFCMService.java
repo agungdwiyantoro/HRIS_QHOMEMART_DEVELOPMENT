@@ -34,7 +34,7 @@ public class MyFCMService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         SessionManager msession=new SessionManager(this);
-        Log.d("TAG_REMOTE_MESSAGE", "onMessageReceived: " + remoteMessage.getNotification());
+        Log.d("TAG_REMOTE_MESSAGE_BODY", "onMessageReceived: " + remoteMessage.getMessageType());
 
         String title = Objects.requireNonNull(remoteMessage.getNotification()).getTitle();
         String body = Objects.requireNonNull(remoteMessage.getNotification()).getBody();
@@ -43,13 +43,13 @@ public class MyFCMService extends FirebaseMessagingService {
 
 
 
-        Log.d("TAG_REMOTE_MESSAGE0", "onMessageReceived: " + title);
-        Log.d("TAG_REMOTE_MESSAGE1", "onMessageReceived: " + body);
-        Log.d("TAG_REMOTE_MESSAGE2", "onMessageReceived: " + click_action);
+//        Log.d("TAG_REMOTE_MESSAGE0", "onMessageReceived: " + title);
+//        Log.d("TAG_REMOTE_MESSAGE1", "onMessageReceived: " + body);
+        Log.d("TAG_REMOTE_MESSAGE2", "onMessageReceived: " + nik);
 
         if(msession.getNik().equals(nik)){
             Log.d("TAG_REMOTE_MESSAGE3", "onMessageReceived: " + msession.getNik());
-            showNotificationMessage(title, body, click_action);
+            showNotificationMessage(title+" "+nik, body, click_action);
         }
 
     }

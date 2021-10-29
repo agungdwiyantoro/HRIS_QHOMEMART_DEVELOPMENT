@@ -345,6 +345,15 @@ public class helper extends AsyncTask {
     }
 
 
+    public static  String getDeviceId(Context ctx){
+        String id="";
+        id= Settings.Secure.getString(ctx.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+        return  id;
+    }
+
+
     @Override
     protected Object doInBackground(Object[] objects) {
         String newVersion = null;
@@ -752,19 +761,21 @@ public class helper extends AsyncTask {
         return hrSize;
     }
 
-    public static void ConfigFCM(String topics){
+    public static String ConfigFCM(){
         // to subscribe a topic from FCM
-        FirebaseMessaging.getInstance().subscribeToTopic(topics);
+       // FirebaseMessaging.getInstance().subscribeToTopic(topics);
         // to get token new FCM version
+        String token="";
         try{
-            String fcmToken = FirebaseInstanceId.getInstance().getToken();
-            Log.d("TAG_FCM_TOKEN", "onComplete: "+fcmToken);
+            token = FirebaseInstanceId.getInstance().getToken();
+            Log.d("TAG_FCM_TOKEN", "onComplete: "+token);
             String id=FirebaseInstanceId.getInstance().getId();
-            Log.d("TAG_FCM_TOKEN_ID", "onComplete: "+FirebaseMessaging.getInstance().subscribeToTopic(topics));
+         //   Log.d("TAG_FCM_TOKEN_ID", "onComplete: "+FirebaseMessaging.getInstance().subscribeToTopic(topics));
 
         } catch (Exception e){
             Log.d("TAG_FCM_TOKEN_FAILED", "onComplete: "+e);
         }
+        return  token;
     }
 
 }

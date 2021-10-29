@@ -87,13 +87,14 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
     private static final int MY_PERMISSIONS_REQUEST_READ_PHONE_STATE = 0;
     private Socket socket;
     private   int index=0;
-    private String idtraining="",SERVICE_NOTIF="";
+    private String idtraining="",SERVICE_NOTIF="",tokenFcm="";
     static set_ip ip = new set_ip();
-    private String TAG="UPDATE_PLAY_STORE";
+    private String TAG="MAIN_FRAGMENT";
     private LinearLayout lytoolbar;
     private AppUpdateManager mAppUpdateManager;
     private static final int RC_APP_UPDATE=100;
     private Dialog dialogResign;
+
     private TextView txJudul,txInfo,txClose;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -105,7 +106,9 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         sessionmanager = new SessionManager(main_fragment.this);
 
         //call FCM configuration
-        helper.ConfigFCM("slip_gaji");
+        tokenFcm=helper.ConfigFCM();
+        Log.d("CEK_DEVICE_ID", "onCreate: "+helper.getDeviceId(main_fragment.this));
+
 
         //Untuk mendapatkan token
         String kyano = sessionmanager.getIdUser();
@@ -188,6 +191,8 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         helper.requestPermissionsGps(main_fragment.this);
         requestReadPhoneStatePermission();
         getInformasiKaryawan(kyano);
+        cekTokenFCM(sessionmanager.getNik(),tokenFcm);
+
 
     }
 
@@ -682,10 +687,35 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
                 finish();
             }
         });
-
-
-
         dialogResign.show();
+    }
+
+
+    public void cekTokenFCM(String nik, String token) {
+        AndroidNetworking.post(api.URL_saveTokenFcm)
+                .addBodyParameter("nik", nik)
+                .addBodyParameter("token", token)
+                .addBodyParameter("key", api.key)
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Boolean success = response.getBoolean("success");
+                            Log.d(TAG, "onResponse: ");
+                            Log.d("CEK_UPDATE", "onResponse: " + success);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("JSON_TOKEN", "onResponse: " + e);
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d("EROOR_TOKEN", "onError: " + anError);
+                    }
+                });
     }
 
 }

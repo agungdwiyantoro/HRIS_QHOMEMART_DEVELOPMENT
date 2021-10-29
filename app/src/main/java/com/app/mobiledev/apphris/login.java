@@ -46,6 +46,7 @@ public class login extends AppCompatActivity {
     EditText txtIDUser, txtPassword;
     TextView lupa_password;
     Button btnLogin;
+    String token;
     String id_user, password;
     private CheckBox checkBox;
     SessionManager sessionManager;
@@ -69,6 +70,7 @@ public class login extends AppCompatActivity {
         mProgressDialog.setMessage("Loading ...");
         tx_versi=findViewById(R.id.tx_versi);
         checkBox.setChecked(false);
+        token=helper.ConfigFCM();
 
         //call FCM configuration
 
@@ -195,7 +197,8 @@ public class login extends AppCompatActivity {
                 Log.d("CEK_LOGIN", "getParams: "+id_user+" cek :"+password+" macaddress: "+helper.getDeviceIMEI(login.this));
                 params.put("users", id_user);
                 params.put("pass", password);
-                params.put("mc_address", helper.getDeviceIMEI(login.this));
+                params.put("token_fcm", token);
+                params.put("mc_address", helper.getDeviceId(login.this));
                 params.put("key", api.key);
                 return params;
             }

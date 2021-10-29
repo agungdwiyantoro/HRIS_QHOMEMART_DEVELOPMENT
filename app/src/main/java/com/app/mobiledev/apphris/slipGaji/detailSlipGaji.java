@@ -56,7 +56,7 @@ public class detailSlipGaji extends AppCompatActivity {
         String postData = null;
         try {
             postData = "bulan=" + URLEncoder.encode(bulan, "UTF-8") + "&tahun=" + URLEncoder.encode(tahun, "UTF-8")+"&nik=" + URLEncoder.encode(msesion.getNik(), "UTF-8");
-            webSlip.postUrl(api.URL_getSlipGaji2,postData.getBytes());
+            webSlip.postUrl(api.URL_getSlipGaji,postData.getBytes());
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

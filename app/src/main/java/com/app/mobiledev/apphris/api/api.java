@@ -96,7 +96,7 @@ public class api {
     public static  final String URL_up_get_data_diri_temp=ip.getIp()+"get_data_diri_temp";
     public static  final String URL_getRiwayatSlipGaji=ip.getIp()+"getRiwayatSlipGaji";
     public static  final String URL_getSlipGaji=ip.getIp()+"getSlipGaji";
-    public static  final String URL_getSlipGaji2=ip.getIp()+"getSlipGaji2";
+    public static  final String URL_saveTokenFcm=ip.getIp()+"saveTokenFcm";
 
 
     //Get Token Alamat

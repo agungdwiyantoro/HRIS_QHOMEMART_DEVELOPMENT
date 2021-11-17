@@ -6,8 +6,8 @@ android {
         applicationId "com.app.mobiledev.apphris"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 40
-        versionName "1.40"
+        versionCode 41
+        versionName "1.41"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 

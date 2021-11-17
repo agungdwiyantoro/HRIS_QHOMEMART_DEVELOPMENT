@@ -104,7 +104,7 @@ public class fragment_report extends Fragment {
         btnCalender1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
+
                 showDateDialog1();
             }
         });
@@ -112,7 +112,7 @@ public class fragment_report extends Fragment {
         btnCalender2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressDialog.show();
+
                 showDateDialog2();
             }
         });
@@ -134,9 +134,11 @@ public class fragment_report extends Fragment {
                 }else{
                     String tgl_mulai=tgl1.getText().toString();
                     String tgl_selesai=tgl2.getText().toString();
+                    mProgressDialog.show();
                     riwayatAbsen(kyano,tgl_mulai,tgl_selesai);
 
                 }
+                mProgressDialog.dismiss();
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -156,10 +158,12 @@ public class fragment_report extends Fragment {
                 }else{
                     String tgl_mulai=tgl1.getText().toString();
                     String tgl_selesai=tgl2.getText().toString();
+                    mProgressDialog.show();
                     riwayatAbsen(kyano,tgl_mulai,tgl_selesai);
                 }
 
                 Log.d("SET_TGL2", "onDateSet: "+dateFormatter.format(newDate.getTime()));
+                mProgressDialog.dismiss();
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));

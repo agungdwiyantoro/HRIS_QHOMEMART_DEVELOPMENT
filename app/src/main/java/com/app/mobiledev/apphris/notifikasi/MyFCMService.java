@@ -49,7 +49,7 @@ public class MyFCMService extends FirebaseMessagingService {
 
         if(msession.getNik().equals(nik)){
             Log.d("TAG_REMOTE_MESSAGE3", "onMessageReceived: " + msession.getNik());
-            showNotificationMessage(title+" "+nik, body, click_action);
+            showNotificationMessage(title, body, click_action);
         }
 
     }

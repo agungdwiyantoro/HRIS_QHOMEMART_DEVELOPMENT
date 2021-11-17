@@ -97,6 +97,9 @@ public class api {
     public static  final String URL_getRiwayatSlipGaji=ip.getIp()+"getRiwayatSlipGaji";
     public static  final String URL_getSlipGaji=ip.getIp()+"getSlipGaji";
     public static  final String URL_saveTokenFcm=ip.getIp()+"saveTokenFcm";
+    public static  final String URL_updateTokenFCM=ip.getIp()+"updateTokenFCM";
+
+
 
 
     //Get Token Alamat

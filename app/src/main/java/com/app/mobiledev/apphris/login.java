@@ -159,7 +159,7 @@ public class login extends AppCompatActivity {
                             hashtag = data.getString("hashtag");
                             divisi = data.getString("kydivisi");
                             jabatan = data.getString("jabatan");
-                            Log.d("STAFF_cek", "onResponse: "+noUser);
+                            Log.d("STAFF_cek_nik", "onResponse: "+nik);
 
 
                         }

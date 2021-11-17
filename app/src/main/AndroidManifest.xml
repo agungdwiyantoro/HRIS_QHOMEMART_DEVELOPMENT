@@ -41,7 +41,14 @@
         <activity
             android:name=".slipGaji.riwayatSlipGaji"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="false" />
+            android:exported="false" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.TARGET_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".test.DownloadFile">
 
             <!--
@@ -161,11 +168,7 @@
         <activity
             android:name=".memo.listMemo.memo_list"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.TARGET_NOTIFICATION" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".bonus.bonus_promosi_proyek.list_bonus_proyek"

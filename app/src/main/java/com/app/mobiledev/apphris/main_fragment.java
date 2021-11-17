@@ -19,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -95,6 +96,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
     private static final int RC_APP_UPDATE=100;
     private Dialog dialogResign;
 
+
     private TextView txJudul,txInfo,txClose;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -102,13 +104,29 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_fragment);
+        mAppUpdateManager= AppUpdateManagerFactory.create(this);
+        mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo result) {
+                //helper.snackBar(lytoolbar,"CEK_VERSION= A="+UpdateAvailability.UPDATE_AVAILABLE+" B="+result.updateAvailability());
+                if(result.updateAvailability()==UpdateAvailability.UPDATE_AVAILABLE
+                        &&result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)){
+                    try {
+                        mAppUpdateManager.startUpdateFlowForResult(result,AppUpdateType.IMMEDIATE,main_fragment.this,
+                                RC_APP_UPDATE);
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                        Log.d(TAG+"_UPDATE", "onSuccess: "+e);
+                    }
+                }
+            }
+        });
+        mAppUpdateManager.registerListener(installStateUpdatedListener);
 
         sessionmanager = new SessionManager(main_fragment.this);
-
         //call FCM configuration
         tokenFcm=helper.ConfigFCM();
         Log.d("CEK_DEVICE_ID", "onCreate: "+helper.getDeviceId(main_fragment.this));
-
 
         //Untuk mendapatkan token
         String kyano = sessionmanager.getIdUser();
@@ -136,7 +154,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
 
             }
         });
-        //mAppUpdateManager.registerListener(installStateUpdatedListener);
+        mAppUpdateManager.registerListener(installStateUpdatedListener);
         lytoolbar=findViewById(R.id.lytoolbar);
 
         kyano=sessionmanager.getIdUser();
@@ -193,14 +211,17 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         getInformasiKaryawan(kyano);
         cekTokenFCM(sessionmanager.getNik(),tokenFcm);
 
-
     }
 
-    /*private InstallStateUpdatedListener installStateUpdatedListener=new InstallStateUpdatedListener() {
+    private InstallStateUpdatedListener installStateUpdatedListener=new InstallStateUpdatedListener() {
         @Override
         public void onStateUpdate(@NonNull InstallState state) {
                 if(state.installStatus()==InstallStatus.DOWNLOADED){
                     shoCompleteUpdate();
+                }
+
+                if(state.installStatus()==InstallStatus.CANCELED){
+                   finish();
                 }
         }
     };
@@ -216,7 +237,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         });
         snackbar.show();
 
-    }*/
+    }
 
     public void getToken(String kyano, String pass) {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
@@ -305,10 +326,10 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
                 sessionmanager.logout();
                 Intent intent3 = new Intent(main_fragment.this, login.class);
                 startActivity(intent3);
+                Log.d(TAG+"_NIK", "onOptionsItemSelected: "+sessionmanager.getNik());
+                updateTokenFcm(nik);
                 finish();
-
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -717,5 +738,32 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
                     }
                 });
     }
+
+    public static void updateTokenFcm(final String nik) {
+        AndroidNetworking.post(api.URL_updateTokenFCM)
+                .addBodyParameter("nik", nik)
+                .addBodyParameter("key", api.key)
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Boolean success = response.getBoolean("success");
+                            Log.d("UPDATE_FCM", "onResponse: " + success);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("JSON_UPDATE_FCM", "onResponse: " + e);
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d("EROOR_UPDATE_FCM", "onError: " + anError);
+                    }
+                });
+    }
+
 
 }

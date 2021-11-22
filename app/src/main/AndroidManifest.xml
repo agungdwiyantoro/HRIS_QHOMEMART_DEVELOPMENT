@@ -35,14 +35,16 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
+            android:name=".underMaintanace.underMaintanance"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
             android:name=".slipGaji.detailSlipGaji"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-            android:exported="false" />
         <activity
             android:name=".slipGaji.riwayatSlipGaji"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="false" >
-
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.TARGET_NOTIFICATION" />
 
@@ -167,9 +169,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".memo.listMemo.memo_list"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
             android:name=".bonus.bonus_promosi_proyek.list_bonus_proyek"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

@@ -31,6 +31,7 @@
     <string name="foto_detail_izin">Foto Detail Izin</string>
     <string name="foto_dp">Foto Dp</string>
     <string name="info_update">Info Karyawan</string>
+    <string name="info_undermaintanance">Hris info perbaikan</string>
     <string name="soal">Soal</string>
     <string name="licensi">Saya tunduk dan patuh pada tata tertib selama melakukan test ini</string>
     <string name="status_form_kunjungan">Keterangan: untuk melihat detail ketuk list  form kunjungan</string>
@@ -156,6 +157,9 @@
     <string name="pesan_data_diri">Data diri anda dapat diperbarui pada halaman profil anda, atau anda bisa menekan tombol Update dibawah ini</string>
     <string name="pesan_data">(Pesan ini tidak akan muncul setelah mengisi data diri)</string>
     <string name="pesan_slip_gaji">Slip gaji ini bersifat rahasia, mohon untuk menyimpan dengan baik dan tidak diperlihatkan kepada pihak lain</string>
+
+    <!-- pesan example-->
+    <string name="pesan_example"></string>
 
 
     <!-- karyawan resign-->

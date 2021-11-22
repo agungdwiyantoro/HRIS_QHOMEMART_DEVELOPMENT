@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/ic_no_data.xml" value="0.21822916666666667" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_absensi_keluar.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_detail_slip_gaji.xml" value="0.12228260869565218" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_riwayat_slip_gaji.xml" value="0.12228260869565218" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_under_maintanance.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_infoslipgaji.xml" value="0.25" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_infoupdate.xml" value="0.12228260869565218" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialogkaryawanresign.xml" value="0.12228260869565218" />

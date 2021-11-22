@@ -100,6 +100,10 @@ public class api {
     public static  final String URL_updateTokenFCM=ip.getIp()+"updateTokenFCM";
 
 
+    //Server api.qhome.id
+    public static final String URL_API_QHOME_ID="http://api.qhome.id/hris/UnderMaintanceMobile";
+
+
 
 
     //Get Token Alamat

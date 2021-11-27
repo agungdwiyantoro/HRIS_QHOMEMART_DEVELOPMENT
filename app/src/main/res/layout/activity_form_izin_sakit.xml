@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_marginTop="@dimen/padd_10"
+        android:padding="15dp"
+        android:layout_gravity="left"
+        android:id="@+id/imStatus"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_chevron_left_white_24dp"
+        android:backgroundTint="@color/abu_abu"/>
+
+    <ScrollView
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+
+            <LinearLayout
+
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginEnd="@dimen/padd_10"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="36dp"
+                    android:text="Surat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="18dp"
+                    android:textColor="@color/main_color_black"
+                    android:text="Izin Sakit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textSize="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/second_color_black"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nama"/>
+
+                <TextView
+                    android:textSize="24dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/main_color_black"
+                    android:layout_height="wrap_content"
+                    android:text="Muhamad Dios Pratama"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textSize="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/second_color_black"
+                    android:text="@string/divisi"/>
+
+                <TextView
+                    android:textSize="24dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/main_color_black"
+                    android:layout_height="wrap_content"
+                    android:text="Mobile Apps Developer"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textSize="12dp"
+                    android:textColor="@color/second_color_black"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jabatan"/>
+
+                <TextView
+                    android:textSize="24dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/main_color_black"
+                    android:text="Staff"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:textSize="12dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/indikasi_penyakit"
+                android:textColor="@color/second_color_black" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorTextAppearance="@style/error_appearance"
+                android:textColorHint="@color/abu_abu">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input_rounded"
+                    android:inputType="text"
+                    android:padding="12dp"
+                    android:textColor="@color/main_color_black" />
+
+
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <TextView
+                android:layout_marginTop="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/tanggal"
+                android:textSize="12dp"
+                android:textColor="@color/second_color_black" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorTextAppearance="@style/error_appearance"
+                android:textColorHint="@color/abu_abu">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input_rounded"
+                    android:inputType="text"
+                    android:padding="12dp"
+                    android:textColor="@color/main_color_black" />
+
+
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="12dp"
+                android:text="@string/catatan"
+                android:textColor="@color/second_color_black"
+                android:layout_marginBottom="8dp"/>
+
+
+            <EditText
+                android:id="@+id/textArea_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:overScrollMode="always"
+                android:scrollbars="vertical"
+                android:textColor="@color/main_color_black"
+                android:lines="6"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:scrollHorizontally="false" />
+
+
+
+
+
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textColor="@color/second_color_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:gravity="left"
+                android:text="@string/lampiran_foto_surat_keterangan_dokter"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:elevation="@dimen/padd_10"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_camera" />
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:layout_marginTop="@dimen/padd_10"
+                android:id="@+id/btn_hapus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round"
+                android:backgroundTint="@color/greennew"
+                android:text="@string/ajukan"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+
+</RelativeLayout>

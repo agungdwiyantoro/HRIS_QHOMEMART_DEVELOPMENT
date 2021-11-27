@@ -35,9 +35,13 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
+            android:name=".newIzin.dashboardIzin"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name=".underMaintanace.underMaintanance"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".slipGaji.detailSlipGaji"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -169,7 +173,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".memo.listMemo.memo_list"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".bonus.bonus_promosi_proyek.list_bonus_proyek"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -383,6 +387,19 @@
         <activity android:name=".visitor.RiwayatVisit" />
         <activity android:name=".visitor.AddPengunjungVisit" />
         <activity android:name=".visitor.AddMobilMotorVisit" />
+        <activity
+            android:name=".newIzin.izinSakit.formIzinSakit"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".newIzin.izinSakit.listIzinSakit"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+
+
     </application>
 
 </manifest>

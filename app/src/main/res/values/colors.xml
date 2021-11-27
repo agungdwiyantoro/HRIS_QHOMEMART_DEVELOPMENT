@@ -19,12 +19,19 @@
     <color name="grey_darken_4">#212121</color>
     <color name="light_grey">#8E8E8E</color>
     <color name="abu_abu">#C1C0C7</color>
+    <color name="main_color_black">#3A3434</color>
+    <color name="second_color_black">#5F5F5F</color>
+    <color name="purple">#5474E7</color>
+    <color name="blue_dark">#365BBB</color>
+
+
+
 
 
 
 
     <color name="btnPrimary">#2196F3</color>
-    <color name="greennew">#00BFA6</color>
+    <color name="greennew">#34A94E</color>
 
     <color name="btnWarning">#FFD54F</color>
     <color name="btnDanger">#F3110C</color>

@@ -487,7 +487,6 @@ public class helper extends AsyncTask {
         AndroidNetworking.post(api.URL_getAksesMobile)
                 .addBodyParameter("key", api.key)
                 .addBodyParameter("menu_mobile", menu)
-
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

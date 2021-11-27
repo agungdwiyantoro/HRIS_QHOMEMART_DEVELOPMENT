@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:id="@+id/relativeMain"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_marginTop="@dimen/padd_10"
+        android:padding="15dp"
+        android:layout_gravity="left"
+        android:id="@+id/imStatus"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_chevron_left_white_24dp"
+        android:backgroundTint="@color/abu_abu"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padd_10"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Surat"
+                android:textColor="@color/main_color_black"
+                android:textSize="36dp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="61dp"
+            android:src="@drawable/mail_box" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linear_izin_sakit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <android.support.design.card.MaterialCardView
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:elevation="10dp"
+                        app:cardCornerRadius="5dp">
+
+
+                        <TextView
+                            android:id="@+id/btn_tambah_izin_sakit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/purple"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="15dp"
+                            android:text="@string/tambah"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </android.support.design.card.MaterialCardView>
+
+                    <android.support.design.card.MaterialCardView
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elevation="10dp"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="5dp">
+
+
+                        <TextView
+                            android:id="@+id/btn_status_izin_sakit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/greennew"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="15dp"
+                            android:text="@string/status"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </android.support.design.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+                <android.support.design.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="5dp">
+
+
+                    <TextView
+                        android:id="@+id/btn_izin_sakit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="15dp"
+                        android:text="@string/izin_sakit"
+                        android:textAlignment="center"
+                        android:textColor="@color/main_color_black"
+                        android:textSize="18dp" />
+
+                </android.support.design.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/linear_izin_meninggalkan_tugas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <android.support.design.card.MaterialCardView
+                        android:layout_margin="5dp"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:elevation="10dp"
+                        app:cardCornerRadius="5dp">
+
+
+                        <TextView
+                            android:id="@+id/btn_tambah_izin_meninggalkan_tugas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/purple"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="15dp"
+                            android:text="@string/tambah"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </android.support.design.card.MaterialCardView>
+
+                    <android.support.design.card.MaterialCardView
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elevation="10dp"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="5dp">
+
+
+                        <TextView
+                            android:id="@+id/btn_status_izin_meninggalkan_tugas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/greennew"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="15dp"
+                            android:text="@string/status"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </android.support.design.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+                <android.support.design.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="5dp">
+
+
+                    <TextView
+                        android:id="@+id/btn_izin_meninggalkan_tugas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="15dp"
+                        android:text="@string/izin_meninggalkan_tugas"
+                        android:textAlignment="center"
+                        android:textColor="@color/main_color_black"
+                        android:textSize="18dp" />
+
+                </android.support.design.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/linear_izin_dinas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <android.support.design.card.MaterialCardView
+                        android:layout_margin="5dp"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:elevation="10dp"
+                        app:cardCornerRadius="5dp">
+
+
+                        <TextView
+                            android:id="@+id/btn_tambah_izin_dinas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/purple"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="15dp"
+                            android:text="@string/tambah"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </android.support.design.card.MaterialCardView>
+
+                    <android.support.design.card.MaterialCardView
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elevation="10dp"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="5dp">
+
+
+                        <TextView
+                            android:id="@+id/btn_status_izin_dinas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/greennew"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="15dp"
+                            android:text="@string/status"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </android.support.design.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+                <android.support.design.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="5dp">
+
+
+                    <TextView
+                        android:id="@+id/btn_izin_dinas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="15dp"
+                        android:text="@string/izin_dinas"
+                        android:textAlignment="center"
+                        android:textColor="@color/main_color_black"
+                        android:textSize="18dp" />
+
+                </android.support.design.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/linear_izin_cuti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <android.support.design.card.MaterialCardView
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:elevation="10dp"
+                        app:cardCornerRadius="5dp">
+
+
+                        <TextView
+                            android:id="@+id/btn_tambah_izin_cuti"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/purple"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="15dp"
+                            android:text="@string/tambah"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </android.support.design.card.MaterialCardView>
+
+                    <android.support.design.card.MaterialCardView
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:elevation="10dp"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        app:cardCornerRadius="5dp">
+
+
+                        <TextView
+                            android:id="@+id/btn_status_izin_cuti"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/greennew"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="15dp"
+                            android:text="@string/status"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+
+                    </android.support.design.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+                <android.support.design.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="5dp">
+
+
+                    <TextView
+                        android:id="@+id/btn_izin_cuti"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="15dp"
+                        android:text="@string/cuti"
+                        android:textAlignment="center"
+                        android:textColor="@color/main_color_black"
+                        android:textSize="18dp" />
+
+                </android.support.design.card.MaterialCardView>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -696,7 +696,7 @@ public class fragment_home extends Fragment {
         dialoginfoUpdate.setContentView(R.layout.dialog_infoupdate);
         dialoginfoUpdate.setCancelable(true);
         dialoginfoUpdate.setCanceledOnTouchOutside(false);
-        dialoginfoUpdate.setTitle("Update data diri");
+        dialoginfoUpdate.setTitle("info update");
         info_update = (TextView) dialoginfoUpdate.findViewById(R.id.info_update);
         txInfo = (TextView) dialoginfoUpdate.findViewById(R.id.txInfo);
         txtClose = (TextView) dialoginfoUpdate.findViewById(R.id.txtClose);

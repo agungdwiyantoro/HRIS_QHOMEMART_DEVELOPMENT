@@ -399,6 +399,13 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
 
+        <activity
+            android:name=".newIzin.izinSakit.statusApproveIzinSakit"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
+
+
 
     </application>
 

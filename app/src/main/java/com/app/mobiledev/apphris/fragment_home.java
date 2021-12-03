@@ -82,6 +82,7 @@ public class fragment_home extends Fragment {
     private List<ModelMemo> mlistMemo;
     private RecyclerView rvMemo;
 
+
     private boolean status_notif = true;
 
     Dialog dialogHubungan;
@@ -96,12 +97,7 @@ public class fragment_home extends Fragment {
         //notifUpdateData();
 
         rootView= inflater.inflate(R.layout.activity_fragment_activity, container, false);
-        sessionmanager = new SessionManager(getActivity());
-        //Untuk mendapatkan token
-        String password = sessionmanager.getPass();
-        Log.d("TAG_UP", "onCreate: "+kyano+password);
-        getToken(kyano, password);
-
+        sessionmanager=new SessionManager(getActivity());
         kyano=sessionmanager.getIdUser();
         hashtag=sessionmanager.getHashtag();
         abs_masuk=rootView.findViewById(R.id.abs_masuk);
@@ -560,45 +556,7 @@ public class fragment_home extends Fragment {
                 });
     }
 
-    public void getToken(String kyano, String pass) {
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(120, TimeUnit.SECONDS)
-                .readTimeout(120, TimeUnit.SECONDS)
-                .writeTimeout(120, TimeUnit.SECONDS)
-                .build();
-        AndroidNetworking.post(api.URL_getTokenAlamat)
-                .addBodyParameter("kyano",kyano/*"0000000000000000"*/)
-                .addBodyParameter("password",pass)
-                .addHeaders("Content-Type","application/x-www-form-urlencoded")
-                .setPriority(Priority.HIGH)
-                .setOkHttpClient(okHttpClient)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("TAG_TOKEN_RESPONSE", "onResponse: "+response);
-                        try {
-                            //int status = Integer.parseInt(response.getString("status"));
-                            String token = response.getString("token");
-                            String waktu = response.getString("waktu");
-                            Log.d("TAG_TOKEN", "onResponse: "+token+" "+waktu);
-                            sessionmanager.createToken(token);
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                            Log.d("JSONException", "onResponse: "+e);
-                        }catch (NumberFormatException e){
-                            e.printStackTrace();
-                            Log.d("NumberFormatException", "onResponse: " + e);
-                        }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("ERROR_TOKEN", "onError: " + anError);
-
-                    }
-                });
-    }
 
 
     @Override

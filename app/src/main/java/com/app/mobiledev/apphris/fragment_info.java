@@ -17,6 +17,7 @@ import com.app.mobiledev.apphris.bonus.menu_bonus;
 import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.izin.menu_izin;
+import com.app.mobiledev.apphris.newIzin.dashboardIzin;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.slipGaji.riwayatSlipGaji;
 import com.app.mobiledev.apphris.training.menu_training;
@@ -108,7 +109,9 @@ public class fragment_info extends Fragment {
         izin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"izin", menu_izin.class);
+                Intent i = new Intent(getActivity(), dashboardIzin.class);
+                startActivity(i);
+               // helper.cekAkses(getActivity(),lmenu,"izin", menu_izin.class);
             }
         });
 

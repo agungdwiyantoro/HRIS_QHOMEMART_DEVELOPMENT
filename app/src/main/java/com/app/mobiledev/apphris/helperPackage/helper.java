@@ -57,6 +57,7 @@ import org.jsoup.Jsoup;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.text.DecimalFormat;
@@ -75,6 +76,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import okhttp3.Credentials;
 
 public class helper extends AsyncTask {
 
@@ -776,5 +778,57 @@ public class helper extends AsyncTask {
         }
         return  token;
     }
+
+
+    public static void getTokenHris( final Context mctx,String bariier) {
+        AndroidNetworking.post(api.URL_API_TOKEN_HRIS)
+                .addHeaders("Authorization", "Basic "+bariier)
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String status = response.getString("status");
+                            if (status.equals("201")) {
+                                String token=response.getString("token");
+                                sessionManager = new SessionManager(mctx);
+                                sessionManager.createToken(token);
+
+
+
+                            } else {
+                                Log.d(TAG, "token salah");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("JSON_TOKEN", "onResponse: " + e);
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d("ERROR_TOKEN", "onError: " + anError);
+                    }
+                });
+    }
+
+    public static String getEncodeToken(String username, String password){
+            String encode="";
+
+        try {
+             encode= Credentials.basic(username,password);
+            //encode = Base64.encodeToString((username + ":" + password).getBytes("UTF-8"), Base64.DEFAULT);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        return  encode;
+    }
+
+
+
+
 
 }

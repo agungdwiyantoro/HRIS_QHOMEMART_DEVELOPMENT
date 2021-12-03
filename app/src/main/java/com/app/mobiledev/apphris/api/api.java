@@ -99,10 +99,15 @@ public class api {
     public static  final String URL_getSlipGaji=ip.getIp()+"getSlipGaji";
     public static  final String URL_saveTokenFcm=ip.getIp()+"saveTokenFcm";
     public static  final String URL_updateTokenFCM=ip.getIp()+"updateTokenFCM";
+    public  static  final String URL_uploadIzinSakit="http://192.168.50.24/all/hris_ci_3/api/uploadimage";
+    public  static  final String URL_IzinSakit="http://192.168.50.24/all/hris_ci_3/api/izinsakit";
 
 
     //Server api.qhome.id
     public static final String URL_API_QHOME_ID="http://api.qhome.id/hris/UnderMaintanceMobile";
+
+    //Server hris ci3 token
+    public static final String URL_API_TOKEN_HRIS="http://192.168.50.24/all/hris_ci_3/api/auth";
 
 
 

@@ -33,7 +33,7 @@ public class SessionManager {
     public static final String JABATAN = "JABATAN";//y show bio
     public static final String DIVISI = "DIVISI";//y show bio
     public static final String IDTRANING="IDTRAINING";//y show id training
-    public static final String TOKEN = "TOKEN";
+    public static final String TOKEN = "TOKEN";//token hris
     public static final String CUTOFF = "CUTOFF";
     public static final String LOKASI_JANTI="LOKASI_JANTI"; // session create lokasi qhome janti
     public static final String LOKASI_JANTI_LESTARI="LOKASI_JANTI_LESTARI"; // session create lokasi qhome janti
@@ -97,6 +97,7 @@ public class SessionManager {
 
 
 
+
     public static String token;
     public static String cutOff;
 
@@ -108,6 +109,8 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
+
+    //token hris
     public void createToken(String token){
         editor.putString(TOKEN, token);
         editor.apply();
@@ -220,7 +223,7 @@ public class SessionManager {
 
     public void checkLogin(){
         if(sharedPreferences.contains(NAMA_USER) && sharedPreferences.contains(ID_USER)){
-            Intent i = new Intent(context, listIzinSakit.class);
+            Intent i = new Intent(context, main_fragment.class);
            // Intent i = new Intent(context, UpdateDataDiri.class);
             i.putExtra("username",sharedPreferences.getString(NAMA_USER,"Username"));
             context.startActivity(i);
@@ -473,6 +476,8 @@ public class SessionManager {
         info_update=sharedPreferences.getBoolean(INFO_UPDATE,true);
         return info_update;
     }
+
+
 
 }
 

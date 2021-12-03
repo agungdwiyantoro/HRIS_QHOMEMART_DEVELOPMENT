@@ -8,14 +8,14 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_marginTop="@dimen/padd_10"
-        android:padding="15dp"
-        android:layout_gravity="left"
-        android:id="@+id/imStatus"
+        android:id="@+id/img_back"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="@dimen/padd_10"
         android:background="@drawable/ic_chevron_left_white_24dp"
-        android:backgroundTint="@color/abu_abu"/>
+        android:backgroundTint="@color/abu_abu"
+        android:padding="15dp" />
 
 
     <LinearLayout
@@ -58,6 +58,16 @@
             android:layout_marginTop="43dp"
             android:src="@drawable/onprogress" />
 
+        <TextView
+            android:id="@+id/text_keterangan"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="24dp"
+            android:textColor="@color/main_color_black"
+            android:text="Izin Sakit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
 
         <ScrollView
@@ -73,13 +83,16 @@
 
 
                 <LinearLayout
+                    android:background="@color/white"
                     android:layout_width="match_parent"
+                    android:layout_margin="15dp"
                     android:layout_height="250dp">
 
                     <android.support.v7.widget.RecyclerView
+                        android:background="@color/white"
+                        android:id="@+id/recyler_status_approve"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
                         tools:listitem="@layout/list_timeline_izin_status" />
                 </LinearLayout>
 
@@ -117,6 +130,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/tx_nama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -141,6 +155,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/tx_indikasi_sakit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -165,6 +180,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/tx_catatan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -189,6 +205,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/tx_selengkapnya"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"

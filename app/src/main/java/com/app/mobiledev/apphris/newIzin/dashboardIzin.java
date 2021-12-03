@@ -1,5 +1,6 @@
 package com.app.mobiledev.apphris.newIzin;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.newIzin.izinSakit.formIzinSakit;
+import com.app.mobiledev.apphris.newIzin.izinSakit.listIzinSakit;
+import com.app.mobiledev.apphris.newIzin.izinSakit.statusApproveIzinSakit;
 
 public class dashboardIzin extends AppCompatActivity {
 
@@ -72,6 +76,25 @@ public class dashboardIzin extends AppCompatActivity {
                 btn_izin_sakit.setVisibility(View.GONE);
                 linear_izin_sakit.setVisibility(View.VISIBLE);
                 izin_sakit=true;
+
+            }
+        });
+
+
+        btn_tambah_izin_sakit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(dashboardIzin.this, formIzinSakit.class);
+                startActivity(i);
+
+            }
+        });
+
+        btn_status_izin_sakit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(dashboardIzin.this, listIzinSakit.class);
+                startActivity(i);
 
             }
         });

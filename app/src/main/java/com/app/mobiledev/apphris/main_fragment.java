@@ -23,6 +23,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -95,6 +96,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
     private AppUpdateManager mAppUpdateManager;
     private static final int RC_APP_UPDATE=100;
     private Dialog dialogResign;
+    private String encodeToken;
 
 
     private TextView txJudul,txInfo,txClose;
@@ -131,8 +133,12 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         //Untuk mendapatkan token
         String kyano = sessionmanager.getIdUser();
         String password = sessionmanager.getPass();
-        Log.d("TAG_UP", "onCreate: "+kyano+password);
-        getToken(kyano, password);
+
+        encodeToken=helper.getEncodeToken(kyano,password);
+        Log.d("BARRIER_TOKEN", "onCreate: "+password);
+        String credentials = kyano + ":" + password;
+        String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        helper.getTokenHris(main_fragment.this,base64EncodedCredentials);
 
         mAppUpdateManager= AppUpdateManagerFactory.create(this);
         mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
@@ -211,6 +217,8 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         getInformasiKaryawan(kyano);
         cekTokenFCM(sessionmanager.getNik(),tokenFcm);
 
+
+
     }
 
     private InstallStateUpdatedListener installStateUpdatedListener=new InstallStateUpdatedListener() {
@@ -239,45 +247,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
 
     }
 
-    public void getToken(String kyano, String pass) {
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(120, TimeUnit.SECONDS)
-                .readTimeout(120, TimeUnit.SECONDS)
-                .writeTimeout(120, TimeUnit.SECONDS)
-                .build();
-        AndroidNetworking.post(api.URL_getTokenAlamat)
-                .addBodyParameter("kyano",kyano/*"0000000000000000"*/)
-                .addBodyParameter("password",pass)
-                .addHeaders("Content-Type","application/json")
-                .setPriority(Priority.HIGH)
-                .setOkHttpClient(okHttpClient)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("TAG_TOKEN_RESPONSE", "onResponse: "+response);
-                        try {
-                            //int status = Integer.parseInt(response.getString("status"));
-                            String token = response.getString("token");
-                            String waktu = response.getString("waktu");
-                            Log.d("TAG_TOKEN", "onResponse: "+token+" "+waktu);
-                            sessionmanager.createToken(token);
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                            Log.d("JSONException", "onResponse: "+e);
-                        }catch (NumberFormatException e){
-                            e.printStackTrace();
-                            Log.d("NumberFormatException", "onResponse: " + e);
-                        }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("ERROR_TOKEN", "onError: " + anError);
-
-                    }
-                });
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

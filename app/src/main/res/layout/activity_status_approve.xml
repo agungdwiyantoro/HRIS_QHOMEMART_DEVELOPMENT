@@ -80,9 +80,254 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <LinearLayout
+                        android:layout_marginStart="-8dp"
+                        android:layout_width="wrap_content"
+                        android:background="@color/white"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
 
-                <LinearLayout
+
+                        <ImageView
+                            android:layout_marginTop="-6dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_dot_sukses"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <LinearLayout
+                            android:layout_marginTop="-5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp">
+                            <View
+                                android:layout_marginStart="12dp"
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/greennew">
+                            </View>
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.CardView
+                        app:cardElevation="0dp"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:contentPadding="10dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_boxtext_green"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_judul1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:textColor="@color/main_color_black"
+                                android:textSize="12sp"
+                                tools:text="24 JAN" />
+
+                            <TextView
+                                android:id="@+id/text_alasan1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@android:color/black"
+                                tools:text="Order Successfully Completed" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <LinearLayout
+                        android:layout_marginStart="-8dp"
+                        android:layout_width="wrap_content"
+                        android:background="@color/white"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+
+                        <ImageView
+                            android:layout_marginTop="-6dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_dot_sukses"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <LinearLayout
+                            android:layout_marginTop="-5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp">
+                            <View
+                                android:layout_marginStart="12dp"
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/greennew">
+                            </View>
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.CardView
+                        app:cardElevation="0dp"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:contentPadding="10dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_boxtext_green"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_judul2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:textColor="@color/main_color_black"
+                                android:textSize="12sp"
+                                tools:text="24 JAN" />
+
+                            <TextView
+                                android:id="@+id/text_alasan2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@android:color/black"
+                                tools:text="Order Successfully Completed" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <LinearLayout
+                        android:layout_marginStart="-8dp"
+                        android:layout_width="wrap_content"
+                        android:background="@color/white"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+
+
+                        <ImageView
+                            android:layout_marginTop="-6dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_dot_sukses"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                        <LinearLayout
+                            android:layout_marginTop="-5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp">
+                            <View
+                                android:layout_marginStart="12dp"
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/greennew">
+                            </View>
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.CardView
+                        app:cardElevation="0dp"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginStart="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:contentPadding="10dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_boxtext_green"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_judul3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:textColor="@color/main_color_black"
+                                android:textSize="12sp"
+                                tools:text="24 JAN" />
+
+                            <TextView
+                                android:id="@+id/text_alasan3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@android:color/black"
+                                tools:text="Order Successfully Completed" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+                <!--<LinearLayout
                     android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_margin="15dp"
@@ -94,6 +339,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:listitem="@layout/list_timeline_izin_status" />
+                </LinearLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
                 </LinearLayout>
 
 

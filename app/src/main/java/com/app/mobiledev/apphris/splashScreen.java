@@ -77,8 +77,8 @@ public class splashScreen extends AppCompatActivity {
                    // helper2.update("1.13",splashScreen.this);//
 
                     if(cek_update==false){
-                        chekingUnderMainTance();
-                        //sessionmanager.checkLogin();
+                        //chekingUnderMainTance();
+                        sessionmanager.checkLogin();
                     }
 
                     this.selesai();

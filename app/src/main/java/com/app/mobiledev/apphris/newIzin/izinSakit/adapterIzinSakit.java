@@ -70,6 +70,7 @@ public class adapterIzinSakit extends RecyclerView.Adapter<adapterIzinSakit.Reyc
 
         if(Object.getApprove_head().equals("null")){
             holder.imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
+            holder.kodeStatus="";
             holder.statusApprove="Dalam Proses";
 
         }
@@ -77,26 +78,26 @@ public class adapterIzinSakit extends RecyclerView.Adapter<adapterIzinSakit.Reyc
         else if(Object.getApprove_head().equals("0")){
 
             holder.imStatus.setImageResource(R.drawable.ic_dot_red);
-            holder.statusAproveHead="Ditolak";
+            holder.kodeStatus="0";
             holder.statusApprove="Ditolak oleh Head";
 
         }
         else if(Object.getApprove_head().equals("1")){
-            holder.statusAproveHead="Diterima";
+
             if(Object.getApprove_hrd().equals("0")){
                 holder.imStatus.setImageResource(R.drawable.ic_dot_red);
-                holder.statusAproveHRD="Ditolak";
-                holder.statusApprove="Ditolak oleh Human Reasorces Development";
+                holder.kodeStatus="0";
+                holder.statusApprove="Ditolak oleh Human Resources Development";
 
             }
             else if(Object.getApprove_hrd().equals("1")){
                 holder.imStatus.setImageResource(R.drawable.ic_dot_sukses);
-                holder.statusAproveHRD="Diterima";
+                holder.kodeStatus="1";
                 holder.statusApprove="Diterima oleh HRD dan Head/Supervisor";
             }
             else{
                 holder.imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
-                holder.statusAproveHRD="Dalam Proses";
+                holder.kodeStatus="";
                 holder.statusApprove="Dalam Proses";
             }
         }
@@ -108,8 +109,7 @@ public class adapterIzinSakit extends RecyclerView.Adapter<adapterIzinSakit.Reyc
                 Intent i = new Intent(mCtx, statusApproveIzinSakit.class);
                 Bundle x = new Bundle();
                 x.putString("id", Object.getId());
-                x.putString("status_approve_hrd", holder.statusAproveHRD);
-                x.putString("status_approve_head", holder.statusAproveHead);
+                x.putString("kode_status", holder.kodeStatus);
                 x.putString("status_approve", holder.statusApprove);
                 i.putExtras(x);
                 mCtx.startActivity(i);
@@ -140,8 +140,7 @@ public class adapterIzinSakit extends RecyclerView.Adapter<adapterIzinSakit.Reyc
         private Date dateSource;
         private ImageView imStatus;
         private CardView card_list_riwayat_izin;
-        private String statusAproveHRD="";
-        private String statusAproveHead="";
+        private String kodeStatus="";
         private String statusApprove="";
 
 

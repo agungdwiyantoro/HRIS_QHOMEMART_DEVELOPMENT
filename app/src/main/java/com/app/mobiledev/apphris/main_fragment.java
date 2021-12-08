@@ -8,8 +8,6 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,7 +47,6 @@ import com.app.mobiledev.apphris.api.set_ip;
 import com.app.mobiledev.apphris.cek_gps.GpsUtils;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.profile.profil;
-import com.app.mobiledev.apphris.service.services_notif;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -62,10 +59,8 @@ import org.json.JSONObject;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-import okhttp3.OkHttpClient;
 
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
@@ -76,7 +71,6 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.play.core.tasks.OnSuccessListener;
-import com.google.android.play.core.tasks.Task;
 
 public class main_fragment extends AppCompatActivity implements  BottomNavigationView.OnNavigationItemSelectedListener  {
     private FragmentManager fragmentManager;
@@ -337,7 +331,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
             else if (id == R.id.pinjaman) {
                 Bundle bundle = new Bundle();
                 bundle.putString("index_notif", ""+index);
-                fragment = new fragment_info();
+                fragment = new fragment_menu();
                 fragment.setArguments(bundle);
                 callFragment(fragment);
             }

@@ -30,8 +30,8 @@ import com.app.mobiledev.apphris.visitor.Visitor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class fragment_info extends Fragment {
-    public fragment_info(){}
+public class fragment_menu extends Fragment {
+    public fragment_menu(){}
     private View rootView;
     private CardView pinjaman,kasbon,cuti,izin,bonus, latihan,projectManage,jadwalSales, visitor,cvApprove,slipGaji;
     private DataSoalSQLite db;

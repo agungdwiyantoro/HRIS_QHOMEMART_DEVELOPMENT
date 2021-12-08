@@ -11,7 +11,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="backgroundColor">#FCF3F3F3</color>
     <color name="yellow">#FFD000</color>
-    <color name="black_overlay">#66000000</color>
+    <color name="black_overlay">#2F000000</color>
     <color name="black">#000000</color>
     <color name="gray_btn_bg_color">#D0D0D0</color>
     <color name="main_blue_color">#2469df</color>
@@ -32,9 +32,10 @@
 
     <color name="btnPrimary">#2196F3</color>
     <color name="greennew">#34A94E</color>
-
+    <color name="green_light">#2600FF39</color>
     <color name="btnWarning">#FFD54F</color>
     <color name="btnDanger">#F3110C</color>
+    <color name="red_light">#26FF0600</color>
     <color name="place_autocomplete_search_text">@android:color/primary_text_dark</color>
     <color name="place_autocomplete_search_hint">@android:color/secondary_text_dark</color>
 </resources>

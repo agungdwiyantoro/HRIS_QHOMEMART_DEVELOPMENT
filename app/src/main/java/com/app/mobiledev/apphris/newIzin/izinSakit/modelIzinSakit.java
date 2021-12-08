@@ -13,6 +13,11 @@ public class modelIzinSakit {
     String approve_hrd;
     String lampiran_file;
 
+    String head_kyano;
+    String hrd_kyano;
+    String head_approve_date;
+    String hrd_approve_date;
+    String head_name;
 
     public String getId() {
         return id;
@@ -102,4 +107,43 @@ public class modelIzinSakit {
         this.lampiran_file = lampiran_file;
     }
 
+    public String getHead_kyano() {
+        return head_kyano;
+    }
+
+    public void setHead_kyano(String head_kyano) {
+        this.head_kyano = head_kyano;
+    }
+
+    public String getHrd_kyano() {
+        return hrd_kyano;
+    }
+
+    public void setHrd_kyano(String hrd_kyano) {
+        this.hrd_kyano = hrd_kyano;
+    }
+
+    public String getHead_approve_date() {
+        return head_approve_date;
+    }
+
+    public void setHead_approve_date(String head_approve_date) {
+        this.head_approve_date = head_approve_date;
+    }
+
+    public String getHrd_approve_date() {
+        return hrd_approve_date;
+    }
+
+    public void setHrd_approve_date(String hrd_approve_date) {
+        this.hrd_approve_date = hrd_approve_date;
+    }
+
+    public String getHead_name() {
+        return head_name;
+    }
+
+    public void setHead_name(String head_name) {
+        this.head_name = head_name;
+    }
 }

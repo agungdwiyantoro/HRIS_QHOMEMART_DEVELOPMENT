@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lin_transparant"
+        android:background="@color/black_overlay"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_gravity="left"
+        android:id="@+id/imStatus"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_chevron_left_white_24dp"
+        android:backgroundTint="@color/abu_abu"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
+
+        <LinearLayout
+            android:id="@+id/lin_from_izin_sakit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/padd_10"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Approval"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="26dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Izin Sakit"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/nama"
+                    android:textColor="@color/second_color_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/txNamaDetAprve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Muhamad Dios Pratama"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/indikasi_penyakit"
+                    android:textColor="@color/second_color_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/txIndikasiDetAprve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="sjdhfjsd"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/catatan"
+                    android:textColor="@color/second_color_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/txCatatanDetAprve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="djshgfbkjsd jdfhbks djfjksdf k sdjfsjkdhfk"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Tanggal dan Waktu Pengajuan"
+                    android:textColor="@color/second_color_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/txTglPengajuanDetAprve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="20 Desember 2021, 13.30 - 16.30"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="left"
+                    android:text="@string/lampiran_foto_surat_keterangan_dokter"
+                    android:textColor="@color/second_color_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Lihat Dokumen"
+                    android:textColor="@color/blue"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:id="@+id/ivDokumen"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lLDetOption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        >
+
+        <Button
+            android:id="@+id/tolak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padd_10"
+            android:layout_weight="1"
+            android:background="@drawable/bg_round"
+            android:backgroundTint="@color/light_grey"
+            android:text="Tolak"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:layout_margin="16dp"
+            />
+
+        <Button
+            android:id="@+id/setuju"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padd_10"
+            android:layout_weight="1"
+            android:background="@drawable/bg_round"
+            android:backgroundTint="@color/greennew"
+            android:text="Setuju"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:layout_margin="16dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lLDetKeputusanAprove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:padding="16dp"
+        >
+
+        <TextView
+            android:id="@+id/txKeputusan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disetujui"
+            android:layout_marginBottom="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal dan waktu keputusan"
+            />
+
+        <TextView
+            android:id="@+id/txTglKeputusanDetAprve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="07 Desember 2021, 10:02 WIB"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

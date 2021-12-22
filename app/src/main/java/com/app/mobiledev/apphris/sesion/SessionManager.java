@@ -8,9 +8,6 @@ import android.util.Log;
 
 import com.app.mobiledev.apphris.login;
 import com.app.mobiledev.apphris.main_fragment;
-import com.app.mobiledev.apphris.newIzin.dashboardIzin;
-import com.app.mobiledev.apphris.newIzin.izinSakit.formIzinSakit;
-import com.app.mobiledev.apphris.newIzin.izinSakit.listIzinSakit;
 
 import java.util.HashMap;
 

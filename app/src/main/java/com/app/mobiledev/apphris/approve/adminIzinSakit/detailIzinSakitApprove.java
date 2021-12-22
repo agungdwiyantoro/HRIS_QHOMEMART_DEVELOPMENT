@@ -1,14 +1,15 @@
 package com.app.mobiledev.apphris.approve.adminIzinSakit;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,51 +20,270 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.approve.adminIzinSakit.adapterIzinSakitApprove.adapterIzinSakitApprove;
-import com.app.mobiledev.apphris.newIzin.izinSakit.modelIzinSakit;
+import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.helperPackage.helper;
+import com.app.mobiledev.apphris.izin.izinSakit.statusApproveIzinSakit;
+import com.app.mobiledev.apphris.profile.UpdateDataDiri;
+import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class detailIzinSakitApprove extends AppCompatActivity {
 
-    private String id, nama, indikasi, catatan, tanggalPengajuan, tanggalKeputusan, imageName, approveHead;
+    private String id, name,indikasi_sakit, kyano, mulai_sakit_tanggal, selesai_sakit_tanggal, catatan, created_at, updated_at;
+    private String approve_head, approve_hrd, lampiran_file, head_kyano, head_approve_date, hrd_approve_date, head_name,hrd_kyano;
+    private String status;
+    private TextView txNama_title, tx_jenisIzin_title, tx_tanggal_title, tx_bulan_tahun_title;
+    private TextView tx_nama, tx_indikasi_sakit, tx_catatan, tx_tgl_pengajuan,tx_link_lihat_dokumen;
+    private  TextView tx_status,tx_tgl_status;
+    private TextView tx_nama_dialog,btn_close_dialog,btn_setuju_dialog,tx_info_dialog,tx_jenis_izin_dialog;
+    private ImageView ivImageName;
+    private LinearLayout linearOption, linearKeputusan;
+    private String token;
+    private SessionManager msession;
+    private  Dialog dialogApprove;
+    private Button btn_setuju;
+    private SimpleDateFormat dateFormat_day;
+    private SimpleDateFormat dateFormat_month_year;
+    private SimpleDateFormat dateFormatSources;
+    private Date dateSource;
+    private CardView card_status_approve;
+    private LinearLayout lin_approve_btn;
+    private LinearLayout lin_status_approve;
+    private ImageView imStatus;
+    private Bundle bundle;
+    private Dialog dialogFoto;
+    private ImageView img_izin_sakit;
+    private TextView txtClose;
+    private ImageView img_back;
+    private Button btn_tolak;
 
-    TextView txNama, txIndikasi, txCatatan, txTanggalPengajuan, txTanggalKeputusan, txKeputusan;
-    ImageView ivImageName;
-    LinearLayout linearOption, linearKeputusan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_izin_sakit_approve);
+        txNama_title = findViewById(R.id.txNama_title);
+        tx_jenisIzin_title = findViewById(R.id.tx_jenisIzin_title);
+        tx_tanggal_title = findViewById(R.id.tx_tanggal_title);
+        tx_bulan_tahun_title = findViewById(R.id.tx_bulan_tahun_title);
+        tx_nama = findViewById(R.id.tx_nama);
+        tx_indikasi_sakit = findViewById(R.id.tx_indikasi_sakit);
+        tx_catatan = findViewById(R.id.tx_catatan);
+        card_status_approve=findViewById(R.id.card_status_approve);
+        lin_approve_btn=findViewById(R.id.lin_approve_btn);
+        btn_tolak=findViewById(R.id.btn_tolak);
+        tx_tgl_pengajuan = findViewById(R.id.tx_tgl_pengajuan);
+        tx_link_lihat_dokumen = findViewById(R.id.tx_link_lihat_dokumen);
+        lin_status_approve=findViewById(R.id.lin_status_approve);
+        tx_status=findViewById(R.id.tx_status);
+        tx_tgl_status=findViewById(R.id.tx_tgl_status);
+        imStatus=findViewById(R.id.imStatus);
+        btn_setuju=findViewById(R.id.btn_setuju);
+        img_back=findViewById(R.id.img_back);
+        msession=new SessionManager(this);
+        token=msession.getToken();
+        dateFormatSources = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat_day = new SimpleDateFormat("dd");
+        dateFormat_month_year = new SimpleDateFormat("MMM-yyyy");
+        bundle = getIntent().getExtras();
+        id=bundle.getString("id");
+        card_status_approve.setVisibility(View.GONE);
 
-        Intent intent = getIntent();
-        id = intent.getStringExtra("id");
 
-        getDetailSakitApprove(id);
 
-        txNama = findViewById(R.id.txNamaDetAprve);
-        txIndikasi = findViewById(R.id.txIndikasiDetAprve);
-        txCatatan = findViewById(R.id.txCatatanDetAprve);
-        txTanggalPengajuan = findViewById(R.id.txTglPengajuanDetAprve);
-        txTanggalKeputusan = findViewById(R.id.txTglKeputusanDetAprve);
-        txKeputusan = findViewById(R.id.txKeputusan);
-
-        ivImageName = findViewById(R.id.ivDokumen);
 
         linearOption = findViewById(R.id.lLDetOption);
         linearKeputusan = findViewById(R.id.lLDetKeputusanAprove);
-
+        getDetailSakitApprove(id);
+        Log.d("CEK_URL_APPROVE", "onCreate: "+api.URL_IzinSakit_approve+"?id="+id);
+        Log.d("CEK_URL_STATUS", "onCreate: "+status);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void getDetailSakitApprove(String _id) {
-        //192.168.50.24/all/hris_ci_3/api/approvehead?id=68
-        //AndroidNetworking.get(api.URL_IzinSakit)
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/approvehead?id="+id)
-                .addHeaders("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjAwMjAwODAxMDMwNTAzODEiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImlhdCI6MTYzODk0ODM3MSwiZXhwIjoxNjM4OTY2MzcxfQ.hrQ5qcryIQbnZG0FY_FvW32SGMD8wN0jRB8ZWAVCJsI")
+        AndroidNetworking.get(api.URL_IzinSakit_approve+"?id="+_id)
+                .addHeaders("Authorization", "Bearer "+token)
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @SuppressLint("ResourceAsColor")
+                    @Override
+                    public void onResponse(JSONObject response) {
+                       try {
+                            status=response.getString("status");
+                            if(status.equals("200")){
+                                Log.d("RESULT_DET_PENG_SAKIT", "onResponse: " + response.toString());
+                                JSONArray dataArray = response.getJSONArray("message");
+
+                                Log.d("RESULT_DET_PENG_SAKIT0", "onResponse: " + dataArray.getJSONObject(0).getString("name"));
+                                name=dataArray.getJSONObject(0).getString("name");
+                                kyano=dataArray.getJSONObject(0).getString("kyano");
+                                indikasi_sakit=dataArray.getJSONObject(0).getString("indikasi_sakit");
+                                mulai_sakit_tanggal=dataArray.getJSONObject(0).getString("mulai_sakit_tanggal");
+                                selesai_sakit_tanggal=dataArray.getJSONObject(0).getString("selesai_sakit_tanggal");
+                                catatan=dataArray.getJSONObject(0).getString("catatan");
+                                created_at=dataArray.getJSONObject(0).getString("created_at");
+                                updated_at=dataArray.getJSONObject(0).getString("updated_at");
+                                approve_head=dataArray.getJSONObject(0).getString("approve_head");
+                                approve_hrd=dataArray.getJSONObject(0).getString("approve_hrd");
+                                lampiran_file=dataArray.getJSONObject(0).getString("lampiran_file");
+                                head_kyano=dataArray.getJSONObject(0).getString("head_kyano");
+                                hrd_kyano=dataArray.getJSONObject(0).getString("hrd_kyano");
+                                head_approve_date=dataArray.getJSONObject(0).getString("head_approve_date");
+                                hrd_approve_date=dataArray.getJSONObject(0).getString("hrd_approve_date");
+                                head_name=dataArray.getJSONObject(0).getString("head_name");
+
+                                txNama_title.setText(name);
+                                dateSource = dateFormatSources.parse(created_at);
+                                tx_tanggal_title.setText(dateFormat_day.format(dateSource));
+                                tx_bulan_tahun_title.setText(dateFormat_month_year.format(dateSource));
+                                tx_nama.setText(name);
+                                tx_indikasi_sakit.setText(indikasi_sakit);
+                                tx_catatan.setText(catatan);
+                                tx_tgl_pengajuan.setText(created_at);
+
+                                if(approve_head.equals("1")&&approve_hrd.equals("0")){
+                                    tx_status.setText("Ditolak");
+                                    tx_tgl_status.setText(hrd_approve_date);
+                                    lin_approve_btn.setVisibility(View.GONE);
+                                    card_status_approve.setVisibility(View.VISIBLE);
+                                    lin_status_approve.setBackgroundResource(R.color.transparentOranye);
+                                    imStatus.setImageResource(R.drawable.ic_dot_oranye);
+                                }
+                                else if(approve_head.equals("0")){
+                                    tx_status.setText("Ditolak");
+                                    tx_tgl_status.setText(head_approve_date);
+                                    lin_approve_btn.setVisibility(View.GONE);
+                                    card_status_approve.setVisibility(View.VISIBLE);
+                                    lin_status_approve.setBackgroundResource(R.color.transparentRed);
+                                    imStatus.setImageResource(R.drawable.ic_dot_red);
+                                }else if(approve_head.equals("1")){
+                                    tx_status.setText("Diterima");
+                                    tx_tgl_status.setText(head_approve_date);
+                                    lin_approve_btn.setVisibility(View.GONE);
+                                    card_status_approve.setVisibility(View.VISIBLE);
+                                    lin_status_approve.setBackgroundResource(R.color.transparentGreen);
+                                    imStatus.setImageResource(R.drawable.ic_dot_sukses);
+                                }else{
+                                    imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
+                                    card_status_approve.setVisibility(View.GONE);
+                                    lin_approve_btn.setVisibility(View.VISIBLE);
+                                }
+                                tx_link_lihat_dokumen.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialogFoto();
+                                    }
+                                });
+                                btn_setuju.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        notifDialog("Apakah Anda yakin menyetujui izin",name,"1");
+
+                                    }
+                                });
+
+                                btn_tolak.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        notifDialog("Apakah Anda yakin menolak izin",name,"0");
+                                    }
+                                });
+
+
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
+                        } catch (ParseException e) {
+                           e.printStackTrace();
+                       }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d("ERROR_DET_SAKIT_APRVE", "onError: " + anError.getErrorDetail());
+                    }
+                });
+
+
+    }
+    private void notifDialog(String pesan,String nama,String _value) {
+        dialogApprove = new Dialog(detailIzinSakitApprove.this);
+        dialogApprove.setContentView(R.layout.dialog_persetujuan_izin);
+        tx_nama_dialog=dialogApprove.findViewById(R.id.tx_nama_dialog);
+        btn_close_dialog=dialogApprove.findViewById(R.id.btn_close);
+        btn_setuju_dialog=dialogApprove.findViewById(R.id.btn_setuju);
+        tx_jenis_izin_dialog=dialogApprove.findViewById(R.id.tx_jenis_izin);
+        tx_info_dialog=dialogApprove.findViewById(R.id.tx_info);
+        tx_nama_dialog.setText(nama);
+        tx_jenis_izin_dialog.setText("Izin Sakit");
+        
+        dialogApprove.setCancelable(true);
+        dialogApprove.setTitle("Update data diri");
+        tx_info_dialog.setText(pesan);
+        btn_close_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogApprove.dismiss();
+            }
+        });
+
+        btn_setuju_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateApprove(id,_value);
+                dialogApprove.dismiss();
+            }
+        });
+        dialogApprove.show();
+    }
+
+    private void dialogFoto()  {
+        dialogFoto = new Dialog(detailIzinSakitApprove.this);
+        dialogFoto.setContentView(R.layout.dialog_foto_izin_sakit);
+        dialogFoto.setCancelable(true);
+
+        dialogFoto.setCanceledOnTouchOutside(false);
+        img_izin_sakit = (ImageView) dialogFoto.findViewById(R.id.img_izin_sakit);
+        txtClose = (TextView) dialogFoto.findViewById(R.id.txtClose);
+        RequestOptions requestOptions = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true);
+        Glide.with(detailIzinSakitApprove.this).load(api.URL_foto_izinsakit+""+lampiran_file).thumbnail(Glide.with(detailIzinSakitApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
+
+        txtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogFoto.dismiss();
+            }
+        });
+        dialogFoto.show();
+    }
+
+    private void updateApprove(String _id,String value){
+        AndroidNetworking.put(api.URL_IzinSakit_approve)
+                .addHeaders("Authorization", "Bearer "+token)
+                .addBodyParameter("id",_id)
+                .addBodyParameter("status",value)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -71,86 +291,13 @@ public class detailIzinSakitApprove extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-
-                            Log.d("RESULT_DET_PENG_SAKIT", "onResponse: " + response.toString());
-                            JSONArray dataArray = response.getJSONArray("message");
-                            JSONObject dataObject = dataArray.getJSONObject(0);
-
-                            Log.d("RESULT_DET_PENG_SAKIT0", "onResponse: " + dataArray.getJSONObject(0).getString("name"));
-
-                            int status = response.getInt("status");
-
-                            if (status == 200){
-                                nama = dataObject.getString("name");
-                                indikasi = dataObject.getString("indikasi_sakit");
-                                tanggalPengajuan = dataObject.getString("created_at");
-                                catatan = dataObject.getString("catatan");
-                                
-                                imageName = dataObject.getString("lampiran_file");
-                                approveHead = dataObject.getString("approve_head");
-                                
-                                if (dataObject.getString("head_approve_date").equals("null")){
-                                    tanggalKeputusan = "";
-                                    linearOption.setVisibility(View.VISIBLE);
-                                } else {
-                                    tanggalKeputusan = dataObject.getString("head_approve_date");
-                                    linearKeputusan.setVisibility(View.VISIBLE);
-                                    if (approveHead.equals("1")){
-                                        linearKeputusan.setBackgroundColor(Color.GREEN);
-                                        txKeputusan.setText("Disetujui");
-                                    } else {
-                                        linearKeputusan.setBackgroundColor(Color.RED);
-                                        txKeputusan.setText("Ditolak");
-                                    }
-                                }
-
-                                txNama.setText(nama);
-                                txIndikasi.setText(indikasi);
-                                txCatatan.setText(catatan);
-                                txTanggalPengajuan.setText(tanggalPengajuan);
-                                txTanggalKeputusan.setText(tanggalKeputusan);
-                                Glide.with(detailIzinSakitApprove.this).load("http://192.168.50.24/all/hris_ci_3/upload/tmp_surat/"+imageName).into(ivImageName);
-                                Log.d("RESULT_DET_PENG_SAKIT1", "onResponse: " + nama + indikasi + tanggalPengajuan + catatan + imageName + tanggalKeputusan + approveHead);
-                                
-                            } else {
-                                Toast.makeText(detailIzinSakitApprove.this, dataObject.toString(), Toast.LENGTH_SHORT).show();
+                            status=response.getString("status");
+                            if(status.equals("200")){
+                                Log.d("APPROVE_SUKSES", "onResponse: " + response.toString());
+                                finish();
+                            }else{
+                                helper.messageToast(detailIzinSakitApprove.this,"izin gagal approve..!!");
                             }
-
-                            /*if (status.equals("200")) {
-
-                                nama = response.getString("name");
-
-                                JSONArray jsonArray = response.getJSONArray("message");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject data = jsonArray.getJSONObject(i);
-                                    modelIzinSakit model = new modelIzinSakit();
-                                    model.setId(data.getString("id"));
-                                    model.setKyano(data.getString("kyano"));
-                                    model.setIndikasi_sakit(data.getString("indikasi_sakit"));
-                                    model.setSelesai_sakit_tanggal(data.getString("mulai_sakit_tanggal"));
-                                    model.setMulai_sakit_tanggal(data.getString("selesai_sakit_tanggal"));
-                                    model.setCatatan(data.getString("catatan"));
-                                    model.setCreated_at(data.getString("created_at"));
-                                    model.setUpdated_at(data.getString("updated_at"));
-                                    model.setApprove_head(data.getString("approve_head"));
-                                    model.setApprove_hrd(data.getString("approve_hrd"));
-                                    model.setLampiran_file(data.getString("lampiran_file"));
-
-                                    model.setHead_kyano(data.getString("head_kyano"));
-                                    model.setHrd_kyano(data.getString("hrd_kyano"));
-                                    model.setHead_approve_date(data.getString("head_approve_date"));
-                                    model.setHrd_approve_date(data.getString("hrd_approve_date"));
-                                    model.setHead_name(data.getString("head_name"));
-
-                                    //modelIzinSakits.add(model);
-                                }
-
-                            } else {
-                                JSONObject object = response.getJSONObject("message");
-                                String pesan = object.getString("lampiran_file");
-
-                                //  Toast.makeText(formIzinSakit.this,""+pesan,toast.LENGTH_SHORT).show();
-                            }*/
 
 
                         } catch (JSONException e) {
@@ -164,7 +311,6 @@ public class detailIzinSakitApprove extends AppCompatActivity {
                         Log.d("ERROR_DET_SAKIT_APRVE", "onError: " + anError.getErrorDetail());
                     }
                 });
-
 
     }
 }

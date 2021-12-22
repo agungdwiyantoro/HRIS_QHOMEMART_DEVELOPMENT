@@ -15,19 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.approve.adminIzinSakit.adapterIzinSakitApprove.adapterIzinSakitApprove;
 import com.app.mobiledev.apphris.approve.adminIzinSakit.detailIzinSakitApprove;
-import com.app.mobiledev.apphris.newIzin.izinSakit.modelIzinSakit;
-import com.app.mobiledev.apphris.newIzin.izinSakit.statusApproveIzinSakit;
-
-import org.jetbrains.annotations.NotNull;
+import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSakitApprove.RvHolder> {
+public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSakitApprove.RecylerViewHolder> {
     private Context mCtx;
     private List<modelIzinSakit> modelIzinSakit;
 
@@ -39,17 +35,18 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSak
 
     @NonNull
     @Override
-    public RvHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecylerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.list_riwayat_izin_sakit, null);
-        return new RvHolder(view);
+        View view = inflater.inflate(R.layout.list_riwayat_izin_sakit_approve, null);
+        return new RecylerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull adapterIzinSakitApprove.RvHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecylerViewHolder holder, int position) {
         final modelIzinSakit Object = modelIzinSakit.get(position);
-        holder.tvKet.setText("" + Object.getIndikasi_sakit());
-        holder.tvAlasan.setText("" + Object.getCatatan());
+
+        holder.tvAlasan.setText("" + Object.getIndikasi_sakit());
+        holder.tvNama.setText(""+Object.getName());
 
 
         try {
@@ -61,14 +58,17 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSak
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.d("CEK_APPROVE_HEAD", "onBindViewHolder: " + Object.getApprove_head());
+        Log.d("CEK_APPROVE_HEAD_APPRO", "onBindViewHolder: " + Object.getApprove_head());
 
         if (Object.getApprove_head().equals("null")) {
             holder.imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
         } else if (Object.getApprove_head().equals("0")) {
             holder.imStatus.setImageResource(R.drawable.ic_dot_red);
-        } else if (Object.getApprove_head().equals("1")) {
+        }
+        else if ((Object.getApprove_head().equals("1")&&Object.getApprove_hrd().equals("null"))||(Object.getApprove_head().equals("1")&&Object.getApprove_hrd().equals("1"))) {
             holder.imStatus.setImageResource(R.drawable.ic_dot_sukses);
+        } else if (Object.getApprove_hrd().equals("0")) {
+            holder.imStatus.setImageResource(R.drawable.ic_dot_oranye);
         }
 
         holder.line1.setOnClickListener(new View.OnClickListener() {
@@ -95,8 +95,8 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSak
         return modelIzinSakit.size();
     }
 
-    public class RvHolder extends RecyclerView.ViewHolder {
-        private TextView tvKet;
+    public class RecylerViewHolder extends RecyclerView.ViewHolder {
+        private TextView tvNama;
         private TextView tvAlasan;
         private LinearLayout line1;
         private TextView tx_tanggal;
@@ -111,15 +111,15 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSak
         private String statusApprove = "";
 
 
-        public RvHolder(View itemView) {
+        public RecylerViewHolder(View itemView) {
             super(itemView);
-            tvKet = itemView.findViewById(R.id.tvKet);
             tvAlasan = itemView.findViewById(R.id.tvAlasan);
             line1 = itemView.findViewById(R.id.line1);
             tx_tanggal = itemView.findViewById(R.id.tx_tanggal);
             tx_bulan_tahun = itemView.findViewById(R.id.tx_bulan_tahun);
             card_list_riwayat_izin = itemView.findViewById(R.id.card_list_riwayat_izin);
             imStatus = itemView.findViewById(R.id.imStatus);
+            tvNama=itemView.findViewById(R.id.tvNama);
             dateFormatSources = new SimpleDateFormat("yyyy-MM-dd");
             dateFormat_day = new SimpleDateFormat("dd");
             dateFormat_month_year = new SimpleDateFormat("MMM-yyyy");

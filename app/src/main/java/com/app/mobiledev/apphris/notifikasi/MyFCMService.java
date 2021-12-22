@@ -40,11 +40,6 @@ public class MyFCMService extends FirebaseMessagingService {
         String body = Objects.requireNonNull(remoteMessage.getNotification()).getBody();
         String click_action = remoteMessage.getData().get("click_action");
         String nik = remoteMessage.getData().get("nik");
-
-
-
-//        Log.d("TAG_REMOTE_MESSAGE0", "onMessageReceived: " + title);
-//        Log.d("TAG_REMOTE_MESSAGE1", "onMessageReceived: " + body);
         Log.d("TAG_REMOTE_MESSAGE2", "onMessageReceived: " + nik);
 
         if(msession.getNik().equals(nik)){
@@ -82,7 +77,6 @@ public class MyFCMService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MainApplication.context, channelId)
                 .setSmallIcon(R.drawable.ic_hris)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(),

@@ -38,6 +38,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.absensi_masuk;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
 import com.app.mobiledev.apphris.izin.menu_izin;
@@ -825,6 +826,15 @@ public class helper extends AsyncTask {
         }
 
         return  encode;
+    }
+
+    public static void permissionCamera(Context ctx){
+        if(ContextCompat.checkSelfPermission(ctx, Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions((Activity) ctx,new String[]{
+                    Manifest.permission.CAMERA
+            },100);
+
+        }
     }
 
 

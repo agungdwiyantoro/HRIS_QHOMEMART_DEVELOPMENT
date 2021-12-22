@@ -18,6 +18,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
@@ -34,10 +37,15 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
+
+
+
         <activity android:name=".approve.adminIzinSakit.detailIzinSakitApprove"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            ></activity>
-        <activity android:name=".approve.adminIzinSakit.ListIzinSakitApprove"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+
+
+        <activity android:name=".splashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             >
             <intent-filter>
@@ -48,7 +56,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".newIzin.dashboardIzin"
+            android:name=".izin.dashboardIzin"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
@@ -283,7 +291,7 @@
             android:name=".update_layout"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".splashScreen"
+            android:name=".approve.adminIzinSakit.ListIzinSakitApprove"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity">
@@ -404,17 +412,17 @@
         <activity android:name=".visitor.AddPengunjungVisit" />
         <activity android:name=".visitor.AddMobilMotorVisit" />
         <activity
-            android:name=".newIzin.izinSakit.formIzinSakit"
+            android:name=".izin.izinSakit.formIzinSakit"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".newIzin.izinSakit.listIzinSakit"
+            android:name=".izin.izinSakit.listIzinSakit"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".newIzin.izinSakit.statusApproveIzinSakit"
+            android:name=".izin.izinSakit.statusApproveIzinSakit"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />

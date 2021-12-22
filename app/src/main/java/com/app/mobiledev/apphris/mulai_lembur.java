@@ -1,6 +1,7 @@
 package com.app.mobiledev.apphris;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -96,6 +98,7 @@ public class mulai_lembur extends AppCompatActivity implements OnMapReadyCallbac
     private String mlatitude,mlongtitude;
     private LocationCallback locationCallback;
     private  Location mLastLocation;
+    static final int REQUEST_IMAGE_CAPTURE = 100;
 
 
 
@@ -127,20 +130,21 @@ public class mulai_lembur extends AppCompatActivity implements OnMapReadyCallbac
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                camera = new Camera.Builder()
-                        .resetToCorrectOrientation(true)
-                        .setTakePhotoRequestCode(1)
-                        .setDirectory("pics")
-                        .setName("ali_" + System.currentTimeMillis())
-                        .setImageFormat(Camera.IMAGE_JPEG)
-                        .setCompression(75)
-                        .setImageHeight(1000)
-                        .build(mulai_lembur.this);
-                try {
-                    camera.takePicture();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                takeFoto();
+//                camera = new Camera.Builder()
+//                        .resetToCorrectOrientation(true)
+//                        .setTakePhotoRequestCode(1)
+//                        .setDirectory("pics")
+//                        .setName("ali_" + System.currentTimeMillis())
+//                        .setImageFormat(Camera.IMAGE_JPEG)
+//                        .setCompression(75)
+//                        .setImageHeight(1000)
+//                        .build(mulai_lembur.this);
+//                try {
+//                    camera.takePicture();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
         });
 
@@ -259,17 +263,17 @@ public class mulai_lembur extends AppCompatActivity implements OnMapReadyCallbac
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            if (requestCode == Camera.REQUEST_TAKE_PHOTO) {
-                Bitmap bitmap = camera.getCameraBitmap();
-                if (bitmap != null ) {
-                    image.setImageBitmap(bitmap);
-                    imageFoto=bitmap;
-                    imageFoto=Bitmap.createScaledBitmap(imageFoto, 500, 500, false);
-                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    imageFoto.compress(Bitmap.CompressFormat.PNG, 50, bytes);
-                    encodedImage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);
-                }
-                else { Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show(); }
+            if(requestCode==100){
+                Bitmap bitmap= (Bitmap) data.getExtras().get("data");
+                image.setImageBitmap(bitmap);
+                imageFoto=bitmap;
+                imageFoto=Bitmap.createScaledBitmap(imageFoto, 500, 500, false);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                imageFoto.compress(Bitmap.CompressFormat.PNG, 50, bytes);
+                encodedImage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);
+
+            }else{
+                Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show();
             }
         }catch (Exception e){
             Log.d("TAKE_CAMERA", "onActivityResult: "+e);
@@ -516,5 +520,15 @@ public class mulai_lembur extends AppCompatActivity implements OnMapReadyCallbac
     public void onBackPressed() {
         finish();
 
+    }
+
+    private void takeFoto() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+            // display error state to the user
+            Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

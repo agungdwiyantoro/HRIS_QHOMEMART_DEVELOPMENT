@@ -91,8 +91,6 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
     private static final int RC_APP_UPDATE=100;
     private Dialog dialogResign;
     private String encodeToken;
-
-
     private TextView txJudul,txInfo,txClose;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -104,7 +102,6 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
             @Override
             public void onSuccess(AppUpdateInfo result) {
-                //helper.snackBar(lytoolbar,"CEK_VERSION= A="+UpdateAvailability.UPDATE_AVAILABLE+" B="+result.updateAvailability());
                 if(result.updateAvailability()==UpdateAvailability.UPDATE_AVAILABLE
                         &&result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)){
                     try {
@@ -133,6 +130,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
         String credentials = kyano + ":" + password;
         String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
         helper.getTokenHris(main_fragment.this,base64EncodedCredentials);
+        helper.permissionCamera(main_fragment.this);
 
         mAppUpdateManager= AppUpdateManagerFactory.create(this);
         mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {

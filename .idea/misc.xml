@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/bg_input.xml" value="0.20989583333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/bg_input_rounded.xml" value="0.20989583333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/bg_profile.xml" value="0.20989583333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/bg_round.xml" value="0.20989583333333334" />
@@ -22,6 +23,7 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/ic_dot_status.xml" value="0.20989583333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/ic_dot_sukses.xml" value="0.20989583333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/ic_no_data.xml" value="0.21822916666666667" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/pink_out_line.xml" value="0.21822916666666667" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout-sw240dp/activity_fragment_activity.xml" value="0.9944444444444445" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout-sw320dp/activity_fragment_activity.xml" value="0.18645833333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout-sw480dp/activity_fragment_activity.xml" value="0.485" />
@@ -32,6 +34,7 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_add_bonus.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_bonus.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_dashboard_izin.xml" value="0.22" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_detail_izin_sakit_approve.xml" value="0.22" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_detail_memo.xml" value="0.19375" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_detail_slip_gaji.xml" value="0.12228260869565218" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_form_bonus_proyek.xml" value="0.20208333333333334" />
@@ -42,10 +45,13 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_fragment_pinjaman.xml" value="0.14764492753623187" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_fragment_report.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_izin_meninggalkan_tugas.xml" value="0.19375" />
-        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_list_izin_sakit.xml" value="0.22" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_list_approve_izin_mt.xml" value="0.20208333333333334" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_list_izin_sakit.xml" value="0.12" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_list_pengajuan_approve.xml" value="0.25" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_login.xml" value="0.19375" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_main_fragment.xml" value="0.19375" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_memo_list.xml" value="0.11820652173913043" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_menu_approve.xml" value="0.33" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_pro_manage.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_riwayat_slip_gaji.xml" value="0.12228260869565218" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_status_approve.xml" value="0.33" />
@@ -56,14 +62,19 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_infoslipgaji.xml" value="0.25" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_infoupdate.xml" value="0.18" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_notify_update.xml" value="0.11639492753623189" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_persetujuan_izin.xml" value="0.25" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_sukses.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialogkaryawanresign.xml" value="0.12228260869565218" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/form_izin_sakit.xml" value="0.22" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/layout_list_izin_sakit.xml" value="0.25" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/layout_status_approve.xml" value="0.25" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_bonusan.xml" value="0.19375" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_data_keluarga.xml" value="0.19375" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_detail_izin_dinas.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_memo_detail.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_riwayat_cuti.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_riwayat_izin_sakit.xml" value="0.25" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_riwayat_izin_sakit_approve.xml" value="0.2" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_slip_gaji.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_timeline_izin_status.xml" value="0.5" />
       </map>

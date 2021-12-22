@@ -5,8 +5,8 @@ public class api {
     static set_ip ip = new set_ip();
     public static final String key = "suksesmandiri96";
     public static final String APPS = "HRIS MOBILE";
-    //public static final String URL_foto = "http://hris.qhomedata.id/image_screnshoot/";
-    public static final String URL_foto = "http://qclean.co.id/image_screnshoot/";
+    public static final String URL_foto = "http://hris.qhomedata.id/image_screnshoot/";
+    //public static final String URL_foto = "http://qclean.co.id/image_screnshoot/";
     //public static final String URL_foto = "http://192.168.8.74/all/hris/image_screnshoot/";
     public static final String URL_foto_form_kunjungan = ip.getIp_image()+"image_mktProyek/";
     public static final String URL_foto_form_bonus_proyek =ip.getIp_image()+"image_bonus_proyek/";
@@ -102,6 +102,7 @@ public class api {
     //data ip aws
     public  static  final String URL_uploadIzinSakit="http://192.168.50.24/all/hris_ci_3/api/uploadimage";
     public  static  final String URL_IzinSakit="http://192.168.50.24/all/hris_ci_3/api/izinsakit";
+    public  static  final String URL_IzinSakit_approve="http://192.168.50.24/all/hris_ci_3/api/approvehead";
     public  static  final String URL_foto_izinsakit="http://192.168.50.24/all/hris_ci_3/upload/tmp_surat/";
 
 

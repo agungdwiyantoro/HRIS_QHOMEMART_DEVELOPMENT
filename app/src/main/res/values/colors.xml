@@ -23,6 +23,11 @@
     <color name="second_color_black">#5F5F5F</color>
     <color name="purple">#5474E7</color>
     <color name="blue_dark">#365BBB</color>
+    <color name="oranye">#ffa500</color>
+    <color name="transparentRed">#E6BB3636</color>
+    <color name="transparentGreen">#E634A94E</color>
+    <color name="transparentOranye">#E6ffa500</color>
+    <color name="transparant_blue_dark">#E6365BBB</color>
 
 
 

@@ -9,11 +9,14 @@ import android.view.View;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.approve.adminIzinDinas.listIzinDinasApprove;
 import com.app.mobiledev.apphris.approve.adminIzinMt.listIzinMtApprove;
+import com.app.mobiledev.apphris.approve.adminIzinSakit.ListIzinSakitApprove;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
 public class menu_approve extends AppCompatActivity {
     private CardView card_izin_dinas;
     private CardView card_izin_mt;
+    private CardView card_izin_sakit;
+    private CardView card_izin_cuti;
     private SessionManager session;
 
 
@@ -23,6 +26,8 @@ public class menu_approve extends AppCompatActivity {
         setContentView(R.layout.activity_menu_approve);
         card_izin_dinas=findViewById(R.id.card_izin_dinas);
         card_izin_mt=findViewById(R.id.card_izin_mt);
+        card_izin_sakit=findViewById(R.id.card_izin_sakit);
+        card_izin_cuti=findViewById(R.id.card_izin_cuti);
 
 
 
@@ -36,14 +41,26 @@ public class menu_approve extends AppCompatActivity {
         });
 
 
-        card_izin_mt.setOnClickListener(new View.OnClickListener() {
+        card_izin_sakit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(menu_approve.this, listIzinMtApprove.class);
+                Intent intent = new Intent(menu_approve.this, ListIzinSakitApprove.class);
                 startActivity(intent);
 
 
             }
         });
+
+
+        card_izin_cuti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(menu_approve.this, listIzinMtApprove.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 }

@@ -9,7 +9,7 @@
                 android:right="16dp"
                 android:top="8dp" />
             <stroke
-                android:color="@color/inputborder"
+                android:color="@color/light_grey"
                 android:width="@dimen/inputSmallborder"/>
         </shape>
     </item>

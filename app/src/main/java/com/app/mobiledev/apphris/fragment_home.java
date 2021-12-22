@@ -132,7 +132,7 @@ public class fragment_home extends Fragment {
                 }
             }
         });
-        cekLokasiFakeGPS();
+        //cekLokasiFakeGPS();
         getlImageProfil(kyano);
         getMemo();
         getabsen(kyano);

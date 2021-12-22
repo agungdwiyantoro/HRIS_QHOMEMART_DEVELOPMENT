@@ -12,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.app.mobiledev.apphris.approve.adminIzinSakit.ListIzinSakitApprove;
 import com.app.mobiledev.apphris.approve.menu_approve;
 import com.app.mobiledev.apphris.bonus.menu_bonus;
 import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
 import com.app.mobiledev.apphris.helperPackage.helper;
+import com.app.mobiledev.apphris.izin.dashboardIzin;
 import com.app.mobiledev.apphris.izin.menu_izin;
-import com.app.mobiledev.apphris.newIzin.dashboardIzin;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.slipGaji.riwayatSlipGaji;
 import com.app.mobiledev.apphris.training.menu_training;
@@ -72,11 +73,14 @@ public class fragment_menu extends Fragment {
         cvApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(helper.regexKata("MANAGER",sessionmanager.getJabatan())){
-                    startActivity(new Intent(getActivity(), menu_approve.class));
-                }else{
-                    helper.snackBar(lmenu,"anda tidak memiliki akses ke menu ini...!!");
-                }
+               // startActivity(new Intent(getActivity(), ListIzinSakitApprove.class));
+//                if(helper.regexKata("MANAGER",sessionmanager.getJabatan())){
+//                    startActivity(new Intent(getActivity(), menu_approve.class));
+//                }else{
+//                    helper.snackBar(lmenu,"anda tidak memiliki akses ke menu ini...!!");
+//                }
+
+                helper.cekAkses(getActivity(),lmenu,"approve", menu_approve.class);
 
             }
         });
@@ -109,9 +113,9 @@ public class fragment_menu extends Fragment {
         izin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), dashboardIzin.class);
-                startActivity(i);
-               // helper.cekAkses(getActivity(),lmenu,"izin", menu_izin.class);
+//                Intent i = new Intent(getActivity(), dashboardIzin.class);
+//                startActivity(i);
+                  helper.cekAkses(getActivity(),lmenu,"izin", dashboardIzin.class);
             }
         });
 

@@ -22,27 +22,128 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/img_back"
         android:layout_gravity="left"
-        android:id="@+id/imStatus"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/ic_chevron_left_white_24dp"
         android:backgroundTint="@color/abu_abu"/>
 
+    <TextView
+        android:layout_marginStart="@dimen/padd_10"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="@dimen/padd_10"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="36dp"
+        android:text="Approval"
+        android:textColor="@color/main_color_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="100dp">
 
         <LinearLayout
+            android:background="@drawable/bg_input"
+            android:layout_margin="@dimen/padd_10"
             android:id="@+id/lin_from_izin_sakit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <LinearLayout
 
+
+
+                <LinearLayout
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:foregroundGravity="left"
+                            android:id="@+id/imStatus"
+                            android:layout_marginStart="-30dp"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_dot_point_red" />
+
+                        <LinearLayout
+                            android:padding="@dimen/padd_10"
+                            android:layout_weight="3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/txNama_title"
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:gravity="left"
+                                android:textColor="@color/main_color_black"
+                                android:text="Muhamad Dios Pratama"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:id="@+id/tx_jenisIzin_title"
+                                android:layout_width="wrap_content"
+                                android:fontFamily="@font/roboto_light"
+                                android:layout_height="match_parent"
+                                android:gravity="start|center"
+                                android:textColor="@color/main_color_black"
+                                android:text="izin dokter"
+                                android:textSize="12sp"
+                                />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tx_tanggal_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="20"
+                                android:textAlignment="center"
+                                android:textColor="@color/main_color_black"
+                                android:textSize="36dp" />
+
+                            <TextView
+                                android:id="@+id/tx_bulan_tahun_title"
+                                android:textColor="@color/main_color_black"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="9dp"
+                                android:fontFamily="@font/roboto_light"
+                                android:textAlignment="center"
+                                android:text="Dec 2021"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -81,7 +182,7 @@
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/txNamaDetAprve"
+                    android:id="@+id/tx_nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -105,7 +206,7 @@
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/txIndikasiDetAprve"
+                    android:id="@+id/tx_indikasi_sakit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -129,7 +230,7 @@
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/txCatatanDetAprve"
+                    android:id="@+id/tx_catatan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -154,7 +255,7 @@
                     android:textSize="12dp" />
 
                 <TextView
-                    android:id="@+id/txTglPengajuanDetAprve"
+                    android:id="@+id/tx_tgl_pengajuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -180,6 +281,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:id="@+id/tx_link_lihat_dokumen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -187,11 +289,119 @@
                     android:textColor="@color/blue"
                     android:textSize="18dp" />
 
-                <ImageView
-                    android:id="@+id/ivDokumen"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    />
+
+
+            </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_marginTop="20dp"
+                android:id="@+id/card_status_approve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:id="@+id/lin_status_approve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="10dp"
+                    android:background="@color/transparentRed"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:padding="@dimen/padd_10"
+                            android:layout_weight="3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/tx_status"
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:gravity="left"
+                                android:textColor="@color/white"
+                                android:text="Ditolak"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_width="wrap_content"
+                                android:fontFamily="@font/roboto_light"
+                                android:layout_height="match_parent"
+                                android:gravity="start|center"
+                                android:textColor="@color/white"
+                                android:text="Tanggal dan Waktu Keputusan"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tx_tgl_status"
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:gravity="left"
+                                android:textColor="@color/white"
+                                android:text="20 Desember 2021, 13.30 - 16.30"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/lin_approve_btn"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:elevation="@dimen/padd_10"
+                    android:layout_marginEnd="@dimen/padd_10"
+                    android:id="@+id/btn_tolak"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/second_color_black"
+                    android:text="@string/tolak"
+                    android:background="@color/abu_abu"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_marginEnd="@dimen/padd_10"
+                    android:background="@color/greennew"
+                    android:id="@+id/btn_setuju"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14dp"
+                    android:text="@string/setuju"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

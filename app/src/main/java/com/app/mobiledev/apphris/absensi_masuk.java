@@ -1,6 +1,7 @@
 package com.app.mobiledev.apphris;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -98,6 +100,7 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
     private float jarak_piyungan=0;
     private float jarak_berbah=0;
     private String alamat="";
+    static final int REQUEST_IMAGE_CAPTURE = 100;
 
 
     //lokasi latitude dang longtitude
@@ -151,7 +154,9 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
             jarak=Double.parseDouble(sessionmanager.getJarak());
         }
         Log.d("CEK_JARAK", "onCreate: "+jarak);
+
         AndroidNetworking.initialize(getApplicationContext());
+
         detector = new FaceDetector.Builder(absensi_masuk.this)
                 .setTrackingEnabled(false)
                 .setLandmarkType(FaceDetector.ALL_LANDMARKS)
@@ -160,20 +165,7 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                camera = new Camera.Builder()
-                        .resetToCorrectOrientation(true)
-                        .setTakePhotoRequestCode(1)
-                        .setDirectory("pics")
-                        .setName("ali_" + System.currentTimeMillis())
-                        .setImageFormat(Camera.IMAGE_JPEG)
-                        .setCompression(75)
-                        .setImageHeight(1000)
-                        .build(absensi_masuk.this);
-                try {
-                    camera.takePicture();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                takeFoto();
             }
         });
 
@@ -345,26 +337,35 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            if (requestCode == Camera.REQUEST_TAKE_PHOTO) {
-                Bitmap bitmap = camera.getCameraBitmap();
-                if (bitmap != null ) {
-                    image.setImageBitmap(bitmap);
-                    imageFoto=bitmap;
-                    imageFoto=Bitmap.createScaledBitmap(imageFoto, 500, 500, false);
-                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                    imageFoto.compress(Bitmap.CompressFormat.PNG, 50, bytes);
-                    encodedimage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);
-                }
-                else { Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show(); }
+            if(requestCode==100){
+                Bitmap bitmap= (Bitmap) data.getExtras().get("data");
+                image.setImageBitmap(bitmap);
+                imageFoto=bitmap;
+                imageFoto=Bitmap.createScaledBitmap(imageFoto, 500, 500, false);
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                imageFoto.compress(Bitmap.CompressFormat.PNG, 50, bytes);
+                encodedimage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);
+
+            }else{
+                Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show();
             }
+
         }catch (Exception e){
-            Log.d("TAKE_CAMERA", "onActivityResult: "+e);
+            Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show();;
         }
 
     }
 
 
-
+    private void takeFoto() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+            // display error state to the user
+            Toast.makeText(this.getApplicationContext(), "Picture not taken!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private float distance(){
         float jarak=0;
@@ -394,6 +395,7 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
 
 
     private void cekPresensiJarakJauh(){
+       // Log.d("CEK_Presensi_jarak", "cekPresensiJarakJauh: "+presensi_jarak);
         if((jarak_janti<=jarak)||(jarak_janti_lestari<=jarak)||(jarak_berbah<=jarak)||(jarak_piyungan<=jarak)){
             Log.d("CEK_cekPresensi2", "cekPresensiJarakJauh: "+presensi_jarak);
             btnAbsen.setTextColor(Color.parseColor("#FFFFFF"));
@@ -715,6 +717,8 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
                 .addGeofence(geofence)
                 .build();
     }
+
+
 
 
 

@@ -22,151 +22,155 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <ImageView
-            android:padding="15dp"
-            android:layout_gravity="left"
             android:id="@+id/img_back"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_gravity="left"
             android:background="@drawable/ic_chevron_left_white_24dp"
-            android:backgroundTint="@color/abu_abu"/>
+            android:backgroundTint="@color/abu_abu"
+            android:padding="15dp" />
 
         <LinearLayout
-            android:padding="15dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_marginEnd="@dimen/padd_10"
-                android:fontFamily="@font/roboto_medium"
-                android:textSize="36dp"
-                android:text="Approve"
-                android:textColor="@color/main_color_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:fontFamily="@font/roboto_medium"
-                android:textSize="18dp"
-                android:textColor="@color/main_color_black"
-                android:text="Izin Sakit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-        <LinearLayout
-            android:padding="15dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:drawableStart="@drawable/ic_dot_sukses"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/roboto_medium"
-                android:textSize="12dp"
-                android:text="@string/diterima"
-                android:textColor="@color/main_color_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:drawableStart="@drawable/ic_dot_red"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/roboto_medium"
-                android:textColor="@color/main_color_black"
-                android:textSize="12dp"
-                android:text="@string/ditolak"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-            <TextView
-                android:drawableStart="@drawable/ic_dot_point_abu_abu"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/roboto_medium"
-                android:textColor="@color/main_color_black"
-                android:textSize="12dp"
-                android:text="@string/dalamproses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:drawableStart="@drawable/ic_dot_oranye"
-                android:layout_marginEnd="5dp"
-                android:fontFamily="@font/roboto_medium"
-                android:textColor="@color/main_color_black"
-                android:textSize="12dp"
-                android:text="@string/ditolak_hrd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-
-
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
-
-
-            <RadioGroup
-                android:checkedButton="@+id/all"
-                android:id="@+id/rbFilter"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginBottom="@dimen/padd_10"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginTop="@dimen/padd_10"
-                android:background="@drawable/out_line_white"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:id="@+id/news"
-                    android:background="@drawable/toggle_widget_background"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="New"
-                    android:textColor="@color/white" />
-
-                <RadioButton
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:id="@+id/all"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/toggle_widget_background"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="All"
-                    android:textColor="@color/white" />
-            </RadioGroup>
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyler_izin_sakit"
-            android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/list_riwayat_izin_sakit_approve"/>
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padd_10"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Approve"
+                android:textColor="@color/main_color_black"
+                android:textSize="36dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Izin Sakit"
+                android:textColor="@color/main_color_black"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:drawableStart="@drawable/ic_dot_sukses"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/diterima"
+                android:textColor="@color/main_color_black"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:drawableStart="@drawable/ic_dot_red"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/ditolak"
+                android:textColor="@color/main_color_black"
+                android:textSize="12dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:drawableStart="@drawable/ic_dot_point_abu_abu"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/dalamproses"
+                android:textColor="@color/main_color_black"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:drawableStart="@drawable/ic_dot_oranye"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/ditolak_hrd"
+                android:textColor="@color/main_color_black"
+                android:textSize="12dp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <RadioGroup
+            android:id="@+id/rbFilter"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="@dimen/padd_10"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="@dimen/padd_10"
+            android:background="@drawable/out_line_white"
+            android:checkedButton="@+id/all"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/news"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:gravity="center"
+                android:text="New"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/all"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/toggle_widget_background"
+                android:button="@null"
+                android:gravity="center"
+                android:text="All"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyler_izin_sakit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                tools:listitem="@layout/list_riwayat_izin_sakit_approve" />
+
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
     </LinearLayout>
 </RelativeLayout>

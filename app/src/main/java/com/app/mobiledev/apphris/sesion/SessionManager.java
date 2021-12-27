@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.app.mobiledev.apphris.approve.adminIzinSakit.ListIzinSakitApprove;
 import com.app.mobiledev.apphris.login;
 import com.app.mobiledev.apphris.main_fragment;
+import com.app.mobiledev.apphris.test.viewPagination;
 
 import java.util.HashMap;
 
@@ -220,7 +222,7 @@ public class SessionManager {
 
     public void checkLogin(){
         if(sharedPreferences.contains(NAMA_USER) && sharedPreferences.contains(ID_USER)){
-            Intent i = new Intent(context, main_fragment.class);
+            Intent i = new Intent(context, ListIzinSakitApprove.class);
            // Intent i = new Intent(context, UpdateDataDiri.class);
             i.putExtra("username",sharedPreferences.getString(NAMA_USER,"Username"));
             context.startActivity(i);

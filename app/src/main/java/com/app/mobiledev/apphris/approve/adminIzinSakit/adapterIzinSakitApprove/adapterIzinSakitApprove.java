@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +36,13 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSak
     @Override
     public RecylerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.list_riwayat_izin_sakit_approve, null);
+        View view = inflater.inflate(R.layout.list_riwayat_izin_sakit_unapprove, null);
         return new RecylerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecylerViewHolder holder, int position) {
         final modelIzinSakit Object = modelIzinSakit.get(position);
-
         holder.tvAlasan.setText("" + Object.getIndikasi_sakit());
         holder.tvNama.setText(""+Object.getName());
 
@@ -58,7 +56,7 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSak
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Log.d("CEK_APPROVE_HEAD_APPRO", "onBindViewHolder: " + Object.getApprove_head());
+
 
         if (Object.getApprove_head().equals("null")) {
             holder.imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);

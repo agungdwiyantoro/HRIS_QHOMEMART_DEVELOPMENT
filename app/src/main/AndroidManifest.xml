@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.app.mobiledev.apphris">
+    package="com.app.mobiledev.apphris" >
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -18,9 +18,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
@@ -36,18 +34,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
-        tools:replace="android:icon">
-
-
-
-        <activity android:name=".approve.adminIzinSakit.detailIzinSakitApprove"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-
-
-
-        <activity android:name=".splashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
+        tools:replace="android:icon" >
+        <activity
+            android:name=".test.viewPagination"
+            android:exported="false" />
+        <activity
+            android:name=".approve.adminIzinSakit.detailIzinSakitApprove"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".splashScreen"
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -69,14 +65,14 @@
         <activity
             android:name=".slipGaji.riwayatSlipGaji"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.TARGET_NOTIFICATION" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".test.DownloadFile">
+        <activity android:name=".test.DownloadFile" >
 
             <!--
             <intent-filter>
@@ -98,7 +94,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/white" />
 
-        <activity android:name=".test.TestFCM">
+        <activity android:name=".test.TestFCM" >
 
             <!--
             <intent-filter>
@@ -111,7 +107,7 @@
 
         <service
             android:name=".notifikasi.MyFCMService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -129,7 +125,7 @@
         <activity android:name=".profile.alamat.Kelurahan" />
         <activity android:name=".profile.alamat.Kecamatan" />
         <activity android:name=".profile.alamat.KotaKab" />
-        <activity android:name=".profile.alamat.Provinsi">
+        <activity android:name=".profile.alamat.Provinsi" >
 
             <!--
             <intent-filter>
@@ -139,7 +135,7 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".profile.UpdateDataDiri">
+        <activity android:name=".profile.UpdateDataDiri" >
 
             <!--
             <intent-filter>
@@ -294,7 +290,7 @@
             android:name=".approve.adminIzinSakit.ListIzinSakitApprove"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="LockedOrientationActivity" >
 
             <!--
             <intent-filter>

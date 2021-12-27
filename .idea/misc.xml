@@ -49,6 +49,7 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_list_izin_sakit.xml" value="0.12" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_list_pengajuan_approve.xml" value="0.25" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_login.xml" value="0.19375" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_main_fragment.xml" value="0.19375" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_memo_list.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_menu_approve.xml" value="0.33" />
@@ -56,6 +57,7 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_riwayat_slip_gaji.xml" value="0.12228260869565218" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_status_approve.xml" value="0.33" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_under_maintanance.xml" value="0.20208333333333334" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/activity_view_pagination.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_detail_bonus.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_foto_izin_sakit.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_info.xml" value="0.20208333333333334" />
@@ -66,6 +68,7 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialog_sukses.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/dialogkaryawanresign.xml" value="0.12228260869565218" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/form_izin_sakit.xml" value="0.22" />
+        <entry key="..\:/github/hris/appHris/app/src/main/res/layout/item_post.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/layout_list_izin_sakit.xml" value="0.25" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/layout_status_approve.xml" value="0.25" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_bonusan.xml" value="0.19375" />

@@ -1,5 +1,9 @@
 package com.app.mobiledev.apphris.approve.adminIzinSakit;
 
+import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
+
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -19,9 +24,12 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.approve.adminIzinSakit.adapterIzinSakitApprove.adapterIzinSakitApprove;
+import com.app.mobiledev.apphris.approve.adminIzinSakit.adapterIzinSakitApprove.adapterIzinSakitApprove_pagination;
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 import com.app.mobiledev.apphris.sesion.SessionManager;
+import com.app.mobiledev.apphris.test.PostItem;
+import com.app.mobiledev.apphris.test.PostRecyclerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,15 +38,28 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListIzinSakitApprove extends AppCompatActivity {
+public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyler_izin_sakit;
     private List<modelIzinSakit> modelIzinSakits;
     private String token;
+    private String TAG="LISIzinSakitApprove";
     private ImageView img_back;
     private SessionManager msession;
     private RadioGroup rbFilter;
     private LinearLayout lin_transparant;
+    private SwipeRefreshLayout swipeRefresh;
+    private PostRecyclerAdapter adapter;
+    private int currentPage = PAGE_START;
+    private boolean isLastPage = false;
+    private int totalPage = 10;
+    private boolean isLoading = false;
+    int itemCount = 0;
+
+    adapterIzinSakitApprove_pagination mAdapter;
+
+
+
 
 
     @Override
@@ -49,12 +70,19 @@ public class ListIzinSakitApprove extends AppCompatActivity {
         rbFilter=findViewById(R.id.rbFilter);
         img_back = findViewById(R.id.img_back);
         lin_transparant=findViewById(R.id.lin_transparant);
+        swipeRefresh=findViewById(R.id.swipeRefresh);
+        swipeRefresh.setOnRefreshListener(this);
         msession = new SessionManager(ListIzinSakitApprove.this);
         modelIzinSakits = new ArrayList<>();
         token = msession.getToken();
-        lin_transparant.setVisibility(View.VISIBLE);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        getRiwayatSakitAll();
+        recyler_izin_sakit.setLayoutManager(layoutManager);
+        mAdapter = new adapterIzinSakitApprove_pagination(new ArrayList<>(),ListIzinSakitApprove.this);
+        recyler_izin_sakit.setAdapter(mAdapter);
+        recyler_izin_sakit.setHasFixedSize(true);
+
+        doApiCall();
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,14 +93,19 @@ public class ListIzinSakitApprove extends AppCompatActivity {
         rbFilter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                lin_transparant.setVisibility(View.VISIBLE);
-                recyler_izin_sakit.setVisibility(View.GONE);
                 if (checkedId==R.id.news){
                     getRiwayatSakitNew();
 
                 } else if(checkedId==R.id.all) {
-                    getRiwayatSakitAll();
-
+                    recyler_izin_sakit.setLayoutManager(layoutManager);
+                    mAdapter = new adapterIzinSakitApprove_pagination(new ArrayList<>(),ListIzinSakitApprove.this);
+                    recyler_izin_sakit.setAdapter(mAdapter);
+                    recyler_izin_sakit.setHasFixedSize(true);
+                    itemCount = 0;
+                    currentPage = PAGE_START;
+                    isLastPage = false;
+                    mAdapter.clear();
+                    doApiCall();
                 }
             }
         });
@@ -80,20 +113,24 @@ public class ListIzinSakitApprove extends AppCompatActivity {
         recyler_izin_sakit.addOnScrollListener(new PaginationListener(layoutManager) {
             @Override
             protected void loadMoreItems() {
-
+                isLoading = true;
+                currentPage++;
+                doApiCall();
             }
 
             @Override
             public boolean isLastPage() {
-                return false;
+                return isLastPage;
             }
 
             @Override
             public boolean isLoading() {
-                return false;
+                return isLoading;
             }
         });
     }
+
+
 
     private void getRiwayatSakitNew() {
         AndroidNetworking.get(api.URL_IzinSakit_approve)
@@ -150,8 +187,7 @@ public class ListIzinSakitApprove extends AppCompatActivity {
                             } else {
                                 JSONObject object = response.getJSONObject("message");
                                 String pesan = object.getString("lampiran_file");
-
-                                //  Toast.makeText(formIzinSakit.this,""+pesan,toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListIzinSakitApprove.this,""+pesan,Toast.LENGTH_SHORT).show();
                             }
 
                             lin_transparant.setVisibility(View.GONE);
@@ -172,8 +208,43 @@ public class ListIzinSakitApprove extends AppCompatActivity {
 
     }
 
-    private void getRiwayatSakitAll() {
-        AndroidNetworking.get(api.URL_IzinSakit_approve)
+
+    private void doApiCall() {
+        final ArrayList<PostItem> items = new ArrayList<>();
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+
+                for (int i = 0; i < 10; i++) {
+                    itemCount++;
+                }
+
+                Log.d("jml_count", "run: "+itemCount);
+                int offset=0;
+                if(itemCount>10){
+                     offset=(itemCount-totalPage)+1;
+                }
+                Log.d("cek_offset", "run: "+offset);
+                getRiwayatSakitAll(itemCount,offset);
+
+
+            }
+        }, 1500);
+    }
+
+    @Override
+    public void onRefresh() {
+        itemCount = 0;
+        currentPage = PAGE_START;
+        isLastPage = false;
+        mAdapter.clear();
+        doApiCall();
+    }
+
+
+    private void getRiwayatSakitAll(int page,int offset) {
+        AndroidNetworking.get(api.URL_IzinSakit_approve+"?limit="+page+"&offset="+offset)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -182,17 +253,17 @@ public class ListIzinSakitApprove extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         try {
-                            recyler_izin_sakit.setVisibility(View.VISIBLE);
+                            //mAdapter.clear();
+                            final ArrayList<modelIzinSakit> items = new ArrayList<>();
+
                             String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_APPROVE", "onResponse: " + status);
+                            Log.d("HASL_RESPONSE_NEW", "onResponse: " + status);
                             if (status.equals("200")) {
-                                modelIzinSakits.clear();
                                 JSONArray jsonArray = response.getJSONArray("message");
+
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     modelIzinSakit model = new modelIzinSakit();
-
-
                                         model.setId(data.getString("id"));
                                         model.setKyano(data.getString("kyano"));
                                         model.setIndikasi_sakit(data.getString("indikasi_sakit"));
@@ -210,42 +281,49 @@ public class ListIzinSakitApprove extends AppCompatActivity {
                                         model.setHrd_approve_date(data.getString("hrd_approve_date"));
                                         model.setHead_name(data.getString("head_name"));
                                         model.setName(data.getString("name"));
-                                        modelIzinSakits.add(model);
-
-
+                                        items.add(model);
+                                        //modelIzinSakits.add(model);
 
 
                                 }
 
-                                adapterIzinSakitApprove mAdapter;
-                                mAdapter = new adapterIzinSakitApprove(modelIzinSakits, ListIzinSakitApprove.this);
-                                mAdapter.notifyDataSetChanged();
-                                recyler_izin_sakit.setLayoutManager(new LinearLayoutManager(ListIzinSakitApprove.this));
-                                recyler_izin_sakit.setItemAnimator(new DefaultItemAnimator());
-                                recyler_izin_sakit.setAdapter(mAdapter);
+                                if (currentPage != PAGE_START) mAdapter.removeLoading();
 
+                                mAdapter.addItems(items);
+                                swipeRefresh.setRefreshing(false);
+
+                                // check weather is last page or not
+                                if (currentPage < totalPage) {
+                                    items.clear();
+                                    mAdapter.addLoading();
+                                } else {
+                                    isLastPage = true;
+                                }
+                                isLoading = false;
                             } else {
                                 JSONObject object = response.getJSONObject("message");
                                 String pesan = object.getString("lampiran_file");
 
-                                //  Toast.makeText(formIzinSakit.this,""+pesan,toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListIzinSakitApprove.this,""+pesan,Toast.LENGTH_SHORT).show();
                             }
-                            lin_transparant.setVisibility(View.GONE);
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
-                            lin_transparant.setVisibility(View.GONE);
+
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
                         Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + anError.getErrorDetail());
-                        lin_transparant.setVisibility(View.GONE);
+                        Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + api.URL_IzinSakit_approve+"?limit="+page);
+
                     }
                 });
 
 
     }
+
 }

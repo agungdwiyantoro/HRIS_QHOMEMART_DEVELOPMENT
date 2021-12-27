@@ -1,10 +1,10 @@
 package com.app.mobiledev.apphris.helperPackage;
 
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import io.reactivex.annotations.NonNull;
-
 
 public abstract class PaginationListener extends RecyclerView.OnScrollListener {
 
@@ -35,8 +35,8 @@ public abstract class PaginationListener extends RecyclerView.OnScrollListener {
 
     if (!isLoading() && !isLastPage()) {
       if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
-          && firstVisibleItemPosition >= 0
-          && totalItemCount >= PAGE_SIZE) {
+              && firstVisibleItemPosition >= 0
+              && totalItemCount >= PAGE_SIZE) {
         loadMoreItems();
       }
     }

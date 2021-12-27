@@ -1,31 +1,35 @@
 package com.app.mobiledev.apphris.izin.izinSakit;
 
-public class modelIzinSakit {
-    String id;
-    String name;
-    String kyano;
-    String indikasi_sakit;
-    String mulai_sakit_tanggal;
-    String selesai_sakit_tanggal;
-    String catatan;
-    String created_at;
-    String updated_at;
-    String approve_head;
-    String approve_hrd;
-    String lampiran_file;
+import android.util.Log;
 
-    String head_kyano;
-    String hrd_kyano;
-    String head_approve_date;
-    String hrd_approve_date;
-    String head_name;
+public class modelIzinSakit {
+    private String id;
+    private String name;
+    private String kyano;
+    private String indikasi_sakit;
+    private String mulai_sakit_tanggal;
+    private String selesai_sakit_tanggal;
+    private String catatan;
+    private String created_at;
+    private String updated_at;
+    private String approve_head;
+    private String approve_hrd;
+    private String lampiran_file;
+
+    private String head_kyano;
+    private String hrd_kyano;
+    private String head_approve_date;
+    private String hrd_approve_date;
+    private String head_name;
 
 
     public String getName() {
+        Log.d("model_getName", "getName: "+name);
         return name;
     }
 
     public void setName(String name) {
+        Log.d("model_setName", "getName: "+name);
         this.name = name;
     }
 

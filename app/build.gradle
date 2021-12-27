@@ -74,5 +74,7 @@ dependencies {
     //implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.google.firebase:firebase-messaging:17.0.0'
 
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
 }
 apply plugin: 'com.google.gms.google-services'

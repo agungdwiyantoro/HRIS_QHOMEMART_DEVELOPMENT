@@ -30,6 +30,7 @@ import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.test.PostItem;
 import com.app.mobiledev.apphris.test.PostRecyclerAdapter;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,14 +59,16 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
     adapterIzinSakitApprove_pagination mAdapter;
 
-
-
-
+    private ShimmerFrameLayout mShimmerViewContainer;
+    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_pengajuan_approve);
+
+        mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
+
         recyler_izin_sakit = findViewById(R.id.recyler_izin_sakit);
         rbFilter=findViewById(R.id.rbFilter);
         img_back = findViewById(R.id.img_back);
@@ -76,13 +79,9 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
         modelIzinSakits = new ArrayList<>();
         token = msession.getToken();
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyler_izin_sakit.setLayoutManager(layoutManager);
-        mAdapter = new adapterIzinSakitApprove_pagination(new ArrayList<>(),ListIzinSakitApprove.this);
-        recyler_izin_sakit.setAdapter(mAdapter);
-        recyler_izin_sakit.setHasFixedSize(true);
-
-        doApiCall();
+        //doApiCall();
+        recyler_izin_sakit.setVisibility(View.GONE);
+        getRiwayatSakitNew();
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +92,9 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
         rbFilter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mShimmerViewContainer.startShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.VISIBLE);
+
                 if (checkedId==R.id.news){
                     getRiwayatSakitNew();
 
@@ -105,6 +107,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                     currentPage = PAGE_START;
                     isLastPage = false;
                     mAdapter.clear();
+
                     doApiCall();
                 }
             }
@@ -144,7 +147,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                         try {
                             recyler_izin_sakit.setVisibility(View.VISIBLE);
                             String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_APPROVE", "onResponse: " + status);
+                            Log.d("HASL_RESPONSE_APPROVE", "onResponse: " + response.toString());
                             if (status.equals("200")) {
                                 modelIzinSakits.clear();
                                 JSONArray jsonArray = response.getJSONArray("message");
@@ -183,6 +186,12 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                                 recyler_izin_sakit.setLayoutManager(new LinearLayoutManager(ListIzinSakitApprove.this));
                                 recyler_izin_sakit.setItemAnimator(new DefaultItemAnimator());
                                 recyler_izin_sakit.setAdapter(mAdapter);
+
+                                // Stopping Shimmer Effect's animation after data is loaded to ListView
+                                mShimmerViewContainer.stopShimmerAnimation();
+                                mShimmerViewContainer.setVisibility(View.GONE);
+
+                                recyler_izin_sakit.setVisibility(View.VISIBLE);
 
                             } else {
                                 JSONObject object = response.getJSONObject("message");
@@ -235,6 +244,9 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
     @Override
     public void onRefresh() {
+        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+
         itemCount = 0;
         currentPage = PAGE_START;
         isLastPage = false;
@@ -257,7 +269,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                             final ArrayList<modelIzinSakit> items = new ArrayList<>();
 
                             String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_NEW", "onResponse: " + status);
+                            Log.d("HASL_RESPONSE_NEW", "onResponse: " + response.getString("message"));
                             if (status.equals("200")) {
                                 JSONArray jsonArray = response.getJSONArray("message");
 
@@ -287,10 +299,21 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
                                 }
 
+                                recyler_izin_sakit.setLayoutManager(layoutManager);
+                                mAdapter = new adapterIzinSakitApprove_pagination(new ArrayList<>(),ListIzinSakitApprove.this);
+                                recyler_izin_sakit.setAdapter(mAdapter);
+                                recyler_izin_sakit.setHasFixedSize(true);
+
                                 if (currentPage != PAGE_START) mAdapter.removeLoading();
 
                                 mAdapter.addItems(items);
                                 swipeRefresh.setRefreshing(false);
+
+                                // Stopping Shimmer Effect's animation after data is loaded to ListView
+                                mShimmerViewContainer.stopShimmerAnimation();
+                                mShimmerViewContainer.setVisibility(View.GONE);
+
+                                recyler_izin_sakit.setVisibility(View.VISIBLE);
 
                                 // check weather is last page or not
                                 if (currentPage < totalPage) {
@@ -324,6 +347,18 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                 });
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
     }
 
 }

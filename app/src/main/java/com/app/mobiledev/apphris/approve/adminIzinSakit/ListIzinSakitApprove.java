@@ -62,6 +62,8 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
     private ShimmerFrameLayout mShimmerViewContainer;
     LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,9 +81,14 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
         modelIzinSakits = new ArrayList<>();
         token = msession.getToken();
 
-        //doApiCall();
-        recyler_izin_sakit.setVisibility(View.GONE);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyler_izin_sakit.setLayoutManager(layoutManager);
+        mAdapter = new adapterIzinSakitApprove_pagination(new ArrayList<>(),ListIzinSakitApprove.this);
+        recyler_izin_sakit.setAdapter(mAdapter);
+        recyler_izin_sakit.setHasFixedSize(true);
+
         getRiwayatSakitNew();
+        //doApiCall();
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +99,8 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
         rbFilter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                recyler_izin_sakit.setVisibility(View.GONE);
+
                 mShimmerViewContainer.startShimmerAnimation();
                 mShimmerViewContainer.setVisibility(View.VISIBLE);
 
@@ -107,7 +116,6 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                     currentPage = PAGE_START;
                     isLastPage = false;
                     mAdapter.clear();
-
                     doApiCall();
                 }
             }
@@ -145,9 +153,9 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                     public void onResponse(JSONObject response) {
 
                         try {
-                            recyler_izin_sakit.setVisibility(View.VISIBLE);
+                            //recyler_izin_sakit.setVisibility(View.VISIBLE);
                             String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_APPROVE", "onResponse: " + response.toString());
+                            Log.d("HASL_RESPONSE_APPROVE", "onResponse: " + status);
                             if (status.equals("200")) {
                                 modelIzinSakits.clear();
                                 JSONArray jsonArray = response.getJSONArray("message");
@@ -232,7 +240,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                 Log.d("jml_count", "run: "+itemCount);
                 int offset=0;
                 if(itemCount>10){
-                     offset=(itemCount-totalPage)+1;
+                    offset=(itemCount-totalPage)+1;
                 }
                 Log.d("cek_offset", "run: "+offset);
                 getRiwayatSakitAll(itemCount,offset);
@@ -244,8 +252,11 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
     @Override
     public void onRefresh() {
+        // Stopping Shimmer Effect's animation after data is loaded to ListView
         mShimmerViewContainer.startShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.VISIBLE);
+
+        recyler_izin_sakit.setVisibility(View.GONE);
 
         itemCount = 0;
         currentPage = PAGE_START;
@@ -265,55 +276,51 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                     public void onResponse(JSONObject response) {
 
                         try {
+
                             //mAdapter.clear();
                             final ArrayList<modelIzinSakit> items = new ArrayList<>();
 
                             String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_NEW", "onResponse: " + response.getString("message"));
+                            Log.d("HASL_RESPONSE_NEW", "onResponse: " + status);
                             if (status.equals("200")) {
                                 JSONArray jsonArray = response.getJSONArray("message");
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     modelIzinSakit model = new modelIzinSakit();
-                                        model.setId(data.getString("id"));
-                                        model.setKyano(data.getString("kyano"));
-                                        model.setIndikasi_sakit(data.getString("indikasi_sakit"));
-                                        model.setSelesai_sakit_tanggal(data.getString("mulai_sakit_tanggal"));
-                                        model.setMulai_sakit_tanggal(data.getString("selesai_sakit_tanggal"));
-                                        model.setCatatan(data.getString("catatan"));
-                                        model.setCreated_at(data.getString("created_at"));
-                                        model.setUpdated_at(data.getString("updated_at"));
-                                        model.setApprove_head(data.getString("approve_head"));
-                                        model.setApprove_hrd(data.getString("approve_hrd"));
-                                        model.setLampiran_file(data.getString("lampiran_file"));
-                                        model.setHead_kyano(data.getString("head_kyano"));
-                                        model.setHrd_kyano(data.getString("hrd_kyano"));
-                                        model.setHead_approve_date(data.getString("head_approve_date"));
-                                        model.setHrd_approve_date(data.getString("hrd_approve_date"));
-                                        model.setHead_name(data.getString("head_name"));
-                                        model.setName(data.getString("name"));
-                                        items.add(model);
-                                        //modelIzinSakits.add(model);
+                                    model.setId(data.getString("id"));
+                                    model.setKyano(data.getString("kyano"));
+                                    model.setIndikasi_sakit(data.getString("indikasi_sakit"));
+                                    model.setSelesai_sakit_tanggal(data.getString("mulai_sakit_tanggal"));
+                                    model.setMulai_sakit_tanggal(data.getString("selesai_sakit_tanggal"));
+                                    model.setCatatan(data.getString("catatan"));
+                                    model.setCreated_at(data.getString("created_at"));
+                                    model.setUpdated_at(data.getString("updated_at"));
+                                    model.setApprove_head(data.getString("approve_head"));
+                                    model.setApprove_hrd(data.getString("approve_hrd"));
+                                    model.setLampiran_file(data.getString("lampiran_file"));
+                                    model.setHead_kyano(data.getString("head_kyano"));
+                                    model.setHrd_kyano(data.getString("hrd_kyano"));
+                                    model.setHead_approve_date(data.getString("head_approve_date"));
+                                    model.setHrd_approve_date(data.getString("hrd_approve_date"));
+                                    model.setHead_name(data.getString("head_name"));
+                                    model.setName(data.getString("name"));
+                                    items.add(model);
+                                    //modelIzinSakits.add(model);
 
 
                                 }
 
-                                recyler_izin_sakit.setLayoutManager(layoutManager);
-                                mAdapter = new adapterIzinSakitApprove_pagination(new ArrayList<>(),ListIzinSakitApprove.this);
-                                recyler_izin_sakit.setAdapter(mAdapter);
-                                recyler_izin_sakit.setHasFixedSize(true);
-
                                 if (currentPage != PAGE_START) mAdapter.removeLoading();
-
-                                mAdapter.addItems(items);
-                                swipeRefresh.setRefreshing(false);
 
                                 // Stopping Shimmer Effect's animation after data is loaded to ListView
                                 mShimmerViewContainer.stopShimmerAnimation();
                                 mShimmerViewContainer.setVisibility(View.GONE);
 
                                 recyler_izin_sakit.setVisibility(View.VISIBLE);
+
+                                mAdapter.addItems(items);
+                                swipeRefresh.setRefreshing(false);
 
                                 // check weather is last page or not
                                 if (currentPage < totalPage) {

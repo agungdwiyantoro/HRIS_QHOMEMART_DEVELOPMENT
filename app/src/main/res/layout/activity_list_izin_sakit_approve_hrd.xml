@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/img_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:background="@drawable/ic_chevron_left_white_24dp"
+        android:backgroundTint="@color/abu_abu"
+        android:padding="15dp" />
+
+    <LinearLayout
+        android:id="@+id/lin_title"
+        app:layout_constraintTop_toBottomOf="@+id/img_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/padd_10"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Approve"
+            android:textColor="@color/main_color_black"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Izin Sakit"
+            android:textColor="@color/main_color_black"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/lin_title"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content" >
+
+
+    <RadioGroup
+        android:id="@+id/rbFilter"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="@dimen/padd_10"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="@dimen/padd_10"
+        android:background="@drawable/out_line_white"
+        android:checkedButton="@+id/all"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/news"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_widget_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="New"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/all"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/toggle_widget_background"
+            android:button="@null"
+            android:gravity="center"
+            android:text="All"
+            android:textColor="@color/white" />
+    </RadioGroup>
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.CoordinatorLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmer_view_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    shimmer:duration="800">
+
+                    <!-- Adding 7 rows of placeholders -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <include layout="@layout/data_placeholder_layout" />
+                        <include layout="@layout/data_placeholder_layout" />
+                        <include layout="@layout/data_placeholder_layout" />
+                        <include layout="@layout/data_placeholder_layout" />
+                        <include layout="@layout/data_placeholder_layout" />
+                        <include layout="@layout/data_placeholder_layout" />
+                        <include layout="@layout/data_placeholder_layout" />
+                    </LinearLayout>
+
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyler_izin_sakit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    tools:listitem="@layout/list_riwayat_izin_sakit_approve_hrd" />
+
+            </android.support.design.widget.CoordinatorLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

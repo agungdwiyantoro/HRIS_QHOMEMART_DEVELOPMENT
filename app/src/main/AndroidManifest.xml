@@ -36,10 +36,14 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon" >
         <activity
+            android:name=".approve.adminIzinSakitHRD.ListIzinSakitApproveHRD"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name=".test.viewPagination"
             android:exported="false" />
         <activity
-            android:name=".approve.adminIzinSakit.detailIzinSakitApprove"
+            android:name=".approve.adminIzinSakitHead.detailIzinSakitApproveHead"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".splashScreen"
@@ -287,7 +291,7 @@
             android:name=".update_layout"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".approve.adminIzinSakit.ListIzinSakitApprove"
+            android:name=".approve.adminIzinSakitHead.ListIzinSakitApproveHead"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" >

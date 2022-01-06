@@ -1,9 +1,7 @@
-package com.app.mobiledev.apphris.approve.adminIzinSakit;
+package com.app.mobiledev.apphris.approve.adminIzinSakitHead;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -13,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -22,8 +19,6 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
-import com.app.mobiledev.apphris.izin.izinSakit.statusApproveIzinSakit;
-import com.app.mobiledev.apphris.profile.UpdateDataDiri;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -37,7 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class detailIzinSakitApprove extends AppCompatActivity {
+public class detailIzinSakitApproveHead extends AppCompatActivity {
 
     private String id, name,indikasi_sakit, kyano, mulai_sakit_tanggal, selesai_sakit_tanggal, catatan, created_at, updated_at;
     private String approve_head, approve_hrd, lampiran_file, head_kyano, head_approve_date, hrd_approve_date, head_name,hrd_kyano;
@@ -105,7 +100,7 @@ public class detailIzinSakitApprove extends AppCompatActivity {
         linearOption = findViewById(R.id.lLDetOption);
         linearKeputusan = findViewById(R.id.lLDetKeputusanAprove);
         getDetailSakitApprove(id);
-        Log.d("CEK_URL_APPROVE", "onCreate: "+api.URL_IzinSakit_approve+"?id="+id);
+        Log.d("CEK_URL_APPROVE", "onCreate: "+api.URL_IzinSakit_approve_head+"?id="+id);
         Log.d("CEK_URL_STATUS", "onCreate: "+status);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +111,7 @@ public class detailIzinSakitApprove extends AppCompatActivity {
     }
 
     private void getDetailSakitApprove(String _id) {
-        AndroidNetworking.get(api.URL_IzinSakit_approve+"?id="+_id)
+        AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?id="+_id)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -227,7 +222,7 @@ public class detailIzinSakitApprove extends AppCompatActivity {
 
     }
     private void notifDialog(String pesan,String nama,String _value) {
-        dialogApprove = new Dialog(detailIzinSakitApprove.this);
+        dialogApprove = new Dialog(detailIzinSakitApproveHead.this);
         dialogApprove.setContentView(R.layout.dialog_persetujuan_izin);
         tx_nama_dialog=dialogApprove.findViewById(R.id.tx_nama_dialog);
         btn_close_dialog=dialogApprove.findViewById(R.id.btn_close);
@@ -258,7 +253,7 @@ public class detailIzinSakitApprove extends AppCompatActivity {
     }
 
     private void dialogFoto()  {
-        dialogFoto = new Dialog(detailIzinSakitApprove.this);
+        dialogFoto = new Dialog(detailIzinSakitApproveHead.this);
         dialogFoto.setContentView(R.layout.dialog_foto_izin_sakit);
         dialogFoto.setCancelable(true);
 
@@ -268,7 +263,7 @@ public class detailIzinSakitApprove extends AppCompatActivity {
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true);
-        Glide.with(detailIzinSakitApprove.this).load(api.URL_foto_izinsakit+""+lampiran_file).thumbnail(Glide.with(detailIzinSakitApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
+        Glide.with(detailIzinSakitApproveHead.this).load(api.URL_foto_izinsakit+""+lampiran_file).thumbnail(Glide.with(detailIzinSakitApproveHead.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
 
         txtClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -280,7 +275,7 @@ public class detailIzinSakitApprove extends AppCompatActivity {
     }
 
     private void updateApprove(String _id,String value){
-        AndroidNetworking.put(api.URL_IzinSakit_approve)
+        AndroidNetworking.put(api.URL_IzinSakit_approve_head)
                 .addHeaders("Authorization", "Bearer "+token)
                 .addBodyParameter("id",_id)
                 .addBodyParameter("status",value)
@@ -296,7 +291,7 @@ public class detailIzinSakitApprove extends AppCompatActivity {
                                 Log.d("APPROVE_SUKSES", "onResponse: " + response.toString());
                                 finish();
                             }else{
-                                helper.messageToast(detailIzinSakitApprove.this,"izin gagal approve..!!");
+                                helper.messageToast(detailIzinSakitApproveHead.this,"izin gagal approve..!!");
                             }
 
 

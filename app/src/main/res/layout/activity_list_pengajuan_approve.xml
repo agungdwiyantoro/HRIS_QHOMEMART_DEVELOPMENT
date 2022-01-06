@@ -60,13 +60,16 @@
 
         </LinearLayout>
 
-        <LinearLayout
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="15dp">
 
             <TextView
+                android:id="@+id/tx_diterima"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -77,8 +80,10 @@
                 android:textSize="12dp" />
 
             <TextView
+                android:id="@+id/tx_ditolak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tx_diterima"
                 android:layout_marginEnd="5dp"
                 android:drawableStart="@drawable/ic_dot_red"
                 android:fontFamily="@font/roboto_medium"
@@ -88,6 +93,8 @@
 
 
             <TextView
+                android:id="@+id/tx_dalamProses"
+                android:layout_toRightOf="@+id/tx_ditolak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -98,6 +105,8 @@
                 android:textSize="12dp" />
 
             <TextView
+                android:id="@+id/tx_ditolak_hrd"
+                android:layout_toRightOf="@+id/tx_dalamProses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -108,11 +117,12 @@
                 android:textSize="12dp" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="wrap_content" />
 
 
@@ -125,7 +135,7 @@
             android:layout_marginRight="50dp"
             android:layout_marginBottom="@dimen/padd_10"
             android:background="@drawable/out_line_white"
-            android:checkedButton="@+id/news"
+            android:checkedButton="@+id/all"
             android:orientation="horizontal">
 
             <RadioButton
@@ -164,8 +174,7 @@
 
             <android.support.design.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/shimmer_view_container"
@@ -201,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:visibility="gone"
-                    tools:listitem="@layout/list_riwayat_izin_sakit_approve" />
+                    tools:listitem="@layout/list_riwayat_izin_sakit_approve_head" />
 
             </android.support.design.widget.CoordinatorLayout>
 

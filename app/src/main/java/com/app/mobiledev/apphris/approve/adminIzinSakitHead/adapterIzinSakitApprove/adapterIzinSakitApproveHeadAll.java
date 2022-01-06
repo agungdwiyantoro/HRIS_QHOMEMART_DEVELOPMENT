@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.approve.adminIzinSakit.adapterIzinSakitApprove;
+package com.app.mobiledev.apphris.approve.adminIzinSakitHead.adapterIzinSakitApprove;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.approve.adminIzinSakit.detailIzinSakitApprove;
+import com.app.mobiledev.apphris.approve.adminIzinSakitHead.detailIzinSakitApproveHead;
 import com.app.mobiledev.apphris.helperPackage.BaseViewHolder;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 
@@ -27,7 +27,7 @@ import java.util.List;
 
 
 
-public class adapterIzinSakitApprove_pagination extends RecyclerView.Adapter<BaseViewHolder> {
+public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_NORMAL = 1;
     private Context mCtx;
@@ -35,7 +35,7 @@ public class adapterIzinSakitApprove_pagination extends RecyclerView.Adapter<Bas
 
     private List<modelIzinSakit> modelIzinSakits;
 
-    public adapterIzinSakitApprove_pagination(List<modelIzinSakit> modelIzinSakit,Context ctx) {
+    public adapterIzinSakitApproveHeadAll(List<modelIzinSakit> modelIzinSakit, Context ctx) {
         this.mCtx=ctx;
         this.modelIzinSakits = modelIzinSakit;
     }
@@ -46,7 +46,7 @@ public class adapterIzinSakitApprove_pagination extends RecyclerView.Adapter<Bas
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
                 return new ViewHolder(
-                        LayoutInflater.from(parent.getContext()).inflate(R.layout.list_riwayat_izin_sakit_approve, parent, false));
+                        LayoutInflater.from(parent.getContext()).inflate(R.layout.list_riwayat_izin_sakit_approve_head, parent, false));
             case VIEW_TYPE_LOADING:
                 return new ProgressHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading_progress, parent, false));
             default:
@@ -177,7 +177,7 @@ public class adapterIzinSakitApprove_pagination extends RecyclerView.Adapter<Bas
             line1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(mCtx, detailIzinSakitApprove.class);
+                    Intent i = new Intent(mCtx, detailIzinSakitApproveHead.class);
                     Bundle x = new Bundle();
                     x.putString("id", Object.getId());
                     i.putExtras(x);

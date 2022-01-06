@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.approve.adminIzinSakit;
+package com.app.mobiledev.apphris.approve.adminIzinSakitHead;
 
 import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
 
@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -23,12 +22,11 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.approve.adminIzinSakit.adapterIzinSakitApprove.adapterIzinSakitApprove;
-import com.app.mobiledev.apphris.approve.adminIzinSakit.adapterIzinSakitApprove.adapterIzinSakitApprove_pagination;
+import com.app.mobiledev.apphris.approve.adminIzinSakitHead.adapterIzinSakitApprove.adapterIzinSakitApproveHeadNew;
+import com.app.mobiledev.apphris.approve.adminIzinSakitHead.adapterIzinSakitApprove.adapterIzinSakitApproveHeadAll;
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 import com.app.mobiledev.apphris.sesion.SessionManager;
-import com.app.mobiledev.apphris.test.PostItem;
 import com.app.mobiledev.apphris.test.PostRecyclerAdapter;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -39,7 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ListIzinSakitApproveHead extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyler_izin_sakit;
     private List<modelIzinSakit> modelIzinSakits;
@@ -56,11 +54,10 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
     private int totalPage = 10;
     private boolean isLoading = false;
     int itemCount = 0;
-
-    adapterIzinSakitApprove_pagination mAdapter;
-
+    LinearLayoutManager layoutManager;
+    adapterIzinSakitApproveHeadAll mAdapterALL;
     private ShimmerFrameLayout mShimmerViewContainer;
-    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
 
 
 
@@ -68,27 +65,21 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_pengajuan_approve);
-
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
-
         recyler_izin_sakit = findViewById(R.id.recyler_izin_sakit);
         rbFilter=findViewById(R.id.rbFilter);
         img_back = findViewById(R.id.img_back);
         lin_transparant=findViewById(R.id.lin_transparant);
         swipeRefresh=findViewById(R.id.swipeRefresh);
         swipeRefresh.setOnRefreshListener(this);
-        msession = new SessionManager(ListIzinSakitApprove.this);
+        msession = new SessionManager(ListIzinSakitApproveHead.this);
         modelIzinSakits = new ArrayList<>();
         token = msession.getToken();
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         recyler_izin_sakit.setLayoutManager(layoutManager);
-        mAdapter = new adapterIzinSakitApprove_pagination(new ArrayList<>(),ListIzinSakitApprove.this);
-        recyler_izin_sakit.setAdapter(mAdapter);
-        recyler_izin_sakit.setHasFixedSize(true);
+        mAdapterALL = new adapterIzinSakitApproveHeadAll(new ArrayList<>(), ListIzinSakitApproveHead.this);
 
-        getRiwayatSakitNew();
-        //doApiCall();
+        paginationCall();
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,24 +90,18 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
         rbFilter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                recyler_izin_sakit.setVisibility(View.GONE);
-
-                mShimmerViewContainer.startShimmerAnimation();
-                mShimmerViewContainer.setVisibility(View.VISIBLE);
 
                 if (checkedId==R.id.news){
                     getRiwayatSakitNew();
 
                 } else if(checkedId==R.id.all) {
                     recyler_izin_sakit.setLayoutManager(layoutManager);
-                    mAdapter = new adapterIzinSakitApprove_pagination(new ArrayList<>(),ListIzinSakitApprove.this);
-                    recyler_izin_sakit.setAdapter(mAdapter);
-                    recyler_izin_sakit.setHasFixedSize(true);
+                    mAdapterALL = new adapterIzinSakitApproveHeadAll(new ArrayList<>(), ListIzinSakitApproveHead.this);
                     itemCount = 0;
                     currentPage = PAGE_START;
                     isLastPage = false;
-                    mAdapter.clear();
-                    doApiCall();
+                    mAdapterALL.clear();
+                    paginationCall();
                 }
             }
         });
@@ -126,7 +111,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
             protected void loadMoreItems() {
                 isLoading = true;
                 currentPage++;
-                doApiCall();
+                paginationCall();
             }
 
             @Override
@@ -144,7 +129,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
 
     private void getRiwayatSakitNew() {
-        AndroidNetworking.get(api.URL_IzinSakit_approve)
+        AndroidNetworking.get(api.URL_IzinSakit_approve_head)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -188,10 +173,10 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
                                 }
 
-                                adapterIzinSakitApprove mAdapter;
-                                mAdapter = new adapterIzinSakitApprove(modelIzinSakits, ListIzinSakitApprove.this);
+                                adapterIzinSakitApproveHeadNew mAdapter;
+                                mAdapter = new adapterIzinSakitApproveHeadNew(modelIzinSakits, ListIzinSakitApproveHead.this);
                                 mAdapter.notifyDataSetChanged();
-                                recyler_izin_sakit.setLayoutManager(new LinearLayoutManager(ListIzinSakitApprove.this));
+                                recyler_izin_sakit.setLayoutManager(new LinearLayoutManager(ListIzinSakitApproveHead.this));
                                 recyler_izin_sakit.setItemAnimator(new DefaultItemAnimator());
                                 recyler_izin_sakit.setAdapter(mAdapter);
 
@@ -204,7 +189,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                             } else {
                                 JSONObject object = response.getJSONObject("message");
                                 String pesan = object.getString("lampiran_file");
-                                Toast.makeText(ListIzinSakitApprove.this,""+pesan,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListIzinSakitApproveHead.this,""+pesan,Toast.LENGTH_SHORT).show();
                             }
 
                             lin_transparant.setVisibility(View.GONE);
@@ -226,8 +211,8 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
     }
 
 
-    private void doApiCall() {
-        final ArrayList<PostItem> items = new ArrayList<>();
+    private void paginationCall() {
+        final ArrayList<modelIzinSakit> items = new ArrayList<>();
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -243,7 +228,12 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                     offset=(itemCount-totalPage)+1;
                 }
                 Log.d("cek_offset", "run: "+offset);
-                getRiwayatSakitAll(itemCount,offset);
+                mShimmerViewContainer.startShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.VISIBLE);
+                recyler_izin_sakit.setVisibility(View.GONE);
+                recyler_izin_sakit.setAdapter(mAdapterALL);
+                recyler_izin_sakit.setHasFixedSize(true);
+                getRiwayatSakitAll(itemCount,offset,items);
 
 
             }
@@ -261,13 +251,13 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
         itemCount = 0;
         currentPage = PAGE_START;
         isLastPage = false;
-        mAdapter.clear();
-        doApiCall();
+        mAdapterALL.clear();
+        paginationCall();
     }
 
 
-    private void getRiwayatSakitAll(int page,int offset) {
-        AndroidNetworking.get(api.URL_IzinSakit_approve+"?limit="+page+"&offset="+offset)
+    private void getRiwayatSakitAll(int page,int offset,ArrayList items) {
+        AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -278,7 +268,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                         try {
 
                             //mAdapter.clear();
-                            final ArrayList<modelIzinSakit> items = new ArrayList<>();
+
 
                             String status = response.getString("status");
                             Log.d("HASL_RESPONSE_NEW", "onResponse: " + status);
@@ -311,7 +301,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
                                 }
 
-                                if (currentPage != PAGE_START) mAdapter.removeLoading();
+                                if (currentPage != PAGE_START) mAdapterALL.removeLoading();
 
                                 // Stopping Shimmer Effect's animation after data is loaded to ListView
                                 mShimmerViewContainer.stopShimmerAnimation();
@@ -319,13 +309,13 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
                                 recyler_izin_sakit.setVisibility(View.VISIBLE);
 
-                                mAdapter.addItems(items);
+                                mAdapterALL.addItems(items);
                                 swipeRefresh.setRefreshing(false);
 
                                 // check weather is last page or not
                                 if (currentPage < totalPage) {
-                                    items.clear();
-                                    mAdapter.addLoading();
+                                   // items.clear();
+                                    mAdapterALL.addLoading();
                                 } else {
                                     isLastPage = true;
                                 }
@@ -334,7 +324,7 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                                 JSONObject object = response.getJSONObject("message");
                                 String pesan = object.getString("lampiran_file");
 
-                                Toast.makeText(ListIzinSakitApprove.this,""+pesan,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListIzinSakitApproveHead.this,""+pesan,Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -348,7 +338,6 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
                     @Override
                     public void onError(ANError anError) {
                         Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + anError.getErrorDetail());
-                        Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + api.URL_IzinSakit_approve+"?limit="+page);
 
                     }
                 });
@@ -364,8 +353,8 @@ public class ListIzinSakitApprove extends AppCompatActivity implements SwipeRefr
 
     @Override
     protected void onPause() {
-        mShimmerViewContainer.stopShimmerAnimation();
         super.onPause();
+        mShimmerViewContainer.stopShimmerAnimation();
     }
 
 }

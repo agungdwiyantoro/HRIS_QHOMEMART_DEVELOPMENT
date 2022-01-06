@@ -102,7 +102,8 @@ public class api {
     //data ip aws
     public  static  final String URL_uploadIzinSakit="http://192.168.50.24/all/hris_ci_3/api/uploadimage";
     public  static  final String URL_IzinSakit="http://192.168.50.24/all/hris_ci_3/api/izinsakit";
-    public  static  final String URL_IzinSakit_approve="http://192.168.50.24/all/hris_ci_3/api/approvehead";
+    public  static  final String URL_IzinSakit_approve_head="http://192.168.50.24/all/hris_ci_3/api/approvehead";
+    public  static  final String URL_IzinSakit_approve_hrd="http://192.168.50.24/all/hris_ci_3/api/approvehrd";
     public  static  final String URL_foto_izinsakit="http://192.168.50.24/all/hris_ci_3/upload/tmp_surat/";
 
 

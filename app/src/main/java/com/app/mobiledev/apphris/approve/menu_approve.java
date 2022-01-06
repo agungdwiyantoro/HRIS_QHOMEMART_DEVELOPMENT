@@ -9,7 +9,8 @@ import android.view.View;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.approve.adminIzinDinas.listIzinDinasApprove;
 import com.app.mobiledev.apphris.approve.adminIzinMt.listIzinMtApprove;
-import com.app.mobiledev.apphris.approve.adminIzinSakit.ListIzinSakitApprove;
+import com.app.mobiledev.apphris.approve.adminIzinSakitHRD.ListIzinSakitApproveHRD;
+import com.app.mobiledev.apphris.approve.adminIzinSakitHead.ListIzinSakitApproveHead;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
 public class menu_approve extends AppCompatActivity {
@@ -44,7 +45,7 @@ public class menu_approve extends AppCompatActivity {
         card_izin_sakit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(menu_approve.this, ListIzinSakitApprove.class);
+                Intent intent = new Intent(menu_approve.this, ListIzinSakitApproveHead.class);
                 startActivity(intent);
 
 
@@ -55,7 +56,7 @@ public class menu_approve extends AppCompatActivity {
         card_izin_cuti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(menu_approve.this, listIzinMtApprove.class);
+                Intent intent = new Intent(menu_approve.this, ListIzinSakitApproveHRD.class);
                 startActivity(intent);
 
             }

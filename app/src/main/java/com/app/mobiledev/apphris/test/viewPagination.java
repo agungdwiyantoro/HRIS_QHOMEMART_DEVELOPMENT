@@ -8,11 +8,9 @@ import android.os.Handler;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -20,7 +18,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.approve.adminIzinSakit.ListIzinSakitApprove;
 
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
@@ -134,7 +131,7 @@ public class viewPagination extends AppCompatActivity
     }
 
     private void getRiwayatSakitAll(int page) {
-        AndroidNetworking.get(api.URL_IzinSakit_approve+"?limit="+page)
+        AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -184,7 +181,7 @@ public class viewPagination extends AppCompatActivity
                     @Override
                     public void onError(ANError anError) {
                         Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + anError.getErrorDetail());
-                        Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + api.URL_IzinSakit_approve+"?limit="+page);
+                        Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + api.URL_IzinSakit_approve_head+"?limit="+page);
 
                     }
                 });
@@ -193,7 +190,7 @@ public class viewPagination extends AppCompatActivity
     }
 
     private void getRiwayatSakitAll() {
-        AndroidNetworking.get(api.URL_IzinSakit_approve)
+        AndroidNetworking.get(api.URL_IzinSakit_approve_head)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()

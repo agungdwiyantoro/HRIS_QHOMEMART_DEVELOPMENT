@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.approve.adminIzinSakit.adapterIzinSakitApprove;
+package com.app.mobiledev.apphris.approve.adminIzinSakitHead.adapterIzinSakitApprove;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.approve.adminIzinSakit.detailIzinSakitApprove;
+import com.app.mobiledev.apphris.approve.adminIzinSakitHead.detailIzinSakitApproveHead;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 
 import java.text.ParseException;
@@ -22,11 +22,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSakitApprove.RecylerViewHolder> {
+public class adapterIzinSakitApproveHeadNew extends RecyclerView.Adapter<adapterIzinSakitApproveHeadNew.RecylerViewHolder> {
     private Context mCtx;
     private List<modelIzinSakit> modelIzinSakit;
 
-    public adapterIzinSakitApprove(List<modelIzinSakit> modelIzinSakit, Context ctx) {
+    public adapterIzinSakitApproveHeadNew(List<modelIzinSakit> modelIzinSakit, Context ctx) {
         this.mCtx = ctx;
         this.modelIzinSakit = modelIzinSakit;
     }
@@ -36,7 +36,7 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSak
     @Override
     public RecylerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.list_riwayat_izin_sakit_unapprove, null);
+        View view = inflater.inflate(R.layout.list_riwayat_izin_sakit_unapprove_head, null);
         return new RecylerViewHolder(view);
     }
 
@@ -73,7 +73,7 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<adapterIzinSak
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(mCtx, detailIzinSakitApprove.class);
+                Intent i = new Intent(mCtx, detailIzinSakitApproveHead.class);
                 Bundle x = new Bundle();
                 x.putString("id", Object.getId());
                 x.putString("kode_status", holder.kodeStatus);

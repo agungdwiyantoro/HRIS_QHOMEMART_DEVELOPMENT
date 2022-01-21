@@ -1,7 +1,9 @@
 package com.app.mobiledev.apphris.approve.adminIzinSakitHRD.adapterIzinSakitApprove;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +15,14 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.approve.adminIzinSakitHRD.detailIzinSakitApproveHRD;
+import com.app.mobiledev.apphris.approve.adminIzinSakitHead.detailIzinSakitApproveHead;
 import com.app.mobiledev.apphris.helperPackage.BaseViewHolder;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class adapterIzinSakitApproveHRDAll extends RecyclerView.Adapter<BaseViewHolder> {
@@ -72,6 +79,7 @@ public class adapterIzinSakitApproveHRDAll extends RecyclerView.Adapter<BaseView
 
     public void addItems (List<modelIzinSakit> modelIzinSakit){
         modelIzinSakits.addAll(modelIzinSakit);
+
         notifyDataSetChanged();
     }
 
@@ -113,6 +121,9 @@ public class adapterIzinSakitApproveHRDAll extends RecyclerView.Adapter<BaseView
         private TextView txAlasan;
         private TextView txTgl;
         private CardView card_list_riwayat_izin;
+        private SimpleDateFormat dateFormatSources;
+        private Date dateSource;
+        private SimpleDateFormat dateFormat_day;
 
         ViewHolder(View itemView){
             super(itemView);
@@ -121,6 +132,8 @@ public class adapterIzinSakitApproveHRDAll extends RecyclerView.Adapter<BaseView
             txAlasan=itemView.findViewById(R.id.txAlasan);
             txTgl=itemView.findViewById(R.id.txTgl);
             card_list_riwayat_izin=itemView.findViewById(R.id.card_list_riwayat_izin);
+            dateFormatSources = new SimpleDateFormat("yyyy-MM-dd");
+            dateFormat_day = new SimpleDateFormat("yyyy-MMMM-dd");
 
         }
 
@@ -135,8 +148,36 @@ public class adapterIzinSakitApproveHRDAll extends RecyclerView.Adapter<BaseView
             modelIzinSakit Object =modelIzinSakits.get(position);
             txNama.setText(Object.getName());
             txNamaHead.setText(Object.getHead_name());
-            txAlasan.setText(Object.getIndikasi_sakit());
-            card_list_riwayat_izin.setCardBackgroundColor(Color.GREEN);
+            txAlasan.setText(Object.getCatatan());
+            try {
+                dateSource = dateFormatSources.parse(Object.getCreated_at());
+                txTgl.setText(""+dateFormat_day.format(dateSource));
+                Log.d("CEK_APPROVE_HEAD", "onBind: "+dateFormatSources.parse(Object.getCreated_at()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Log.d("CEK_APPROVE_HEAD", "onBind: "+e.getMessage());
+            }
+
+
+            if(Object.getApprove_hrd().equals("1")){
+                card_list_riwayat_izin.setCardBackgroundColor(Color.GREEN);
+            }else if(Object.getApprove_hrd().equals("0")){
+                card_list_riwayat_izin.setCardBackgroundColor(Color.RED);
+            }else {
+                card_list_riwayat_izin.setCardBackgroundColor(Color.GRAY);
+            }
+
+            card_list_riwayat_izin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(mCtx, detailIzinSakitApproveHRD.class);
+                    Bundle x = new Bundle();
+                    x.putString("id", Object.getId());
+                    i.putExtras(x);
+                    mCtx.startActivity(i);
+                }
+            });
+
 
         }
     }

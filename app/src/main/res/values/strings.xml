@@ -182,8 +182,12 @@
     <string name="lampiran_foto_surat_keterangan_dokter">Lampiran Foto Surat Keterangan Dokter</string>
     <string name="izin_meninggalkan_tugas">Izin Meningglakan Tugas</string>
     <string name="izin_sakit">Izin Sakit</string>
+    <string name="approve_izin_sakit">approve izin sakit</string>
     <string name="izin_dinas">Izin Dinas</string>
     <string name="cuti">Cuti</string>
+    <string name="izin_sakit_approve_hrd">izit sakit approve hrd</string>
+    <string name="izin_sakit_approve_head">izin sakit aprrove head</string>
+
     <string name="tambah">Tambah</string>
     <string name="data_ajuan">Data Ajuan</string>
     <string name="lihat_dokumen">Lihat Dokumen</string>

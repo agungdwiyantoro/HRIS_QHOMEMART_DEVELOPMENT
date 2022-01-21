@@ -42,13 +42,13 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
 
     @NonNull @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
                 return new ViewHolder(
                         LayoutInflater.from(parent.getContext()).inflate(R.layout.list_riwayat_izin_sakit_approve_head, parent, false));
             case VIEW_TYPE_LOADING:
                 return new ProgressHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading_progress, parent, false));
+
             default:
                 return null;
         }
@@ -76,6 +76,7 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
 
     public void addItems(List<modelIzinSakit> modelIzinsakit) {
         modelIzinSakits.addAll(modelIzinsakit);
+        Log.d("add_items_all", "addItems: "+modelIzinSakits.size());
         notifyDataSetChanged();
     }
 
@@ -148,7 +149,7 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
             modelIzinSakit Object = modelIzinSakits.get(position);
 
 
-            tvAlasan.setText("" + Object.getIndikasi_sakit());
+            tvAlasan.setText("" + Object.getCatatan());
             tvNama.setText(""+Object.getName());
             Log.d("CEK_ADAPTER", "onBind: "+Object.getName());
 

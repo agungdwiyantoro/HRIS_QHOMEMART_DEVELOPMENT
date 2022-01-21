@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -22,7 +22,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.approve.adminIzinSakitHead.adapterIzinSakitApprove.adapterIzinSakitApproveHeadNew;
 import com.app.mobiledev.apphris.approve.adminIzinSakitHead.adapterIzinSakitApprove.adapterIzinSakitApproveHeadAll;
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
@@ -49,6 +48,12 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
     private PostRecyclerAdapter adapter;
+    private TextView  tx_approve;
+
+
+    private Boolean all=true;
+
+
     private int currentPage = PAGE_START;
     private boolean isLastPage = false;
     private int totalPage = 10;
@@ -71,6 +76,7 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
         img_back = findViewById(R.id.img_back);
         lin_transparant=findViewById(R.id.lin_transparant);
         swipeRefresh=findViewById(R.id.swipeRefresh);
+        tx_approve=findViewById(R.id.tx_approve);
         swipeRefresh.setOnRefreshListener(this);
         msession = new SessionManager(ListIzinSakitApproveHead.this);
         modelIzinSakits = new ArrayList<>();
@@ -78,7 +84,10 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
         layoutManager = new LinearLayoutManager(this);
         recyler_izin_sakit.setLayoutManager(layoutManager);
         mAdapterALL = new adapterIzinSakitApproveHeadAll(new ArrayList<>(), ListIzinSakitApproveHead.this);
-
+        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        recyler_izin_sakit.setVisibility(View.GONE);
+        recyler_izin_sakit.setAdapter(mAdapterALL);
         paginationCall();
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,20 +96,43 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
             }
         });
 
+        tx_approve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapterALL.removeLoading();
+            }
+        });
+
         rbFilter.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 if (checkedId==R.id.news){
-                    getRiwayatSakitNew();
-
-                } else if(checkedId==R.id.all) {
+                    all=false;
                     recyler_izin_sakit.setLayoutManager(layoutManager);
                     mAdapterALL = new adapterIzinSakitApproveHeadAll(new ArrayList<>(), ListIzinSakitApproveHead.this);
                     itemCount = 0;
                     currentPage = PAGE_START;
                     isLastPage = false;
                     mAdapterALL.clear();
+                    mShimmerViewContainer.startShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.VISIBLE);
+                    recyler_izin_sakit.setVisibility(View.GONE);
+                    recyler_izin_sakit.setAdapter(mAdapterALL);
+                    paginationCall();
+
+                } else {
+                    all=true;
+                    recyler_izin_sakit.setLayoutManager(layoutManager);
+                    mAdapterALL = new adapterIzinSakitApproveHeadAll(new ArrayList<>(), ListIzinSakitApproveHead.this);
+                    itemCount = 0;
+                    currentPage = PAGE_START;
+                    isLastPage = false;
+                    mAdapterALL.clear();
+                    mShimmerViewContainer.startShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.VISIBLE);
+                    recyler_izin_sakit.setVisibility(View.GONE);
+                    recyler_izin_sakit.setAdapter(mAdapterALL);
                     paginationCall();
                 }
             }
@@ -116,9 +148,9 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
 
             @Override
             public boolean isLastPage() {
+
                 return isLastPage;
             }
-
             @Override
             public boolean isLoading() {
                 return isLoading;
@@ -128,87 +160,8 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
 
 
 
-    private void getRiwayatSakitNew() {
-        AndroidNetworking.get(api.URL_IzinSakit_approve_head)
-                .addHeaders("Authorization", "Bearer "+token)
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
-                            //recyler_izin_sakit.setVisibility(View.VISIBLE);
-                            String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_APPROVE", "onResponse: " + status);
-                            if (status.equals("200")) {
-                                modelIzinSakits.clear();
-                                JSONArray jsonArray = response.getJSONArray("message");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject data = jsonArray.getJSONObject(i);
-                                    modelIzinSakit model = new modelIzinSakit();
-
-                                    if(data.getString("approve_head").equals("null")){
-                                        model.setId(data.getString("id"));
-                                        model.setKyano(data.getString("kyano"));
-                                        model.setIndikasi_sakit(data.getString("indikasi_sakit"));
-                                        model.setSelesai_sakit_tanggal(data.getString("mulai_sakit_tanggal"));
-                                        model.setMulai_sakit_tanggal(data.getString("selesai_sakit_tanggal"));
-                                        model.setCatatan(data.getString("catatan"));
-                                        model.setCreated_at(data.getString("created_at"));
-                                        model.setUpdated_at(data.getString("updated_at"));
-                                        model.setApprove_head(data.getString("approve_head"));
-                                        model.setApprove_hrd(data.getString("approve_hrd"));
-                                        model.setLampiran_file(data.getString("lampiran_file"));
-                                        model.setHead_kyano(data.getString("head_kyano"));
-                                        model.setHrd_kyano(data.getString("hrd_kyano"));
-                                        model.setHead_approve_date(data.getString("head_approve_date"));
-                                        model.setHrd_approve_date(data.getString("hrd_approve_date"));
-                                        model.setHead_name(data.getString("head_name"));
-                                        model.setName(data.getString("name"));
-                                        modelIzinSakits.add(model);
-
-                                    }
 
 
-                                }
-
-                                adapterIzinSakitApproveHeadNew mAdapter;
-                                mAdapter = new adapterIzinSakitApproveHeadNew(modelIzinSakits, ListIzinSakitApproveHead.this);
-                                mAdapter.notifyDataSetChanged();
-                                recyler_izin_sakit.setLayoutManager(new LinearLayoutManager(ListIzinSakitApproveHead.this));
-                                recyler_izin_sakit.setItemAnimator(new DefaultItemAnimator());
-                                recyler_izin_sakit.setAdapter(mAdapter);
-
-                                // Stopping Shimmer Effect's animation after data is loaded to ListView
-                                mShimmerViewContainer.stopShimmerAnimation();
-                                mShimmerViewContainer.setVisibility(View.GONE);
-
-                                recyler_izin_sakit.setVisibility(View.VISIBLE);
-
-                            } else {
-                                JSONObject object = response.getJSONObject("message");
-                                String pesan = object.getString("lampiran_file");
-                                Toast.makeText(ListIzinSakitApproveHead.this,""+pesan,Toast.LENGTH_SHORT).show();
-                            }
-
-                            lin_transparant.setVisibility(View.GONE);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
-                            lin_transparant.setVisibility(View.GONE);
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + anError.getErrorDetail());
-                        lin_transparant.setVisibility(View.GONE);
-                    }
-                });
-
-
-    }
 
 
     private void paginationCall() {
@@ -222,20 +175,14 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
                     itemCount++;
                 }
 
-                Log.d("jml_count", "run: "+itemCount);
+                Log.d("jml_count", "run: "+all);
                 int offset=0;
                 if(itemCount>10){
                     offset=(itemCount-totalPage)+1;
                 }
-                Log.d("cek_offset", "run: "+offset);
-                mShimmerViewContainer.startShimmerAnimation();
-                mShimmerViewContainer.setVisibility(View.VISIBLE);
-                recyler_izin_sakit.setVisibility(View.GONE);
-                recyler_izin_sakit.setAdapter(mAdapterALL);
                 recyler_izin_sakit.setHasFixedSize(true);
+                Log.d("cek_url_all", "run: "+api.URL_IzinSakit_approve_head+"?limit="+itemCount+"&offset="+offset);
                 getRiwayatSakitAll(itemCount,offset,items);
-
-
             }
         }, 1500);
     }
@@ -243,104 +190,230 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
     @Override
     public void onRefresh() {
         // Stopping Shimmer Effect's animation after data is loaded to ListView
-        mShimmerViewContainer.startShimmerAnimation();
-        mShimmerViewContainer.setVisibility(View.VISIBLE);
-
-        recyler_izin_sakit.setVisibility(View.GONE);
 
         itemCount = 0;
         currentPage = PAGE_START;
         isLastPage = false;
         mAdapterALL.clear();
+        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        recyler_izin_sakit.setVisibility(View.GONE);
+        recyler_izin_sakit.setAdapter(mAdapterALL);
         paginationCall();
     }
 
 
     private void getRiwayatSakitAll(int page,int offset,ArrayList items) {
-        AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset)
-                .addHeaders("Authorization", "Bearer "+token)
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
+        if(all==false){
+            AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset+"&status=0")
+                    .addHeaders("Authorization", "Bearer "+token)
+                    .setPriority(Priority.HIGH)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //mAdapter.clear();
+                                String status = response.getString("status");
+                                String message = response.getString("message");
+                                Log.d("HASL_RESPONSE_NEW", "onResponse: " + status);
+                                if (status.equals("200")) {
+                                    if(!message.equals("null")){
 
-                        try {
+                                        JSONArray jsonArray = response.getJSONArray("message");
 
-                            //mAdapter.clear();
-
-
-                            String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_NEW", "onResponse: " + status);
-                            if (status.equals("200")) {
-                                JSONArray jsonArray = response.getJSONArray("message");
-
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject data = jsonArray.getJSONObject(i);
-                                    modelIzinSakit model = new modelIzinSakit();
-                                    model.setId(data.getString("id"));
-                                    model.setKyano(data.getString("kyano"));
-                                    model.setIndikasi_sakit(data.getString("indikasi_sakit"));
-                                    model.setSelesai_sakit_tanggal(data.getString("mulai_sakit_tanggal"));
-                                    model.setMulai_sakit_tanggal(data.getString("selesai_sakit_tanggal"));
-                                    model.setCatatan(data.getString("catatan"));
-                                    model.setCreated_at(data.getString("created_at"));
-                                    model.setUpdated_at(data.getString("updated_at"));
-                                    model.setApprove_head(data.getString("approve_head"));
-                                    model.setApprove_hrd(data.getString("approve_hrd"));
-                                    model.setLampiran_file(data.getString("lampiran_file"));
-                                    model.setHead_kyano(data.getString("head_kyano"));
-                                    model.setHrd_kyano(data.getString("hrd_kyano"));
-                                    model.setHead_approve_date(data.getString("head_approve_date"));
-                                    model.setHrd_approve_date(data.getString("hrd_approve_date"));
-                                    model.setHead_name(data.getString("head_name"));
-                                    model.setName(data.getString("name"));
-                                    items.add(model);
-                                    //modelIzinSakits.add(model);
+                                        for (int i = 0; i < jsonArray.length(); i++) {
+                                            JSONObject data = jsonArray.getJSONObject(i);
+                                            modelIzinSakit model = new modelIzinSakit();
+                                            model.setId(data.getString("id"));
+                                            model.setKyano(data.getString("kyano"));
+                                            model.setIndikasi_sakit(data.getString("indikasi_sakit"));
+                                            model.setSelesai_sakit_tanggal(data.getString("mulai_sakit_tanggal"));
+                                            model.setMulai_sakit_tanggal(data.getString("selesai_sakit_tanggal"));
+                                            model.setCatatan(data.getString("catatan"));
+                                            model.setCreated_at(data.getString("created_at"));
+                                            model.setUpdated_at(data.getString("updated_at"));
+                                            model.setApprove_head(data.getString("approve_head"));
+                                            model.setApprove_hrd(data.getString("approve_hrd"));
+                                            model.setLampiran_file(data.getString("lampiran_file"));
+                                            model.setHead_kyano(data.getString("head_kyano"));
+                                            model.setHrd_kyano(data.getString("hrd_kyano"));
+                                            model.setHead_approve_date(data.getString("head_approve_date"));
+                                            model.setHrd_approve_date(data.getString("hrd_approve_date"));
+                                            model.setHead_name(data.getString("head_name"));
+                                            model.setName(data.getString("name"));
+                                            items.add(model);
+                                            //modelIzinSakits.add(model);
 
 
+                                        }
+
+                                        if (currentPage != PAGE_START) mAdapterALL.removeLoading();
+                                        mAdapterALL.addItems(items);
+                                        swipeRefresh.setRefreshing(false);
+                                        Log.d("CUURENT_PAGE", "onResponse: "+items.size());
+
+//                                        if((items.size()+1<totalPage)&&currentPage==1){
+//                                            mAdapterALL.removeLoading();
+//                                        }else{
+//                                            if (currentPage < totalPage) {
+//                                                mAdapterALL.addLoading();
+//                                            }else{
+//                                                isLastPage = true;
+//                                            }
+//                                        }
+
+                                        if (currentPage < totalPage) {
+                                            mAdapterALL.addLoading();
+                                        }else{
+                                            isLastPage = true;
+                                        }
+                                        isLoading = false;
+
+                                    }else{
+                                        mAdapterALL.removeLoading();
+                                    }
+
+                                } else {
+                                    JSONObject object = response.getJSONObject("message");
+                                    String pesan = object.getString("lampiran_file");
+                                    mShimmerViewContainer.stopShimmerAnimation();
+                                    mShimmerViewContainer.setVisibility(View.GONE);
+
+                                    recyler_izin_sakit.setVisibility(View.VISIBLE);
+                                    mAdapterALL.removeLoading();
+
+                                    Toast.makeText(ListIzinSakitApproveHead.this,""+pesan,Toast.LENGTH_SHORT).show();
                                 }
-
-                                if (currentPage != PAGE_START) mAdapterALL.removeLoading();
-
                                 // Stopping Shimmer Effect's animation after data is loaded to ListView
                                 mShimmerViewContainer.stopShimmerAnimation();
                                 mShimmerViewContainer.setVisibility(View.GONE);
 
                                 recyler_izin_sakit.setVisibility(View.VISIBLE);
 
-                                mAdapterALL.addItems(items);
-                                swipeRefresh.setRefreshing(false);
 
-                                // check weather is last page or not
-                                if (currentPage < totalPage) {
-                                   // items.clear();
-                                    mAdapterALL.addLoading();
-                                } else {
-                                    isLastPage = true;
-                                }
-                                isLoading = false;
-                            } else {
-                                JSONObject object = response.getJSONObject("message");
-                                String pesan = object.getString("lampiran_file");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
 
-                                Toast.makeText(ListIzinSakitApproveHead.this,""+pesan,Toast.LENGTH_SHORT).show();
                             }
+                        }
 
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
+                        @Override
+                        public void onError(ANError anError) {
+                            Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + anError.getErrorDetail());
 
                         }
-                    }
+                    });
+        }else{
+            AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset)
+                    .addHeaders("Authorization", "Bearer "+token)
+                    .setPriority(Priority.HIGH)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                //mAdapter.clear();
+                                String status = response.getString("status");
+                                String message = response.getString("message");
+                                Log.d("HASL_RESPONSE_NEW", "onResponse: " + status);
+                                if (status.equals("200")) {
+                                    if(!message.equals("null")){
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + anError.getErrorDetail());
+                                        JSONArray jsonArray = response.getJSONArray("message");
 
-                    }
-                });
+                                        for (int i = 0; i < jsonArray.length(); i++) {
+                                            JSONObject data = jsonArray.getJSONObject(i);
+                                            if(!data.getString("approve_head").equals("null")){
+                                                modelIzinSakit model = new modelIzinSakit();
+                                                model.setId(data.getString("id"));
+                                                model.setKyano(data.getString("kyano"));
+                                                model.setIndikasi_sakit(data.getString("indikasi_sakit"));
+                                                model.setSelesai_sakit_tanggal(data.getString("mulai_sakit_tanggal"));
+                                                model.setMulai_sakit_tanggal(data.getString("selesai_sakit_tanggal"));
+                                                model.setCatatan(data.getString("catatan"));
+                                                model.setCreated_at(data.getString("created_at"));
+                                                model.setUpdated_at(data.getString("updated_at"));
+                                                model.setApprove_head(data.getString("approve_head"));
+                                                model.setApprove_hrd(data.getString("approve_hrd"));
+                                                model.setLampiran_file(data.getString("lampiran_file"));
+                                                model.setHead_kyano(data.getString("head_kyano"));
+                                                model.setHrd_kyano(data.getString("hrd_kyano"));
+                                                model.setHead_approve_date(data.getString("head_approve_date"));
+                                                model.setHrd_approve_date(data.getString("hrd_approve_date"));
+                                                model.setHead_name(data.getString("head_name"));
+                                                model.setName(data.getString("name"));
+                                                items.add(model);
+                                            }
+
+
+
+
+                                        }
+
+                                        if (currentPage != PAGE_START) mAdapterALL.removeLoading();
+                                        mAdapterALL.addItems(items);
+                                        swipeRefresh.setRefreshing(false);
+                                        Log.d("CEK_ITEMS", "onResponse: items "+items.size()+1+" remove"+totalPage);
+
+//                                        if((items.size()+1<totalPage)&&currentPage==1){
+//                                            mAdapterALL.removeLoading();
+//                                        }else{
+//                                            if (currentPage < totalPage) {
+//                                                mAdapterALL.addLoading();
+//                                            }else{
+//                                                isLastPage = true;
+//                                            }
+//                                        }
+
+                                        if (currentPage < totalPage) {
+                                            mAdapterALL.addLoading();
+                                        }else{
+                                            isLastPage = true;
+                                        }
+                                        isLoading = false;
+
+
+
+                                    }else{
+                                        mAdapterALL.removeLoading();
+                                    }
+
+                                } else {
+                                    JSONObject object = response.getJSONObject("message");
+                                    String pesan = object.getString("lampiran_file");
+                                    mShimmerViewContainer.stopShimmerAnimation();
+                                    mShimmerViewContainer.setVisibility(View.GONE);
+
+                                    recyler_izin_sakit.setVisibility(View.VISIBLE);
+                                    mAdapterALL.removeLoading();
+
+                                    Toast.makeText(ListIzinSakitApproveHead.this,""+pesan,Toast.LENGTH_SHORT).show();
+                                }
+                                // Stopping Shimmer Effect's animation after data is loaded to ListView
+                                mShimmerViewContainer.stopShimmerAnimation();
+                                mShimmerViewContainer.setVisibility(View.GONE);
+
+                                recyler_izin_sakit.setVisibility(View.VISIBLE);
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
+
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+                            Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + anError.getErrorDetail());
+
+                        }
+                    });
+
+        }
+
 
 
     }

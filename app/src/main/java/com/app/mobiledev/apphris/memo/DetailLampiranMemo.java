@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.notifikasi.MainApplication;
 import com.app.mobiledev.apphris.pdfHelper.PDFHelper;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -120,21 +121,13 @@ public class DetailLampiranMemo extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void downloadMemo(String fileHal, String fileName) {
-
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-
-        //http://hris.qhomedata.id/upload/20210928-MEMO-HR089-231-Penggabungan-Divisi.pdf
-
-        Uri uri = Uri.parse("http://hris.qhomedata.id/upload/"+fileName);
-
+        Uri uri = Uri.parse(api.URL_Link_lampiran_memo+fileName);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileHal+".pdf");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-
         Long reference = downloadManager.enqueue(request);
-
         Log.d("TAG_DOWN_REF", "onClick: " + reference + downloadManager + request);
-
         showProgressDownload(reference);
 
     }
@@ -145,11 +138,8 @@ public class DetailLampiranMemo extends AppCompatActivity {
 
         progressBarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressBarDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, whichButton) -> {
-            // Toast.makeText(getBaseContext(),
-            //       "OK clicked!", Toast.LENGTH_SHORT).show();
         });
         progressBarDialog.setProgress(0);
-
         new Thread(new Runnable() {
 
             @Override
@@ -191,11 +181,7 @@ public class DetailLampiranMemo extends AppCompatActivity {
 
             }
         }).start();
-
-
-        //show the dialog
         progressBarDialog.show();
-
     }
 
 }

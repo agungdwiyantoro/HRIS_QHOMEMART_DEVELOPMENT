@@ -73,12 +73,9 @@
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
 
-
-
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/padd_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -111,62 +108,72 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="bottom|center"
+                            android:fontFamily="@font/roboto_medium"
                             android:text="@string/menu_izin_dinas"
-                            android:textColor="@color/abu_abu"
+                            android:textColor="@color/second_color_black"
                             android:textSize="12dp"
                             android:textFontWeight="800"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/card_izin_mt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:foreground="?android:selectableItemBackground"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="4dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorWhite"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <ImageView
-                            android:id="@+id/img_izin_mt"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_surat_izin" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="bottom|center"
-                            android:text="@string/menu_izin_mt"
-                            android:textColor="@color/abu_abu"
-                            android:textFontWeight="800"
-                            android:textSize="12dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
 
 
 
             </LinearLayout>
 
+
+
             <LinearLayout
-                android:layout_marginTop="@dimen/padd_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                     <android.support.v7.widget.CardView
+                         android:id="@+id/card_izin_mt"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_margin="8dp"
+                         android:layout_weight="1"
+                         android:foreground="?android:selectableItemBackground"
+                         app:cardCornerRadius="5dp"
+                         app:cardElevation="4dp">
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:background="@color/colorWhite"
+                             android:gravity="center"
+                             android:orientation="vertical"
+                             android:padding="10dp">
+
+                             <ImageView
+                                 android:id="@+id/img_izin_mt"
+                                 android:layout_width="50dp"
+                                 android:layout_height="50dp"
+                                 android:src="@drawable/ic_surat_izin" />
+
+                             <TextView
+                                 android:textColor="@color/second_color_black"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="bottom|center"
+                                 android:text="@string/menu_izin_mt"
+                                 android:textFontWeight="800"
+                                 android:textSize="12dp"
+                                 android:textStyle="bold" />
+                         </LinearLayout>
+                     </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/card_izin_sakit"
+                    android:id="@+id/card_izin_sakit_approve_head"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -192,53 +199,59 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="bottom|center"
-                            android:text="@string/izin_sakit"
-                            android:textColor="@color/abu_abu"
+                            android:text="@string/izin_sakit_approve_head"
+                            android:textColor="@color/second_color_black"
                             android:textSize="12dp"
                             android:textFontWeight="800"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/card_izin_cuti"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:foreground="?android:selectableItemBackground"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorWhite"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="10dp">
-
-                        <ImageView
-                            android:id="@+id/img_izin_cuti"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/ic_surat_izin" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="bottom|center"
-                            android:text="@string/cuti"
-                            android:textColor="@color/abu_abu"
-                            android:textFontWeight="800"
-                            android:textSize="12dp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-
 
             </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_izin_sakit_approve_hrd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:foreground="?android:selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/img_izin_cuti"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_surat_izin" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom|center"
+                        android:text="@string/izin_sakit_approve_hrd"
+                        android:textColor="@color/second_color_black"
+                        android:textFontWeight="800"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
 
         </LinearLayout>
 

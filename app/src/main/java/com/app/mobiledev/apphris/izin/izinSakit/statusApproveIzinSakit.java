@@ -1,8 +1,16 @@
 package com.app.mobiledev.apphris.izin.izinSakit;
 
 import android.app.Dialog;
+import android.app.DownloadManager;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +28,7 @@ import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,15 +70,11 @@ public class statusApproveIzinSakit extends AppCompatActivity {
     private ImageView img_status;
     //dialog
     private Dialog dialogFoto;
-    private ImageView img_izin_sakit;
-    private TextView txtClose;
-
+    private PhotoView img_izin_sakit;
     private String nama="";
     private String lampiran_file;
-
-
-
-
+    private FloatingActionButton fabDownloadIzin;
+    private DownloadManager downloadManager;
 
 
 
@@ -100,6 +105,8 @@ public class statusApproveIzinSakit extends AppCompatActivity {
 
 
 
+
+
         img_back=findViewById(R.id.img_back);
         msession=new SessionManager(this);
         token=msession.getToken();
@@ -116,6 +123,7 @@ public class statusApproveIzinSakit extends AppCompatActivity {
         text_hrd.setText("Human Resource Development");
         nama=msession.getNamaLEngkap();
         tx_nama.setText(nama);
+        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         getRiwayatStatusApprove(idDetailIzin);
 
 
@@ -132,7 +140,6 @@ public class statusApproveIzinSakit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //URL_foto_izinsakit
-
                 dialogFotoIzinSakit();
             }
         });
@@ -284,22 +291,69 @@ public class statusApproveIzinSakit extends AppCompatActivity {
         dialogFoto = new Dialog(statusApproveIzinSakit.this);
         dialogFoto.setContentView(R.layout.dialog_foto_izin_sakit);
         dialogFoto.setCancelable(true);
-
-        dialogFoto.setCanceledOnTouchOutside(false);
-        img_izin_sakit = (ImageView) dialogFoto.findViewById(R.id.img_izin_sakit);
-        txtClose = (TextView) dialogFoto.findViewById(R.id.txtClose);
+        dialogFoto.setCanceledOnTouchOutside(true);
+        img_izin_sakit = dialogFoto.findViewById(R.id.img_izin_sakit);
+        fabDownloadIzin=dialogFoto.findViewById(R.id.fabDownloadIzin);
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true);
         Glide.with(statusApproveIzinSakit.this).load(api.URL_foto_izinsakit+""+lampiran_file).thumbnail(Glide.with(statusApproveIzinSakit.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
-
-        txtClose.setOnClickListener(new View.OnClickListener() {
+        fabDownloadIzin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogFoto.dismiss();
+                downloadIzin(lampiran_file);
             }
         });
         dialogFoto.show();
+    }
+
+
+    private void downloadIzin(String fileName) {
+        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(api.URL_foto_izinsakit+fileName);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName+".png");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        Long reference = downloadManager.enqueue(request);
+        showProgressDownload(reference);
+    }
+
+    private void showProgressDownload(Long reference) {
+        final ProgressDialog progressBarDialog = new ProgressDialog(this);
+        progressBarDialog.setTitle("Mengunduh Memo");
+        progressBarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressBarDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, whichButton) -> {
+        });
+        progressBarDialog.setProgress(0);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean downloading = true;
+                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                while (downloading) {
+                    DownloadManager.Query q = new DownloadManager.Query();
+                    q.setFilterById(reference);
+                    Cursor cursor = manager.query(q);
+                    cursor.moveToFirst();
+                    int bytes_downloaded = cursor.getInt(cursor
+                            .getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
+                    int bytes_total = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
+                    if (cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) {
+                        downloading = false;
+                    }
+                    final int dl_progress = (int) ((bytes_downloaded * 100l) / bytes_total);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBarDialog.setProgress((int) dl_progress);
+                        }
+                    });
+                    cursor.close();
+                }
+
+            }
+        }).start();
+        progressBarDialog.show();
     }
 
 

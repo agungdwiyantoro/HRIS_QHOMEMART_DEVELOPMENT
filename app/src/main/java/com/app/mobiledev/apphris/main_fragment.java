@@ -170,7 +170,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
 //        Intent background = new Intent(this, services_notif.class);
 //        stopService(background);
 //        startService(background);
-        getInfoTraining(bottomNavigationView);
+
 
         try {
             socket = IO.socket(ip.ip_notif);
@@ -531,10 +531,6 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
             }catch (NullPointerException e){
                 Log.d("NULL_POINTER", "getInfoTraining: "+e);
             }
-
-
-
-
     }
 
     private Emitter.Listener  notif = new Emitter.Listener() {

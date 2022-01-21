@@ -53,14 +53,10 @@ public class MyFCMService extends FirebaseMessagingService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void showNotificationMessage(String title, String body, String click_action) {
-
         Intent intent = new Intent(click_action);
-
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
         int notificationId = 1;
         String channelId = "channel-01";
         String channelName = "Channel Name";

@@ -1,68 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/ll"
-    android:layout_margin="0dp"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white">
 
 
-    <ProgressBar
-        android:layout_marginTop="50dp"
-        android:id="@+id/progressWheel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
 
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/img_izin_sakit"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:gravity="center"
-        android:scaleType="fitCenter" />
+        android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabDownloadIzin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/a"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtClose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16sp"
-            android:layout_weight="2"
-            android:fontFamily="@font/montserrat_black"
-            android:gravity="center"
-            android:text="Close"
-            android:textColor="@color/red_btn_bg_color"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        android:layout_alignEnd="@+id/img_izin_sakit"
+        android:layout_alignBottom="@+id/img_izin_sakit"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/btnPrimary"
+        android:contentDescription="downloadMemo"
+        android:src="@drawable/ic_baseline_cloud_download_24" />
 
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:visibility="gone"
-                android:id="@+id/btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="OK"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/colorWhite"
-                android:textSize="20sp" />
 
 
-        </LinearLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
 

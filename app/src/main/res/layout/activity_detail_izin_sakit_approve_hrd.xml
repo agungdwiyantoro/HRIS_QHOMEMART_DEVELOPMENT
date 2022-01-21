@@ -57,90 +57,65 @@
 
 
 
+            <LinearLayout
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
                 <LinearLayout
-                    android:id="@+id/line1"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorWhite"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:foregroundGravity="left"
+                        android:id="@+id/imStatus"
+                        android:layout_marginStart="-30dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/ic_dot_point_red" />
 
                     <LinearLayout
-
-                        android:layout_width="match_parent"
+                        android:padding="@dimen/padd_10"
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:foregroundGravity="left"
-                            android:id="@+id/imStatus"
-                            android:layout_marginStart="-30dp"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@drawable/ic_dot_point_red" />
 
-                        <LinearLayout
-                            android:padding="@dimen/padd_10"
-                            android:layout_weight="3"
-                            android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/txNama_title"
+                            android:textStyle="bold"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="left"
+                            android:textColor="@color/main_color_black"
+                            android:text="Muhamad Dios Pratama"
+                            android:textSize="18sp" />
 
 
-                            <TextView
-                                android:id="@+id/txNama_title"
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:gravity="left"
-                                android:textColor="@color/main_color_black"
-                                android:text="Muhamad Dios Pratama"
-                                android:textSize="18sp" />
+                        <TextView
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/tx_tgl"
+                            android:layout_width="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:layout_height="match_parent"
+                            android:gravity="start|center"
+                            android:textColor="@color/main_color_black"
+                            android:text="izin dokter"
+                            android:textSize="12sp"
+                            />
 
 
-                            <TextView
-                                android:layout_marginTop="5dp"
-                                android:id="@+id/tx_jenisIzin_title"
-                                android:layout_width="wrap_content"
-                                android:fontFamily="@font/roboto_light"
-                                android:layout_height="match_parent"
-                                android:gravity="start|center"
-                                android:textColor="@color/main_color_black"
-                                android:text="izin dokter"
-                                android:textSize="12sp"
-                                />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tx_tanggal_title"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="20"
-                                android:textAlignment="center"
-                                android:textColor="@color/main_color_black"
-                                android:textSize="36dp" />
-
-                            <TextView
-                                android:id="@+id/tx_bulan_tahun_title"
-                                android:textColor="@color/main_color_black"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textSize="9dp"
-                                android:fontFamily="@font/roboto_light"
-                                android:textAlignment="center"
-                                android:text="Dec 2021"/>
-                        </LinearLayout>
                     </LinearLayout>
+
+
                 </LinearLayout>
+            </LinearLayout>
 
 
             <LinearLayout
@@ -265,6 +240,8 @@
 
             </LinearLayout>
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -275,7 +252,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:text="Lama Waktu Sakit"
+                    android:text="Tanggal dan Waktu Pengajuan"
                     android:textColor="@color/second_color_black"
                     android:textSize="12dp" />
 
@@ -284,7 +261,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text=""
+                    android:text="20 Desember 2021, 13.30 - 16.30"
                     android:textColor="@color/main_color_black"
                     android:textSize="18dp" />
 
@@ -363,6 +340,7 @@
 
 
                             <TextView
+                                android:id="@+id/tx_ket_approve"
                                 android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:fontFamily="@font/roboto_light"

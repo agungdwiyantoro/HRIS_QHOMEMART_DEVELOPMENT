@@ -268,23 +268,17 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
 
                         String[] arr_lokasi_piyungan = lokasipiyungan.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-                            piyungan_lat=Double.parseDouble(arr_lokasi_piyungan[0]);
-                            piyungan_long=Double.parseDouble(arr_lokasi_piyungan[1]);
+                        piyungan_lat=Double.parseDouble(arr_lokasi_piyungan[0]);
+                        piyungan_long=Double.parseDouble(arr_lokasi_piyungan[1]);
 
                         String[] arr_lokasi_berbah = lokasiberbah.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                         berbah_lat=Double.parseDouble(arr_lokasi_berbah[0]);
                         berbah_long=Double.parseDouble(arr_lokasi_berbah[1]);
 
-
-
-
                         LatLng lokasi_janti = new LatLng( janti_lat,janti_long);
                         LatLng lokasi_janti_lestari = new LatLng( janti_lestari_lat,janti_lestari_long);
                         LatLng lokasi_piyungan = new LatLng( piyungan_lat,piyungan_long);
                         LatLng lokasi_berbah = new LatLng( berbah_lat,berbah_long);
-
-
-
 
                         getLokasi(location.getLatitude(), location.getLongitude());
                         int strokeColor = 0xffff0000; //red outline
@@ -301,20 +295,14 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
 
                         CircleOptions circleOptions_berbah = new CircleOptions().center(lokasi_berbah).radius(jarak).fillColor(shadeColor).strokeColor(strokeColor).strokeWidth(8);
                         MarkerOptions markerOptions_berbah = new MarkerOptions().position(lokasi_berbah);
-
-
-
                           mMap.moveCamera(CameraUpdateFactory.newLatLng(mylokasi));
                           mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
                           mMap.addCircle(circleOptions_janti);
                           mMap.addMarker(markerOptions_janti);
-
                           mMap.addCircle(circleOptions_janti_lestari);
                           mMap.addMarker(markerOptions_janti_lestari);
-
                           mMap.addCircle(circleOptions_piyungan);
                           mMap.addMarker(markerOptions_piyungan);
-
                         mMap.addCircle(circleOptions_berbah);
                         mMap.addMarker(markerOptions_berbah);
                         jarak_janti=distanceBetween(mylokasi,lokasi_janti);
@@ -489,7 +477,6 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
                     public void onResponse(JSONObject response) {
                         try {
                             Boolean success = response.getBoolean("status");
-
                             String data = response.getString("ket");
                             if (success) {
                                 String tgl_masuk= response.getString("tgl_masuk");
@@ -527,6 +514,7 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
                     public void onError(ANError anError) {
                         helper.showMsg(absensi_masuk.this, "Peringatan", "" + helper.PESAN_KONEKSI, helper.ERROR_TYPE);
                         Log.d("EROOR_EXCEPTION", "onError: "+anError);
+                        Log.d("EROOR_EXCEPTION", "onError: status:"+status+" outlokasi"+outlokasi+" kyano"+kyano+" lat"+lat+" long"+lon+" alamat"+alamat+" imei"+helper.getDeviceIMEI(absensi_masuk.this));
                         mProgressDialog.dismiss();
 
                     }

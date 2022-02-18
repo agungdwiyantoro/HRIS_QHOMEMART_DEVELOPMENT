@@ -127,8 +127,6 @@ public class absensi_keluar extends AppCompatActivity implements OnMapReadyCallb
                 .setMode(FaceDetector.FAST_MODE)
                 .build();
 
-
-
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

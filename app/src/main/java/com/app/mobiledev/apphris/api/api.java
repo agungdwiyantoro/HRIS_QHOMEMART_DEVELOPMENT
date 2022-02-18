@@ -11,7 +11,7 @@ public class api {
     public static final String URL_foto_form_kunjungan = ip.getIp_image()+"image_mktProyek/";
     public static final String URL_foto_form_bonus_proyek =ip.getIp_image()+"image_bonus_proyek/";
     public static  final String URL_foto_izin=ip.getIp_image()+"foto_izin";
-    public static final String URL_foto_profil = ip.getIp_foto_profil()+"upload/karyawan/";
+    public static final String URL_foto_profil = ip.getURL()+"upload/karyawan/";
     public static final String URL_login = ip.getIp() + "loginApps/";
     public static final String URL_absen = ip.getIp() + "uploadFoto3/"; // absensi_masuk, absensi_pulang, istirahat, lembur
     public static final String URL_generatePdf = ip.getIp() + "generatePdf/";
@@ -101,11 +101,11 @@ public class api {
     public static  final String URL_updateTokenFCM=ip.getIp()+"updateTokenFCM";
 
     //data ip aws
-    public  static  final String URL_uploadIzinSakit="http://192.168.50.24/all/hris_ci_3/api/uploadimage";
-    public  static  final String URL_IzinSakit="http://192.168.50.24/all/hris_ci_3/api/izinsakit";
-    public  static  final String URL_IzinSakit_approve_head="http://192.168.50.24/all/hris_ci_3/api/approvehead";
-    public  static  final String URL_IzinSakit_approve_hrd="http://192.168.50.24/all/hris_ci_3/api/approvehrd";
-    public  static  final String URL_foto_izinsakit="http://192.168.50.24/all/hris_ci_3/upload/tmp_surat/";
+    public  static  final String URL_uploadIzinSakit=ip.getIp()+"uploadimage";
+    public  static  final String URL_IzinSakit=ip.getIp()+"izinsakit";
+    public  static  final String URL_IzinSakit_approve_head=ip.getIp()+"approvehead";
+    public  static  final String URL_IzinSakit_approve_hrd=ip.getIp()+"approvehrd";
+    public  static  final String URL_foto_izinsakit=ip.getURL()+"upload/tmp_surat/";
 
 
 
@@ -113,7 +113,7 @@ public class api {
     public static final String URL_API_QHOME_ID="http://api.qhome.id/hris/UnderMaintanceMobile";
 
     //Server hris ci3 token
-    public static final String URL_API_TOKEN_HRIS="http://192.168.50.24/all/hris_ci_3/api/auth";
+    public static final String URL_API_TOKEN_HRIS=ip.getIp()+"auth";
 
 
 

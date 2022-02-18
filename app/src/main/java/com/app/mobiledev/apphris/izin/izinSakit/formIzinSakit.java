@@ -213,7 +213,7 @@ public class formIzinSakit extends AppCompatActivity {
 
 
                         }else{
-                            Toast.makeText(formIzinSakit.this,"upluoad: "+bytesUploaded+" total"+totalBytes,toast.LENGTH_SHORT).show();
+                            Toast.makeText(formIzinSakit.this,"upload: "+bytesUploaded+" total"+totalBytes,toast.LENGTH_SHORT).show();
                         }
 
                     }

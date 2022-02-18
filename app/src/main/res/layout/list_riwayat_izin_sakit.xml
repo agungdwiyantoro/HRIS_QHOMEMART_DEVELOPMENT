@@ -34,14 +34,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:foregroundGravity="left"
                     android:id="@+id/imStatus"
-                    android:layout_marginStart="-10dp"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/ic_dot_point_red" />
+                    android:layout_marginStart="-10dp"
+                    android:background="@drawable/ic_dot_point_red"
+                    android:foregroundGravity="left" />
 
-            <LinearLayout
+                <LinearLayout
                 android:padding="@dimen/padd_10"
                 android:layout_weight="3"
                 android:layout_width="0dp"

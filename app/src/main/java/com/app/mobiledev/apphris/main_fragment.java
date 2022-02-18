@@ -115,7 +115,6 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
             }
         });
         mAppUpdateManager.registerListener(installStateUpdatedListener);
-
         sessionmanager = new SessionManager(main_fragment.this);
         //call FCM configuration
         tokenFcm=helper.ConfigFCM();

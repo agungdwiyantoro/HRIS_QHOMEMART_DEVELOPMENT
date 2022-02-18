@@ -90,6 +90,9 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_riwayat_izin_sakit_unapprove_head.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_slip_gaji.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_timeline_izin_status.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_calendar_test.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_form_izin_sakit.xml" value="0.20277777777777778" />
+        <entry key="app/src/main/res/layout/activity_security_verifikasi.xml" value="0.1" />
       </map>
     </option>
   </component>

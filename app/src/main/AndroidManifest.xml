@@ -43,21 +43,36 @@
             android:name=".approve.adminIzinSakitHRD.ListIzinSakitApproveHRD"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity
-            android:name=".test.viewPagination"
-            android:exported="false" />
-        <activity
-            android:name=".approve.adminIzinSakitHead.detailIzinSakitApproveHead"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".splashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:name=".test.CalendarTest"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".test.viewPagination"
+            android:exported="false" />
+        <activity
+            android:name=".approve.adminIzinSakitHead.detailIzinSakitApproveHead"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".splashScreen"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".izin.dashboardIzin"

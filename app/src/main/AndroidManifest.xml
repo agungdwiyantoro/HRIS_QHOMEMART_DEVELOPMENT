@@ -36,43 +36,37 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:name=".approve.adminIzinSakitHRD.detailIzinSakitApproveHRD"
+            android:name=".test.TestReduceImage"
             android:exported="false" />
+        <activity
+            android:name=".approve.adminIzinSakitHRD.detailIzinSakitApproveHRD"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".approve.adminIzinSakitHRD.ListIzinSakitApproveHRD"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".test.CalendarTest"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".test.viewPagination"
             android:exported="false" />
         <activity
             android:name=".approve.adminIzinSakitHead.detailIzinSakitApproveHead"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".splashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".izin.dashboardIzin"
@@ -89,11 +83,14 @@
             android:name=".slipGaji.riwayatSlipGaji"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar">
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.TARGET_NOTIFICATION" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            -->
         </activity>
         <activity android:name=".test.DownloadFile">
 
@@ -434,7 +431,14 @@
             android:name=".izin.izinSakit.formIzinSakit"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".izin.izinSakit.listIzinSakit"
             android:screenOrientation="portrait"

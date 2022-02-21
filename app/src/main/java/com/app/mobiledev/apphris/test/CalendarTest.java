@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,26 +22,33 @@ import java.util.Locale;
 
 public class CalendarTest extends AppCompatActivity {
 
-    TextView tvDateSelected;
-    Button btnDate;
+    TextView tvDateSelected, tvGetDate;
+    Button btnDate, btnOpen;
 
     ArrayList<String> list = new ArrayList<String>();
+    LinearLayout llViewCalendar, llViewGetDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_test);
 
-        tvDateSelected = findViewById(R.id.tvDateSelected);
-        btnDate = findViewById(R.id.btnGetDates);
+        llViewCalendar = findViewById(R.id.llViewCalendar);
+        llViewGetDates = findViewById(R.id.llViewGetDates);
 
-        Calendar nextYear = Calendar.getInstance();
-        nextYear.add(Calendar.YEAR, 1);
+        tvDateSelected = findViewById(R.id.tvDateSelected);
+        tvGetDate = findViewById(R.id.tvGetDate);
+
+        btnDate = findViewById(R.id.btnGetDates);
+        btnOpen = findViewById(R.id.btnOpen);
+
+        Calendar prevMonth = Calendar.getInstance();
+
+        prevMonth.add(Calendar.MONTH, -1);
 
         CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
         Date today = new Date();
-        calendar.init(today, nextYear.getTime())
-                .withSelectedDate(today)
+        calendar.init(prevMonth.getTime(), today)
                 .inMode(CalendarPickerView.SelectionMode.MULTIPLE);
 
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
@@ -55,7 +63,7 @@ public class CalendarTest extends AppCompatActivity {
                 Toast.makeText(CalendarTest.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
 
                 Log.d("TAG_DATE_SELECTED", "onDateSelected: "+clearFormatDate);
-                tvDateSelected.setText(clearFormatDate);
+                //tvDateSelected.setText(clearFormatDate);
 
                 list.add(clearFormatDate);
 
@@ -71,14 +79,26 @@ public class CalendarTest extends AppCompatActivity {
                 Toast.makeText(CalendarTest.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
 
                 Log.d("TAG_DATE_SELECTED", "onDateSelected: "+clearFormatDate);
-                tvDateSelected.setText(clearFormatDate);
+                //tvDateSelected.setText(clearFormatDate);
 
                 list.remove(clearFormatDate);
             }
         });
 
+        btnOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar.setVisibility(View.VISIBLE);
+                llViewCalendar.setVisibility(View.VISIBLE);
+                llViewGetDates.setVisibility(View.VISIBLE);
+            }
+        });
+
         btnDate.setOnClickListener(v -> {
             tvDateSelected.setText(list.toString().replace("[","" ).replace("]",""));
+            tvGetDate.setText(list.toString().replace("[","" ).replace("]",""));
+            calendar.setVisibility(View.GONE);
+            llViewGetDates.setVisibility(View.GONE);
             Log.d("TAG_DATE_ARRAY", "onCreate: "+list.toString().replace("[","" ).replace("]",""));
         });
 

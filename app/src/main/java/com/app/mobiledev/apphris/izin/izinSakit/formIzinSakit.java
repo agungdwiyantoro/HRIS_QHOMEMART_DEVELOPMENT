@@ -6,23 +6,18 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Camera;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,13 +38,7 @@ import com.squareup.timessquare.CalendarPickerView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -73,7 +62,7 @@ public class formIzinSakit extends AppCompatActivity {
     private File chosedfile;
     private Bitmap image_bmap;
     private Button btn_ajukan, btnDate, btnCancelDate;
-    private String kyano, token, nameImage = "", indikasiSakit = "", mulaiSakit = "", selasaiSakit = "", catatan = "";
+    private String kyano, token, nameImage = "", indikasiSakit = "", mulaiSakit = "", selasaiSakit = "", catatan = "", skd = "0";
     private Toast toast;
 
     ArrayList<String> list = new ArrayList<String>();
@@ -182,6 +171,7 @@ public class formIzinSakit extends AppCompatActivity {
         cbSkdView = findViewById(R.id.cbSkd);
         cbSkdView.setOnClickListener(v -> {
             if (cbSkdView.isChecked()) {
+                skd = "1";
                 llUploadSkd.setVisibility(View.VISIBLE);
             } else {
                 llUploadSkd.setVisibility(View.GONE);
@@ -204,12 +194,6 @@ public class formIzinSakit extends AppCompatActivity {
                 llViewGetDates.setVisibility(View.VISIBLE);
             }
         });
-        /*edit_tgl_selesai_sakit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialogTglSelesaiSakit();
-            }
-        });*/
 
 
         image_surat_izin_sakit.setOnClickListener(new View.OnClickListener() {
@@ -230,40 +214,6 @@ public class formIzinSakit extends AppCompatActivity {
         });
 
     }
-
-    /*private void showDateDialogTglSakit(){
-        Calendar newCalendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(formIzinSakit.this, new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                edit_tgl_sakit.setText(""+dateFormatter.format(newDate.getTime()));
-
-
-            }
-
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }
-
-    private void showDateDialogTglSelesaiSakit(){
-        Calendar newCalendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(formIzinSakit.this, new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                edit_tgl_selesai_sakit.setText(""+dateFormatter.format(newDate.getTime()));
-
-
-            }
-
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -311,8 +261,8 @@ public class formIzinSakit extends AppCompatActivity {
 
     public void uploadIzinSakit(File file, String token) {
         AndroidNetworking.upload(api.URL_uploadIzinSakit)
-                //.addHeaders("Authorization", "Bearer " + token)
-                .addHeaders("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjA2NTIyMDA1MTMwNTEyOTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImlhdCI6MTY0NTQ5NzEwMywiZXhwIjoxNjQ1NTE1MTAzfQ.WXlzgJadd0c1yZtgWp-CD5rgtmcsgO1ecgYOTUVI07Y")
+                .addHeaders("Authorization", "Bearer " + token)
+                //.addHeaders("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjA2NTIyMDA1MTMwNTEyOTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImlhdCI6MTY0NTQ5NzEwMywiZXhwIjoxNjQ1NTE1MTAzfQ.WXlzgJadd0c1yZtgWp-CD5rgtmcsgO1ecgYOTUVI07Y")
                 .addMultipartFile("lampiran_file", file)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -322,12 +272,6 @@ public class formIzinSakit extends AppCompatActivity {
                         // do anything with progress
                         tx_image_name.setVisibility(View.VISIBLE);
                         nameImage = tx_image_name.getText().toString();
-                        /*if (nameImage.equals("") || nameImage.isEmpty()) {
-                            Toast.makeText(formIzinSakit.this, "Foto masih kosong", toast.LENGTH_SHORT).show();
-
-                        } else {
-                            Toast.makeText(formIzinSakit.this, "upload: " + bytesUploaded + " total" + totalBytes, toast.LENGTH_SHORT).show();
-                        }*/
 
                     }
                 })
@@ -380,14 +324,16 @@ public class formIzinSakit extends AppCompatActivity {
         return null;
     }
 
-    private void insertIzinSakit(String indikasiSakit, String mulaiSakit, String selesaiSakit, String catatan, String namaFile) {
+    private void insertIzinSakit(String indikasiSakit, String catatan, String namaFile, String selectDate, String option) {
         AndroidNetworking.post(api.URL_IzinSakit)
                 .addHeaders("Authorization", "Bearer " + token)
                 .addBodyParameter("indikasi_sakit", indikasiSakit)
-                .addBodyParameter("mulai_sakit", mulaiSakit)
-                .addBodyParameter("selesai_sakit", selesaiSakit)
+                /*.addBodyParameter("mulai_sakit", mulaiSakit)
+                .addBodyParameter("selesai_sakit", selesaiSakit)*/
                 .addBodyParameter("catatan", catatan)
                 .addBodyParameter("nama_file", namaFile)
+                .addBodyParameter("select_date", selectDate)
+                .addBodyParameter("option", option)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -443,9 +389,10 @@ public class formIzinSakit extends AppCompatActivity {
             //mProgressDialog.show();
             tx_input_indikasi.setErrorEnabled(false);
             tx_input_tgl_sakit.setErrorEnabled(false);
-            tx_input_tgl_selesai_sakit.setErrorEnabled(false);
+            //tx_input_tgl_selesai_sakit.setErrorEnabled(false);
             lin_transparant.setVisibility(View.VISIBLE);
-            insertIzinSakit(indikasiSakit, mulaiSakit, selasaiSakit, catatan, nameImage);
+            Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+indikasiSakit+" | "+ catatan +" | "+ nameImage +" | "+ edit_tgl_sakit.getText().toString() +" | "+ skd);
+            insertIzinSakit(indikasiSakit, catatan, nameImage, edit_tgl_sakit.getText().toString().trim() , skd);
             //auth_user(id_user, password);
         }
     }
@@ -464,27 +411,5 @@ public class formIzinSakit extends AppCompatActivity {
             }
         });
         dialogResign.show();
-    }
-
-    public void onPictureTaken(byte[] data, Camera camera) {
-        InputStream in = new ByteArrayInputStream(data);
-
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        Bitmap preview_bitmap = BitmapFactory.decodeStream(in, null, options);
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        preview_bitmap.compress(Bitmap.CompressFormat.JPEG, 60, stream);
-        byte[] byteArray = stream.toByteArray();
-
-        FileOutputStream outStream = null;
-        try {
-            outStream = new FileOutputStream(new File(
-                    Environment.getExternalStorageDirectory(), "Image1.jpg"));
-            outStream.write(byteArray);
-            outStream.close();
-        } catch (FileNotFoundException e) {
-            Log.d("CAMERA", e.getMessage());
-        } catch (IOException e) {
-            Log.d("CAMERA", e.getMessage());
-        }
     }
 }

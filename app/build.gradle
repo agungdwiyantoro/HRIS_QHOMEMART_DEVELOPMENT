@@ -64,6 +64,8 @@ dependencies {
 
     implementation 'com.squareup:android-times-square:1.6.5@aar'
 
+    implementation 'id.zelory:compressor:2.1.1'
+
     implementation('com.github.nkzawa:socket.io-client:0.6.0') {
         exclude group: 'org.json', module: 'json'
     }

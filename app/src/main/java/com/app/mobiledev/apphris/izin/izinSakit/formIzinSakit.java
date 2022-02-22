@@ -55,6 +55,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import id.zelory.compressor.Compressor;
+
 public class formIzinSakit extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
@@ -279,25 +281,26 @@ public class formIzinSakit extends AppCompatActivity {
 
                 Log.d("TAG_IMG_SIZE", "onActivityResult: "+fileSizeInBytes +" | "+fileSizeInKB+" | "+fileSizeInMB);
 
-                /*Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                image_surat_izin_sakit.setImageBitmap(bitmap);
-                image_bmap = bitmap;
-                //image_bmap = Bitmap.createScaledBitmap(image_bmap, 500, 500, false);
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                image_bmap.compress(Bitmap.CompressFormat.PNG, 50, bytes);*/
-
                 if (chosedfile != null) {
                     if (fileSizeInMB < 1) {
                         Toast.makeText(formIzinSakit.this, "Ukuran foto adalah "+fileSizeInKB+" Kb", toast.LENGTH_SHORT).show();
                         uploadIzinSakit(chosedfile, token);
+
+                        Log.d("TAG1", "onActivityResult: "+chosedfile.toString());
                     } else {
-                        Toast.makeText(formIzinSakit.this, "Batas ukuran foto adalah 1 Mb", toast.LENGTH_SHORT).show();
+
+                        File compressedImageFile = new Compressor(this).compressToFile(chosedfile);
+
+                        long fileSizeInBytesNew = compressedImageFile.length();
+                        long fileSizeInKBNew = fileSizeInBytesNew / 1024;
+
+                        Log.d("TAG2", "onActivityResult: Real: "+fileSizeInBytesNew+" | New: "+fileSizeInKBNew);
+
+                        uploadIzinSakit(compressedImageFile, token);
+
+                        Toast.makeText(formIzinSakit.this, "Sekarang ukuran foto adalah "+fileSizeInKBNew+" Kb", toast.LENGTH_SHORT).show();
                     }
-
                 }
-
-
-                //  encodedimage= Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);
             }
         } catch (Exception e) {
             Log.d("TAKE_GALERI", "onActivityResult: " + e);

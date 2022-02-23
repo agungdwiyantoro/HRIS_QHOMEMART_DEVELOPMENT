@@ -21,7 +21,7 @@ public class SecurityVerifikasi extends AppCompatActivity {
         llSecVer = findViewById(R.id.llSecVer);
 
         llSecVer.setOnClickListener(v -> {
-            Intent intent= new Intent(SecurityVerifikasi.this, RiwayatVisit.class);
+            Intent intent= new Intent(SecurityVerifikasi.this, JenisVerifikasi.class);
             startActivity(intent);
         });
 

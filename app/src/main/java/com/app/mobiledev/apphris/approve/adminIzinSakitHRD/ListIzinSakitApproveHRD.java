@@ -162,6 +162,7 @@ public class ListIzinSakitApproveHRD extends AppCompatActivity implements SwipeR
             }
         },1500);
     }
+
     private void getRiwayatSakitAll(int page, int offset, ArrayList items) {
        if(all==true){
            AndroidNetworking.get(api.URL_IzinSakit_approve_hrd+"?limit="+page+"&offset="+offset)

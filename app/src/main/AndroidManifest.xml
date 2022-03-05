@@ -36,17 +36,26 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
+            android:name=".izin.izinSakit.sakitNew.DetailSakitEmp"
+            android:exported="false" />
+        <activity
+            android:name=".izin.izinSakit.sakitNew.ListInfinitySakitEmp"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".test.SecurityVerifikasi.ScanQR"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".test.SecurityVerifikasi.JenisVerifikasi"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".test.TestReduceImage"
-            android:exported="false" />
         <activity
             android:name=".approve.adminIzinSakitHRD.detailIzinSakitApproveHRD"
             android:exported="false"
@@ -64,14 +73,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".test.SecurityVerifikasi.SecurityVerifikasi"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".test.viewPagination"
             android:exported="false" />
@@ -80,7 +82,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".splashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
             android:name=".izin.dashboardIzin"
             android:exported="false"

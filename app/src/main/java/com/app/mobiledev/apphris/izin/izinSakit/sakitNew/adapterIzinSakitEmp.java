@@ -37,16 +37,16 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
 
     @NonNull @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
+        /*switch (viewType) {
             case VIEW_TYPE_NORMAL:
-                return new ViewHolder(
-                        LayoutInflater.from(parent.getContext()).inflate(R.layout.list_riwayat_izin_sakit, parent, false));
+                return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_riwayat_izin_sakit, parent, false));
             case VIEW_TYPE_LOADING:
                 return new ProgressHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading_progress, parent, false));
 
             default:
                 return null;
-        }
+        }*/
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_riwayat_izin_sakit, parent, false));
     }
 
     @Override
@@ -69,6 +69,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
         return modelIzinSakitNews == null ? 0 : modelIzinSakitNews.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void addItems(List<modelIzinSakitNew> modelIzinSakitNews) {
         modelIzinSakitNews.addAll(modelIzinSakitNews);
         Log.d("add_items_all", "addItems: "+modelIzinSakitNews.size());
@@ -98,6 +99,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void clear() {
         modelIzinSakitNews.clear();
         notifyDataSetChanged();
@@ -108,32 +110,31 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public class ViewHolder extends BaseViewHolder {
-        TextView tvNama;
-        TextView tvAlasan;
-        LinearLayout line1;
-        TextView tx_tanggal;
-        TextView tx_bulan_tahun;
-        SimpleDateFormat dateFormatSources;
-        SimpleDateFormat dateFormat_day;
-        SimpleDateFormat dateFormat_month_year;
+        TextView tvAlasanEmp, tvKetEmp;
+        LinearLayout line1Emp;
+        TextView tx_tanggalEmp;
+        TextView tx_bulan_tahunEmp;
+        SimpleDateFormat dateFormatSourcesEmp;
+        SimpleDateFormat dateFormat_dayEmp;
+        SimpleDateFormat dateFormat_month_yearEmp;
         Date dateSource;
-        ImageView imStatus;
-        CardView card_list_riwayat_izin;
+        ImageView imStatusEmp;
+        CardView card_list_riwayat_izinEmp;
 
 
         @SuppressLint("SimpleDateFormat")
         ViewHolder(View itemView) {
             super(itemView);
-            tvAlasan = itemView.findViewById(R.id.tvAlasan);
-            line1 = itemView.findViewById(R.id.line1);
-            tx_tanggal = itemView.findViewById(R.id.tx_tanggal);
-            tx_bulan_tahun = itemView.findViewById(R.id.tx_bulan_tahun);
-            card_list_riwayat_izin = itemView.findViewById(R.id.card_list_riwayat_izin);
-            imStatus = itemView.findViewById(R.id.imStatus);
-            tvNama=itemView.findViewById(R.id.tvKet);
-            dateFormatSources = new SimpleDateFormat("yyyy-MM-dd");
-            dateFormat_day = new SimpleDateFormat("dd");
-            dateFormat_month_year = new SimpleDateFormat("MMM-yyyy");
+            tvAlasanEmp = itemView.findViewById(R.id.tvAlasanEmp);
+            tvKetEmp = itemView.findViewById(R.id.tvKetEmp);
+            line1Emp = itemView.findViewById(R.id.line1Emp);
+            tx_tanggalEmp = itemView.findViewById(R.id.tx_tanggalEmp);
+            tx_bulan_tahunEmp = itemView.findViewById(R.id.tx_bulan_tahunEmp);
+            card_list_riwayat_izinEmp = itemView.findViewById(R.id.card_list_riwayat_izinEmp);
+            imStatusEmp = itemView.findViewById(R.id.imStatusEmp);
+            dateFormatSourcesEmp = new SimpleDateFormat("yyyy-MM-dd");
+            dateFormat_dayEmp = new SimpleDateFormat("dd");
+            dateFormat_month_yearEmp = new SimpleDateFormat("MMM-yyyy");
         }
 
         protected void clear() {
@@ -145,13 +146,13 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
             super.onBind(position);
             modelIzinSakitNew Object = modelIzinSakitNews.get(position);
 
+            tvAlasanEmp.setText("" + Object.getCatatan());
+            tvKetEmp.setText(""+Object.getIndikasiSakit());
+            tx_tanggalEmp.setText(""+Object.getSelectDate());
+            tx_bulan_tahunEmp.setText(""+Object.getMulaiSakitTanggal());
+            Log.d("CEK_ADAPTER", "onBind: "+Object.getIndikasiSakit());
 
-            tvAlasan.setText("" + Object.getCatatan());
-            tvNama.setText(""+Object.getName());
-            Log.d("CEK_ADAPTER", "onBind: "+Object.getName());
-
-
-            line1.setOnClickListener(new View.OnClickListener() {
+            line1Emp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(mCtx, DetailSakitEmp.class);

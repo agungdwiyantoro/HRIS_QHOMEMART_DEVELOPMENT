@@ -24,9 +24,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.approve.adminIzinSakitHead.ListIzinSakitApproveHead;
-import com.app.mobiledev.apphris.approve.adminIzinSakitHead.adapterIzinSakitApprove.adapterIzinSakitApproveHeadAll;
-import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.test.PostRecyclerAdapter;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -78,7 +75,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         dropdown.setAdapter(adapter);
 
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
-        recyler_izin_sakit = findViewById(R.id.recyler_izin_sakit);
+        recyler_izin_sakit = findViewById(R.id.recyler_izin_sakit_emp);
         rbFilter=findViewById(R.id.rbFilter);
         img_back = findViewById(R.id.img_back);
         lin_transparant=findViewById(R.id.lin_transparant);
@@ -115,7 +112,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                     offset=(itemCount-totalPage)+1;
                 }
                 recyler_izin_sakit.setHasFixedSize(true);
-                Log.d("cek_url_all", "run: "+ api.URL_IzinSakit_approve_head+"?limit="+itemCount+"&offset="+offset);
+                Log.d("cek_url_all", "run: "+ api.URL_IzinSakit+"?limit="+itemCount+"&offset="+offset);
                 getRiwayatSakitAll(itemCount,offset,items);
             }
         }, 1500);
@@ -138,8 +135,8 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
     private void getRiwayatSakitAll(int page,int offset,ArrayList items) {
         //AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset+"&status=")
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit=10&offset=0&status=")
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3IiwiamFiYXRhbiI6Im51bGwiLCJpYXQiOjE2NDY0NTg0MDEsImV4cCI6MTY0NjQ3NjQwMX0.d2m7xBoHyJ_BKO5yNCweGkhNhN4iMdSkIZzMr4waWWE"/*+token*/)
+        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit="+page+"&offset="+offset+"&status=")
+                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3IiwiamFiYXRhbiI6Im51bGwiLCJpYXQiOjE2NDY2MTg1OTQsImV4cCI6MTY0NjYzNjU5NH0.7J4VkFJAG2ms9NTGxrJDp6jINtuGRVr2nEFrCnIKbFk"/*+token*/)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -149,11 +146,12 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                             //mAdapter.clear();
                             String status = response.getString("status");
                             String message = response.getString("message");
-                            Log.d("HASL_RESPONSE_NEW", "onResponse: " + message);
+                            Log.d("TAG_TAG", "run: "+message);
                             if (status.equals("200")) {
                                 if(!message.equals("null")){
 
                                     JSONArray jsonArray = response.getJSONArray("message");
+                                    Log.d("TAG_TAG", "run: "+jsonArray);
 
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject data = jsonArray.getJSONObject(i);
@@ -193,7 +191,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
                                         items.add(model);
                                         //modelIzinSakits.add(model);
-
+                                        //modelIzinSakitNews.add(model);
 
                                     }
 
@@ -201,16 +199,6 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                     adapterIzinSakitEmp.addItems(items);
                                     swipeRefresh.setRefreshing(false);
                                     Log.d("CUURENT_PAGE", "onResponse: "+items.size());
-
-//                                        if((items.size()+1<totalPage)&&currentPage==1){
-//                                            adapterIzinSakitEmp.removeLoading();
-//                                        }else{
-//                                            if (currentPage < totalPage) {
-//                                                adapterIzinSakitEmp.addLoading();
-//                                            }else{
-//                                                isLastPage = true;
-//                                            }
-//                                        }
 
                                     if (currentPage < totalPage) {
                                         adapterIzinSakitEmp.addLoading();
@@ -224,15 +212,13 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                 }
 
                             } else {
-                                JSONObject object = response.getJSONObject("message");
-                                String pesan = object.getString("lampiran_file");
+
                                 mShimmerViewContainer.stopShimmerAnimation();
                                 mShimmerViewContainer.setVisibility(View.GONE);
 
                                 recyler_izin_sakit.setVisibility(View.VISIBLE);
                                 adapterIzinSakitEmp.removeLoading();
 
-                                Toast.makeText(ListInfinitySakitEmp.this,""+pesan,Toast.LENGTH_SHORT).show();
                             }
                             // Stopping Shimmer Effect's animation after data is loaded to ListView
                             mShimmerViewContainer.stopShimmerAnimation();

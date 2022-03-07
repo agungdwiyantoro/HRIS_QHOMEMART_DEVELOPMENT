@@ -1,5 +1,7 @@
 package com.app.mobiledev.apphris.izin.izinSakit.sakitNew;
 
+import android.util.Log;
+
 public class modelIzinSakitNew {
     String name;
     String id;
@@ -53,6 +55,7 @@ public class modelIzinSakitNew {
     }
 
     public String getIndikasiSakit() {
+        Log.d("model_getIndikasi", "getIndikasi: "+indikasiSakit);
         return indikasiSakit;
     }
 

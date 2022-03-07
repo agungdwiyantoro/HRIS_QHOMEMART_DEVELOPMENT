@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -24,8 +23,8 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.sesion.SessionManager;
-import com.app.mobiledev.apphris.test.PostRecyclerAdapter;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
@@ -47,7 +46,6 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
     private RadioGroup rbFilter;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
-    private PostRecyclerAdapter adapter;
     private TextView tx_approve;
 
     private int currentPage = PAGE_START;
@@ -87,12 +85,33 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         token = msession.getToken();
         layoutManager = new LinearLayoutManager(this);
         recyler_izin_sakit.setLayoutManager(layoutManager);
-        adapterIzinSakitEmp = new adapterIzinSakitEmp(new ArrayList<>(), ListInfinitySakitEmp.this);
+
         mShimmerViewContainer.startShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         recyler_izin_sakit.setVisibility(View.GONE);
+
+        adapterIzinSakitEmp = new adapterIzinSakitEmp(ListInfinitySakitEmp.this, new ArrayList<>());
         recyler_izin_sakit.setAdapter(adapterIzinSakitEmp);
         paginationCall();
+
+        recyler_izin_sakit.addOnScrollListener(new PaginationListener(layoutManager) {
+            @Override
+            protected void loadMoreItems() {
+                isLoading = true;
+                currentPage++;
+                paginationCall();
+            }
+
+            @Override
+            public boolean isLastPage() {
+
+                return isLastPage;
+            }
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
 
     }
 
@@ -136,7 +155,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
     private void getRiwayatSakitAll(int page,int offset,ArrayList items) {
         //AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset+"&status=")
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit="+page+"&offset="+offset+"&status=")
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3IiwiamFiYXRhbiI6Im51bGwiLCJpYXQiOjE2NDY2MTg1OTQsImV4cCI6MTY0NjYzNjU5NH0.7J4VkFJAG2ms9NTGxrJDp6jINtuGRVr2nEFrCnIKbFk"/*+token*/)
+                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3IiwiamFiYXRhbiI6Im51bGwiLCJpYXQiOjE2NDY2MzEzMTgsImV4cCI6MTY0NjY0OTMxOH0._dlsa7AHtlzLlBdxpLk69MHyFNq5LMzf3PKhDv2Eze4"/*+token*/)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -191,7 +210,9 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
                                         items.add(model);
                                         //modelIzinSakits.add(model);
-                                        //modelIzinSakitNews.add(model);
+                                        modelIzinSakitNews.add(model);
+
+                                        Log.d("TAG_INDIKASI", "onResponse: "+data.getString("indikasi_sakit"));
 
                                     }
 

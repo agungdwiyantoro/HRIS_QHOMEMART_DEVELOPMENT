@@ -26,7 +26,6 @@ import com.app.mobiledev.apphris.approve.adminIzinSakitHead.adapterIzinSakitAppr
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 import com.app.mobiledev.apphris.sesion.SessionManager;
-import com.app.mobiledev.apphris.test.PostRecyclerAdapter;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONArray;
@@ -47,7 +46,6 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
     private RadioGroup rbFilter;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
-    private PostRecyclerAdapter adapter;
     private TextView  tx_approve;
 
 

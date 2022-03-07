@@ -75,9 +75,6 @@
             android:name=".test.SecurityVerifikasi.SecurityVerifikasi"
             android:exported="true" />
         <activity
-            android:name=".test.viewPagination"
-            android:exported="false" />
-        <activity
             android:name=".approve.adminIzinSakitHead.detailIzinSakitApproveHead"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.helperPackage.BaseViewHolder;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if (isLoaderVisible) {
-            return position == modelIzinSakitNews.size() - 1 ? VIEW_TYPE_LOADING : VIEW_TYPE_NORMAL;
+            return position == modelIzinSakitNews.size() ? VIEW_TYPE_LOADING : VIEW_TYPE_NORMAL;
         } else {
             return VIEW_TYPE_NORMAL;
         }
@@ -79,16 +80,16 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void addLoading() {
+    /*public void addLoading() {
         isLoaderVisible = true;
         modelIzinSakitNews.add(new modelIzinSakitNew());
         notifyItemInserted(modelIzinSakitNews.size() - 1);
-    }
+    }*/
 
     public void removeLoading() {
         try{
             isLoaderVisible = false;
-            int position = modelIzinSakitNews.size() - 1;
+            int position = modelIzinSakitNews.size();
             Log.d("ADAPTER_POSITION_IZIN", "removeLoading: "+position);
             modelIzinSakitNew item = getItem(position);
             if (item != null) {
@@ -134,11 +135,11 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
             tx_tanggal = itemView.findViewById(R.id.tx_tanggalEmp);
             tx_bulan_tahun = itemView.findViewById(R.id.tx_bulan_tahunEmp);
             card_list_riwayat_izin = itemView.findViewById(R.id.card_list_riwayat_izinEmp);
-            imStatus = itemView.findViewById(R.id.imStatusEmp);
+            //imStatus = itemView.findViewById(R.id.imStatusEmp);
 
             dateFormatSources = new SimpleDateFormat("yyyy-MM-dd");
             dateFormat_day = new SimpleDateFormat("dd");
-            dateFormat_month_year = new SimpleDateFormat("MMM-yyyy");
+            dateFormat_month_year = new SimpleDateFormat("MMM yyyy");
         }
 
         protected void clear() {
@@ -153,6 +154,13 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
 
             tvAlasan.setText("" + Object.getCatatan());
             tvKetEmp.setText("" + Object.getIndikasiSakit());
+            try {
+                dateSource = dateFormatSources.parse(Object.getCreatedAt());
+                tx_tanggal.setText(dateFormat_day.format(dateSource));
+                tx_bulan_tahun.setText(dateFormat_month_year.format(dateSource));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             Log.d("CEK_ADAPTER", "onBind: "+Object.getName());
 

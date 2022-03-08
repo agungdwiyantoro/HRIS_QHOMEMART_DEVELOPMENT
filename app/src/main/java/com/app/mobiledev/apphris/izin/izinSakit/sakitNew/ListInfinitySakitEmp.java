@@ -40,7 +40,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
     RecyclerView recyler_izin_sakit;
     private List<modelIzinSakitNew> modelIzinSakitNews;
     private String token;
-    private String TAG="LISIzinSakitApprove";
+    private String TAG = "LISIzinSakitApprove";
     private ImageView img_back;
     private SessionManager msession;
     private RadioGroup rbFilter;
@@ -74,11 +74,11 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         recyler_izin_sakit = findViewById(R.id.recyler_izin_sakit_emp);
-        rbFilter=findViewById(R.id.rbFilter);
+        rbFilter = findViewById(R.id.rbFilter);
         img_back = findViewById(R.id.img_back);
-        lin_transparant=findViewById(R.id.lin_transparant);
-        swipeRefresh=findViewById(R.id.swipeRefresh);
-        tx_approve=findViewById(R.id.tx_approve);
+        lin_transparant = findViewById(R.id.lin_transparant);
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        tx_approve = findViewById(R.id.tx_approve);
         swipeRefresh.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) ListInfinitySakitEmp.this);
         msession = new SessionManager(ListInfinitySakitEmp.this);
         modelIzinSakitNews = new ArrayList<>();
@@ -107,6 +107,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
                 return isLastPage;
             }
+
             @Override
             public boolean isLoading() {
                 return isLoading;
@@ -126,13 +127,13 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                     itemCount++;
                 }
 
-                int offset=0;
-                if(itemCount>10){
-                    offset=(itemCount-totalPage)+1;
+                int offset = 0;
+                if (itemCount > 10) {
+                    offset = (itemCount - totalPage);
                 }
                 recyler_izin_sakit.setHasFixedSize(true);
-                Log.d("cek_url_all", "run: "+ api.URL_IzinSakit+"?limit="+itemCount+"&offset="+offset);
-                getRiwayatSakitAll(itemCount,offset,items);
+                Log.d("cek_url_all", "run: " + api.URL_IzinSakit + "?limit=" + itemCount + "&offset=" + offset);
+                getRiwayatSakitAll(itemCount, offset, items);
             }
         }, 1500);
     }
@@ -152,25 +153,24 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         paginationCall();
     }
 
-    private void getRiwayatSakitAll(int page,int offset,ArrayList items) {
+    private void getRiwayatSakitAll(int page, int offset, ArrayList items) {
         //AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset+"&status=")
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit="+page+"&offset="+offset+"&status=")
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3IiwiamFiYXRhbiI6Im51bGwiLCJpYXQiOjE2NDY2MzEzMTgsImV4cCI6MTY0NjY0OTMxOH0._dlsa7AHtlzLlBdxpLk69MHyFNq5LMzf3PKhDv2Eze4"/*+token*/)
+        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit=" + page + "&offset=" + offset + "&status=")
+                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3IiwiamFiYXRhbiI6Im51bGwiLCJpYXQiOjE2NDY3MjEwOTYsImV4cCI6MTY0NjczOTA5Nn0.6TR4nCkdd_R17muJ8w40qeH2u24XCpp2qxibvKpHgQQ"/*+token*/)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            //mAdapter.clear();
                             String status = response.getString("status");
                             String message = response.getString("message");
-                            Log.d("TAG_TAG", "run: "+message);
+                            Log.d("TAG_TAG", "run: " + message);
                             if (status.equals("200")) {
-                                if(!message.equals("null")){
+                                if (!message.equals("null")) {
 
                                     JSONArray jsonArray = response.getJSONArray("message");
-                                    Log.d("TAG_TAG", "run: "+jsonArray);
+                                    Log.d("TAG_TAG", "run: " + jsonArray);
 
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject data = jsonArray.getJSONObject(i);
@@ -210,25 +210,26 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
                                         items.add(model);
                                         //modelIzinSakits.add(model);
-                                        modelIzinSakitNews.add(model);
+                                        //modelIzinSakitNews.add(model);
 
-                                        Log.d("TAG_INDIKASI", "onResponse: "+data.getString("indikasi_sakit"));
+                                        Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
 
                                     }
 
-                                    if (currentPage != PAGE_START) adapterIzinSakitEmp.removeLoading();
+                                    if (currentPage != PAGE_START)
+                                        adapterIzinSakitEmp.removeLoading();
                                     adapterIzinSakitEmp.addItems(items);
                                     swipeRefresh.setRefreshing(false);
-                                    Log.d("CUURENT_PAGE", "onResponse: "+items.size());
+                                    Log.d("CUURENT_PAGE", "onResponse: " + items.size());
 
                                     if (currentPage < totalPage) {
-                                        adapterIzinSakitEmp.addLoading();
-                                    }else{
+                                        //adapterIzinSakitEmp.addLoading();
+                                    } else {
                                         isLastPage = true;
                                     }
                                     isLoading = false;
 
-                                }else{
+                                } else {
                                     adapterIzinSakitEmp.removeLoading();
                                 }
 
@@ -261,7 +262,6 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
                     }
                 });
-
 
 
     }

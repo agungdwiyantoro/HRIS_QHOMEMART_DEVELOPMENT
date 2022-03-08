@@ -1,128 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_list_riwayat_izinEmp"
     android:layout_width="match_parent"
-
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    android:outlineSpotShadowColor="#8003A9F4"
     >
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_list_riwayat_izinEmp"
+    <LinearLayout
+        android:id="@+id/line1Emp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="4dp">
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/line1Emp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
-            android:background="@color/colorWhite"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:padding="16dp"
+            >
+
+            <!--<ImageView
+                android:id="@+id/imStatusEmp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="-10dp"
+                android:background="@drawable/ic_dot_point_red"
+                android:foregroundGravity="left" />-->
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imStatusEmp"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="-10dp"
-                    android:background="@drawable/ic_dot_point_red"
-                    android:foregroundGravity="left" />
-
-                <LinearLayout
-                android:padding="@dimen/padd_10"
-                android:layout_weight="3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
 
                 <TextView
                     android:id="@+id/tvKetEmp"
-                    android:textStyle="bold"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:gravity="left"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="fill"
+                    app:autoSizeTextType="uniform"
+                    android:textSize="18sp"
+                    android:autoSizeMaxTextSize="24sp"
+                    android:includeFontPadding="true"
+                    android:text="Demam Berdarah Dengue"
                     android:textColor="@color/main_color_black"
-                    android:text="Demam Berdarah"
-                    android:textSize="18sp" />
+                    android:textStyle="bold"
+                    tools:ignore="NestedWeights" />
 
                 <TextView
-                    android:layout_marginTop="5dp"
                     android:id="@+id/tvAlasanEmp"
-                    android:layout_width="wrap_content"
-
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="start|center"
+                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
+                    android:text="terkadang pusing"
                     android:textColor="@color/main_color_black"
-                    android:text="izin dokter"
-                    android:textSize="14sp"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="18sp"
+                    android:autoSizeMaxTextSize="24sp"
                     />
 
 
             </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tx_tanggalEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:text="00"
+                    android:textAlignment="center"
+                    android:textColor="@color/main_color_black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeMaxTextSize="100sp"/>
 
-                    <TextView
-                        android:id="@+id/tx_tanggalEmp"
-                        android:textColor="@color/main_color_black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="36dp"
-
-                        android:textAlignment="center"
-                        android:text="20"/>
-
-                    <TextView
-                        android:id="@+id/tx_bulan_tahunEmp"
-                        android:textColor="@color/main_color_black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="9dp"
-
-                        android:textAlignment="center"
-                        android:text="Dec 2021"/>
-
-
-
-
-                </LinearLayout>
-
-
-
-
-
-
-
+                <TextView
+                    android:id="@+id/tx_bulan_tahunEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"
+                    android:text="Dec 2021"
+                    android:textAlignment="center"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeMaxTextSize="100sp"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="9dp" />
 
 
             </LinearLayout>
 
 
-
-
-
-
-
-
         </LinearLayout>
-    </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

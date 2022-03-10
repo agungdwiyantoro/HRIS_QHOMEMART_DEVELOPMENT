@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 
 
-
 public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_NORMAL = 1;
@@ -36,11 +35,12 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
     private List<modelIzinSakit> modelIzinSakits;
 
     public adapterIzinSakitApproveHeadAll(List<modelIzinSakit> modelIzinSakit, Context ctx) {
-        this.mCtx=ctx;
+        this.mCtx = ctx;
         this.modelIzinSakits = modelIzinSakit;
     }
 
-    @NonNull @Override
+    @NonNull
+    @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
@@ -57,7 +57,7 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         holder.onBind(position);
-        Log.d("cek_position", "onBind: "+position);
+        Log.d("cek_position", "onBind: " + position);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
 
     public void addItems(List<modelIzinSakit> modelIzinsakit) {
         modelIzinSakits.addAll(modelIzinsakit);
-        Log.d("add_items_all", "addItems: "+modelIzinSakits.size());
+        Log.d("add_items_all", "addItems: " + modelIzinSakits.size());
         notifyDataSetChanged();
     }
 
@@ -87,18 +87,18 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
     }
 
     public void removeLoading() {
-        try{
+        try {
             isLoaderVisible = false;
             int position = modelIzinSakits.size() - 1;
-            Log.d("ADAPTER_POSITION_IZIN", "removeLoading: "+position);
+            Log.d("ADAPTER_POSITION_IZIN", "removeLoading: " + position);
             modelIzinSakit item = getItem(position);
             if (item != null) {
                 modelIzinSakits.remove(position);
                 notifyItemRemoved(position);
             }
 
-        }catch (IndexOutOfBoundsException e){
-            Log.d("adapter", "removeLoading: "+e);
+        } catch (IndexOutOfBoundsException e) {
+            Log.d("adapter", "removeLoading: " + e);
         }
 
     }
@@ -134,7 +134,7 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
             tx_bulan_tahun = itemView.findViewById(R.id.tx_bulan_tahun);
             card_list_riwayat_izin = itemView.findViewById(R.id.card_list_riwayat_izin);
             imStatus = itemView.findViewById(R.id.imStatus);
-            tvNama=itemView.findViewById(R.id.tvNama);
+            tvNama = itemView.findViewById(R.id.tvNama);
             dateFormatSources = new SimpleDateFormat("yyyy-MM-dd");
             dateFormat_day = new SimpleDateFormat("dd");
             dateFormat_month_year = new SimpleDateFormat("MMM-yyyy");
@@ -150,8 +150,8 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
 
 
             tvAlasan.setText("" + Object.getCatatan());
-            tvNama.setText(""+Object.getName());
-            Log.d("CEK_ADAPTER", "onBind: "+Object.getName());
+            tvNama.setText("" + Object.getName());
+            Log.d("CEK_ADAPTER", "onBind: " + Object.getName());
 
 
             try {
@@ -168,8 +168,7 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
                 imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
             } else if (Object.getApprove_head().equals("0")) {
                 imStatus.setImageResource(R.drawable.ic_dot_red);
-            }
-            else if ((Object.getApprove_head().equals("1")&&Object.getApprove_hrd().equals("null"))||(Object.getApprove_head().equals("1")&&Object.getApprove_hrd().equals("1"))) {
+            } else if ((Object.getApprove_head().equals("1") && Object.getApprove_hrd().equals("null")) || (Object.getApprove_head().equals("1") && Object.getApprove_hrd().equals("1"))) {
                 imStatus.setImageResource(R.drawable.ic_dot_sukses);
             } else if (Object.getApprove_hrd().equals("0")) {
                 imStatus.setImageResource(R.drawable.ic_dot_oranye);

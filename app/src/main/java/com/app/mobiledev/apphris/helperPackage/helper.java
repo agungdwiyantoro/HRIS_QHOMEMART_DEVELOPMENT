@@ -63,6 +63,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
@@ -837,8 +838,24 @@ public class helper extends AsyncTask {
         }
     }
 
+    public static String formateDateFromstring(String inputFormat, String outputFormat, String inputDate){
 
+        Date parsed = null;
+        String outputDate = "";
 
+        SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
+        SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
 
+        try {
+            parsed = df_input.parse(inputDate);
+            outputDate = df_output.format(parsed);
+
+        } catch (ParseException e) {
+            Log.d(TAG, "ParseException - dateFormat");
+        }
+
+        return outputDate;
+
+    }
 
 }

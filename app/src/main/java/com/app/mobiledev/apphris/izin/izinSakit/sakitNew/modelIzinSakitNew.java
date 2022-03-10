@@ -14,6 +14,7 @@ public class modelIzinSakitNew {
     String lampiranFile;
     String createdAt;
     String updatedAt;
+    String status;
     String approveHead;
     String approveHrd;
     String approveExecutiv;
@@ -27,8 +28,10 @@ public class modelIzinSakitNew {
     String executivApproveDate;
     String directurApproveDate;
     String catatanHrd;
+    String comment;
     String headName;
     String hrdName;
+    String executiv;
 
     public String getName() {
         return name;
@@ -55,7 +58,6 @@ public class modelIzinSakitNew {
     }
 
     public String getIndikasiSakit() {
-        Log.d("model_getIndikasi", "getIndikasi: "+indikasiSakit);
         return indikasiSakit;
     }
 
@@ -117,6 +119,14 @@ public class modelIzinSakitNew {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getApproveHead() {
@@ -223,6 +233,14 @@ public class modelIzinSakitNew {
         this.catatanHrd = catatanHrd;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public String getHeadName() {
         return headName;
     }
@@ -237,5 +255,13 @@ public class modelIzinSakitNew {
 
     public void setHrdName(String hrdName) {
         this.hrdName = hrdName;
+    }
+
+    public String getExecutiv() {
+        return executiv;
+    }
+
+    public void setExecutiv(String executiv) {
+        this.executiv = executiv;
     }
 }

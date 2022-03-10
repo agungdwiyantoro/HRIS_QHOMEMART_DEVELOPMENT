@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -113,16 +114,12 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public class ViewHolder extends BaseViewHolder {
-        private TextView tvKetEmp;
-        private TextView tvAlasan;
+        private TextView tvKetEmp, tvAlasan;
         private LinearLayout line1;
-        private TextView tx_tanggal;
-        private TextView tx_bulan_tahun;
-        private SimpleDateFormat dateFormatSources;
-        private SimpleDateFormat dateFormat_day;
-        private SimpleDateFormat dateFormat_month_year;
+        private TextView tx_tanggal, tx_bulan_tahun, tvStatusIzin;
+        private SimpleDateFormat dateFormatSources, dateFormat_day, dateFormat_month_year;
         private Date dateSource;
-        private ImageView imStatus;
+        private ImageView ivStatus;
         private CardView card_list_riwayat_izin;
 
 
@@ -135,7 +132,8 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
             tx_tanggal = itemView.findViewById(R.id.tx_tanggalEmp);
             tx_bulan_tahun = itemView.findViewById(R.id.tx_bulan_tahunEmp);
             card_list_riwayat_izin = itemView.findViewById(R.id.card_list_riwayat_izinEmp);
-            //imStatus = itemView.findViewById(R.id.imStatusEmp);
+            ivStatus = itemView.findViewById(R.id.ivStatusIzin);
+            tvStatusIzin = itemView.findViewById(R.id.tvStatusIzin);
 
             dateFormatSources = new SimpleDateFormat("yyyy-MM-dd");
             dateFormat_day = new SimpleDateFormat("dd");
@@ -154,6 +152,21 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
 
             tvAlasan.setText("" + Object.getCatatan());
             tvKetEmp.setText("" + Object.getIndikasiSakit());
+
+            if (Object.getStatus().equals("ON PROGRESS")) {
+                tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.second_color_black));
+                ivStatus.setImageResource(R.drawable.ic_circle_grey_48);
+                tvStatusIzin.setText("Menunggu");
+            } else if (Object.getStatus().equals("SELESAI")) {
+                tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.greennew));
+                ivStatus.setImageResource(R.drawable.ic_circle_green_48);
+                tvStatusIzin.setText("Diterima");
+            } else {
+                tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.red_btn_bg_pressed_color));
+                ivStatus.setImageResource(R.drawable.ic_circle_red_48);
+                tvStatusIzin.setText("Ditolak");
+            }
+
             try {
                 dateSource = dateFormatSources.parse(Object.getCreatedAt());
                 tx_tanggal.setText(dateFormat_day.format(dateSource));
@@ -164,10 +177,10 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
 
             Log.d("CEK_ADAPTER", "onBind: "+Object.getName());
 
-            line1.setOnClickListener(new View.OnClickListener() {
+            card_list_riwayat_izin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(mCtx, DetailSakitEmp.class);
+                    Intent i = new Intent(mCtx, DetailIzinSakitEmp.class);
                     Bundle x = new Bundle();
                     x.putString("id", Object.getId());
                     i.putExtras(x);

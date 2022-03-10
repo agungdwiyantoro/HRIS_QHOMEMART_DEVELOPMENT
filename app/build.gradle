@@ -82,5 +82,7 @@ dependencies {
 
     implementation 'me.dm7.barcodescanner:zxing:1.9.13'
 
+    implementation 'com.github.dewinjm:monthyear-picker:1.0.2'
+
 }
 apply plugin: 'com.google.gms.google-services'

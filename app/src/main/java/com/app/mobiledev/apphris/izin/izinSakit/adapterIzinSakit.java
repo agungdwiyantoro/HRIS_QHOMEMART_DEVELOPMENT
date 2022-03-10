@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.izin.izinSakit.sakitNew.DetailIzinSakitEmp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -98,7 +99,7 @@ public class adapterIzinSakit extends RecyclerView.Adapter<adapterIzinSakit.Reyc
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(mCtx, statusApproveIzinSakit.class);
+                Intent i = new Intent(mCtx, DetailIzinSakitEmp.class);
                 Bundle x = new Bundle();
                 x.putString("id", Object.getId());
                 x.putString("kode_status", holder.kodeStatus);

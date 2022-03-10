@@ -41,12 +41,12 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:fontFamily="@font/roboto_medium"
-                android:textSize="18dp"
-                android:textColor="@color/main_color_black"
-                android:text="Izin Sakit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Izin Sakit"
+                android:textColor="@color/main_color_black"
+                android:textSize="18dp" />
 
 
         </LinearLayout>
@@ -56,18 +56,17 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:layout_marginTop="43dp"/>
+            android:layout_marginTop="43dp" />
 
         <TextView
             android:id="@+id/text_keterangan"
-            android:textAlignment="center"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="24dp"
-            android:textColor="@color/main_color_black"
-            android:text="Izin Sakit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Izin Sakit"
+            android:textAlignment="center"
+            android:textColor="@color/main_color_black"
+            android:textSize="24dp" />
 
 
         <ScrollView
@@ -75,60 +74,58 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="20dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_marginStart="-8dp"
                         android:layout_width="wrap_content"
-                        android:background="@color/white"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="-8dp"
+                        android:background="@color/white"
                         android:orientation="vertical">
-
 
 
                         <ImageView
                             android:id="@+id/dot_result"
-                            android:layout_marginTop="-6dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/ic_dot_sukses"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-6dp"
+                            android:background="@drawable/ic_dot_sukses" />
 
 
                         <LinearLayout
-                            android:layout_marginTop="-5dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp">
+                            android:layout_height="40dp"
+                            android:layout_marginTop="-5dp">
+
                             <View
                                 android:id="@+id/view_result"
-                                android:layout_marginStart="12dp"
                                 android:layout_width="4dp"
                                 android:layout_height="match_parent"
-                                android:background="@color/greennew">
-                            </View>
+                                android:layout_marginStart="12dp"
+                                android:background="@color/greennew" />
                         </LinearLayout>
-
 
 
                     </LinearLayout>
 
                     <android.support.v7.widget.CardView
-                        app:cardElevation="0dp"
-                        android:backgroundTint="@color/white"
-                        android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:backgroundTint="@color/white"
+                        app:cardElevation="0dp"
                         app:contentPadding="10dp">
 
                         <LinearLayout
@@ -154,9 +151,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
-                                android:textSize="12dp"
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/white"
+                                android:textSize="12dp"
                                 tools:text="Order Successfully Completed" />
 
                         </LinearLayout>
@@ -166,43 +163,41 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_marginStart="-8dp"
                         android:layout_width="wrap_content"
-                        android:background="@color/white"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="-8dp"
+                        android:background="@color/white"
                         android:orientation="vertical">
-
 
 
                         <ImageView
                             android:id="@+id/dot_hrd"
-                            android:layout_marginTop="-6dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/ic_dot_sukses"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-6dp"
+                            android:background="@drawable/ic_dot_sukses" />
 
 
                         <LinearLayout
-                            android:layout_marginTop="-5dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp">
+                            android:layout_height="40dp"
+                            android:layout_marginTop="-5dp">
+
                             <View
                                 android:id="@+id/view_hrd"
-                                android:layout_marginStart="12dp"
                                 android:layout_width="4dp"
                                 android:layout_height="match_parent"
-                                android:background="@color/greennew">
-                            </View>
+                                android:layout_marginStart="12dp"
+                                android:background="@color/greennew" />
                         </LinearLayout>
-
 
 
                     </LinearLayout>
@@ -218,8 +213,8 @@
 
                         <LinearLayout
                             android:id="@+id/lin_hrd"
-                            android:layout_height="50dp"
                             android:layout_width="match_parent"
+                            android:layout_height="50dp"
                             android:layout_gravity="center"
                             android:background="@drawable/ic_boxtext_green"
                             android:gravity="center"
@@ -250,52 +245,132 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_marginStart="-8dp"
                         android:layout_width="wrap_content"
-                        android:background="@color/white"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="-8dp"
+                        android:background="@color/white"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/dot_head"
-                            android:layout_marginTop="-6dp"
-                            android:layout_gravity="center"
-                            android:background="@drawable/ic_dot_sukses"
+                            android:id="@+id/dot_exec"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-6dp"
+                            android:background="@drawable/ic_dot_sukses" />
 
 
                         <LinearLayout
-                            android:layout_marginTop="-5dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp">
+                            android:layout_height="40dp"
+                            android:layout_marginTop="-5dp">
+
                             <View
-                                android:id="@+id/view_head"
-                                android:layout_marginStart="12dp"
+                                android:id="@+id/view_exec"
                                 android:layout_width="4dp"
                                 android:layout_height="match_parent"
-                                android:background="@color/greennew">
-                            </View>
+                                android:layout_marginStart="12dp"
+                                android:background="@color/greennew" />
                         </LinearLayout>
-
 
 
                     </LinearLayout>
 
                     <android.support.v7.widget.CardView
-                        app:cardElevation="0dp"
-                        android:backgroundTint="@color/white"
-                        android:layout_marginStart="15dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:backgroundTint="@color/white"
+                        app:cardElevation="0dp"
+                        app:contentPadding="10dp">
+
+                        <LinearLayout
+                            android:id="@+id/lin_exec"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_boxtext_green"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/text_exec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:textColor="@color/main_color_black"
+                                android:textSize="12sp"
+                                tools:text="Executive" />
+
+                            <TextView
+                                android:id="@+id/text_status_exec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@android:color/black"
+                                tools:text="Order Successfully Completed" />
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="-8dp"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/dot_head"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-6dp"
+                            android:background="@drawable/ic_dot_sukses" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="-5dp">
+
+                            <View
+                                android:id="@+id/view_head"
+                                android:layout_width="4dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="12dp"
+                                android:background="@color/greennew" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="15dp"
+                        android:backgroundTint="@color/white"
+                        app:cardElevation="0dp"
                         app:contentPadding="10dp">
 
                         <LinearLayout
@@ -350,7 +425,6 @@
                     android:layout_height="wrap_content">
 
 
-
                 </LinearLayout>
 
 
@@ -362,13 +436,13 @@
 
 
                     <TextView
-                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/data_ajuan"
                         android:textColor="@color/main_color_black"
-                        android:textSize="24dp" />
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
 
@@ -447,10 +521,10 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginBottom="50dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/padd_10"
+                    android:layout_marginBottom="50dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -472,14 +546,9 @@
                 </LinearLayout>
 
 
-
-
-
-
             </LinearLayout>
 
         </ScrollView>
-
 
 
     </LinearLayout>

@@ -90,23 +90,30 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_riwayat_izin_sakit_unapprove_head.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_slip_gaji.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_timeline_izin_status.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable/ic_boxtext_result_green.xml" value="0.27037037037037037" />
+        <entry key="app/src/main/res/drawable/ic_circle_green_48.xml" value="0.15925925925925927" />
+        <entry key="app/src/main/res/drawable/ic_circle_red_48.xml" value="0.15925925925925927" />
         <entry key="app/src/main/res/drawable/ic_date.xml" value="0.3425925925925926" />
         <entry key="app/src/main/res/drawable/ic_date_blue.xml" value="0.2361111111111111" />
+        <entry key="app/src/main/res/drawable/ic_dot_point_abu_abu.xml" value="1.0" />
         <entry key="app/src/main/res/drawable/ic_dot_point_red.xml" value="0.35462962962962963" />
+        <entry key="app/src/main/res/layout-v28/list_riwayat_izin_sakit.xml" value="0.34" />
         <entry key="app/src/main/res/layout/activity_calendar_test.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detail_sakit_emp.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_form_izin_sakit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_jenis_verifikasi.xml" value="0.3453125" />
-        <entry key="app/src/main/res/layout/activity_list_infinity_sakit_emp.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_list_infinity_sakit_emp.xml" value="0.30708661417322836" />
         <entry key="app/src/main/res/layout/activity_list_izin_sakit.xml" value="0.3138888888888889" />
         <entry key="app/src/main/res/layout/activity_list_pengajuan_approve.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_riwayat_verifikasi_security.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_scan_qr.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_security_verifikasi.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_status_approve.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_test_lib.xml" value="0.2712962962962963" />
         <entry key="app/src/main/res/layout/activity_test_reduce_image.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/calendar.xml" value="0.2222222222222222" />
         <entry key="app/src/main/res/layout/item_loading_progress.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/list_riwayat_izin_sakit.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_riwayat_izin_sakit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_riwayat_izin_sakit_approve_head.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/list_riwayat_ver_security.xml" value="0.33" />
       </map>

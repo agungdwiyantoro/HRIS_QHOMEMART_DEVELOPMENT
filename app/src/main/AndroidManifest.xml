@@ -36,7 +36,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
-            android:name=".izin.izinSakit.sakitNew.DetailSakitEmp"
+            android:name=".test.TestLib"
             android:exported="false" />
         <activity
             android:name=".izin.izinSakit.sakitNew.ListInfinitySakitEmp"
@@ -79,7 +79,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".splashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".izin.dashboardIzin"
             android:exported="false"
@@ -460,7 +460,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".izin.izinSakit.statusApproveIzinSakit"
+            android:name=".izin.izinSakit.sakitNew.DetailIzinSakitEmp"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />

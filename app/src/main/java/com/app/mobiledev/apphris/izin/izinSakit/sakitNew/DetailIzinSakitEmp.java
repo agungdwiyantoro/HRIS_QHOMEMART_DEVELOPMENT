@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
@@ -46,6 +47,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
     private String idDetailIzin = "", kodeStatus = "", status_approve = "", token, nama = "", lampiran_file, jabatan;
     private SessionManager msession;
     private LinearLayout lin_hrd, lin_exec, lin_head, lin_result;
+    private RelativeLayout rlExecSakit;
     private View view_hrd, view_head, view_exec, view_result;
 
     //dialog
@@ -59,45 +61,55 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status_approve);
         modelIzinSakitNews = new ArrayList<>();
+
         text_keterangan = findViewById(R.id.text_keterangan);
         text_status = findViewById(R.id.text_status);
         text_alasan = findViewById(R.id.text_alasan);
+
+        text_head = findViewById(R.id.text_head);
         text_status_hrd = findViewById(R.id.text_status_hrd);
         text_status_head = findViewById(R.id.text_status_head);
         text_status_exec = findViewById(R.id.text_status_exec);
-        text_head = findViewById(R.id.text_head);
+
         text_exec = findViewById(R.id.text_exec);
         text_hrd = findViewById(R.id.text_hrd);
         lin_hrd = findViewById(R.id.lin_hrd);
         lin_head = findViewById(R.id.lin_head);
         lin_exec = findViewById(R.id.lin_exec);
+
+        rlExecSakit = findViewById(R.id.rlExecSakit);
+
         dot_hrd = findViewById(R.id.dot_hrd);
         dot_head = findViewById(R.id.dot_head);
         dot_exec = findViewById(R.id.dot_exec);
+
         view_head = findViewById(R.id.view_head);
         view_exec = findViewById(R.id.view_exec);
         view_hrd = findViewById(R.id.view_hrd);
+
         img_status = findViewById(R.id.img_status);
+
         lin_result = findViewById(R.id.lin_result);
+
         view_result = findViewById(R.id.view_result);
+
         dot_result = findViewById(R.id.dot_result);
 
+        getRiwayatStatusApprove(idDetailIzin);
 
         img_back = findViewById(R.id.img_back);
         msession = new SessionManager(this);
         token = msession.getToken();
         jabatan = msession.getJabatan();
+
         text_keterangan.setText("Dalam Proses");
         tx_nama = findViewById(R.id.tx_nama);
         tx_indikasi_sakit = findViewById(R.id.tx_indikasi_sakit);
         tx_catatan = findViewById(R.id.tx_catatan);
         tx_selengkapnya = findViewById(R.id.tx_selengkapnya);
-        bundle = getIntent().getExtras();
-        idDetailIzin = bundle.getString("id");
-        nama = msession.getNamaLEngkap();
-        tx_nama.setText(nama);
+        //bundle = getIntent().getExtras();
+        //idDetailIzin = bundle.getString("id");
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        getRiwayatStatusApprove(idDetailIzin);
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,8 +129,8 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
 
     private void getRiwayatStatusApprove(String id) {
-        AndroidNetworking.get(api.URL_IzinSakit + "?id=" + id)
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ2ODk4ODg1LCJleHAiOjE2NDY5MTY4ODV9.fqs3YsMs9h5n24k9jm8U5PwEHqg4TzI5h338kJZVcHk"/*+token*/)
+        AndroidNetworking.get(api.URL_IzinSakit + "?id=28"/* + id*/)
+                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MDU5NDc3LCJleHAiOjE2NDcwNzc0Nzd9.qWjDgnX-P3aVTLuO1_NKxgYXKljPvnh0Xv3m6l8uia4"/*+token*/)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -126,8 +138,9 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
 
-                            Log.d("HASL_RESPONSE", "onResponse: " + response);
+                            Log.d("HASIL_RESPONSE", "onResponse: " + response);
                             String status = response.getString("status");
+                            Log.d("HASIL_MSG", "onResponse: " + response.getString("message"));
 
                             loadDataFormAPI(status, response);
 
@@ -142,8 +155,6 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                         Log.d("EROOR_RIWYAT_IZIN_SAKIT", "onError: " + anError.getErrorDetail());
                     }
                 });
-
-
     }
 
     private void loadDataFormAPI(String status, JSONObject response) throws JSONException {
@@ -154,10 +165,26 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                 modelIzinSakitNew model = new modelIzinSakitNew();
                 modelIzinSakitNews.add(model);
 
+                tx_nama.setText(data.getString("name"));
                 tx_indikasi_sakit.setText(data.getString("indikasi_sakit"));
                 tx_catatan.setText(data.getString("catatan"));
 
                 status = data.getString("status");
+                data.getString("id");
+                data.getString("kyano");
+                data.getString("indikasi_sakit");
+                data.getString("catatan");
+                data.getString("mulai_sakit_tanggal");
+                data.getString("selesai_sakit_tanggal");
+                data.getString("created_at");
+                data.getString("updated_at");
+
+                lampiran_file = data.getString("lampiran_file");
+                data.getString("approve_hrd");
+                data.getString("head_kyano");
+                data.getString("hrd_kyano");
+                data.getString("hrd_approve_date");
+                data.getString("hrd_approve_date");
 
                 switch (status) {
                     case "ON PROGRESS":
@@ -191,50 +218,27 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                         view_result.setBackgroundResource(R.color.greennew);
                 }
 
-                data.getString("id");
-                data.getString("kyano");
-                data.getString("indikasi_sakit");
-                data.getString("catatan");
-                data.getString("mulai_sakit_tanggal");
-                data.getString("selesai_sakit_tanggal");
-                data.getString("created_at");
-                data.getString("updated_at");
-
-                lampiran_file = data.getString("lampiran_file");
-                data.getString("approve_hrd");
-                data.getString("head_kyano");
-                data.getString("hrd_kyano");
-                data.getString("hrd_approve_date");
-                data.getString("hrd_approve_date");
-
                 /*
                  * ====================== Head Division Condition START ======================
                  */
 
-                if (jabatan.contains("MANAGER") || jabatan.contains("manager") || jabatan.contains("head")) {
-                    dot_head.setVisibility(View.GONE);
-                    lin_head.setVisibility(View.GONE);
-                    view_head.setVisibility(View.GONE);
-                    text_status_head.setVisibility(View.GONE);
-                    text_head.setVisibility(View.GONE);
+                if (data.getString("approve_head").equals("1")) {
+                    lin_head.setBackgroundResource(R.drawable.ic_boxtext_green);
+                    dot_head.setBackgroundResource(R.drawable.ic_dot_sukses);
+                    view_head.setBackgroundResource(R.color.greennew);
+                    text_status_head.setText(data.getString("head_name"));
+                } else if (data.getString("approve_head").equals("0")) {
+                    lin_head.setBackgroundResource(R.drawable.ic_boxtext_red);
+                    dot_head.setBackgroundResource(R.drawable.ic_dot_red);
+                    view_head.setBackgroundResource(R.color.red_btn_bg_pressed_color);
+                    text_status_head.setText(data.getString("approve_head"));
+                    lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
                 } else {
-                    if (data.getString("approve_head").equals("null")) {
-                        text_status_head.setText("----");
-                        lin_head.setBackgroundResource(R.drawable.ic_boxtext_gray);
-                        dot_head.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
-                        view_head.setBackgroundResource(R.color.abu_abu);
-                    } else if (data.getString("approve_head").equals("0")) {
-                        lin_head.setBackgroundResource(R.drawable.ic_boxtext_red);
-                        dot_head.setBackgroundResource(R.drawable.ic_dot_red);
-                        view_head.setBackgroundResource(R.color.red_btn_bg_pressed_color);
-                        text_status_head.setText(data.getString("approve_head"));
-                        lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
-                    } else {
-                        lin_head.setBackgroundResource(R.drawable.ic_boxtext_green);
-                        dot_head.setBackgroundResource(R.drawable.ic_dot_sukses);
-                        view_head.setBackgroundResource(R.color.greennew);
-                        text_status_head.setText(data.getString("head_name"));
-                    }
+                    text_status_head.setText("----");
+                    Log.d("TAG_IS", "loadDataFormAPI: " + data.getString("approve_head"));
+                    lin_head.setBackgroundResource(R.drawable.ic_boxtext_gray);
+                    dot_head.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
+                    view_head.setBackgroundResource(R.color.abu_abu);
                 }
 
                 /*
@@ -251,22 +255,24 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     view_exec.setVisibility(View.GONE);
                     text_status_exec.setVisibility(View.GONE);
                     text_exec.setVisibility(View.GONE);
+                    rlExecSakit.setVisibility(View.GONE);
+
                 } else {
-                    if (data.getString("approve_executiv").equals("null")) {
-                        text_status_hrd.setText("----");
-                        lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_gray);
-                        dot_hrd.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
-                        view_hrd.setBackgroundResource(R.color.abu_abu);
+                    if (data.getString("approve_executiv").equals("1")) {
+                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_green);
+                        dot_exec.setBackgroundResource(R.drawable.ic_dot_sukses);
+                        view_exec.setBackgroundResource(R.color.greennew);
+                        text_status_exec.setText(data.getString("executiv"));
                     } else if (data.getString("approve_executiv").equals("0")) {
-                        lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
-                        dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
-                        view_hrd.setBackgroundResource(R.color.red_btn_bg_pressed_color);
-                        text_status_hrd.setText(data.getString("approve_executiv"));
+                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_red);
+                        dot_exec.setBackgroundResource(R.drawable.ic_dot_red);
+                        view_exec.setBackgroundResource(R.color.red_btn_bg_pressed_color);
+                        text_status_exec.setText(data.getString("executiv"));
                     } else {
-                        lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_green);
-                        dot_hrd.setBackgroundResource(R.drawable.ic_dot_sukses);
-                        view_hrd.setBackgroundResource(R.color.greennew);
-                        text_status_hrd.setText(data.getString("approve_executiv"));
+                        text_status_exec.setText("----");
+                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_gray);
+                        dot_exec.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
+                        view_exec.setBackgroundResource(R.color.abu_abu);
                     }
                 }
 
@@ -292,7 +298,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_green);
                     dot_hrd.setBackgroundResource(R.drawable.ic_dot_sukses);
                     view_hrd.setBackgroundResource(R.color.greennew);
-                    text_status_hrd.setText(data.getString("approve_hrd"));
+                    text_status_hrd.setText(data.getString("hrd_name"));
                 }
 
                 /*
@@ -329,7 +335,6 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         });
         dialogFoto.show();
     }
-
 
     private void downloadIzin(String fileName) {
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);

@@ -33,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="929292" />
-                            <entry key="outputName" value="ic_circle_grey_48" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/scan_describe.svg" />
+                            <entry key="outputName" value="ic_empty_history" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/empty_history.svg" />
                           </map>
                         </option>
                       </PersistentState>

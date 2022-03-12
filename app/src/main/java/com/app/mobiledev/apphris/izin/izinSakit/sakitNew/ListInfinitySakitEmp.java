@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,6 +23,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
@@ -43,8 +53,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -58,6 +70,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
     private SwipeRefreshLayout swipeRefresh;
     private TextView tx_approve, tvDate;
     ImageView ivMonthFilter;
+    View emptyHistory;
 
     private int currentPage = PAGE_START;
     private boolean isLastPage = false;
@@ -90,6 +103,8 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         tvDate = findViewById(R.id.tvDate);
         ivMonthFilter = findViewById(R.id.ivMonthFilter);
 
+        emptyHistory = findViewById(R.id.includeEmptyHistory);
+
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         recyler_izin_sakit = findViewById(R.id.recyler_izin_sakit_emp);
         img_back = findViewById(R.id.img_back);
@@ -118,7 +133,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         minDate = calendar.getTimeInMillis(); // Get milliseconds of the modified date
 
         calendar.clear();
-        calendar.set(yearSelected, monthSelected+1, daySelected); // Set maximum date to show in dialog
+        calendar.set(yearSelected, monthSelected, daySelected); // Set maximum date to show in dialog
         maxDate = calendar.getTimeInMillis(); // Get milliseconds of the modified date
 
         Button btn_show = findViewById(R.id.btn_show);
@@ -237,6 +252,8 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
     }
 
     private void paginationCall() {
+        emptyHistory.setVisibility(View.GONE);
+
         final ArrayList<modelIzinSakitNew> items = new ArrayList<>();
         new Handler().postDelayed(new Runnable() {
 
@@ -252,8 +269,9 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                     offset = (itemCount - totalPage);
                 }
                 recyler_izin_sakit.setHasFixedSize(true);
-                Log.d("cek_url_all", "run: " + api.URL_IzinSakit + "?limit=" + itemCount + "&offset=" + offset);
-                getRiwayatSakitAll(itemCount, offset, items);
+                Log.d("cek_url_all", "run: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + itemCount + "&status="+spinResult);
+                //getRiwayatSakitAll(itemCount, offset, items);
+                getData(itemCount, offset, items);
             }
         }, 1500);
     }
@@ -281,7 +299,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         //AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit=" + page + "&offset=" + offset + "&status=")
         Log.d("TAG_PARAM", "getRiwayatSakitAll: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult);
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult)
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ2ODk4ODg1LCJleHAiOjE2NDY5MTY4ODV9.fqs3YsMs9h5n24k9jm8U5PwEHqg4TzI5h338kJZVcHk"/*+token*/)
+                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MDQ5MDgyLCJleHAiOjE2NDcwNjcwODJ9.vzD1DDFW7FBIojYXV_EpBF2QZxEUiw3zVrubdJsssC8"/*+token*/)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -340,8 +358,9 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                     Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
 
                                 }
-                            } else {
+                            } else if(status.equals("201")) {
                                 Toast.makeText(ListInfinitySakitEmp.this, "Riwayat Izin Sakit Kosong", Toast.LENGTH_LONG).show();
+                                emptyHistory.setVisibility(View.VISIBLE);
                             }
 
                             if (currentPage != PAGE_START)
@@ -381,6 +400,124 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                 });
 
 
+    }
+
+    private void getData(int page, int offset, ArrayList items) {
+        JsonObjectRequest req = new JsonObjectRequest("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String status = response.getString("status");
+                            String message = response.getString("message");
+                            Log.d("TAG_TAG_STATUS", "run: " + status);
+                            Log.d("TAG_TAG_MESSAGE", "run: " + message);
+
+                            if (status.equals("200") && !message.equals("Your data is not found")) {
+                                JSONArray jsonArray = response.getJSONArray("message");
+                                Log.d("TAG_TAG", "run: " + jsonArray);
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject data = jsonArray.getJSONObject(i);
+                                    modelIzinSakitNew model = new modelIzinSakitNew();
+
+                                    model.setName(data.getString("name"));
+                                    model.setId(data.getString("id"));
+                                    model.setKyano(data.getString("kyano"));
+                                    model.setIndikasiSakit(data.getString("indikasi_sakit"));
+                                    model.setMulaiSakitTanggal(data.getString("mulai_sakit_tanggal"));
+                                    model.setSelesaiSakitTanggal(data.getString("selesai_sakit_tanggal"));
+                                    model.setSelectDate(data.getString("select_date"));
+                                    model.setCatatan(data.getString("catatan"));
+                                    model.setLampiranFile(data.getString("lampiran_file"));
+
+                                    model.setCreatedAt(data.getString("created_at"));
+                                    model.setUpdatedAt(data.getString("updated_at"));
+                                    model.setApproveHead(data.getString("approve_head"));
+                                    model.setApproveHrd(data.getString("approve_hrd"));
+
+                                    model.setApproveExecutiv(data.getString("approve_executiv"));
+                                    model.setApproveDirectur(data.getString("approve_directur"));
+
+                                    model.setExecutivKyano(data.getString("executiv_kyano"));
+                                    model.setDirecturKyano(data.getString("directur_kyano"));
+                                    model.setHrdKyano(data.getString("hrd_kyano"));
+
+                                    model.setHeadApproveDate(data.getString("head_approve_date"));
+                                    model.setHrdApproveDate(data.getString("hrd_approve_date"));
+                                    model.setExecutivApproveDate(data.getString("executiv_approve_date"));
+                                    model.setDirecturApproveDate(data.getString("directur_approve_date"));
+
+                                    model.setHeadName(data.getString("head_name"));
+                                    model.setHrdName(data.getString("hrd_name"));
+
+                                    model.setCatatanHrd(data.getString("catatan_hrd"));
+                                    model.setStatus(data.getString("status"));
+
+                                    items.add(model);
+                                    //modelIzinSakits.add(model);
+                                    //modelIzinSakitNews.add(model);
+
+                                    Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
+                                    emptyHistory.setVisibility(View.GONE);
+                                }
+                            } else if(status.equals("404")) {
+                                emptyHistory.setVisibility(View.VISIBLE);
+                                mShimmerViewContainer.setVisibility(View.GONE);
+                                recyler_izin_sakit.setVisibility(View.GONE);
+                            }
+
+                            if (currentPage != PAGE_START)
+                                adapterIzinSakitEmp.removeLoading();
+                            adapterIzinSakitEmp.addItems(items);
+                            swipeRefresh.setRefreshing(false);
+                            Log.d("CUURENT_PAGE", "onResponse: " + items.size());
+
+                            if (currentPage < totalPage) {
+                                //adapterIzinSakitEmp.addLoading();
+                            } else {
+                                isLastPage = true;
+                            }
+                            isLoading = false;
+
+                            // Stopping Shimmer Effect's animation after data is loaded to ListView
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+
+                            recyler_izin_sakit.setVisibility(View.VISIBLE);
+
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error_Volley: ", error.toString());
+
+                if (error.toString().equals("")) {
+                    emptyHistory.setVisibility(View.VISIBLE);
+                    mShimmerViewContainer.setVisibility(View.GONE);
+                    recyler_izin_sakit.setVisibility(View.GONE);
+                    //refresh dibawah digunakan untuk
+                    // menanggulangi error
+                    // BasicNetwork.performRequest: Unexpected response code 404
+                }
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MDU5NDc3LCJleHAiOjE2NDcwNzc0Nzd9.qWjDgnX-P3aVTLuO1_NKxgYXKljPvnh0Xv3m6l8uia4");
+                return headers;
+            }
+        };
+
+        //ApplicationController.getInstance().addToRequestQueue(req);
+        Volley.newRequestQueue(ListInfinitySakitEmp.this).add(req);
     }
 
     @Override

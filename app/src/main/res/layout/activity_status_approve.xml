@@ -225,9 +225,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
-                                android:textColor="@color/main_color_black"
                                 android:textSize="12sp"
-                                tools:text="Human Resource Development" />
+                                android:text="Human Resource Development"
+                                android:textColor="@color/light_grey"/>
 
                             <TextView
                                 android:id="@+id/text_status_hrd"
@@ -235,8 +235,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginTop="5dp"
-                                android:textColor="@android:color/black"
-                                tools:text="Order Successfully Completed" />
+                                android:text="Order Successfully Completed"
+                                android:textColor="@color/black"
+                                />
 
                         </LinearLayout>
 
@@ -245,6 +246,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rlExecSakit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -306,9 +308,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
-                                android:textColor="@color/main_color_black"
                                 android:textSize="12sp"
-                                tools:text="Executive" />
+                                android:text="Executive"
+                                android:textColor="@color/light_grey"
+                                />
 
                             <TextView
                                 android:id="@+id/text_status_exec"
@@ -316,8 +319,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginTop="5dp"
-                                android:textColor="@android:color/black"
-                                tools:text="Order Successfully Completed" />
+                                android:text="Order Successfully Completed"
+                                android:textColor="@color/black"
+                                />
 
                         </LinearLayout>
 
@@ -380,16 +384,18 @@
                             android:layout_gravity="center"
                             android:background="@drawable/ic_boxtext_green"
                             android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            >
 
                             <TextView
                                 android:id="@+id/text_head"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
-                                android:textColor="@color/main_color_black"
                                 android:textSize="12sp"
-                                tools:text="Head/Supervisor" />
+                                android:text="Head/Supervisor"
+                                android:textColor="@color/light_grey"
+                                />
 
                             <TextView
                                 android:id="@+id/text_status_head"
@@ -397,8 +403,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginTop="5dp"
-                                android:textColor="@android:color/black"
-                                tools:text="Order Successfully Completed" />
+                                android:text="Order Successfully Completed"
+                                android:textColor="@color/black"
+                                />
 
                         </LinearLayout>
 

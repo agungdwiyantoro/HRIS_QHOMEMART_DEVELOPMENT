@@ -41,12 +41,12 @@
         <activity
             android:name=".izin.izinSakit.sakitNew.ListInfinitySakitEmp"
             android:exported="true">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".test.SecurityVerifikasi.ScanQR"
@@ -463,7 +463,14 @@
             android:name=".izin.izinSakit.sakitNew.DetailIzinSakitEmp"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

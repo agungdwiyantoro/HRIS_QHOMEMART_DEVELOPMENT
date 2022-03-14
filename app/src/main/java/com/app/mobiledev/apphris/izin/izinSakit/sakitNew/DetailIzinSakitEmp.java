@@ -42,9 +42,9 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
     private List<modelIzinSakitNew> modelIzinSakitNews;
     private TextView text_keterangan, text_status, text_alasan, text_status_hrd, text_status_head, text_status_exec, tx_nama, tx_indikasi_sakit, tx_catatan, tx_selengkapnya, text_head, text_hrd, text_exec;
-    private ImageView img_back, dot_hrd, dot_head, dot_exec, dot_result, img_status;
+    private ImageView dot_hrd, dot_head, dot_exec, dot_result, img_status, ivBackPage;
     private Bundle bundle;
-    private String idDetailIzin = "", kodeStatus = "", status_approve = "", token, nama = "", lampiran_file, jabatan;
+    private String kyano="",idDetailIzin = "", kodeStatus = "", status_approve = "", token, nama = "", lampiran_file="", jabatan;
     private SessionManager msession;
     private LinearLayout lin_hrd, lin_exec, lin_head, lin_result;
     private RelativeLayout rlExecSakit;
@@ -88,6 +88,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         view_hrd = findViewById(R.id.view_hrd);
 
         img_status = findViewById(R.id.img_status);
+        ivBackPage = findViewById(R.id.ivBackPage);
 
         lin_result = findViewById(R.id.lin_result);
 
@@ -95,9 +96,6 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
         dot_result = findViewById(R.id.dot_result);
 
-        getRiwayatStatusApprove(idDetailIzin);
-
-        img_back = findViewById(R.id.img_back);
         msession = new SessionManager(this);
         token = msession.getToken();
         jabatan = msession.getJabatan();
@@ -107,11 +105,12 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         tx_indikasi_sakit = findViewById(R.id.tx_indikasi_sakit);
         tx_catatan = findViewById(R.id.tx_catatan);
         tx_selengkapnya = findViewById(R.id.tx_selengkapnya);
-        //bundle = getIntent().getExtras();
-        //idDetailIzin = bundle.getString("id");
+        bundle = getIntent().getExtras();
+        idDetailIzin = bundle.getString("id");
+        getRiwayatStatusApprove(idDetailIzin);
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 
-        img_back.setOnClickListener(new View.OnClickListener() {
+        ivBackPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -129,8 +128,8 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
 
     private void getRiwayatStatusApprove(String id) {
-        AndroidNetworking.get(api.URL_IzinSakit + "?id=28"/* + id*/)
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MDU5NDc3LCJleHAiOjE2NDcwNzc0Nzd9.qWjDgnX-P3aVTLuO1_NKxgYXKljPvnh0Xv3m6l8uia4"/*+token*/)
+        AndroidNetworking.get(api.URL_IzinSakit + "?id=" + id)
+                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MjQ1OTc0LCJleHAiOjE2NDcyNjM5NzR9.HA-94FOCeQjP6zPwkMMK7NkXNI1ksXnvFJllz8L98zs"/*+token*/)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -138,7 +137,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
 
-                            Log.d("HASIL_RESPONSE", "onResponse: " + response);
+                            Log.d("HASIL_ID", "onResponse: " + id + kyano);
                             String status = response.getString("status");
                             Log.d("HASIL_MSG", "onResponse: " + response.getString("message"));
 
@@ -158,6 +157,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
     }
 
     private void loadDataFormAPI(String status, JSONObject response) throws JSONException {
+        modelIzinSakitNews.clear();
         if (status.equals("200")) {
             JSONArray jsonArray = response.getJSONArray("message");
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -171,7 +171,6 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
                 status = data.getString("status");
                 data.getString("id");
-                data.getString("kyano");
                 data.getString("indikasi_sakit");
                 data.getString("catatan");
                 data.getString("mulai_sakit_tanggal");
@@ -179,6 +178,9 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                 data.getString("created_at");
                 data.getString("updated_at");
 
+                Log.d("TAG_IMAGE", "loadDataFormAPI: "+data.getString("lampiran_file"));
+
+                kyano = data.getString("kyano");
                 lampiran_file = data.getString("lampiran_file");
                 data.getString("approve_hrd");
                 data.getString("head_kyano");
@@ -191,7 +193,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                         text_status.setText("Diproses");
                         text_keterangan.setText("Dalam Proses");
                         img_status.setBackgroundResource(R.drawable.onprogress);
-                        lin_result.setBackgroundResource(R.drawable.ic_boxtext_gray);
+                        lin_result.setBackgroundResource(R.drawable.ic_boxtext_grey);
                         dot_result.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
                         view_result.setBackgroundResource(R.color.abu_abu);
                         text_status.setTextColor(Color.BLACK);
@@ -236,7 +238,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                 } else {
                     text_status_head.setText("----");
                     Log.d("TAG_IS", "loadDataFormAPI: " + data.getString("approve_head"));
-                    lin_head.setBackgroundResource(R.drawable.ic_boxtext_gray);
+                    lin_head.setBackgroundResource(R.drawable.ic_boxtext_grey);
                     dot_head.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
                     view_head.setBackgroundResource(R.color.abu_abu);
                 }
@@ -270,7 +272,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                         text_status_exec.setText(data.getString("executiv"));
                     } else {
                         text_status_exec.setText("----");
-                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_gray);
+                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_grey);
                         dot_exec.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
                         view_exec.setBackgroundResource(R.color.abu_abu);
                     }
@@ -286,7 +288,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
                 if (data.getString("approve_hrd").equals("null")) {
                     text_status_hrd.setText("----");
-                    lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_gray);
+                    lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_grey);
                     dot_hrd.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
                     view_hrd.setBackgroundResource(R.color.abu_abu);
                 } else if (data.getString("approve_hrd").equals("0")) {
@@ -326,7 +328,13 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true);
-        Glide.with(DetailIzinSakitEmp.this).load(api.URL_foto_izinsakit + "" + lampiran_file).thumbnail(Glide.with(DetailIzinSakitEmp.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
+        Glide.with(DetailIzinSakitEmp.this)
+                .load(api.URL_foto_izinsakit+kyano+"/lampiran/surat_sakit/"+lampiran_file)
+                .thumbnail(Glide.with(DetailIzinSakitEmp.this)
+                        .load(R.drawable.loading))
+                .apply(requestOptions)
+                .into(img_izin_sakit);
+
         fabDownloadIzin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -338,7 +346,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
     private void downloadIzin(String fileName) {
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri uri = Uri.parse(api.URL_foto_izinsakit + fileName);
+        Uri uri = Uri.parse(api.URL_foto_izinsakit+kyano+"/lampiran/surat_sakit/"+fileName);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName + ".png");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

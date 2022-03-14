@@ -299,7 +299,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         //AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit=" + page + "&offset=" + offset + "&status=")
         Log.d("TAG_PARAM", "getRiwayatSakitAll: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult);
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult)
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MDQ5MDgyLCJleHAiOjE2NDcwNjcwODJ9.vzD1DDFW7FBIojYXV_EpBF2QZxEUiw3zVrubdJsssC8"/*+token*/)
+                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MjQ1OTc0LCJleHAiOjE2NDcyNjM5NzR9.HA-94FOCeQjP6zPwkMMK7NkXNI1ksXnvFJllz8L98zs"/*+token*/)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -511,7 +511,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MDU5NDc3LCJleHAiOjE2NDcwNzc0Nzd9.qWjDgnX-P3aVTLuO1_NKxgYXKljPvnh0Xv3m6l8uia4");
+                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MjQ1OTc0LCJleHAiOjE2NDcyNjM5NzR9.HA-94FOCeQjP6zPwkMMK7NkXNI1ksXnvFJllz8L98zs");
                 return headers;
             }
         };

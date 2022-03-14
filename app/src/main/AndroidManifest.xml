@@ -40,13 +40,14 @@
             android:exported="false" />
         <activity
             android:name=".izin.izinSakit.sakitNew.ListInfinitySakitEmp"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity
             android:name=".test.SecurityVerifikasi.ScanQR"
@@ -79,7 +80,9 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".splashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" >
+
+        </activity>
         <activity
             android:name=".izin.dashboardIzin"
             android:exported="false"
@@ -464,12 +467,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" >
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
     </application>
 

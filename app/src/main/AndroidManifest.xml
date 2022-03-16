@@ -434,9 +434,7 @@
         <activity
             android:name=".fragment_menu"
             android:screenOrientation="portrait"
-            tools:ignore="Instantiatable,LockedOrientationActivity" >
-            
-        </activity>
+            tools:ignore="Instantiatable,LockedOrientationActivity" />
         <activity
             android:name=".cuti"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

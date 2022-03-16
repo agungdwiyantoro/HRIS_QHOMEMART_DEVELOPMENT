@@ -145,6 +145,7 @@ public class login extends AppCompatActivity {
                         String cekStaff="";
                         String namaLengkap="";
                         String hashtag="";
+                        String kydivisi="";
                         String divisi="";
                         String jabatan="";
                         String kyjabatan="";
@@ -157,14 +158,19 @@ public class login extends AppCompatActivity {
                             cekStaff = data.getString("kyjenis");
                             namaLengkap = data.getString("kynm");
                             hashtag = data.getString("hashtag");
-                            divisi = data.getString("kydivisi");
+                            kydivisi = data.getString("kydivisi");
+                            divisi = data.getString("divisi");
+                            kyjabatan = data.getString("kyjabatan");
                             jabatan = data.getString("jabatan");
                             Log.d("STAFF_cek_nik", "onResponse: "+nik);
 
-
                         }
 
-                        sessionManager.createSession(noUser, email,password,nik,cekStaff,namaLengkap,hashtag,divisi,jabatan);
+                        sessionManager.createSession(
+                                noUser, email,password,
+                                nik,cekStaff,namaLengkap,
+                                hashtag, kydivisi, divisi,
+                                kyjabatan,jabatan);
                         Toast.makeText(login.this, "Selamat datang " + namaLengkap, Toast.LENGTH_SHORT).show();
                         Intent utm = new Intent(login.this, main_fragment.class);
                         utm.putExtra("username",email);

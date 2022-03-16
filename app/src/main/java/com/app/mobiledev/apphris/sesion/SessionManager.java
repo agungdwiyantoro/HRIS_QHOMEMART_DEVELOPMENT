@@ -27,7 +27,9 @@ public class SessionManager {
     public static final String CEK_STAFF = "CEK_STAFF";//y show bio
     public static final String CEK_NAMA_LENGKAP = "NAMA_LENGKAP";//y show bio
     public static final String HASHTAG = "HASHTAG";//y show bio
+    public static final String KYJABATAN = "KYJABATAN";//y show bio
     public static final String JABATAN = "JABATAN";//y show bio
+    public static final String KYDIVISI = "KYDIVISI";//y show bio
     public static final String DIVISI = "DIVISI";//y show bio
     public static final String IDTRANING="IDTRAINING";//y show id training
     public static final String TOKEN = "TOKEN";//token hris
@@ -65,6 +67,7 @@ public class SessionManager {
     public static String cek_staff;
     public static String namaLengkap;
     public static String hashtag;
+    public static String kyDivisi;
     public static String divisi;
     public static String jabatan;
     public static String idtraining;
@@ -79,11 +82,11 @@ public class SessionManager {
     public static  String kyjk;
     public static  String kyagama;
     public static  String kytptlhr;
-    public static  String  kytgllhr;
+    public static  String kytgllhr;
     public static  String kystatus_kerja;
     public static  String kyalamat;
     public static  String kyhp;
-    public static  String jbano;
+    public static  String kyjabatan;
     public static  String dvano;
     public static  String npwp;
     public static  String kytglmasuk;
@@ -118,20 +121,23 @@ public class SessionManager {
         return token;
     }
 
-    public void createSession(String id_user, String nama_user,String pass, String nik,String cek_staff,String namaLengkap,String hashtag,String divisi, String jabatan){
+    public void createSession(String id_user, String email,String pass,
+                              String nik,String cek_staff,String namaLengkap,
+                              String hashtag,String kydivisi,String divisi,
+                              String kyjabatan, String jabatan){
         editor.putBoolean(LOGIN, true);
-        editor.putString(ID_USER, id_user);//kyano
-        editor.putString(NAMA_USER, nama_user);
+        editor.putString(ID_USER, id_user);
+        editor.putString(KYEMAIL, email);
         editor.putString(PASS_USER, pass);
         editor.putString(NIK_USER, nik);
         editor.putString(CEK_STAFF, cek_staff);
         editor.putString(CEK_NAMA_LENGKAP, namaLengkap);
         editor.putString(HASHTAG, hashtag);
+        editor.putString(KYDIVISI, kydivisi);
         editor.putString(DIVISI, divisi);
+        editor.putString(KYJABATAN, kyjabatan);
         editor.putString(JABATAN, jabatan);
-        editor.putString(IDTRANING,"");
         editor.apply();
-
 
     }
 
@@ -219,10 +225,10 @@ public class SessionManager {
     }
 
     public void checkLogin(){
-        if(sharedPreferences.contains(NAMA_USER) && sharedPreferences.contains(ID_USER)){
+        if(sharedPreferences.contains(CEK_NAMA_LENGKAP) && sharedPreferences.contains(ID_USER)){
             Intent i = new Intent(context, main_fragment.class);
            // Intent i = new Intent(context, UpdateDataDiri.class);
-            i.putExtra("username",sharedPreferences.getString(NAMA_USER,"Username"));
+            i.putExtra("username",sharedPreferences.getString(CEK_NAMA_LENGKAP,"Username"));
             context.startActivity(i);
         }else{
             Intent load = new Intent(context, login.class);
@@ -234,7 +240,7 @@ public class SessionManager {
     public HashMap<String, String> getUserDetail(){
         HashMap<String, String> user = new HashMap<>();
         user.put(ID_USER, sharedPreferences.getString(ID_USER, ""));
-        user.put(NAMA_USER, sharedPreferences.getString(NAMA_USER, ""));
+        user.put(CEK_NAMA_LENGKAP, sharedPreferences.getString(NAMA_USER, ""));
         return user;
     }
 
@@ -244,7 +250,7 @@ public class SessionManager {
     }
 
     public String getUsername(){
-        nama_user=sharedPreferences.getString(NAMA_USER, "");
+        nama_user=sharedPreferences.getString(CEK_NAMA_LENGKAP, "");
         return nama_user;
 
     }
@@ -298,6 +304,10 @@ public class SessionManager {
 
     }
 
+    public String getKyDivisi(){
+        kyDivisi=sharedPreferences.getString(KYDIVISI, "");
+        return kyDivisi;
+    }
 
     public String getDivisi(){
         divisi=sharedPreferences.getString(DIVISI, "");
@@ -357,11 +367,6 @@ public class SessionManager {
         return dvano;
     }
 
-    public String getNojabatan(){
-        jbano=sharedPreferences.getString(JBANO,"");
-        return jbano;
-    }
-
     public String getJenisKelamin(){
         kyjk=sharedPreferences.getString(KYJK,"");
         return kyjk;
@@ -402,8 +407,8 @@ public class SessionManager {
     }
 
     public String getNoJabatan(){
-        jbano=sharedPreferences.getString(JBANO,"");
-        return jbano;
+        kyjabatan=sharedPreferences.getString(KYJABATAN,"");
+        return kyjabatan;
     }
 
     public String getDvano(){

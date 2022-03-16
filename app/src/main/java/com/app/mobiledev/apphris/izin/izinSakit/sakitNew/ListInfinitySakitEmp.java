@@ -3,6 +3,7 @@ package com.app.mobiledev.apphris.izin.izinSakit.sakitNew;
 import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -64,13 +65,12 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
     RecyclerView recyler_izin_sakit;
     private List<modelIzinSakitNew> modelIzinSakitNews;
     private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="null";
-    private ImageView img_back;
     private SessionManager msession;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
     private TextView tx_approve, tvDate;
     ImageView ivMonthFilter;
-    View emptyHistory;
+    View emptyHistory, inc_backPage;
 
     private int currentPage = PAGE_START;
     private boolean isLastPage = false;
@@ -90,13 +90,16 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_infinity_sakit_emp);
 
+        inc_backPage = findViewById(R.id.inc_backPage);
+
         //get the spinner from the xml.
         dropdown = findViewById(R.id.spinDDown);
 //create a list of items for the spinner.
         String[] items = new String[]{"Menunggu", "Diterima", "Ditolak"};
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
 //There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
 
@@ -107,7 +110,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
         mShimmerViewContainer = findViewById(R.id.shimmer_view_container);
         recyler_izin_sakit = findViewById(R.id.recyler_izin_sakit_emp);
-        img_back = findViewById(R.id.img_back);
+        inc_backPage = findViewById(R.id.inc_backPage);
         lin_transparant = findViewById(R.id.lin_transparant);
         swipeRefresh = findViewById(R.id.swipeRefresh);
         tx_approve = findViewById(R.id.tx_approve);
@@ -136,8 +139,6 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         calendar.set(yearSelected, monthSelected, daySelected); // Set maximum date to show in dialog
         maxDate = calendar.getTimeInMillis(); // Get milliseconds of the modified date
 
-        Button btn_show = findViewById(R.id.btn_show);
-
         dialogFragment = MonthYearPickerDialogFragment
                 .getInstance(monthSelected, yearSelected, minDate, maxDate, "Tanggal Izin");
 
@@ -145,6 +146,13 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         recyler_izin_sakit.setAdapter(adapterIzinSakitEmp);
         getMonth();
         paginationCall();
+
+        inc_backPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         ivMonthFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +186,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinSelected = parent.getItemAtPosition(position).toString();
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
                 switch (spinSelected) {
                     case "Menunggu":
                         spinResult = "null";
@@ -192,7 +201,6 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                         onRefresh();
                         break;
                 }
-                Toast.makeText(ListInfinitySakitEmp.this, "Hello Toast "+spinResult, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -299,7 +307,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         //AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit=" + page + "&offset=" + offset + "&status=")
         Log.d("TAG_PARAM", "getRiwayatSakitAll: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult);
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult)
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MjQ1OTc0LCJleHAiOjE2NDcyNjM5NzR9.HA-94FOCeQjP6zPwkMMK7NkXNI1ksXnvFJllz8L98zs"/*+token*/)
+                .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -511,7 +519,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MjQ1OTc0LCJleHAiOjE2NDcyNjM5NzR9.HA-94FOCeQjP6zPwkMMK7NkXNI1ksXnvFJllz8L98zs");
+                headers.put("Authorization", "Bearer "+token);
                 return headers;
             }
         };

@@ -42,13 +42,13 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
     private List<modelIzinSakitNew> modelIzinSakitNews;
     private TextView text_keterangan, text_status, text_alasan, text_status_hrd, text_status_head, text_status_exec, tx_nama, tx_indikasi_sakit, tx_catatan, tx_selengkapnya, text_head, text_hrd, text_exec;
-    private ImageView dot_hrd, dot_head, dot_exec, dot_result, img_status, ivBackPage;
+    private ImageView dot_hrd, dot_head, dot_exec, dot_result, img_status;
     private Bundle bundle;
     private String kyano="",idDetailIzin = "", kodeStatus = "", status_approve = "", token, nama = "", lampiran_file="", jabatan;
     private SessionManager msession;
     private LinearLayout lin_hrd, lin_exec, lin_head, lin_result;
     private RelativeLayout rlExecSakit;
-    private View view_hrd, view_head, view_exec, view_result;
+    private View view_hrd, view_head, view_exec, view_result, inc_backPage;
 
     //dialog
     private Dialog dialogFoto;
@@ -88,7 +88,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         view_hrd = findViewById(R.id.view_hrd);
 
         img_status = findViewById(R.id.img_status);
-        ivBackPage = findViewById(R.id.ivBackPage);
+        inc_backPage = findViewById(R.id.inc_backPage);
 
         lin_result = findViewById(R.id.lin_result);
 
@@ -110,7 +110,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         getRiwayatStatusApprove(idDetailIzin);
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 
-        ivBackPage.setOnClickListener(new View.OnClickListener() {
+        inc_backPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -129,7 +129,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
     private void getRiwayatStatusApprove(String id) {
         AndroidNetworking.get(api.URL_IzinSakit + "?id=" + id)
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjQ3MjQ1OTc0LCJleHAiOjE2NDcyNjM5NzR9.HA-94FOCeQjP6zPwkMMK7NkXNI1ksXnvFJllz8L98zs"/*+token*/)
+                .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -191,13 +191,15 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                 switch (status) {
                     case "ON PROGRESS":
                         text_status.setText("Diproses");
+                        text_alasan.setVisibility(View.GONE);
                         text_keterangan.setText("Dalam Proses");
                         img_status.setBackgroundResource(R.drawable.onprogress);
-                        lin_result.setBackgroundResource(R.drawable.ic_boxtext_grey);
+                        lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_grey);
                         dot_result.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
                         view_result.setBackgroundResource(R.color.abu_abu);
                         text_status.setTextColor(Color.BLACK);
                         text_alasan.setTextColor(Color.BLACK);
+                        text_status.setTextColor(Color.WHITE);
                         break;
 
                     case "TOLAK":
@@ -235,6 +237,8 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     view_head.setBackgroundResource(R.color.red_btn_bg_pressed_color);
                     text_status_head.setText(data.getString("approve_head"));
                     lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
+                    dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
+                    lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
                 } else {
                     text_status_head.setText("----");
                     Log.d("TAG_IS", "loadDataFormAPI: " + data.getString("approve_head"));
@@ -260,6 +264,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     rlExecSakit.setVisibility(View.GONE);
 
                 } else {
+                    Log.d("TAG_DITOLAK", "loadDataFormAPI: "+data.getString("approve_executiv"));
                     if (data.getString("approve_executiv").equals("1")) {
                         lin_exec.setBackgroundResource(R.drawable.ic_boxtext_green);
                         dot_exec.setBackgroundResource(R.drawable.ic_dot_sukses);
@@ -270,6 +275,9 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                         dot_exec.setBackgroundResource(R.drawable.ic_dot_red);
                         view_exec.setBackgroundResource(R.color.red_btn_bg_pressed_color);
                         text_status_exec.setText(data.getString("executiv"));
+                        lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
+                        dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
+                        lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
                     } else {
                         text_status_exec.setText("----");
                         lin_exec.setBackgroundResource(R.drawable.ic_boxtext_grey);
@@ -291,11 +299,12 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_grey);
                     dot_hrd.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
                     view_hrd.setBackgroundResource(R.color.abu_abu);
-                } else if (data.getString("approve_hrd").equals("0")) {
+                } else if (data.getString("approve_hrd").equals("0") || data.getString("approve_head").equals("0") || data.getString("approve_head").equals("0")) {
                     lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
                     dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
                     view_hrd.setBackgroundResource(R.color.red_btn_bg_pressed_color);
                     text_status_hrd.setText(data.getString("approve_hrd"));
+                    lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
                 } else {
                     lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_green);
                     dot_hrd.setBackgroundResource(R.drawable.ic_dot_sukses);
@@ -356,7 +365,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
     private void showProgressDownload(Long reference) {
         final ProgressDialog progressBarDialog = new ProgressDialog(this);
-        progressBarDialog.setTitle("Mengunduh Memo");
+        progressBarDialog.setTitle("Mengunduh SKD");
         progressBarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressBarDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, whichButton) -> {
         });

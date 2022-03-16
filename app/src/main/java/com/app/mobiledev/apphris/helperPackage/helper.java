@@ -504,10 +504,10 @@ public class helper extends AsyncTask {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     sessionManager = new SessionManager(mctx);
-                                    Log.d(TAG, "onResponse: Cek_Divisi_Session1 :"+sessionManager.getDivisi());
+                                    Log.d(TAG, "onResponse: Cek_Divisi_Session1 :"+sessionManager.getKyDivisi());
                                     Log.d(TAG, "onResponse: Cek_Divisi_Session2 :"+data.getString("divisi"));
                                     if(data.getString("status_menu").equals("open")){
-                                        if(sessionManager.getDivisi().equals(data.getString("divisi"))){
+                                        if(sessionManager.getKyDivisi().equals(data.getString("divisi"))){
                                             Intent intent = new Intent(mctx, classMenu);
                                             Bundle x = new Bundle();
                                             x.putString("lokasi_tujuan", "");
@@ -521,8 +521,8 @@ public class helper extends AsyncTask {
                                             x.putString("lokasi_tujuan", "");
                                             x.putString("lokasi_awal", "");
                                             intent.putExtras(x);
-                                            mctx.startActivity( intent);
-                                        }{
+                                            mctx.startActivity(intent);
+                                        } else {
                                             helper.snackBar(view,"anda tidak memiliki akses menu ini.....!!!!!!");
                                         }
 
@@ -532,8 +532,6 @@ public class helper extends AsyncTask {
 
                                 }
 
-
-                            } else {
 
                             }
                             Log.d("CEK_UPDATE", "onResponse: " + success);

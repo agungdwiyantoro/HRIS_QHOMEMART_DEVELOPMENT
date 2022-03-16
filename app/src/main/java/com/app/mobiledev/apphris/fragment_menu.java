@@ -1,6 +1,8 @@
 package com.app.mobiledev.apphris;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
@@ -11,6 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.approve.menu_approve;
 import com.app.mobiledev.apphris.bonus.menu_bonus;
 import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
@@ -24,6 +31,10 @@ import com.app.mobiledev.apphris.helperPackage.DataSoalSQLite;
 import com.app.mobiledev.apphris.kasbon.kasbon_karyawan;
 import com.app.mobiledev.apphris.pinjaman.pinjamanUang;
 import com.app.mobiledev.apphris.visitor.Visitor;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +78,8 @@ public class fragment_menu extends Fragment {
         lmenu=rootView.findViewById(R.id.lmenu);
         txnotif_latihan.setVisibility(View.GONE);
 
+        checkApproveAvailable();
+
         cvApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +102,6 @@ public class fragment_menu extends Fragment {
             }
         });
 
-
         kasbon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,8 +109,6 @@ public class fragment_menu extends Fragment {
 
             }
         });
-
-
 
         cuti.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +149,7 @@ public class fragment_menu extends Fragment {
 
             }
         });
+
         projectManage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,7 +164,6 @@ public class fragment_menu extends Fragment {
 
             }
         });
-
 
         slipGaji.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +191,45 @@ public class fragment_menu extends Fragment {
         }
     }
 
+    private void checkApproveAvailable() {
+        AndroidNetworking.post(api.URL_getAksesMobile)
+                .addBodyParameter("key", api.key)
+                .addBodyParameter("menu_mobile", "approve")
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Boolean success = response.getBoolean("success");
+                            if (success) {
+                                JSONArray jsonArray = response.getJSONArray("data");
 
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject data = jsonArray.getJSONObject(i);
+
+                                    if (data.getString("jabatan").contains(sessionmanager.getNoJabatan())){
+                                        cvApprove.setVisibility(View.VISIBLE);
+                                    }
+
+                                }
+
+                            }
+                            Log.d("CEK_UPDATE", "onResponse: " + success);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            helper.showMsg(getActivity(), "informasi", "" + helper.PESAN_SERVER);
+                            Log.d("JSONUPDATE", "onResponse: " + e);
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d("EROOR_UPDATE", "onError: " + anError);
+                        helper.showMsg(getActivity(), "informasi", "" + helper.PESAN_KONEKSI);
+
+                    }
+                });
+    }
 
 }

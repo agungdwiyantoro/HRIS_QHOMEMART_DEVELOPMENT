@@ -8,13 +8,11 @@
     android:orientation="vertical"
     >
 
-    <ImageView
-        android:id="@+id/ivBackPage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:src="@drawable/ic_keyboard_arrow_left_black_48dp"
-        />
+    <include
+        android:id="@+id/inc_backPage"
+        layout="@layout/layout_back_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,6 +31,7 @@
                 android:textSize="24sp"
                 android:layout_marginLeft="16dp"
                 android:textStyle="bold"
+                android:textColor="@color/light_grey"
                 />
 
             <ImageView
@@ -41,7 +40,6 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/onprogress"
                 />
 
             <TextView
@@ -89,7 +87,7 @@
                             android:id="@+id/view_result"
                             android:layout_width="4dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="13dp"
                             android:background="@color/light_grey" />
                     </LinearLayout>
 
@@ -130,7 +128,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/white"
-                            android:textSize="12dp"
+                            android:textSize="16sp"
                             tools:text="Order Successfully Completed" />
 
                     </LinearLayout>
@@ -172,7 +170,7 @@
                             android:id="@+id/view_hrd"
                             android:layout_width="4dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="13dp"
                             android:background="@color/light_grey" />
                     </LinearLayout>
 
@@ -254,7 +252,7 @@
                             android:id="@+id/view_exec"
                             android:layout_width="4dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="13dp"
                             android:background="@color/light_grey" />
                     </LinearLayout>
 
@@ -337,7 +335,7 @@
                             android:id="@+id/view_head"
                             android:layout_width="4dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="13dp"
                             android:background="@color/light_grey" />
                     </LinearLayout>
 
@@ -424,8 +422,10 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/data_ajuan"
                     android:textColor="@color/main_color_black"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    />
             </LinearLayout>
 
 
@@ -441,7 +441,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/nama"
                     android:textColor="@color/second_color_black"
-                    android:textSize="12dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tx_nama"
@@ -450,7 +450,8 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Muhamad Dios Pratama"
                     android:textColor="@color/main_color_black"
-                    android:textSize="24dp" />
+                    android:textSize="20sp"
+                    />
             </LinearLayout>
 
 
@@ -466,7 +467,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/indikasi_penyakit"
                     android:textColor="@color/second_color_black"
-                    android:textSize="12dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tx_indikasi_sakit"
@@ -475,7 +476,8 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Demam berdarah"
                     android:textColor="@color/main_color_black"
-                    android:textSize="24dp" />
+                    android:textSize="20sp"
+                    />
             </LinearLayout>
 
 
@@ -491,7 +493,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/catatan"
                     android:textColor="@color/second_color_black"
-                    android:textSize="12dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tx_catatan"
@@ -500,7 +502,8 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="sesak nafas,demam tinggi"
                     android:textColor="@color/main_color_black"
-                    android:textSize="24dp" />
+                    android:textSize="20sp"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -516,7 +519,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/lampiran_foto_surat_keterangan_dokter"
                     android:textColor="@color/second_color_black"
-                    android:textSize="12dp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tx_selengkapnya"

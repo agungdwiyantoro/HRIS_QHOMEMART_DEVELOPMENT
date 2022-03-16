@@ -8,14 +8,14 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_marginTop="@dimen/padd_10"
-        android:padding="15dp"
-        android:layout_gravity="left"
         android:id="@+id/imStatus"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_chevron_left_white_24dp"
-        android:backgroundTint="@color/abu_abu"/>
+        android:layout_gravity="left"
+        android:layout_marginTop="@dimen/padd_10"
+        android:background="@drawable/ic_keyboard_arrow_left_black_48dp"
+        android:backgroundTint="@color/abu_abu"
+        android:padding="15dp" />
 
 
     <LinearLayout
@@ -34,9 +34,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/padd_10"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Surat"
+                android:text="Izin"
                 android:textColor="@color/main_color_black"
                 android:textSize="36dp" />
 
@@ -73,9 +72,9 @@
                     android:orientation="horizontal">
 
                     <android.support.design.card.MaterialCardView
-                        android:layout_margin="5dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
@@ -98,13 +97,13 @@
                     </android.support.design.card.MaterialCardView>
 
                     <android.support.design.card.MaterialCardView
-                        android:layout_margin="5dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:elevation="10dp"
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
+                        android:elevation="10dp"
                         app:cardCornerRadius="5dp">
 
 
@@ -150,20 +149,20 @@
                 </android.support.design.card.MaterialCardView>
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
                     android:id="@+id/linear_izin_meninggalkan_tugas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:background="@color/white"
                     android:orientation="horizontal">
 
                     <android.support.design.card.MaterialCardView
-                        android:layout_margin="5dp"
-
                         android:layout_width="0dp"
+
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
@@ -186,13 +185,13 @@
                     </android.support.design.card.MaterialCardView>
 
                     <android.support.design.card.MaterialCardView
-                        android:layout_margin="5dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:elevation="10dp"
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
+                        android:elevation="10dp"
                         app:cardCornerRadius="5dp">
 
 
@@ -238,20 +237,20 @@
                 </android.support.design.card.MaterialCardView>
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
                     android:id="@+id/linear_izin_dinas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:background="@color/white"
                     android:orientation="horizontal">
 
                     <android.support.design.card.MaterialCardView
-                        android:layout_margin="5dp"
-
                         android:layout_width="0dp"
+
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
@@ -274,13 +273,13 @@
                     </android.support.design.card.MaterialCardView>
 
                     <android.support.design.card.MaterialCardView
-                        android:layout_margin="5dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:elevation="10dp"
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
+                        android:elevation="10dp"
                         app:cardCornerRadius="5dp">
 
 
@@ -327,19 +326,19 @@
                 </android.support.design.card.MaterialCardView>
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
                     android:id="@+id/linear_izin_cuti"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
                     android:background="@color/white"
                     android:orientation="horizontal">
 
                     <android.support.design.card.MaterialCardView
-                        android:layout_margin="5dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
@@ -362,13 +361,13 @@
                     </android.support.design.card.MaterialCardView>
 
                     <android.support.design.card.MaterialCardView
-                        android:layout_margin="5dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
                         android:layout_weight="1"
-                        android:elevation="10dp"
                         android:background="@color/white"
                         android:backgroundTint="@color/white"
+                        android:elevation="10dp"
                         app:cardCornerRadius="5dp">
 
 

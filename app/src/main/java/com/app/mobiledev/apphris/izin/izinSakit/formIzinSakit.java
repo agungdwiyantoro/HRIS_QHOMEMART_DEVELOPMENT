@@ -51,8 +51,8 @@ public class formIzinSakit extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     private EditText edit_tgl_sakit, edit_tgl_selesai_sakit, edit_IndikasiPenyakit, edit_catatan;
-    private ImageView image_surat_izin_sakit, ivTgl;
-    private TextView tx_image_name, txClose, tvGetDate;
+    private ImageView image_surat_izin_sakit, ivTgl, imStatus;
+    private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp;
     private TextInputLayout tx_input_indikasi, tx_input_tgl_sakit, tx_input_tgl_selesai_sakit;
     private Dialog dialogResign;
     private LinearLayout lin_transparant, llUploadSkd, llViewCalendar, llViewGetDates;
@@ -62,7 +62,7 @@ public class formIzinSakit extends AppCompatActivity {
     private File chosedfile;
     private Bitmap image_bmap;
     private Button btn_ajukan, btnDate, btnCancelDate;
-    private String kyano, token, nameImage = "", indikasiSakit = "", mulaiSakit = "", selasaiSakit = "", catatan = "", skd = "0";
+    private String kyano, token, nameImage = "", indikasiSakit = "", mulaiSakit = "", selasaiSakit = "", catatan = "", skd = "0", namaEmp, divisiEmp, jabatanEmp;
     private Toast toast;
 
     ArrayList<String> list = new ArrayList<String>();
@@ -72,29 +72,40 @@ public class formIzinSakit extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_izin_sakit);
+
+        imStatus = findViewById(R.id.imStatus);
+
         edit_tgl_sakit = findViewById(R.id.edit_tgl_sakit);
-        //edit_tgl_selesai_sakit=findViewById(R.id.edit_tgl_selesai_sakit);
         edit_catatan = findViewById(R.id.edit_catatan);
         tx_input_indikasi = findViewById(R.id.tx_input_indikasi);
         tx_input_tgl_sakit = findViewById(R.id.tx_input_tgl_sakit);
         lin_transparant = findViewById(R.id.lin_transparant);
         llUploadSkd = findViewById(R.id.llUploadSkd);
-        //tx_input_tgl_selesai_sakit=findViewById(R.id.tx_input_tgl_selesai_sakit);
         edit_IndikasiPenyakit = findViewById(R.id.edit_IndikasiPenyakit);
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         image_surat_izin_sakit = findViewById(R.id.image_surat_izin_sakit);
         ivTgl = findViewById(R.id.ivTgl);
         tx_image_name = findViewById(R.id.tx_image_name);
         btn_ajukan = findViewById(R.id.btn_ajukan);
-        //edit_tgl_sakit.setInputType(InputType.TYPE_NULL);
-        //edit_tgl_selesai_sakit.setInputType(InputType.TYPE_NULL);
+
         session = new SessionManager(formIzinSakit.this);
         helper.verifyStoragePermissions(formIzinSakit.this);
         kyano = session.getIdUser();
         token = session.getToken();
+
+        tvNamaEmp = findViewById(R.id.tvNamaEmp);
+        tvDivisiEmp = findViewById(R.id.tvDivisiEmp);
+        tvJabatanEmp = findViewById(R.id.tvJabatanEmp);
+
+        namaEmp = session.getNamaLEngkap();
+        divisiEmp = session.getDivisi();
+        jabatanEmp = session.getJabatan();
+
+        tvNamaEmp.setText(namaEmp);
+        tvDivisiEmp.setText(divisiEmp);
+        tvJabatanEmp.setText(jabatanEmp);
 
         /*
          * START OPEN MULTIPLE CALENDAR
@@ -168,6 +179,13 @@ public class formIzinSakit extends AppCompatActivity {
          * END OPEN MULTIPLE CALENDAR
          * */
 
+        imStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         cbSkdView = findViewById(R.id.cbSkd);
         cbSkdView.setOnClickListener(v -> {
             if (cbSkdView.isChecked()) {
@@ -234,7 +252,6 @@ public class formIzinSakit extends AppCompatActivity {
                 if (chosedfile != null) {
                     if (fileSizeInMB < 1) {
                         Toast.makeText(formIzinSakit.this, "Ukuran foto adalah "+fileSizeInKB+" Kb", toast.LENGTH_SHORT).show();
-                        uploadIzinSakit(chosedfile, token);
 
                         Log.d("TAG1", "onActivityResult: "+chosedfile.toString());
                     } else {
@@ -246,8 +263,6 @@ public class formIzinSakit extends AppCompatActivity {
 
                         Log.d("TAG2", "onActivityResult: Real: "+fileSizeInBytesNew+" | New: "+fileSizeInKBNew);
 
-                        uploadIzinSakit(compressedImageFile, token);
-
                         Toast.makeText(formIzinSakit.this, "Sekarang ukuran foto adalah "+fileSizeInKBNew+" Kb", toast.LENGTH_SHORT).show();
                     }
                 }
@@ -257,56 +272,6 @@ public class formIzinSakit extends AppCompatActivity {
         }
 
 
-    }
-
-    public void uploadIzinSakit(File file, String token) {
-        AndroidNetworking.upload(api.URL_uploadIzinSakit)
-                .addHeaders("Authorization", "Bearer " + token)
-                //.addHeaders("Authorization", "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjA2NTIyMDA1MTMwNTEyOTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImlhdCI6MTY0NTQ5NzEwMywiZXhwIjoxNjQ1NTE1MTAzfQ.WXlzgJadd0c1yZtgWp-CD5rgtmcsgO1ecgYOTUVI07Y")
-                .addMultipartFile("lampiran_file", file)
-                .setPriority(Priority.HIGH)
-                .build()
-                .setUploadProgressListener(new UploadProgressListener() {
-                    @Override
-                    public void onProgress(long bytesUploaded, long totalBytes) {
-                        // do anything with progress
-                        tx_image_name.setVisibility(View.VISIBLE);
-                        nameImage = tx_image_name.getText().toString();
-
-                    }
-                })
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Log.d("HASIL_RESPONSE", "onResponse: " + response);
-                            String status = response.getString("status");
-
-                            if (status.equals("200")) {
-                                JSONObject object = response.getJSONObject("message");
-                                nameImage = object.getString("file_name");
-                                tx_image_name.setVisibility(View.VISIBLE);
-                                tx_image_name.setText("" + nameImage);
-                                Toast.makeText(formIzinSakit.this, "Upload SKD berhasil", toast.LENGTH_SHORT).show();
-
-                            } else {
-                                JSONObject object = response.getJSONObject("message");
-                                String pesan = object.getString("lampiran_file");
-
-                                Toast.makeText(formIzinSakit.this, "" + pesan, toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("JSON_UPLOAD", "onResponse: " + e);
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("EROOR_UPLOAD", "onError: " + anError);
-                    }
-                });
     }
 
     private String getRealPathFormURI(Uri contenturi, Activity context) {
@@ -322,49 +287,6 @@ public class formIzinSakit extends AppCompatActivity {
         }
 
         return null;
-    }
-
-    private void insertIzinSakit(String indikasiSakit, String catatan, String namaFile, String selectDate, String option) {
-        AndroidNetworking.post(api.URL_IzinSakit)
-                .addHeaders("Authorization", "Bearer " + token)
-                .addBodyParameter("indikasi_sakit", indikasiSakit)
-                /*.addBodyParameter("mulai_sakit", mulaiSakit)
-                .addBodyParameter("selesai_sakit", selesaiSakit)*/
-                .addBodyParameter("catatan", catatan)
-                .addBodyParameter("nama_file", namaFile)
-                .addBodyParameter("select_date", selectDate)
-                .addBodyParameter("option", option)
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        lin_transparant.setVisibility(View.GONE);
-                        try {
-                            String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_INSERT", "onResponse: " + response);
-                            if (status.equals("201")) {
-                                String message = response.getString("message");
-                                notifDialogSukses();
-                            } else {
-                                JSONObject object = response.getJSONObject("message");
-                                String pesan = object.getString("lampiran_file");
-                                Toast.makeText(formIzinSakit.this, "" + pesan, toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            lin_transparant.setVisibility(View.GONE);
-                            Log.d("JSON_insert", "onResponse: " + e);
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        lin_transparant.setVisibility(View.GONE);
-                        Log.d("EROOR_insert", "onError: " + anError);
-                    }
-                });
-
     }
 
     private void cekInputFormInsert() {
@@ -383,7 +305,7 @@ public class formIzinSakit extends AppCompatActivity {
         }/*else if(selasaiSakit.isEmpty()){
             tx_input_tgl_selesai_sakit.setError("tanggal mulai sakit harus diisi");
             tx_input_tgl_selesai_sakit.requestFocus();
-        }*/ else if (nameImage.isEmpty() || chosedfile == null) {
+        }*/ else if (chosedfile == null) {
             Toast.makeText(formIzinSakit.this, "foto izin sakit belum disii", toast.LENGTH_SHORT).show();
         } else {
             //mProgressDialog.show();
@@ -392,9 +314,59 @@ public class formIzinSakit extends AppCompatActivity {
             //tx_input_tgl_selesai_sakit.setErrorEnabled(false);
             lin_transparant.setVisibility(View.VISIBLE);
             Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+indikasiSakit+" | "+ catatan +" | "+ nameImage +" | "+ edit_tgl_sakit.getText().toString() +" | "+ skd);
-            insertIzinSakit(indikasiSakit, catatan, nameImage, edit_tgl_sakit.getText().toString().trim() , skd);
+            insertIzinSakit(indikasiSakit, catatan, mulaiSakit, chosedfile , skd);
             //auth_user(id_user, password);
         }
+    }
+
+    private void insertIzinSakit(String indikasiSakit, String catatan, String selectDate, File file, String option) {
+        AndroidNetworking.upload(api.URL_IzinSakit)
+                .addHeaders("Authorization", "Bearer " + token)
+                .addMultipartParameter("indikasi_sakit", indikasiSakit)
+                .addMultipartParameter("catatan", catatan)
+                .addMultipartParameter("select_date", selectDate)
+                .addMultipartFile("lampiran_file", file)
+                .addMultipartParameter("option", option)
+                .setPriority(Priority.HIGH)
+                .build()
+                .setUploadProgressListener(new UploadProgressListener() {
+                    @Override
+                    public void onProgress(long bytesUploaded, long totalBytes) {
+                        Log.d("TAG_UPLOAD_PROGRESS", "onProgress: "+bytesUploaded);
+                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+totalBytes);
+                    }
+                })
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        lin_transparant.setVisibility(View.GONE);
+                        try {
+                            String status = response.getString("status");
+                            Log.d("RESULT_RESPONSE_INSERT", "onResponse: " + response);
+                            if (status.equals("200")) {
+                                String message = response.getString("message");
+                                notifDialogSukses();
+                            } else {
+                                JSONObject object = response.getJSONObject("message");
+                                String pesan = object.getString("lampiran_file");
+                                Toast.makeText(formIzinSakit.this, "" + pesan, toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            lin_transparant.setVisibility(View.GONE);
+                            Log.d("JSON_insert", "onResponse: " + e);
+                        }
+                    }
+
+
+
+                    @Override
+                    public void onError(ANError anError) {
+                        lin_transparant.setVisibility(View.GONE);
+                        Log.d("ERROR_INSERT_IZIN", "onError: " + anError);
+                    }
+                });
+
     }
 
     private void notifDialogSukses() {

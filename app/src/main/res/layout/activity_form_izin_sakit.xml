@@ -28,7 +28,7 @@
         android:id="@+id/imStatus"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_chevron_left_white_24dp"
+        android:background="@drawable/ic_keyboard_arrow_left_black_48dp"
         android:backgroundTint="@color/abu_abu"/>
 
     <ScrollView
@@ -88,6 +88,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/tvNamaEmp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -111,6 +112,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/tvDivisiEmp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -134,6 +136,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/tvJabatanEmp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"

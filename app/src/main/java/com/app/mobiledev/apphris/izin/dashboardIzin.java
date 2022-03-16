@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.izin.izinSakit.formIzinSakit;
 import com.app.mobiledev.apphris.izin.izinSakit.listIzinSakit;
+import com.app.mobiledev.apphris.izin.izinSakit.sakitNew.ListInfinitySakitEmp;
 
 public class dashboardIzin extends AppCompatActivity {
 
@@ -37,11 +39,14 @@ public class dashboardIzin extends AppCompatActivity {
     Boolean izin_dinas=false;
     Boolean izin_cuti=false;
 
+    ImageView imStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_izin);
 
+        imStatus = findViewById(R.id.imStatus);
 
         btn_izin_sakit=findViewById(R.id.btn_izin_sakit);
         btn_izin_meninggalkan_tugas=findViewById(R.id.btn_izin_meninggalkan_tugas);
@@ -67,6 +72,13 @@ public class dashboardIzin extends AppCompatActivity {
         linear_izin_dinas.setVisibility(View.GONE);
         linear_izin_cuti.setVisibility(View.GONE);
 
+        imStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         btn_izin_sakit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +102,7 @@ public class dashboardIzin extends AppCompatActivity {
         btn_status_izin_sakit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(dashboardIzin.this, listIzinSakit.class);
+                Intent i = new Intent(dashboardIzin.this, ListInfinitySakitEmp.class);
                 startActivity(i);
 
             }

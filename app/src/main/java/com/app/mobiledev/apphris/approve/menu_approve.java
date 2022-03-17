@@ -1,165 +1,173 @@
 package com.app.mobiledev.apphris.approve;
 
-import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
-
 import android.content.Intent;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.approve.adminIzinDinas.listIzinDinasApprove;
-import com.app.mobiledev.apphris.approve.adminIzinMt.listIzinMtApprove;
-import com.app.mobiledev.apphris.approve.adminIzinSakitHRD.ListIzinSakitApproveHRD;
 import com.app.mobiledev.apphris.approve.adminIzinSakitHead.ListIzinSakitApproveHead;
-import com.app.mobiledev.apphris.helperPackage.helper;
-import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
+import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-public class menu_approve extends AppCompatActivity {
-    private CardView card_izin_dinas;
-    private CardView card_izin_mt;
-    private CardView card_izin_sakit_approve_head;
-    private CardView card_izin_sakit_approve_hrd;
+public class menu_approve extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+    CardView cvSakitApproveHead, cvDinasApproveHead, cvTinggalTugasApproveHead, cvCutiApproveHead,
+            cvSakitApproveExec, cvDinasApproveExec, cvTinggalTugasApproveExec, cvCutiApproveExec,
+            cvSakitApproveDirect, cvDinasApproveDirect, cvTinggalTugasApproveDirect, cvCutiApproveDirect,
+            cvSakitApproveHRD, cvDinasApproveHRD, cvTinggalTugasApproveHRD, cvCutiApproveHRD;
     private SessionManager session;
-    private String token;
-    private ConstraintLayout lmenu;
+    private String token, spinSelected, spinResult, noJabatan, appHead, appExec, appDirect, appHRD;
     private SessionManager msession;
-
-
+    private Spinner dropdown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_approve);
-        card_izin_dinas=findViewById(R.id.card_izin_dinas);
-        card_izin_mt=findViewById(R.id.card_izin_mt);
-        card_izin_sakit_approve_head=findViewById(R.id.card_izin_sakit_approve_head);
-        card_izin_sakit_approve_hrd=findViewById(R.id.card_izin_sakit_approve_hrd);
-        lmenu=findViewById(R.id.lmenu);
-        msession=new SessionManager(menu_approve.this);
-        token=msession.getToken();
-        approveIzinSakitHead();
-        approveIzinSakitHrd();
+
+        msession = new SessionManager(menu_approve.this);
+
+        noJabatan = msession.getNoJabatan();
+
+        cvSakitApproveHead = findViewById(R.id.cvSakitApproveHead);
+        cvCutiApproveHead = findViewById(R.id.cvCutiApproveHead);
+        cvDinasApproveHead = findViewById(R.id.cvDinasApproveHead);
+        cvTinggalTugasApproveHead = findViewById(R.id.cvTinggalTugasApproveHead);
+
+        //get the spinner from the xml.
+        dropdown = findViewById(R.id.spinDDown);
+//create a list of items for the spinner.
+        String[] items = new String[]{"HRD", "Eksekutif", "Direktur"};
+//create an adapter to describe how the items are displayed, adapters are used in several places in android.
+//There are multiple variations of this, but this is the basic variant.
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//set the spinners adapter to the previously created one.
+        dropdown.setAdapter(adapter);
+
+        /*cvSakitApproveExec = findViewById(R.id.cvSakitApproveExec);
+        cvCutiApproveExec = findViewById(R.id.cvCutiApproveExec);
+        cvDinasApproveExec = findViewById(R.id.cvDinasApproveExec);
+        cvTinggalTugasApproveExec = findViewById(R.id.cvTinggalTugasApproveExec);
+
+        cvSakitApproveDirect = findViewById(R.id.cvSakitApproveDirect);
+        cvCutiApproveDirect = findViewById(R.id.cvCutiApproveDirect);
+        cvDinasApproveDirect = findViewById(R.id.cvDinasApproveDirect);
+        cvTinggalTugasApproveDirect = findViewById(R.id.cvTinggalTugasApproveDirect);
+
+        cvSakitApproveHRD = findViewById(R.id.cvSakitApproveHRD);
+        cvCutiApproveHRD = findViewById(R.id.cvCutiApproveHRD);
+        cvDinasApproveHRD = findViewById(R.id.cvDinasApproveHRD);
+        cvTinggalTugasApproveHRD = findViewById(R.id.cvTinggalTugasApproveHRD);*/
 
 
 
-        card_izin_dinas.setOnClickListener(new View.OnClickListener() {
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                helper.snackBar(lmenu,"menu ini belum tersedia....!!!");
-//                Intent intent = new Intent(menu_approve.this, listIzinDinasApprove.class);
-//                startActivity(intent);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spinSelected = parent.getItemAtPosition(position).toString();
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
+                switch (spinSelected) {
+                    case "HRD":
+                        spinResult = "HRD";
+                        onRefresh();
+                        break;
+                    case "Eksekutif":
+                        spinResult = "EXECUTIVE";
+                        onRefresh();
+                        break;
+                    case "Direktur":
+                        spinResult = "DIRECTOR";
+                        onRefresh();
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
 
-
-        card_izin_sakit_approve_head.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(menu_approve.this, ListIzinSakitApproveHead.class);
-                startActivity(intent);
-
-
-            }
-        });
-
-
-        card_izin_sakit_approve_hrd.setOnClickListener(new View.OnClickListener() {
+        cvSakitApproveHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(menu_approve.this, ListIzinSakitApproveHRD.class);
-                startActivity(intent);
 
+                if (noJabatan.equals("HR181")) {
+                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                    intent.putExtra("kyJabatan", "HEAD");
+                    startActivity(intent);
+                } else if(noJabatan.equals("HR177")){
+                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                    intent.putExtra("kyJabatan", "HEAD");
+                    startActivity(intent);
+                } else if(noJabatan.equals("HR177")){
+                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                    intent.putExtra("kyJabatan", "HEAD");
+                    startActivity(intent);
+                } else if(noJabatan.equals("HR177")){
+                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                    intent.putExtra("kyJabatan", "HEAD");
+                    startActivity(intent);
+                }  else if(noJabatan.equals("HR177")){
+                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                    intent.putExtra("kyJabatan", "HEAD");
+                    startActivity(intent);
+                }
             }
         });
-    }
 
-    private void approveIzinSakitHrd(){
-        AndroidNetworking.get(api.URL_IzinSakit_approve_hrd)
-                .addHeaders("Authorization", "Bearer "+token)
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String status = response.getString("status");
-                            String message = response.getString("message");
-                            Log.d("HASL_RESPONSE_HRD", "onResponse: " + status);
-                            if (status.equals("200")) {
-                                card_izin_sakit_approve_hrd.setVisibility(View.VISIBLE);
-                            } else {
-                                card_izin_sakit_approve_hrd.setVisibility(View.GONE);
-                            }
+        /*cvSakitApproveHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                switch (noJabatan) {
+                    case "HR181": // System Development Manager
+
+                        Intent intent = new Intent(menu_approve.this, ListIzinSakitApproveHead.class);
+                        intent.putExtra("kyJabatan", noJabatan);
+                        startActivity(intent);
+
+                        break;
+                    case "HR003": // FINANCE MANAGER
 
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
 
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("EROOR_RIWYAT_SAKIT_HRD", "onError: " + anError.getErrorDetail());
-                        card_izin_sakit_approve_hrd.setVisibility(View.GONE);
-
-                    }
-                });
-    }
+                        break;
+                    case "HR177": // Sekretaris Direktur
 
 
-    private void approveIzinSakitHead(){
-        AndroidNetworking.get(api.URL_IzinSakit_approve_head)
-                .addHeaders("Authorization", "Bearer "+token)
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String status = response.getString("status");
-                            Log.d("HASL_RESPONSE_HEAD", "onResponse: " + status);
-                            if (status.equals("200")) {
-                                card_izin_sakit_approve_head.setVisibility(View.VISIBLE);
-                            } else {
-                                card_izin_sakit_approve_head.setVisibility(View.GONE);
-                            }
 
+                        break;
+                    case "HR058": // KEPALA URUSAN PAJAK
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("JSON_RESPONSE_HEAD", "onResponse: " + e);
+                        break;
+                    case "HR007": // EXECUTIVE MANAGER KEUANGAN
 
-                        }
-                    }
+                        break;
+                    case "HR245": // Executive HR Manager
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("EROOR_RESPONSE_HEAD", "onError: " + anError.getErrorDetail());
-                        card_izin_sakit_approve_head.setVisibility(View.GONE);
+                        break;
+                    default:
+                }
 
-                    }
-                });
+            }
+        });*/
+
     }
 
 
 
+    @Override
+    public void onRefresh() {
+
+    }
 }

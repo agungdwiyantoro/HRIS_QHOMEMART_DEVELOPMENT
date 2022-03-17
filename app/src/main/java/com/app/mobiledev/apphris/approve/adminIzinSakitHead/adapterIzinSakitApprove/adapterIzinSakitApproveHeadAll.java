@@ -16,7 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.approve.adminIzinSakitHead.detailIzinSakitApproveHead;
+import com.app.mobiledev.apphris.approve.approveSakitNew.DetailIzinSakitApprove;
 import com.app.mobiledev.apphris.helperPackage.BaseViewHolder;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 
@@ -177,7 +177,7 @@ public class adapterIzinSakitApproveHeadAll extends RecyclerView.Adapter<BaseVie
             line1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(mCtx, detailIzinSakitApproveHead.class);
+                    Intent i = new Intent(mCtx, DetailIzinSakitApprove.class);
                     Bundle x = new Bundle();
                     x.putString("id", Object.getId());
                     i.putExtras(x);

@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.izin.izinSakit.sakitNew;
+package com.app.mobiledev.apphris.Model;
 
 import android.util.Log;
 

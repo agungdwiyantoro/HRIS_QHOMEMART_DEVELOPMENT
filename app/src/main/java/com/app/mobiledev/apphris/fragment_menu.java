@@ -1,8 +1,6 @@
 package com.app.mobiledev.apphris;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
@@ -56,7 +54,7 @@ public class fragment_menu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView= inflater.inflate(R.layout.activity_fragment_pinjaman, container, false);
+        rootView= inflater.inflate(R.layout.activity_fragment_menu, container, false);
         pinjaman=rootView.findViewById(R.id.pinjaman);
         kasbon=rootView.findViewById(R.id.kasbon);
         cuti=rootView.findViewById(R.id.cuti);
@@ -205,11 +203,15 @@ public class fragment_menu extends Fragment {
                             if (success) {
                                 JSONArray jsonArray = response.getJSONArray("data");
 
+                                Log.d("TAG_PREF_JABATAN", "onResponse: "+sessionmanager.getNoJabatan());
+
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
 
                                     if (data.getString("jabatan").contains(sessionmanager.getNoJabatan())){
                                         cvApprove.setVisibility(View.VISIBLE);
+                                    } else {
+                                        cvApprove.setVisibility(View.GONE);
                                     }
 
                                 }

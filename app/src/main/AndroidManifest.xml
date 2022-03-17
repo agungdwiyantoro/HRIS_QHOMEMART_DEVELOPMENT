@@ -46,6 +46,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
+
+        <activity
+            android:name=".approve.approveSakitNew.ListInfinitySakitApprove"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="true">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+
         <activity
             android:name=".test.SecurityVerifikasi.ScanQR"
             android:exported="false"
@@ -73,7 +86,7 @@
             android:name=".test.SecurityVerifikasi.SecurityVerifikasi"
             android:exported="true" />
         <activity
-            android:name=".approve.adminIzinSakitHead.detailIzinSakitApproveHead"
+            android:name=".approve.approveSakitNew.DetailIzinSakitApprove"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".splashScreen"
@@ -201,7 +214,9 @@
         <activity
             android:name=".izin.izinMT.listIzinMt"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".approve.menu_approve" />
+        <activity android:name=".approve.menu_approve"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
         <activity
             android:name=".izin.izinDinas.formDetailIzinDinas"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

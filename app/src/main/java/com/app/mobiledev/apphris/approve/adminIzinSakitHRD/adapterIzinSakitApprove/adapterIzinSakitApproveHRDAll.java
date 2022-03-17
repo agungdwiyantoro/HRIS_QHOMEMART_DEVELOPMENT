@@ -11,12 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.approve.adminIzinSakitHRD.detailIzinSakitApproveHRD;
-import com.app.mobiledev.apphris.approve.adminIzinSakitHead.detailIzinSakitApproveHead;
 import com.app.mobiledev.apphris.helperPackage.BaseViewHolder;
 import com.app.mobiledev.apphris.izin.izinSakit.modelIzinSakit;
 

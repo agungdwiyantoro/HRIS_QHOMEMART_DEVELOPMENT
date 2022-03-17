@@ -48,7 +48,7 @@
     <!--menu approve-->
     <string name="menu_izin_dinas">izin dinas</string>
     <string name="menu_izin_mt">izin meninggalkan tugas</string>
-    <string name="ket_menu_approve">Merupakan menu yang dapat\ndiakses oleh masing-masing\nhead divisi</string>
+    <string name="ket_menu_approve">Merupakan menu yang dapat diakses oleh karyawan yang telah ditetapkan oleh HRD</string>
 
 
     <!--menu info-->
@@ -185,8 +185,31 @@
     <string name="approve_izin_sakit">approve izin sakit</string>
     <string name="izin_dinas">Izin Dinas</string>
     <string name="cuti">Cuti</string>
-    <string name="izin_sakit_approve_hrd">izit sakit approve hrd</string>
-    <string name="izin_sakit_approve_head">izin sakit aprrove head</string>
+
+    <string name="izin_sakit_approve_head">Daftar Pengajuan Izin Sakit</string>
+    <string name="izin_dinas_approve_head">Daftar Pengajuan Izin Dinas</string>
+    <string name="izin_tinggal_tugas_approve_head">Daftar Pengajuan Izin Meninggalkan Tugas</string>
+    <string name="izin_cuti_approve_head">Daftar Pengajuan Izin Cuti</string>
+
+    <!--<string name="izin_sakit_approve_head">Daftar Pengajuan Izin Sakit(Head/SPV)</string>
+    <string name="izin_dinas_approve_head">Daftar Pengajuan Izin Dinas(Head/SPV)</string>
+    <string name="izin_tinggal_tugas_approve_head">Daftar Pengajuan Izin Meninggalkan Tugas(Head/SPV)</string>
+    <string name="izin_cuti_approve_head">Daftar Pengajuan Izin Cuti(Head/SPV)</string>-->
+
+    <!--<string name="izin_sakit_approve_exec">Daftar Pengajuan Izin Sakit(Executive)</string>
+    <string name="izin_dinas_approve_exec">Daftar Pengajuan Izin Dinas(Executive)</string>
+    <string name="izin_tinggal_tugas_approve_exec">Daftar Pengajuan Izin Meninggalkan Tugas(Executive)</string>
+    <string name="izin_cuti_approve_exec">Daftar Pengajuan Izin Cuti(Executive)</string>
+
+    <string name="izin_sakit_approve_direct">Daftar Pengajuan Izin Sakit(Direktur)</string>
+    <string name="izin_dinas_approve_direct">Daftar Pengajuan Izin Dinas(Direktur)</string>
+    <string name="izin_tinggal_tugas_approve_direct">Daftar Pengajuan Izin Meninggalkan Tugas(Direktur)</string>
+    <string name="izin_cuti_approve_direct">Daftar Pengajuan Izin Cuti(Direktur)</string>
+
+    <string name="izin_sakit_approve_hrd">Daftar Pengajuan Izin Sakit(HRD)</string>
+    <string name="izin_dinas_approve_hrd">Daftar Pengajuan Izin Dinas(HRD)</string>
+    <string name="izin_tinggal_tugas_approve_hrd">Daftar Pengajuan Izin Meninggalkan Tugas(HRD)</string>
+    <string name="izin_cuti_approve_hrd">Daftar Pengajuan Izin Cuti(HRD)</string>-->
 
     <string name="tambah">Tambah</string>
     <string name="data_ajuan">Data Pengajuan</string>

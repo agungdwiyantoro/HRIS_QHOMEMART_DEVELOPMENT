@@ -1,12 +1,13 @@
-package com.app.mobiledev.apphris.izin.izinSakit.sakitNew;
+package com.app.mobiledev.apphris.approve.approveSakitNew;
 
 import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -46,12 +47,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ListInfinitySakitApprove extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     Spinner dropdown;
     RecyclerView recyler_izin_sakit;
     private List<modelIzinSakitNew> modelIzinSakitNews;
-    private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="null";
+    private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="null", access ="";
     private SessionManager msession;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
@@ -65,7 +66,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
     private boolean isLoading = false;
     int itemCount = 0;
     LinearLayoutManager layoutManager;
-    adapterIzinSakitEmp adapterIzinSakitEmp;
+    adapterIzinSakitApprove adapterIzinSakitApprove;
     private ShimmerFrameLayout mShimmerViewContainer;
 
     MonthYearPickerDialogFragment dialogFragment;
@@ -77,17 +78,15 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_infinity_sakit_emp);
 
+        Intent intent = getIntent();
+        access = intent.getStringExtra("kyJabatan");
+
         inc_backPage = findViewById(R.id.inc_backPage);
 
-        //get the spinner from the xml.
         dropdown = findViewById(R.id.spinDDown);
-//create a list of items for the spinner.
         String[] items = new String[]{"Menunggu", "Diterima", "Ditolak"};
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
 
         tvDate = findViewById(R.id.tvDate);
@@ -101,8 +100,8 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         lin_transparant = findViewById(R.id.lin_transparant);
         swipeRefresh = findViewById(R.id.swipeRefresh);
         tx_approve = findViewById(R.id.tx_approve);
-        swipeRefresh.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) ListInfinitySakitEmp.this);
-        msession = new SessionManager(ListInfinitySakitEmp.this);
+        swipeRefresh.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) ListInfinitySakitApprove.this);
+        msession = new SessionManager(ListInfinitySakitApprove.this);
         modelIzinSakitNews = new ArrayList<>();
         token = msession.getToken();
         layoutManager = new LinearLayoutManager(this);
@@ -129,8 +128,8 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         dialogFragment = MonthYearPickerDialogFragment
                 .getInstance(monthSelected, yearSelected, minDate, maxDate, "Tanggal Izin");
 
-        adapterIzinSakitEmp = new adapterIzinSakitEmp(ListInfinitySakitEmp.this, new ArrayList<>());
-        recyler_izin_sakit.setAdapter(adapterIzinSakitEmp);
+        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>());
+        recyler_izin_sakit.setAdapter(adapterIzinSakitApprove);
         getMonth();
         paginationCall();
 
@@ -211,7 +210,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                 bil = "" + monthAdd;
             }
 
-            dateMonthDate = year + "-" + bil/* + "-01"*/;
+            dateMonthDate = year + "-" + bil;
             dateMonthString = year + "-" + bil + "-01";
 
             String monthYear = helper.formateDateFromstring("yyyy-MM-dd", "MMMM yyyy", dateMonthString);
@@ -278,127 +277,26 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         itemCount = 0;
         currentPage = PAGE_START;
         isLastPage = false;
-        adapterIzinSakitEmp.clear();
+        adapterIzinSakitApprove.clear();
         mShimmerViewContainer.startShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         recyler_izin_sakit.setVisibility(View.GONE);
-        recyler_izin_sakit.setAdapter(adapterIzinSakitEmp);
+        recyler_izin_sakit.setAdapter(adapterIzinSakitApprove);
 
 
 
         paginationCall();
     }
 
-    private void getRiwayatSakitAll(int page, int offset, ArrayList items) {
-        //AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset+"&status=")
-        //AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit=" + page + "&offset=" + offset + "&status=")
-        Log.d("TAG_PARAM", "getRiwayatSakitAll: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult);
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult)
-                .addHeaders("Authorization", "Bearer "+token)
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String status = response.getString("status");
-                            String message = response.getString("message");
-                            Log.d("TAG_TAG", "run: " + message);
-
-                            if (status.equals("200")) {
-                                JSONArray jsonArray = response.getJSONArray("message");
-                                Log.d("TAG_TAG", "run: " + jsonArray);
-
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject data = jsonArray.getJSONObject(i);
-                                    modelIzinSakitNew model = new modelIzinSakitNew();
-
-                                    model.setName(data.getString("name"));
-                                    model.setId(data.getString("id"));
-                                    model.setKyano(data.getString("kyano"));
-                                    model.setIndikasiSakit(data.getString("indikasi_sakit"));
-                                    model.setMulaiSakitTanggal(data.getString("mulai_sakit_tanggal"));
-                                    model.setSelesaiSakitTanggal(data.getString("selesai_sakit_tanggal"));
-                                    model.setSelectDate(data.getString("select_date"));
-                                    model.setCatatan(data.getString("catatan"));
-                                    model.setLampiranFile(data.getString("lampiran_file"));
-
-                                    model.setCreatedAt(data.getString("created_at"));
-                                    model.setUpdatedAt(data.getString("updated_at"));
-                                    model.setApproveHead(data.getString("approve_head"));
-                                    model.setApproveHrd(data.getString("approve_hrd"));
-
-                                    model.setApproveExecutiv(data.getString("approve_executiv"));
-                                    model.setApproveDirectur(data.getString("approve_directur"));
-
-                                    model.setExecutivKyano(data.getString("executiv_kyano"));
-                                    model.setDirecturKyano(data.getString("directur_kyano"));
-                                    model.setHrdKyano(data.getString("hrd_kyano"));
-
-                                    model.setHeadApproveDate(data.getString("head_approve_date"));
-                                    model.setHrdApproveDate(data.getString("hrd_approve_date"));
-                                    model.setExecutivApproveDate(data.getString("executiv_approve_date"));
-                                    model.setDirecturApproveDate(data.getString("directur_approve_date"));
-
-                                    model.setHeadName(data.getString("head_name"));
-                                    model.setHrdName(data.getString("hrd_name"));
-
-                                    model.setCatatanHrd(data.getString("catatan_hrd"));
-                                    model.setStatus(data.getString("status"));
-
-                                    items.add(model);
-                                    //modelIzinSakits.add(model);
-                                    //modelIzinSakitNews.add(model);
-
-                                    Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
-
-                                }
-                            } else if(status.equals("201")) {
-                                Toast.makeText(ListInfinitySakitEmp.this, "Riwayat Izin Sakit Kosong", Toast.LENGTH_LONG).show();
-                                emptyHistory.setVisibility(View.VISIBLE);
-                            }
-
-                            if (currentPage != PAGE_START)
-                                adapterIzinSakitEmp.removeLoading();
-                            adapterIzinSakitEmp.addItems(items);
-                            swipeRefresh.setRefreshing(false);
-                            Log.d("CUURENT_PAGE", "onResponse: " + items.size());
-
-                            if (currentPage < totalPage) {
-                                //adapterIzinSakitEmp.addLoading();
-                            } else {
-                                isLastPage = true;
-                            }
-                            isLoading = false;
-
-                            // Stopping Shimmer Effect's animation after data is loaded to ListView
-                            mShimmerViewContainer.stopShimmerAnimation();
-                            mShimmerViewContainer.setVisibility(View.GONE);
-
-                            recyler_izin_sakit.setVisibility(View.VISIBLE);
-
-                        } catch (JSONException e) {
-
-                            e.printStackTrace();
-                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("ON_ERROR", "onError: "+anError.getErrorBody());
-                    }
-
-
-
-
-                });
-
-
-    }
-
     private void getData(int page, int offset, ArrayList items) {
-        JsonObjectRequest req = new JsonObjectRequest("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult, null,
+        //http://192.168.50.24/all/hris_ci_3/api/approvesakit?status=&hak_akses=HEAD&limit=10&offset=0
+        JsonObjectRequest req = new JsonObjectRequest(
+                "http://192.168.50.24/all/hris_ci_3/api/approvesakit?" +
+                        "offset=" + offset +
+                        "&hak_akses="+ access +
+                        "&first_date="+ dateMonthDate +
+                        "&limit=" + page +
+                        "&status="+spinResult, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -463,8 +361,8 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                             }
 
                             if (currentPage != PAGE_START)
-                                adapterIzinSakitEmp.removeLoading();
-                            adapterIzinSakitEmp.addItems(items);
+                                adapterIzinSakitApprove.removeLoading();
+                            adapterIzinSakitApprove.addItems(items);
                             swipeRefresh.setRefreshing(false);
                             Log.d("CUURENT_PAGE", "onResponse: " + items.size());
 
@@ -506,13 +404,13 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer "+token);
+                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjAwMTEwODAxMDMxMzA0NzkiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTgxIiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJIRUFEIiwiaWF0IjoxNjQ3NDk5OTE0LCJleHAiOjE2NDc1MTc5MTR9.M6JISgefWIi42iK4I3BQkFx3KTEw1RHozi7pXp717vg"/*+token*/);
                 return headers;
             }
         };
 
         //ApplicationController.getInstance().addToRequestQueue(req);
-        Volley.newRequestQueue(ListInfinitySakitEmp.this).add(req);
+        Volley.newRequestQueue(ListInfinitySakitApprove.this).add(req);
     }
 
     @Override

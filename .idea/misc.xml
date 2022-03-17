@@ -101,12 +101,14 @@
         <entry key="app/src/main/res/drawable/ic_dot_point_abu_abu.xml" value="1.0" />
         <entry key="app/src/main/res/drawable/ic_dot_point_red.xml" value="0.35462962962962963" />
         <entry key="app/src/main/res/drawable/ic_keyboard_arrow_left_black_48dp.xml" value="0.3055555555555556" />
+        <entry key="app/src/main/res/layout-v26/activity_fragment_menu.xml" value="0.228125" />
         <entry key="app/src/main/res/layout-v26/activity_fragment_pinjaman.xml" value="0.19537037037037036" />
         <entry key="app/src/main/res/layout-v28/list_riwayat_izin_sakit.xml" value="0.34" />
         <entry key="app/src/main/res/layout/activity_add_bonus.xml" value="0.3074074074074074" />
         <entry key="app/src/main/res/layout/activity_bonus.xml" value="0.3074074074074074" />
         <entry key="app/src/main/res/layout/activity_calendar_test.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dashboard_izin.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/layout/activity_detail_izin_sakit_approve.xml" value="0.1574074074074074" />
         <entry key="app/src/main/res/layout/activity_detail_sakit_emp.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_form_izin_sakit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_fragment_pinjaman.xml" value="0.22" />
@@ -115,6 +117,7 @@
         <entry key="app/src/main/res/layout/activity_list_infinity_sakit_emp.xml" value="0.2140221402214022" />
         <entry key="app/src/main/res/layout/activity_list_izin_sakit.xml" value="0.3138888888888889" />
         <entry key="app/src/main/res/layout/activity_list_pengajuan_approve.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_menu_approve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_menu_bonus.xml" value="0.3074074074074074" />
         <entry key="app/src/main/res/layout/activity_menu_training.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_riwayat_verifikasi_security.xml" value="0.33" />
@@ -127,6 +130,7 @@
         <entry key="app/src/main/res/layout/dialog_foto_izin_sakit.xml" value="0.3109375" />
         <entry key="app/src/main/res/layout/item_loading_progress.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/layout_back_page.xml" value="0.3458333333333333" />
         <entry key="app/src/main/res/layout/layout_empty_history.xml" value="0.2638888888888889" />
         <entry key="app/src/main/res/layout/list_riwayat_izin_sakit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_riwayat_izin_sakit_approve_head.xml" value="0.4036458333333333" />

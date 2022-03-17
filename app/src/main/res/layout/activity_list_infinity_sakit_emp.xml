@@ -7,7 +7,7 @@
     android:background="@color/white"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".izin.izinSakit.sakitNew.ListInfinitySakitEmp">
+    >
 
     <include
         android:id="@+id/inc_backPage"

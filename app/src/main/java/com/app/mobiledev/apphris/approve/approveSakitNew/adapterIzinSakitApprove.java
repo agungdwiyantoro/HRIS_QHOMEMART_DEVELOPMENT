@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.izin.izinSakit.sakitNew;
+package com.app.mobiledev.apphris.approve.approveSakitNew;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,7 +27,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
+public class adapterIzinSakitApprove extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_NORMAL = 1;
     private Context mCtx;
@@ -35,7 +35,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
 
     private final List<modelIzinSakitNew> modelIzinSakitNews;
 
-    public adapterIzinSakitEmp(Context mCtx, List<modelIzinSakitNew> modelIzinSakitNews) {
+    public adapterIzinSakitApprove(Context mCtx, List<modelIzinSakitNew> modelIzinSakitNews) {
         this.mCtx = mCtx;
         this.modelIzinSakitNews = modelIzinSakitNews;
     }
@@ -181,7 +181,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
             card_list_riwayat_izin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(mCtx, DetailIzinSakitEmp.class);
+                    Intent i = new Intent(mCtx, DetailIzinSakitApprove.class);
                     Bundle x = new Bundle();
                     x.putString("id", Object.getId());
                     i.putExtras(x);

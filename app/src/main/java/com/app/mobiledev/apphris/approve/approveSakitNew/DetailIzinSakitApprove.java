@@ -7,15 +7,21 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.ColorRes;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,14 +49,14 @@ import java.util.Date;
 
 public class DetailIzinSakitApprove extends AppCompatActivity {
 
-    private String id, name, indikasi_sakit, kyano, mulai_sakit_tanggal, selesai_sakit_tanggal, catatan, created_at, updated_at;
+    private String id, access, name, indikasi_sakit, kyano, mulai_sakit_tanggal, selesai_sakit_tanggal, catatan, created_at, updated_at;
     private String approve_head, approve_hrd, lampiran_file, head_kyano, head_approve_date, hrd_approve_date, head_name, hrd_kyano;
     private String status;
     private TextView txNama_title, tx_jenisIzin_title, tx_tanggal_title, tx_bulan_tahun_title;
     private TextView tx_nama, tx_indikasi_sakit, tx_catatan, tx_tgl_pengajuan, tx_link_lihat_dokumen;
     private TextView tx_status, tx_tgl_status;
     private TextView tx_waktu_sakit;
-    private TextView tx_nama_dialog, btn_close_dialog, btn_setuju_dialog, tx_info_dialog, tx_jenis_izin_dialog;
+    private TextView tx_nama_dialog, tvCancelDialog, tvSubmitDialog, tx_info_dialog, tx_jenis_izin_dialog;
     private ImageView ivImageName;
     private LinearLayout linearOption, linearKeputusan;
     private String token;
@@ -62,7 +68,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     private SimpleDateFormat dateFormat_standart;
     private SimpleDateFormat dateFormatSources;
     private Date dateSource;
-    private CardView card_status_approve;
+    private CardView card_status_approve, cvSubmitDialog, cvCancelDialog;
     private LinearLayout lin_approve_btn;
     private LinearLayout lin_status_approve;
     private ImageView imStatus;
@@ -74,12 +80,19 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     private Button btn_tolak;
     private DownloadManager downloadManager;
     private FloatingActionButton fabDownloadIzin;
+    private TextInputLayout tilAlasan;
+    private EditText etAlasan;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_izin_sakit_approve);
+
+        bundle = getIntent().getExtras();
+        id = bundle.getString("id");
+        access = bundle.getString("access");
+
         txNama_title = findViewById(R.id.txNama_title);
         tx_jenisIzin_title = findViewById(R.id.tx_jenisIzin_title);
         tx_tanggal_title = findViewById(R.id.tx_tanggal_title);
@@ -105,8 +118,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         dateFormat_day = new SimpleDateFormat("dd");
         dateFormat_month_year = new SimpleDateFormat("MMM-yyyy");
         dateFormat_standart = new SimpleDateFormat("dd-MMM-yyyy");
-        bundle = getIntent().getExtras();
-        id = bundle.getString("id");
+
         card_status_approve.setVisibility(View.GONE);
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 
@@ -114,8 +126,8 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         linearOption = findViewById(R.id.lLDetOption);
         linearKeputusan = findViewById(R.id.lLDetKeputusanAprove);
         getDetailSakitApprove(id);
-        Log.d("CEK_URL_APPROVE", "onCreate: " + api.URL_IzinSakit_approve_head + "?id=" + id);
-        Log.d("CEK_URL_STATUS", "onCreate: " + status);
+        Log.d("CEK_URL_APPROVE", "onCreate: " + api.URL_IzinSakit_approve + "?id=" + id);
+        Log.d("CEK_BUNDLE_STRING", "onCreate: " + id + access + token);
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +137,9 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     }
 
     private void getDetailSakitApprove(String _id) {
-        AndroidNetworking.get(api.URL_IzinSakit_approve_head + "?id=" + _id)
+        //http://192.168.50.24/all/hris_ci_3/api/approvesakit?id=7
+        AndroidNetworking.get(api.URL_IzinSakit_approve + "?id=" + _id)
+        /*AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/approvesakit?id=7")*/
                 .addHeaders("Authorization", "Bearer " + token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -206,7 +220,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                 btn_setuju.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        notifDialog("Apakah Anda yakin menyetujui izin", name, "1");
+                                        notifDialog("Apakah Anda yakin menyetujui izin dari ", name, "1");
 
                                     }
                                 });
@@ -214,13 +228,12 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                 btn_tolak.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        notifDialog("Apakah Anda yakin menolak izin", name, "0");
+                                        notifDialog("Apakah Anda yakin menolak izin dari ", name, "0");
                                     }
                                 });
 
 
                             }
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -242,28 +255,43 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     private void notifDialog(String pesan, String nama, String _value) {
         dialogApprove = new Dialog(DetailIzinSakitApprove.this);
         dialogApprove.setContentView(R.layout.dialog_persetujuan_izin);
+
         tx_nama_dialog = dialogApprove.findViewById(R.id.tx_nama_dialog);
-        btn_close_dialog = dialogApprove.findViewById(R.id.btn_close);
-        btn_setuju_dialog = dialogApprove.findViewById(R.id.btn_setuju);
-        tx_jenis_izin_dialog = dialogApprove.findViewById(R.id.tx_jenis_izin);
+        cvSubmitDialog = dialogApprove.findViewById(R.id.cvSubmitDialog);
+        cvCancelDialog = dialogApprove.findViewById(R.id.cvCancelDialog);
         tx_info_dialog = dialogApprove.findViewById(R.id.tx_info);
+        tvSubmitDialog = dialogApprove.findViewById(R.id.tvSubmitDialog);
+        tilAlasan = dialogApprove.findViewById(R.id.tilAlasan);
+        etAlasan = dialogApprove.findViewById(R.id.etAlasan);
         tx_nama_dialog.setText(nama);
-        tx_jenis_izin_dialog.setText("Izin Sakit");
+
+        if (_value.equals("0")) {
+            //cvSubmitDialog.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+            cvSubmitDialog.setCardBackgroundColor(getResources().getColor(R.color.quantum_vanillared800));
+            //cvSubmitDialog.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
+            //cvSubmitDialog.setTint
+            tvSubmitDialog.setText("Tolak");
+            tilAlasan.setVisibility(View.VISIBLE);
+        } else {
+            cvSubmitDialog.setCardBackgroundColor(getResources().getColor(R.color.quantum_vanillagreen800
+            ));
+        }
 
         dialogApprove.setCancelable(true);
-        dialogApprove.setTitle("Update data diri");
+        dialogApprove.setTitle("Konfirmasi");
         tx_info_dialog.setText(pesan);
-        btn_close_dialog.setOnClickListener(new View.OnClickListener() {
+
+        cvCancelDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogApprove.dismiss();
             }
         });
 
-        btn_setuju_dialog.setOnClickListener(new View.OnClickListener() {
+        cvSubmitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateApprove(id, _value);
+                updateApprove(id, _value, access);
                 dialogApprove.dismiss();
             }
         });
@@ -280,7 +308,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true);
-        Glide.with(DetailIzinSakitApprove.this).load(api.URL_foto_izinsakit + "" + lampiran_file).thumbnail(Glide.with(DetailIzinSakitApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
+        Glide.with(DetailIzinSakitApprove.this).load(api.URL_foto_izinsakit+kyano+"/lampiran/surat_sakit/"+lampiran_file).thumbnail(Glide.with(DetailIzinSakitApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
         fabDownloadIzin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -290,11 +318,12 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         dialogFoto.show();
     }
 
-    private void updateApprove(String _id, String value) {
-        AndroidNetworking.put(api.URL_IzinSakit_approve_head)
+    private void updateApprove(String _id, String value, String hak_akses) {
+        AndroidNetworking.put(api.URL_IzinSakit_approve)
                 .addHeaders("Authorization", "Bearer " + token)
                 .addBodyParameter("id", _id)
                 .addBodyParameter("status", value)
+                .addBodyParameter("hak_akses", hak_akses)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -305,7 +334,9 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                             status = response.getString("status");
                             if (status.equals("200")) {
                                 Log.d("APPROVE_SUKSES", "onResponse: " + response.toString());
+                                startActivity(getIntent());
                                 finish();
+
                             } else {
                                 helper.messageToast(DetailIzinSakitApprove.this, "izin gagal approve..!!");
                             }
@@ -324,10 +355,10 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                 });
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void downloadIzin(String fileName) {
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri uri = Uri.parse(api.URL_foto_izinsakit + fileName);
+        Uri uri = Uri.parse(api.URL_foto_izinsakit+kyano+"/lampiran/surat_sakit/"+fileName);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName + ".png");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -372,4 +403,5 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         }).start();
         progressBarDialog.show();
     }
+
 }

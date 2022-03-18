@@ -179,7 +179,7 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
                     offset=(itemCount-totalPage)+1;
                 }
                 recyler_izin_sakit.setHasFixedSize(true);
-                Log.d("cek_url_all", "run: "+api.URL_IzinSakit_approve_head+"?limit="+itemCount+"&offset="+offset);
+                Log.d("cek_url_all", "run: "+api.URL_IzinSakit_approve+"?limit="+itemCount+"&offset="+offset);
                 getRiwayatSakitAll(itemCount,offset,items);
             }
         }, 1500);
@@ -203,7 +203,7 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
 
     private void getRiwayatSakitAll(int page,int offset,ArrayList items) {
         if(all==false){
-            AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset+"&status=0")
+            AndroidNetworking.get(api.URL_IzinSakit_approve+"?limit="+page+"&offset="+offset+"&status=0")
                     .addHeaders("Authorization", "Bearer "+token)
                     .setPriority(Priority.HIGH)
                     .build()
@@ -304,7 +304,7 @@ public class ListIzinSakitApproveHead extends AppCompatActivity implements Swipe
                         }
                     });
         }else{
-            AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset)
+            AndroidNetworking.get(api.URL_IzinSakit_approve+"?limit="+page+"&offset="+offset)
                     .addHeaders("Authorization", "Bearer "+token)
                     .setPriority(Priority.HIGH)
                     .build()

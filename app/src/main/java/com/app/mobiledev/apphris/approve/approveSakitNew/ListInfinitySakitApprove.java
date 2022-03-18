@@ -52,7 +52,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
     Spinner dropdown;
     RecyclerView recyler_izin_sakit;
     private List<modelIzinSakitNew> modelIzinSakitNews;
-    private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="null", access ="";
+    private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="", access ="";
     private SessionManager msession;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
@@ -128,7 +128,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
         dialogFragment = MonthYearPickerDialogFragment
                 .getInstance(monthSelected, yearSelected, minDate, maxDate, "Tanggal Izin");
 
-        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>());
+        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>(), access);
         recyler_izin_sakit.setAdapter(adapterIzinSakitApprove);
         getMonth();
         paginationCall();
@@ -175,7 +175,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
                 switch (spinSelected) {
                     case "Menunggu":
-                        spinResult = "null";
+                        spinResult = "";
                         onRefresh();
                         break;
                     case "Diterima":
@@ -283,20 +283,24 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
         recyler_izin_sakit.setVisibility(View.GONE);
         recyler_izin_sakit.setAdapter(adapterIzinSakitApprove);
 
-
-
         paginationCall();
     }
 
-    private void getData(int page, int offset, ArrayList items) {
+    private void getData(int limit, int offset, ArrayList items) {
         //http://192.168.50.24/all/hris_ci_3/api/approvesakit?status=&hak_akses=HEAD&limit=10&offset=0
         JsonObjectRequest req = new JsonObjectRequest(
-                "http://192.168.50.24/all/hris_ci_3/api/approvesakit?" +
+                /*"http://192.168.50.24/all/hris_ci_3/api/approvesakit?" +
                         "offset=" + offset +
                         "&hak_akses="+ access +
                         "&first_date="+ dateMonthDate +
                         "&limit=" + page +
-                        "&status="+spinResult, null,
+                        "&status="+spinResult, null,*/
+                "http://192.168.50.24/all/hris_ci_3/api/approvesakit?" +
+                        "status="+spinResult+
+                        "&hak_akses="+access+
+                        "&limit="+limit+
+                        "&offset="+offset+
+                        "&first_date="+dateMonthDate, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -354,7 +358,11 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                                     Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
                                     emptyHistory.setVisibility(View.GONE);
                                 }
-                            } else if(status.equals("404")) {
+                            } else if(status.equals("201")) {
+                                emptyHistory.setVisibility(View.VISIBLE);
+                                mShimmerViewContainer.setVisibility(View.GONE);
+                                recyler_izin_sakit.setVisibility(View.GONE);
+                            } else if (status.equals("404")) {
                                 emptyHistory.setVisibility(View.VISIBLE);
                                 mShimmerViewContainer.setVisibility(View.GONE);
                                 recyler_izin_sakit.setVisibility(View.GONE);
@@ -389,7 +397,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error_Volley: ", error.toString());
+                VolleyLog.e("ERROR_VOLLEY_APP: ", error.toString());
 
                 if (error.toString().equals("")) {
                     emptyHistory.setVisibility(View.VISIBLE);
@@ -404,7 +412,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjAwMTEwODAxMDMxMzA0NzkiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTgxIiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJIRUFEIiwiaWF0IjoxNjQ3NDk5OTE0LCJleHAiOjE2NDc1MTc5MTR9.M6JISgefWIi42iK4I3BQkFx3KTEw1RHozi7pXp717vg"/*+token*/);
+                headers.put("Authorization", "Bearer "+token);
                 return headers;
             }
         };
@@ -423,5 +431,12 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
     protected void onPause() {
         super.onPause();
         mShimmerViewContainer.stopShimmerAnimation();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
     }
 }

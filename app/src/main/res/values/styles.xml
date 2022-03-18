@@ -61,4 +61,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="VerifyTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="colorPrimary">@color/black_overlay</item>
+    </style>
+
 </resources>

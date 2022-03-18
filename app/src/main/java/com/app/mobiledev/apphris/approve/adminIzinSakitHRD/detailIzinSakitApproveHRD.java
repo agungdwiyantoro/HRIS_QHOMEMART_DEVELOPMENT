@@ -270,7 +270,7 @@ public class detailIzinSakitApproveHRD extends AppCompatActivity {
         tx_nama_dialog=dialogApprove.findViewById(R.id.tx_nama_dialog);
         btn_close_dialog=dialogApprove.findViewById(R.id.btn_close);
         btn_setuju_dialog=dialogApprove.findViewById(R.id.btn_setuju);
-        tx_jenis_izin_dialog=dialogApprove.findViewById(R.id.tx_jenis_izin);
+
         tx_info_dialog=dialogApprove.findViewById(R.id.tx_info);
         tx_nama_dialog.setText(nama);
         tx_jenis_izin_dialog.setText("Izin Sakit");

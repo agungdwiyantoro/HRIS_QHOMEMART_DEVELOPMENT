@@ -456,7 +456,11 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                     Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
                                     emptyHistory.setVisibility(View.GONE);
                                 }
-                            } else if(status.equals("404")) {
+                            } else if(status.equals("201")) {
+                                emptyHistory.setVisibility(View.VISIBLE);
+                                mShimmerViewContainer.setVisibility(View.GONE);
+                                recyler_izin_sakit.setVisibility(View.GONE);
+                            } else if (status.equals("404")) {
                                 emptyHistory.setVisibility(View.VISIBLE);
                                 mShimmerViewContainer.setVisibility(View.GONE);
                                 recyler_izin_sakit.setVisibility(View.GONE);
@@ -491,7 +495,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error_Volley: ", error.toString());
+                VolleyLog.e("ERROR_VOLLEY_EMP: ", error.toString());
 
                 if (error.toString().equals("")) {
                     emptyHistory.setVisibility(View.VISIBLE);

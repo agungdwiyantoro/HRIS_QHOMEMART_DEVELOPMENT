@@ -30,14 +30,17 @@ import java.util.List;
 public class adapterIzinSakitApprove extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_NORMAL = 1;
-    private Context mCtx;
+
     private boolean isLoaderVisible = false;
 
+    private Context mCtx;
     private final List<modelIzinSakitNew> modelIzinSakitNews;
+    private String access;
 
-    public adapterIzinSakitApprove(Context mCtx, List<modelIzinSakitNew> modelIzinSakitNews) {
+    public adapterIzinSakitApprove(Context mCtx, List<modelIzinSakitNew> modelIzinSakitNews, String access) {
         this.mCtx = mCtx;
         this.modelIzinSakitNews = modelIzinSakitNews;
+        this.access = access;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -184,6 +187,7 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<BaseViewHolder
                     Intent i = new Intent(mCtx, DetailIzinSakitApprove.class);
                     Bundle x = new Bundle();
                     x.putString("id", Object.getId());
+                    x.putString("access", access);
                     i.putExtras(x);
                     mCtx.startActivity(i);
 

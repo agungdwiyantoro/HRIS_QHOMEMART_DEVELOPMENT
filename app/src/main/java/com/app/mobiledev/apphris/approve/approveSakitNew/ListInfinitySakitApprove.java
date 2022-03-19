@@ -2,6 +2,7 @@ package com.app.mobiledev.apphris.approve.approveSakitNew;
 
 import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -56,7 +57,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
     private SessionManager msession;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
-    private TextView tx_approve, tvDate;
+    private TextView tx_approve, tvDate, tvTitleInfinityList, tvMessage;
     ImageView ivMonthFilter;
     View emptyHistory, inc_backPage;
 
@@ -73,6 +74,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
     int yearSelected, monthSelected, daySelected;
     long minDate, maxDate;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,11 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter);
+
+        tvTitleInfinityList = findViewById(R.id.tvTitleInfinityList);
+        tvTitleInfinityList.setText("Daftar Pengajuan Izin Sakit");
+        tvMessage = findViewById(R.id.tvMessage);
+        tvMessage.setText("Pengajuan izin sakit kosong");
 
         tvDate = findViewById(R.id.tvDate);
         ivMonthFilter = findViewById(R.id.ivMonthFilter);
@@ -310,62 +317,68 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                             Log.d("TAG_TAG_STATUS", "run: " + status);
                             Log.d("TAG_TAG_MESSAGE", "run: " + message);
 
-                            if (status.equals("200") && !message.equals("Your data is not found")) {
-                                JSONArray jsonArray = response.getJSONArray("message");
-                                Log.d("TAG_TAG", "run: " + jsonArray);
+                            switch (status) {
+                                case "200":
+                                    JSONArray jsonArray = response.getJSONArray("message");
+                                    Log.d("TAG_TAG", "run: " + jsonArray);
 
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject data = jsonArray.getJSONObject(i);
-                                    modelIzinSakitNew model = new modelIzinSakitNew();
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject data = jsonArray.getJSONObject(i);
+                                        modelIzinSakitNew model = new modelIzinSakitNew();
 
-                                    model.setName(data.getString("name"));
-                                    model.setId(data.getString("id"));
-                                    model.setKyano(data.getString("kyano"));
-                                    model.setIndikasiSakit(data.getString("indikasi_sakit"));
-                                    model.setMulaiSakitTanggal(data.getString("mulai_sakit_tanggal"));
-                                    model.setSelesaiSakitTanggal(data.getString("selesai_sakit_tanggal"));
-                                    model.setSelectDate(data.getString("select_date"));
-                                    model.setCatatan(data.getString("catatan"));
-                                    model.setLampiranFile(data.getString("lampiran_file"));
+                                        model.setName(data.getString("name"));
+                                        model.setId(data.getString("id"));
+                                        model.setKyano(data.getString("kyano"));
+                                        model.setIndikasiSakit(data.getString("indikasi_sakit"));
+                                        model.setMulaiSakitTanggal(data.getString("mulai_sakit_tanggal"));
+                                        model.setSelesaiSakitTanggal(data.getString("selesai_sakit_tanggal"));
+                                        model.setSelectDate(data.getString("select_date"));
+                                        model.setCatatan(data.getString("catatan"));
+                                        model.setLampiranFile(data.getString("lampiran_file"));
 
-                                    model.setCreatedAt(data.getString("created_at"));
-                                    model.setUpdatedAt(data.getString("updated_at"));
-                                    model.setApproveHead(data.getString("approve_head"));
-                                    model.setApproveHrd(data.getString("approve_hrd"));
+                                        model.setCreatedAt(data.getString("created_at"));
+                                        model.setUpdatedAt(data.getString("updated_at"));
+                                        model.setApproveHead(data.getString("approve_head"));
+                                        model.setApproveHrd(data.getString("approve_hrd"));
 
-                                    model.setApproveExecutiv(data.getString("approve_executiv"));
-                                    model.setApproveDirectur(data.getString("approve_directur"));
+                                        model.setApproveExecutiv(data.getString("approve_executiv"));
+                                        model.setApproveDirectur(data.getString("approve_directur"));
 
-                                    model.setExecutivKyano(data.getString("executiv_kyano"));
-                                    model.setDirecturKyano(data.getString("directur_kyano"));
-                                    model.setHrdKyano(data.getString("hrd_kyano"));
+                                        model.setExecutivKyano(data.getString("executiv_kyano"));
+                                        model.setDirecturKyano(data.getString("directur_kyano"));
+                                        model.setHrdKyano(data.getString("hrd_kyano"));
 
-                                    model.setHeadApproveDate(data.getString("head_approve_date"));
-                                    model.setHrdApproveDate(data.getString("hrd_approve_date"));
-                                    model.setExecutivApproveDate(data.getString("executiv_approve_date"));
-                                    model.setDirecturApproveDate(data.getString("directur_approve_date"));
+                                        model.setHeadApproveDate(data.getString("head_approve_date"));
+                                        model.setHrdApproveDate(data.getString("hrd_approve_date"));
+                                        model.setExecutivApproveDate(data.getString("executiv_approve_date"));
+                                        model.setDirecturApproveDate(data.getString("directur_approve_date"));
 
-                                    model.setHeadName(data.getString("head_name"));
-                                    model.setHrdName(data.getString("hrd_name"));
+                                        model.setHeadName(data.getString("head_name"));
+                                        model.setHrdName(data.getString("hrd_name"));
 
-                                    model.setCatatanHrd(data.getString("catatan_hrd"));
-                                    model.setStatus(data.getString("status"));
+                                        model.setCatatanHrd(data.getString("catatan_hrd"));
+                                        model.setStatus(data.getString("status"));
 
-                                    items.add(model);
-                                    //modelIzinSakits.add(model);
-                                    //modelIzinSakitNews.add(model);
+                                        items.add(model);
+                                        //modelIzinSakits.add(model);
+                                        //modelIzinSakitNews.add(model);
 
-                                    Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
-                                    emptyHistory.setVisibility(View.GONE);
-                                }
-                            } else if(status.equals("201")) {
-                                emptyHistory.setVisibility(View.VISIBLE);
-                                mShimmerViewContainer.setVisibility(View.GONE);
-                                recyler_izin_sakit.setVisibility(View.GONE);
-                            } else if (status.equals("404")) {
-                                emptyHistory.setVisibility(View.VISIBLE);
-                                mShimmerViewContainer.setVisibility(View.GONE);
-                                recyler_izin_sakit.setVisibility(View.GONE);
+                                        Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
+                                        emptyHistory.setVisibility(View.GONE);
+                                    }
+
+                                    break;
+                                /*case "201":
+                                    emptyHistory.setVisibility(View.VISIBLE);
+                                    mShimmerViewContainer.setVisibility(View.GONE);
+                                    recyler_izin_sakit.setVisibility(View.GONE);
+                                    onRestart();
+                                    break;*/
+                                case "404":
+                                    emptyHistory.setVisibility(View.VISIBLE);
+                                    mShimmerViewContainer.setVisibility(View.GONE);
+                                    recyler_izin_sakit.setVisibility(View.GONE);
+                                    break;
                             }
 
                             if (currentPage != PAGE_START)

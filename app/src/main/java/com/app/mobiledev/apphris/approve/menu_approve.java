@@ -40,9 +40,10 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             cvSakitApproveDirect, cvDinasApproveDirect, cvTinggalTugasApproveDirect, cvCutiApproveDirect,
             cvSakitApproveHRD, cvDinasApproveHRD, cvTinggalTugasApproveHRD, cvCutiApproveHRD;
     private SessionManager session;
-    private String token, spinSelected, spinResult, noJabatan, appHead, appExec, appDirect, appHRD;
+    private String token, spinSelected, spinResult, noJabatan, appHead, appExec, appDirect, appHRD, hak_akses;
     private SessionManager msession;
     private Spinner dropdown;
+    private View incPageBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_menu_approve);
 
         msession = new SessionManager(menu_approve.this);
+
+        incPageBack = findViewById(R.id.incPageBack);
 
         noJabatan = msession.getNoJabatan();
 
@@ -84,6 +87,12 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         cvDinasApproveHRD = findViewById(R.id.cvDinasApproveHRD);
         cvTinggalTugasApproveHRD = findViewById(R.id.cvTinggalTugasApproveHRD);*/
 
+        incPageBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -117,7 +126,9 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onClick(View v) {
 
-                if (noJabatan.equals("HR181")) {
+                checkJabatan();
+
+                /*if (noJabatan.equals("HR181")) {
                     Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
                     intent.putExtra("kyJabatan", "HEAD");
                     startActivity(intent);
@@ -137,7 +148,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                     Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
                     intent.putExtra("kyJabatan", "HEAD");
                     startActivity(intent);
-                }
+                }*/
             }
         });
 
@@ -194,11 +205,36 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                     public void onResponse(JSONObject response) {
                         try {
                             String status = response.getString("status");
-                            String message = response.getString("message");
+
+                            JSONObject message = response.getJSONObject("message");
 
                             Log.d("TAG_TAG_STATUS", "run: " + status);
 
                             if (status.equals("200")) {
+
+                                hak_akses = message.getString("hak_akses");
+
+                                if (hak_akses.equals("HEAD")) {
+                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                    intent.putExtra("kyJabatan", "HEAD");
+                                    startActivity(intent);
+                                } else if(hak_akses.equals("EXECUTIV")){
+                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                    intent.putExtra("kyJabatan", "EXECUTIV");
+                                    startActivity(intent);
+                                } else if(hak_akses.equals("DIRECTUR")){
+                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                    intent.putExtra("kyJabatan", "DIRECTUR");
+                                    startActivity(intent);
+                                } else if(hak_akses.equals("HRD")){
+                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                    intent.putExtra("kyJabatan", "HRD");
+                                    startActivity(intent);
+                                } else if(hak_akses.equals("DIRECTUR, EXECUTIV")){
+                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                    intent.putExtra("kyJabatan", "DIRECTUR");
+                                    startActivity(intent);
+                                }
 
                             } else if (status.equals("404")) {
 
@@ -220,7 +256,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjAwMTEwODAxMDMxMzA0NzkiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTgxIiwia3lkaXZpc2kiOiJIUjAwNCIsImphYmF0YW4iOiJIRUFEIiwiaWF0IjoxNjQ3NDk5OTE0LCJleHAiOjE2NDc1MTc5MTR9.M6JISgefWIi42iK4I3BQkFx3KTEw1RHozi7pXp717vg"/*+token*/);
+                headers.put("Authorization", "Bearer "+token);
                 return headers;
             }
         };

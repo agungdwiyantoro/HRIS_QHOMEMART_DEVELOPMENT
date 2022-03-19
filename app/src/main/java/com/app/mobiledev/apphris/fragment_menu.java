@@ -1,6 +1,7 @@
 package com.app.mobiledev.apphris;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
@@ -11,11 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
 import com.app.mobiledev.apphris.approve.menu_approve;
 import com.app.mobiledev.apphris.bonus.menu_bonus;
 import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
@@ -35,7 +42,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class fragment_menu extends Fragment {
     public fragment_menu(){}
@@ -46,7 +55,7 @@ public class fragment_menu extends Fragment {
     private  double lat=0,lon=0;
     private TooltipCompat tooltipCompat;
     private SessionManager sessionmanager;
-    private String jabatan,kyano;
+    private String jabatan,kyano, hak_akses, token;
     private ConstraintLayout lmenu;
     private String idtraining="",index="";
     private TextView txnotif_latihan;
@@ -70,13 +79,14 @@ public class fragment_menu extends Fragment {
         modelLatihan = new ArrayList<>();
         db = new DataSoalSQLite(getActivity());
         sessionmanager = new SessionManager(getActivity());
+        token = sessionmanager.getToken();
         kyano=sessionmanager.getIdUser();
         jabatan=sessionmanager.getCekStaff();
         idtraining=sessionmanager.getIdtraning();
         lmenu=rootView.findViewById(R.id.lmenu);
         txnotif_latihan.setVisibility(View.GONE);
 
-        checkApproveAvailable();
+        checkJabatan();
 
         cvApprove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,49 +199,52 @@ public class fragment_menu extends Fragment {
         }
     }
 
-    private void checkApproveAvailable() {
-        AndroidNetworking.post(api.URL_getAksesMobile)
-                .addBodyParameter("key", api.key)
-                .addBodyParameter("menu_mobile", "approve")
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
+    private void checkJabatan() {
+        JsonObjectRequest req = new JsonObjectRequest(
+                "http://192.168.50.24/all/hris_ci_3/api/akses", null,
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Boolean success = response.getBoolean("success");
-                            if (success) {
-                                JSONArray jsonArray = response.getJSONArray("data");
+                            String status = response.getString("status");
 
-                                Log.d("TAG_PREF_JABATAN", "onResponse: "+sessionmanager.getNoJabatan());
+                            JSONObject message = response.getJSONObject("message");
 
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject data = jsonArray.getJSONObject(i);
+                            if (status.equals("200")) {
 
-                                    if (data.getString("jabatan").contains(sessionmanager.getNoJabatan())){
-                                        cvApprove.setVisibility(View.VISIBLE);
-                                    } else {
-                                        cvApprove.setVisibility(View.GONE);
-                                    }
+                                hak_akses = message.getString("hak_akses");
+                                Log.d("TAG_HAK", "run: " + hak_akses);
 
+                                if (hak_akses.contains("HRD")) {
+                                    cvApprove.setVisibility(View.VISIBLE);
                                 }
 
+                            } else {
+
                             }
-                            Log.d("CEK_UPDATE", "onResponse: " + success);
+
                         } catch (JSONException e) {
+
                             e.printStackTrace();
-                            helper.showMsg(getActivity(), "informasi", "" + helper.PESAN_SERVER);
-                            Log.d("JSONUPDATE", "onResponse: " + e);
+                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
                         }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("EROOR_UPDATE", "onError: " + anError);
-                        helper.showMsg(getActivity(), "informasi", "" + helper.PESAN_KONEKSI);
 
                     }
-                });
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error_Volley: ", error.toString());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer "+token);
+                return headers;
+            }
+        };
+
+        Volley.newRequestQueue(getActivity()).add(req);
     }
 
 }

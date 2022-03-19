@@ -856,4 +856,32 @@ public class helper extends AsyncTask {
 
     }
 
+    public static String convertMonth(String month) {
+
+        String bulan = "";
+
+        switch (month) {
+            case "January":
+                return bulan = "Januari";
+            case "February":
+                return bulan = "Februari";
+            case "March":
+                return bulan = "Maret";
+            case "May":
+                return bulan = "Mei";
+            case "Juny":
+                return bulan = "Juni";
+            case "July":
+                return bulan = "July";
+            case "August":
+                return bulan = "Agustus";
+            case "October":
+                return bulan = "Oktober";
+            case "December":
+                return bulan = "Desember";
+        }
+
+        return bulan;
+    }
+
 }

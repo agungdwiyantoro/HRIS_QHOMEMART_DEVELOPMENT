@@ -139,7 +139,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     private void getDetailSakitApprove(String _id) {
         //http://192.168.50.24/all/hris_ci_3/api/approvesakit?id=7
         AndroidNetworking.get(api.URL_IzinSakit_approve + "?id=" + _id)
-        /*AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/approvesakit?id=7")*/
+                /*AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/approvesakit?id=7")*/
                 .addHeaders("Authorization", "Bearer " + token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -272,6 +272,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
             //cvSubmitDialog.setTint
             tvSubmitDialog.setText("Tolak");
             tilAlasan.setVisibility(View.VISIBLE);
+
         } else {
             cvSubmitDialog.setCardBackgroundColor(getResources().getColor(R.color.quantum_vanillagreen800
             ));
@@ -280,6 +281,8 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         dialogApprove.setCancelable(true);
         dialogApprove.setTitle("Konfirmasi");
         tx_info_dialog.setText(pesan);
+
+        dialogApprove.show();
 
         cvCancelDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,11 +294,23 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         cvSubmitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateApprove(id, _value, access);
-                dialogApprove.dismiss();
+
+                if (_value.equals("0")) {
+                    checkInput(_value);
+                } else if (_value.equals("1")) {
+                    updateApprove(id, _value, access);
+                }
             }
         });
-        dialogApprove.show();
+    }
+
+    private void checkInput(String _value) {
+        if (etAlasan.getText().toString().isEmpty()) {
+            tilAlasan.setError("Alasan menolak masih kosong");
+            tilAlasan.requestFocus();
+        } else {
+            updateApprove(id, _value, access);
+        }
     }
 
     private void dialogFoto() {
@@ -308,7 +323,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true);
-        Glide.with(DetailIzinSakitApprove.this).load(api.URL_foto_izinsakit+kyano+"/lampiran/surat_sakit/"+lampiran_file).thumbnail(Glide.with(DetailIzinSakitApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
+        Glide.with(DetailIzinSakitApprove.this).load(api.URL_foto_izinsakit + kyano + "/lampiran/surat_sakit/" + lampiran_file).thumbnail(Glide.with(DetailIzinSakitApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
         fabDownloadIzin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -358,7 +373,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void downloadIzin(String fileName) {
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri uri = Uri.parse(api.URL_foto_izinsakit+kyano+"/lampiran/surat_sakit/"+fileName);
+        Uri uri = Uri.parse(api.URL_foto_izinsakit + kyano + "/lampiran/surat_sakit/" + fileName);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName + ".png");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

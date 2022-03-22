@@ -356,7 +356,6 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                                         model.setHeadName(data.getString("head_name"));
                                         model.setHrdName(data.getString("hrd_name"));
 
-                                        model.setCatatanHrd(data.getString("catatan_hrd"));
                                         model.setStatus(data.getString("status"));
 
                                         items.add(model);

@@ -1,7 +1,5 @@
 package com.app.mobiledev.apphris.approve;
 
-import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,22 +13,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.app.mobiledev.apphris.Model.modelIzinSakitNew;
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.approve.adminIzinSakitHead.ListIzinSakitApproveHead;
 import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +35,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             cvSakitApproveDirect, cvDinasApproveDirect, cvTinggalTugasApproveDirect, cvCutiApproveDirect,
             cvSakitApproveHRD, cvDinasApproveHRD, cvTinggalTugasApproveHRD, cvCutiApproveHRD;
     private SessionManager session;
-    private String token, spinSelected, spinResult, noJabatan, appHead, appExec, appDirect, appHRD, hak_akses;
+    private String token, spinSelected, spinResult, noJabatan, appHead, appExec, appDirect, appHRD, hak_akses="";
     private SessionManager msession;
     private Spinner dropdown;
     private View incPageBack;
@@ -51,8 +46,13 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         setContentView(R.layout.activity_menu_approve);
 
         msession = new SessionManager(menu_approve.this);
+        token = msession.getToken();
 
         incPageBack = findViewById(R.id.incPageBack);
+
+        hak_akses = getIntent().getExtras().getString("hak_akses");
+
+        Log.d("TAG_BUNDLE", "onCreate: "+hak_akses);
 
         noJabatan = msession.getNoJabatan();
 
@@ -86,6 +86,9 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         cvCutiApproveHRD = findViewById(R.id.cvCutiApproveHRD);
         cvDinasApproveHRD = findViewById(R.id.cvDinasApproveHRD);
         cvTinggalTugasApproveHRD = findViewById(R.id.cvTinggalTugasApproveHRD);*/
+
+        /*checkProduct();
+        checkJabatan();*/
 
         incPageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,66 +131,8 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
 
                 checkJabatan();
 
-                /*if (noJabatan.equals("HR181")) {
-                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                    intent.putExtra("kyJabatan", "HEAD");
-                    startActivity(intent);
-                } else if(noJabatan.equals("HR177")){
-                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                    intent.putExtra("kyJabatan", "HEAD");
-                    startActivity(intent);
-                } else if(noJabatan.equals("HR177")){
-                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                    intent.putExtra("kyJabatan", "HEAD");
-                    startActivity(intent);
-                } else if(noJabatan.equals("HR177")){
-                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                    intent.putExtra("kyJabatan", "HEAD");
-                    startActivity(intent);
-                }  else if(noJabatan.equals("HR177")){
-                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                    intent.putExtra("kyJabatan", "HEAD");
-                    startActivity(intent);
-                }*/
             }
         });
-
-        /*cvSakitApproveHead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                switch (noJabatan) {
-                    case "HR181": // System Development Manager
-
-                        Intent intent = new Intent(menu_approve.this, ListIzinSakitApproveHead.class);
-                        intent.putExtra("kyJabatan", noJabatan);
-                        startActivity(intent);
-
-                        break;
-                    case "HR003": // FINANCE MANAGER
-
-
-
-                        break;
-                    case "HR177": // Sekretaris Direktur
-
-
-
-                        break;
-                    case "HR058": // KEPALA URUSAN PAJAK
-
-                        break;
-                    case "HR007": // EXECUTIVE MANAGER KEUANGAN
-
-                        break;
-                    case "HR245": // Executive HR Manager
-
-                        break;
-                    default:
-                }
-
-            }
-        });*/
 
     }
 
@@ -198,21 +143,24 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void checkJabatan() {
-        JsonObjectRequest req = new JsonObjectRequest(
+        Log.d("TAG", "checkJabatan: onMethod");
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,
                 "http://192.168.50.24/all/hris_ci_3/api/akses", null,
+                //"http://hris.qhomedata.id/api/akses", null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            String status = response.getString("status");
+                            int status = response.getInt("status");
 
                             JSONObject message = response.getJSONObject("message");
+                            String hak = message.getString("hak_akses");
 
-                            Log.d("TAG_TAG_STATUS", "run: " + status);
+                            Log.d("TAG_TAG_MSG_MENU", "run: " + status + message.toString()+ hak);
 
-                            if (status.equals("200")) {
+                            if (status == 200) {
 
-                                hak_akses = message.getString("hak_akses");
+                                hak_akses = hak;
 
                                 if (hak_akses.equals("HEAD")) {
                                     Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
@@ -236,9 +184,9 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                     startActivity(intent);
                                 }
 
-                            } else if (status.equals("404")) {
+                            } /*else if (status.equals("404")) {
 
-                            }
+                            }*/
 
                         } catch (JSONException e) {
 
@@ -250,12 +198,13 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error_Volley: ", error.toString());
+                VolleyLog.e("Error_Volley_MENU_APP: ", error.toString());
             }
         }) {
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
                 headers.put("Authorization", "Bearer "+token);
                 return headers;
             }

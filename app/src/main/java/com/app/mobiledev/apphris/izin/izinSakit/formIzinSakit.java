@@ -320,7 +320,8 @@ public class formIzinSakit extends AppCompatActivity {
     }
 
     private void insertIzinSakit(String indikasiSakit, String catatan, String selectDate, File file, String option) {
-        AndroidNetworking.upload(api.URL_IzinSakit)
+        //AndroidNetworking.upload(api.URL_IzinSakit)
+        AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izinsakit")
                 .addHeaders("Authorization", "Bearer " + token)
                 .addMultipartParameter("indikasi_sakit", indikasiSakit)
                 .addMultipartParameter("catatan", catatan)
@@ -332,8 +333,8 @@ public class formIzinSakit extends AppCompatActivity {
                 .setUploadProgressListener(new UploadProgressListener() {
                     @Override
                     public void onProgress(long bytesUploaded, long totalBytes) {
-                        Log.d("TAG_UPLOAD_PROGRESS", "onProgress: "+bytesUploaded);
-                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+totalBytes);
+                        //Log.d("TAG_UPLOAD_PROGRESS", "onProgress: "+bytesUploaded);
+                        //Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+totalBytes);
                     }
                 })
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -363,7 +364,9 @@ public class formIzinSakit extends AppCompatActivity {
                     @Override
                     public void onError(ANError anError) {
                         lin_transparant.setVisibility(View.GONE);
-                        Log.d("ERROR_INSERT_IZIN", "onError: " + anError);
+                        Log.d("ERROR_INSERT_CODE", "onError: " + anError.getErrorCode());
+                        Log.d("ERROR_INSERT_DETAIL", "onError: " + anError.getErrorDetail());
+                        Log.d("ERROR_INSERT_RESPONSE", "onError: " + anError.getResponse());
                     }
                 });
 

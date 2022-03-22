@@ -98,7 +98,7 @@ public class fragment_menu extends Fragment {
 //                    helper.snackBar(lmenu,"anda tidak memiliki akses ke menu ini...!!");
 //                }
 
-                helper.cekAkses(getActivity(),lmenu,"approve", menu_approve.class);
+                helper.cekAkses(getActivity(),lmenu,"approve", menu_approve.class, hak_akses);
 
             }
         });
@@ -106,14 +106,14 @@ public class fragment_menu extends Fragment {
         pinjaman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"pinjaman", pinjamanUang.class);
+                helper.cekAkses(getActivity(),lmenu,"pinjaman", pinjamanUang.class, "");
             }
         });
 
         kasbon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"kasbon", kasbon_karyawan.class);
+                helper.cekAkses(getActivity(),lmenu,"kasbon", kasbon_karyawan.class, "");
 
             }
         });
@@ -121,23 +121,23 @@ public class fragment_menu extends Fragment {
         cuti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               helper.cekAkses(getActivity(),lmenu,"cuti", cuti.class);
+               helper.cekAkses(getActivity(),lmenu,"cuti", cuti.class, "");
             }
         });
 
         izin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent i = new Intent(getActivity(), dashboardIzin.class);
+//                Intent i = new Intent(getActivity(), dashboardIzin.class, ");
 //                startActivity(i);
-                  helper.cekAkses(getActivity(),lmenu,"izin", dashboardIzin.class);
+                  helper.cekAkses(getActivity(),lmenu,"izin", dashboardIzin.class, "");
             }
         });
 
         bonus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"bonus", menu_bonus.class);
+                helper.cekAkses(getActivity(),lmenu,"bonus", menu_bonus.class, "");
 
             }
         });
@@ -153,7 +153,7 @@ public class fragment_menu extends Fragment {
         latihan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"latihan", menu_training.class);
+                helper.cekAkses(getActivity(),lmenu,"latihan", menu_training.class, "");
 
             }
         });
@@ -161,14 +161,14 @@ public class fragment_menu extends Fragment {
         projectManage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"projek_manage", list_formKunjungan.class);
+                helper.cekAkses(getActivity(),lmenu,"projek_manage", list_formKunjungan.class, "");
             }
         });
 
         visitor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"pengunjung", Visitor.class);
+                helper.cekAkses(getActivity(),lmenu,"pengunjung", Visitor.class, "");
 
             }
         });
@@ -176,7 +176,7 @@ public class fragment_menu extends Fragment {
         slipGaji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                helper.cekAkses(getActivity(),lmenu,"slip gaji", riwayatSlipGaji.class);
+                helper.cekAkses(getActivity(),lmenu,"slip gaji", riwayatSlipGaji.class, "");
 
             }
         });
@@ -215,12 +215,22 @@ public class fragment_menu extends Fragment {
                                 hak_akses = message.getString("hak_akses");
                                 Log.d("TAG_HAK", "run: " + hak_akses);
 
-                                if (hak_akses.contains("HRD")) {
+                                if (hak_akses.equals("HEAD")) {
                                     cvApprove.setVisibility(View.VISIBLE);
+                                    hak_akses = message.getString("hak_akses");
+                                } else if(hak_akses.equals("EXECUTIV")){
+                                    cvApprove.setVisibility(View.VISIBLE);
+                                    hak_akses = message.getString("hak_akses");
+                                } else if(hak_akses.equals("DIRECTUR")){
+                                    cvApprove.setVisibility(View.VISIBLE);
+                                    hak_akses = message.getString("hak_akses");
+                                } else if(hak_akses.equals("HRD")){
+                                    cvApprove.setVisibility(View.VISIBLE);
+                                    hak_akses = message.getString("hak_akses");
+                                } else if(hak_akses.equals("HRD,EXECUTIV")){
+                                    cvApprove.setVisibility(View.VISIBLE);
+                                    hak_akses = message.getString("hak_akses");
                                 }
-
-                            } else {
-
                             }
 
                         } catch (JSONException e) {

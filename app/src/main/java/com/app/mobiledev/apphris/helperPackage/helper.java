@@ -487,7 +487,7 @@ public class helper extends AsyncTask {
         return  formattedDate;
     }
 
-    public static void cekAkses( final Context mctx, final View view ,String menu,Class classMenu) {
+    public static void cekAkses( final Context mctx, final View view ,String menu,Class classMenu, String hakAkses) {
         AndroidNetworking.post(api.URL_getAksesMobile)
                 .addBodyParameter("key", api.key)
                 .addBodyParameter("menu_mobile", menu)
@@ -512,14 +512,16 @@ public class helper extends AsyncTask {
                                             Bundle x = new Bundle();
                                             x.putString("lokasi_tujuan", "");
                                             x.putString("lokasi_awal", "");
+                                            x.putString("hak_akses", hakAkses);
                                             intent.putExtras(x);
-                                            mctx.startActivity( intent);
+                                            mctx.startActivity(intent);
                                         }
                                         else if(data.getString("divisi").equals("all")){
                                             Intent intent = new Intent(mctx, classMenu);
                                             Bundle x = new Bundle();
                                             x.putString("lokasi_tujuan", "");
                                             x.putString("lokasi_awal", "");
+                                            x.putString("hak_akses", hakAkses);
                                             intent.putExtras(x);
                                             mctx.startActivity(intent);
                                         } else {

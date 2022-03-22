@@ -361,6 +361,35 @@
                                 android:text="Ditolak"
                                 android:textSize="18sp" />
 
+                            <LinearLayout
+                                android:id="@+id/llAlasan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone"
+                                >
+
+                                <TextView
+                                    android:layout_marginTop="5dp"
+                                    android:layout_width="wrap_content"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:layout_height="match_parent"
+                                    android:gravity="start|center"
+                                    android:textColor="@color/white"
+                                    android:text="Alasan"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tx_alasan"
+                                    android:layout_width="wrap_content"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:layout_height="match_parent"
+                                    android:gravity="start|center"
+                                    android:textColor="@color/white"
+                                    android:text="Alasan penolakan"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
 
                             <TextView
                                 android:layout_marginTop="5dp"

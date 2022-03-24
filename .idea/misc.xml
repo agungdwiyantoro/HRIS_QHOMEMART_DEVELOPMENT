@@ -129,9 +129,11 @@
         <entry key="app/src/main/res/layout/activity_test_reduce_image.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.3458333333333333" />
         <entry key="app/src/main/res/layout/calendar.xml" value="0.2222222222222222" />
+        <entry key="app/src/main/res/layout/dialog_confirm.xml" value="0.2" />
         <entry key="app/src/main/res/layout/dialog_foto_izin_sakit.xml" value="0.3109375" />
         <entry key="app/src/main/res/layout/dialog_notify_update.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/dialog_persetujuan_izin.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/dialog_sukses.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/layout/dialog_tolak_izin.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_loading_progress.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.4036458333333333" />

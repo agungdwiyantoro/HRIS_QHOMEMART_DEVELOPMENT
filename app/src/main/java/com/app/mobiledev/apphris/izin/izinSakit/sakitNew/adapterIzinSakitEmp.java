@@ -169,7 +169,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
             }
 
             try {
-                dateSource = dateFormatSources.parse(Object.getCreatedAt());
+                dateSource = dateFormatSources.parse(Object.getMulaiSakitTanggal());
                 tx_tanggal.setText(dateFormat_day.format(dateSource));
                 tx_bulan_tahun.setText(dateFormat_month_year.format(dateSource));
             } catch (ParseException e) {

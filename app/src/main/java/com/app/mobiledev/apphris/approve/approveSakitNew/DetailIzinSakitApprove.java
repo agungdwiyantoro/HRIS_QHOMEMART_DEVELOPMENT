@@ -69,7 +69,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     private Dialog dialogApprove;
     private Button btn_setuju, btn_tolak;
     private SimpleDateFormat dateFormat_day, dateFormat_month_year, dateFormat_standart, dateFormatSources;
-    private Date dateSource;
+    private Date dateSource, dateSource1;
     private CardView card_status_approve, cvSubmitDialog, cvCancelDialog;
     private Bundle bundle;
     private Dialog dialogFoto;
@@ -145,7 +145,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
-                    @SuppressLint("ResourceAsColor")
+                    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
                     @Override
                     public void onResponse(JSONObject response) {
 
@@ -207,7 +207,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
 
                                 dateSource = dateFormatSources.parse(created_at);
                                 dateSource = dateFormatSources.parse(mulai_sakit_tanggal);
-                                dateSource = dateFormatSources.parse(selesai_sakit_tanggal);
+                                dateSource1 = dateFormatSources.parse(selesai_sakit_tanggal);
 
                                 txNama_title.setText(name);
                                 tx_nama.setText(name);
@@ -220,7 +220,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                 tx_bulan_tahun_title.setText(dateFormat_month_year.format(dateSource));
 
                                 mulai_sakit_tanggal = dateFormat_standart.format(dateSource);
-                                selesai_sakit_tanggal = dateFormat_standart.format(dateSource);
+                                selesai_sakit_tanggal = dateFormat_standart.format(dateSource1);
                                 tx_waktu_sakit.setText(mulai_sakit_tanggal + "   " + selesai_sakit_tanggal);
 
                                 /*

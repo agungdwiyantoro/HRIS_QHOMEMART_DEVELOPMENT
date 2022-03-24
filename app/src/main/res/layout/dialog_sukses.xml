@@ -33,7 +33,6 @@
                 android:layout_marginBottom="4dp"
                 android:fontFamily="@font/montserrat_black"
                 android:text="@string/sukses"
-
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -59,8 +58,8 @@
                     android:layout_weight="2"
                     android:fontFamily="@font/montserrat_black"
                     android:gravity="center"
-                    android:text="Close"
-                    android:textColor="@color/red_btn_bg_color"
+                    android:text="Selesai"
+                    android:textColor="@color/greennew"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 

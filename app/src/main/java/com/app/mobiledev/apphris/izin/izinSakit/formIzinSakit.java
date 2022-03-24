@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
 
@@ -54,14 +55,14 @@ public class formIzinSakit extends AppCompatActivity {
     private ImageView image_surat_izin_sakit, ivTgl, imStatus;
     private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp;
     private TextInputLayout tx_input_indikasi, tx_input_tgl_sakit, tx_input_tgl_selesai_sakit;
-    private Dialog dialogResign;
+    private Dialog dialogResign, dialogConfirm;
     private LinearLayout lin_transparant, llUploadSkd, llViewCalendar, llViewGetDates;
     private CheckBox cbSkdView;
 
     private Uri resultUri;
     private File chosedfile;
     private Bitmap image_bmap;
-    private Button btn_ajukan, btnDate, btnCancelDate;
+    private Button btn_ajukan, btnDate, btnCancelDate, dialogBtnSubmit, dialogBtnCancel;
     private String kyano, token, nameImage = "", indikasiSakit = "", mulaiSakit = "", selasaiSakit = "", catatan = "", skd = "0", namaEmp, divisiEmp, jabatanEmp;
     private Toast toast;
 
@@ -239,7 +240,7 @@ public class formIzinSakit extends AppCompatActivity {
         try {
             if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
                 final Uri imageUri = data.getData();
-                chosedfile = new File(getRealPathFormURI(imageUri, formIzinSakit.this));
+                chosedfile = new File(Objects.requireNonNull(getRealPathFormURI(imageUri, formIzinSakit.this)));
                 resultUri = imageUri;
                 image_surat_izin_sakit.setImageURI(resultUri);
 
@@ -256,7 +257,10 @@ public class formIzinSakit extends AppCompatActivity {
                         Log.d("TAG1", "onActivityResult: "+chosedfile.toString());
                     } else {
 
-                        File compressedImageFile = new Compressor(this).compressToFile(chosedfile);
+                        File compressedImageFile =
+                                new Compressor(this)
+                                        .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                                        .compressToFile(chosedfile);
 
                         long fileSizeInBytesNew = compressedImageFile.length();
                         long fileSizeInKBNew = fileSizeInBytesNew / 1024;
@@ -312,14 +316,14 @@ public class formIzinSakit extends AppCompatActivity {
             tx_input_indikasi.setErrorEnabled(false);
             tx_input_tgl_sakit.setErrorEnabled(false);
             //tx_input_tgl_selesai_sakit.setErrorEnabled(false);
-            lin_transparant.setVisibility(View.VISIBLE);
-            Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+indikasiSakit+" | "+ catatan +" | "+ nameImage +" | "+ edit_tgl_sakit.getText().toString() +" | "+ skd);
-            insertIzinSakit(indikasiSakit, catatan, mulaiSakit, chosedfile , skd);
-            //auth_user(id_user, password);
+
+            dialog_confirm();
+
         }
     }
 
     private void insertIzinSakit(String indikasiSakit, String catatan, String selectDate, File file, String option) {
+        Log.d("TAG_INPUT_CEK", "insertIzinSakit: "+ indikasiSakit + catatan + selectDate + file + option);
         //AndroidNetworking.upload(api.URL_IzinSakit)
         AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izinsakit")
                 .addHeaders("Authorization", "Bearer " + token)
@@ -334,7 +338,8 @@ public class formIzinSakit extends AppCompatActivity {
                     @Override
                     public void onProgress(long bytesUploaded, long totalBytes) {
                         //Log.d("TAG_UPLOAD_PROGRESS", "onProgress: "+bytesUploaded);
-                        //Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+totalBytes);
+                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+totalBytes);
+                        lin_transparant.setVisibility(View.VISIBLE);
                     }
                 })
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -346,6 +351,7 @@ public class formIzinSakit extends AppCompatActivity {
                             Log.d("RESULT_RESPONSE_INSERT", "onResponse: " + response);
                             if (status.equals("200")) {
                                 String message = response.getString("message");
+                                dialogConfirm.dismiss();
                                 notifDialogSukses();
                             } else {
                                 JSONObject object = response.getJSONObject("message");
@@ -386,5 +392,35 @@ public class formIzinSakit extends AppCompatActivity {
             }
         });
         dialogResign.show();
+    }
+
+    private void dialog_confirm() {
+        dialogConfirm = new Dialog(formIzinSakit.this);
+        dialogConfirm.setContentView(R.layout.dialog_confirm);
+
+        dialogBtnSubmit = dialogConfirm.findViewById(R.id.btnSubmit);
+        dialogBtnCancel = dialogConfirm.findViewById(R.id.btnCancel);
+
+        dialogConfirm.setCancelable(true);
+        dialogConfirm.setCanceledOnTouchOutside(false);
+
+        dialogBtnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+indikasiSakit+" | "+ catatan +" | "+ nameImage +" | "+ mulaiSakit +" | "+ skd);
+                insertIzinSakit(indikasiSakit, catatan, mulaiSakit, chosedfile , skd);
+
+            }
+        });
+
+        dialogBtnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogConfirm.dismiss();
+
+            }
+        });
+
+        dialogConfirm.show();
     }
 }

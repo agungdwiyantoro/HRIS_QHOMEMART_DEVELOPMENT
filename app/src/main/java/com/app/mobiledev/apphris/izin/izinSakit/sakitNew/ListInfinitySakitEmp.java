@@ -183,7 +183,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
                 switch (spinSelected) {
                     case "Menunggu":
-                        spinResult = "null";
+                        spinResult = "";
                         onRefresh();
                         break;
                     case "Diterima":
@@ -218,7 +218,13 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                 bil = "" + monthAdd;
             }
 
-            dateMonthDate = year + "-" + bil/* + "-01"*/;
+            if (spinResult.equals("")) {
+                dateMonthDate = "";
+                spinResult = "";
+            } else {
+                dateMonthDate = year + "-" + bil/* + "-01"*/;
+            }
+
             dateMonthString = year + "-" + bil + "-01";
 
             String monthYear = helper.formateDateFromstring("yyyy-MM-dd", "MMMM yyyy", dateMonthString);
@@ -243,7 +249,13 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
             bil = "" + monthAdd;
         }
 
-        dateMonthDate = yearSelected + "-" + bil/* + "-01"*/;
+        if (spinResult.equals("")) {
+            dateMonthDate = "";
+            spinResult = "";
+        } else {
+            //dateMonthDate = yearSelected + "-" + bil/* + "-01"*/;
+        }
+
         dateMonthString = yearSelected + "-" + bil + "-01";
 
         String monthYear = helper.formateDateFromstring("yyyy-MM-dd", "MMMM yyyy", dateMonthString);
@@ -296,116 +308,14 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         paginationCall();
     }
 
-    private void getRiwayatSakitAll(int page, int offset, ArrayList items) {
-        //AndroidNetworking.get(api.URL_IzinSakit_approve_head+"?limit="+page+"&offset="+offset+"&status=")
-        //AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?limit=" + page + "&offset=" + offset + "&status=")
-        Log.d("TAG_PARAM", "getRiwayatSakitAll: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult);
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult)
-                .addHeaders("Authorization", "Bearer "+token)
-                .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String status = response.getString("status");
-                            String message = response.getString("message");
-                            Log.d("TAG_TAG", "run: " + message);
-
-                            if (status.equals("200")) {
-                                JSONArray jsonArray = response.getJSONArray("message");
-                                Log.d("TAG_TAG", "run: " + jsonArray);
-
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject data = jsonArray.getJSONObject(i);
-                                    modelIzinSakitNew model = new modelIzinSakitNew();
-
-                                    model.setName(data.getString("name"));
-                                    model.setId(data.getString("id"));
-                                    model.setKyano(data.getString("kyano"));
-                                    model.setIndikasiSakit(data.getString("indikasi_sakit"));
-                                    model.setMulaiSakitTanggal(data.getString("mulai_sakit_tanggal"));
-                                    model.setSelesaiSakitTanggal(data.getString("selesai_sakit_tanggal"));
-                                    model.setSelectDate(data.getString("select_date"));
-                                    model.setCatatan(data.getString("catatan"));
-                                    model.setLampiranFile(data.getString("lampiran_file"));
-
-                                    model.setCreatedAt(data.getString("created_at"));
-                                    model.setUpdatedAt(data.getString("updated_at"));
-                                    model.setApproveHead(data.getString("approve_head"));
-                                    model.setApproveHrd(data.getString("approve_hrd"));
-
-                                    model.setApproveExecutiv(data.getString("approve_executiv"));
-                                    model.setApproveDirectur(data.getString("approve_directur"));
-
-                                    model.setExecutivKyano(data.getString("executiv_kyano"));
-                                    model.setDirecturKyano(data.getString("directur_kyano"));
-                                    model.setHrdKyano(data.getString("hrd_kyano"));
-
-                                    model.setHeadApproveDate(data.getString("head_approve_date"));
-                                    model.setHrdApproveDate(data.getString("hrd_approve_date"));
-                                    model.setExecutivApproveDate(data.getString("executiv_approve_date"));
-                                    model.setDirecturApproveDate(data.getString("directur_approve_date"));
-
-                                    model.setHeadName(data.getString("head_name"));
-                                    model.setHrdName(data.getString("hrd_name"));
-
-                                    model.setCatatanHrd(data.getString("catatan_hrd"));
-                                    model.setStatus(data.getString("status"));
-
-                                    items.add(model);
-                                    //modelIzinSakits.add(model);
-                                    //modelIzinSakitNews.add(model);
-
-                                    Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
-
-                                }
-                            } else if(status.equals("201")) {
-                                Toast.makeText(ListInfinitySakitEmp.this, "Riwayat Izin Sakit Kosong", Toast.LENGTH_LONG).show();
-                                emptyHistory.setVisibility(View.VISIBLE);
-                            }
-
-                            if (currentPage != PAGE_START)
-                                adapterIzinSakitEmp.removeLoading();
-                            adapterIzinSakitEmp.addItems(items);
-                            swipeRefresh.setRefreshing(false);
-                            Log.d("CUURENT_PAGE", "onResponse: " + items.size());
-
-                            if (currentPage < totalPage) {
-                                //adapterIzinSakitEmp.addLoading();
-                            } else {
-                                isLastPage = true;
-                            }
-                            isLoading = false;
-
-                            // Stopping Shimmer Effect's animation after data is loaded to ListView
-                            mShimmerViewContainer.stopShimmerAnimation();
-                            mShimmerViewContainer.setVisibility(View.GONE);
-
-                            recyler_izin_sakit.setVisibility(View.VISIBLE);
-
-                        } catch (JSONException e) {
-
-                            e.printStackTrace();
-                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("ON_ERROR", "onError: "+anError.getErrorBody());
-                    }
-
-
-
-
-                });
-
-
-    }
-
     private void getData(int page, int offset, ArrayList items) {
-        JsonObjectRequest req = new JsonObjectRequest("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + page + "&status="+spinResult, null,
+
+        Log.d("TAG_CHECK_LIST", "getData: "+ offset + dateMonthDate + page + spinResult);
+
+        JsonObjectRequest req = new JsonObjectRequest("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset
+                +"&first_date="+ dateMonthDate
+                +"&limit=" + page
+                + "&status="+spinResult, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -454,7 +364,6 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                         model.setHeadName(data.getString("head_name"));
                                         model.setHrdName(data.getString("hrd_name"));
 
-                                        model.setCatatanHrd(data.getString("catatan_hrd"));
                                         model.setStatus(data.getString("status"));
 
                                         items.add(model);

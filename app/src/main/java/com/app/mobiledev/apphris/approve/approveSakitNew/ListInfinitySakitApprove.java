@@ -217,7 +217,13 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                 bil = "" + monthAdd;
             }
 
-            dateMonthDate = year + "-" + bil;
+            if (spinResult.equals("")) {
+                dateMonthDate = "";
+                spinResult = "";
+            } else {
+                dateMonthDate = year + "-" + bil/* + "-01"*/;
+            }
+
             dateMonthString = year + "-" + bil + "-01";
 
             String monthYear = helper.formateDateFromstring("yyyy-MM-dd", "MMMM yyyy", dateMonthString);
@@ -242,7 +248,13 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
             bil = "" + monthAdd;
         }
 
-        dateMonthDate = yearSelected + "-" + bil/* + "-01"*/;
+        if (spinResult.equals("")) {
+            dateMonthDate = "";
+            spinResult = "";
+        } else {
+            //dateMonthDate = yearSelected + "-" + bil/* + "-01"*/;
+        }
+
         dateMonthString = yearSelected + "-" + bil + "-01";
 
         String monthYear = helper.formateDateFromstring("yyyy-MM-dd", "MMMM yyyy", dateMonthString);

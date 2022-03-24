@@ -27,7 +27,6 @@ public class modelIzinSakitNew {
     String hrdApproveDate;
     String executivApproveDate;
     String directurApproveDate;
-    String catatanHrd;
     String comment;
     String headName;
     String hrdName;
@@ -223,14 +222,6 @@ public class modelIzinSakitNew {
 
     public void setDirecturApproveDate(String directurApproveDate) {
         this.directurApproveDate = directurApproveDate;
-    }
-
-    public String getCatatanHrd() {
-        return catatanHrd;
-    }
-
-    public void setCatatanHrd(String catatanHrd) {
-        this.catatanHrd = catatanHrd;
     }
 
     public String getComment() {

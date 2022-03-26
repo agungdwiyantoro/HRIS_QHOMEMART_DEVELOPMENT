@@ -797,7 +797,7 @@ public class helper extends AsyncTask {
                                 sessionManager = new SessionManager(mctx);
                                 sessionManager.createToken(token);
 
-
+                                Log.i("TAG_TOKEN", "onResponse: "+token);
 
                             } else {
                                 Log.d(TAG, "token salah");

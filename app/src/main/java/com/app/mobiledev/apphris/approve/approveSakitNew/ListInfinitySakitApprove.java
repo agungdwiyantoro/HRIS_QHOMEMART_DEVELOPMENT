@@ -53,7 +53,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
     Spinner dropdown;
     RecyclerView recyler_izin_sakit;
     private List<modelIzinSakitNew> modelIzinSakitNews;
-    private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="", access ="";
+    private String token, dateMonthDate = "", dateMonthString = "", spinSelected, spinResult = "", access = "";
     private SessionManager msession;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
@@ -86,7 +86,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
         inc_backPage = findViewById(R.id.inc_backPage);
 
         dropdown = findViewById(R.id.spinDDown);
-        String[] items = new String[]{"Menunggu", "Diterima", "Ditolak"};
+        String[] items = new String[]{"Menunggu", "Proses", "Diterima", "Ditolak"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter);
@@ -125,7 +125,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
         daySelected = calendar.get(Calendar.DAY_OF_MONTH);
 
         calendar.clear();
-        calendar.set(yearSelected, monthSelected-1, 1); // Set minimum date to show in dialog
+        calendar.set(yearSelected, monthSelected - 1, 1); // Set minimum date to show in dialog
         minDate = calendar.getTimeInMillis(); // Get milliseconds of the modified date
 
         calendar.clear();
@@ -135,7 +135,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
         dialogFragment = MonthYearPickerDialogFragment
                 .getInstance(monthSelected, yearSelected, minDate, maxDate, "Tanggal Izin");
 
-        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>(), access);
+        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>(), access, spinResult);
         recyler_izin_sakit.setAdapter(adapterIzinSakitApprove);
         getMonth();
         paginationCall();
@@ -183,14 +183,22 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                 switch (spinSelected) {
                     case "Menunggu":
                         spinResult = "";
+                        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>(), access, spinResult);
+                        onRefresh();
+                        break;
+                    case "Proses":
+                        spinResult = "2";
+                        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>(), access, spinResult);
                         onRefresh();
                         break;
                     case "Diterima":
                         spinResult = "1";
+                        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>(), access, spinResult);
                         onRefresh();
                         break;
                     case "Ditolak":
                         spinResult = "0";
+                        adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>(), access, spinResult);
                         onRefresh();
                         break;
                 }
@@ -230,7 +238,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
 
             tvDate.setText(monthYear);
 
-            Log.d("TAG_TAG_MY", "getMonthOfYear: " + dateMonthDate + " | "+ dateMonthString);
+            Log.d("TAG_TAG_MY", "getMonthOfYear: " + dateMonthDate + " | " + dateMonthString);
 
             onRefresh();
         });
@@ -261,7 +269,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
 
         tvDate.setText(monthYear);
 
-        Log.d("TAG_TAG_MY", "getMonthOfYear: " + dateMonthDate + " | "+ dateMonthString);
+        Log.d("TAG_TAG_MY", "getMonthOfYear: " + dateMonthDate + " | " + dateMonthString);
     }
 
     private void paginationCall() {
@@ -282,7 +290,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                     offset = (itemCount - totalPage);
                 }
                 recyler_izin_sakit.setHasFixedSize(true);
-                Log.d("cek_url_all", "run: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + itemCount + "&status="+spinResult);
+                Log.d("cek_url_all", "run: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset + "&first_date=" + dateMonthDate + "&limit=" + itemCount + "&status=" + spinResult);
                 //getRiwayatSakitAll(itemCount, offset, items);
                 getData(itemCount, offset, items);
             }
@@ -315,11 +323,11 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                         "&limit=" + page +
                         "&status="+spinResult, null,*/
                 "http://192.168.50.24/all/hris_ci_3/api/approvesakit?" +
-                        "status="+spinResult+
-                        "&hak_akses="+access+
-                        "&limit="+limit+
-                        "&offset="+offset+
-                        "&first_date="+dateMonthDate, null,
+                        "status=" + spinResult +
+                        "&hak_akses=" + access +
+                        "&limit=" + limit +
+                        "&offset=" + offset +
+                        "&first_date=" + dateMonthDate, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -379,12 +387,12 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                                     }
 
                                     break;
-                                /*case "201":
-                                    emptyHistory.setVisibility(View.VISIBLE);
+                                case "201":
+                                    /*emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
-                                    recyler_izin_sakit.setVisibility(View.GONE);
-                                    onRestart();
-                                    break;*/
+                                    recyler_izin_sakit.setVisibility(View.GONE);*/
+
+                                    break;
                                 case "404":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
@@ -436,7 +444,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer "+token);
+                headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
         };

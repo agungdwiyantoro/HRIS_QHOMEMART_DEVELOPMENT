@@ -143,7 +143,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void checkJabatan() {
-        Log.d("TAG", "checkJabatan: onMethod");
+
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,
                 "http://192.168.50.24/all/hris_ci_3/api/akses", null,
                 //"http://hris.qhomedata.id/api/akses", null,
@@ -151,6 +151,8 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            Log.d("TAG_RESPONSE_MENU", "checkJabatan: onMethod"+response.toString());
+
                             int status = response.getInt("status");
 
                             JSONObject message = response.getJSONObject("message");

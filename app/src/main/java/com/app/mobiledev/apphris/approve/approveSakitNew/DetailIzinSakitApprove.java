@@ -59,12 +59,11 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
             dir_kyano, dir_name, approve_dir, dir_approve_date,
             hrd_kyano, hrd_name, approve_hrd, hrd_approve_date;
     private TextView
-            txNama_title, tx_jenisIzin_title, tx_tanggal_title, tx_bulan_tahun_title,
             tx_nama, tx_indikasi_sakit, tx_catatan, tx_tgl_pengajuan, tx_link_lihat_dokumen,
             tx_status, tx_tgl_status, tx_waktu_sakit, tx_nama_dialog, tvCancelDialog,
-            tvSubmitDialog, tx_info_dialog, tx_jenis_izin_dialog, tx_alasan;
-    private ImageView ivImageName, imStatus, img_back;
-    private LinearLayout linearOption, linearKeputusan, lin_approve_btn, lin_status_approve, llAlasan;
+            tvSubmitDialog, tx_info_dialog, tx_jenis_izin_dialog, tx_alasan, tvTitleDetailApp;
+    private ImageView ivImageName, img_back;
+    private LinearLayout lin_approve_btn, lin_status_approve, llAlasan;
     private SessionManager msession;
     private Dialog dialogApprove;
     private Button btn_setuju, btn_tolak;
@@ -91,10 +90,9 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         id = bundle.getString("id");
         access = bundle.getString("access");
 
-        txNama_title = findViewById(R.id.txNama_title);
-        tx_jenisIzin_title = findViewById(R.id.tx_jenisIzin_title);
-        tx_tanggal_title = findViewById(R.id.tx_tanggal_title);
-        tx_bulan_tahun_title = findViewById(R.id.tx_bulan_tahun_title);
+        tvTitleDetailApp = findViewById(R.id.tvTitleDetailApp);
+        tvTitleDetailApp.setText("Detail Persetujuan");
+
         tx_waktu_sakit = findViewById(R.id.tx_waktu_sakit);
         tx_nama = findViewById(R.id.tx_nama);
         tx_indikasi_sakit = findViewById(R.id.tx_indikasi_sakit);
@@ -106,7 +104,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         tx_alasan = findViewById(R.id.tx_alasan);
 
         card_status_approve = findViewById(R.id.card_status_approve);
-        imStatus = findViewById(R.id.imStatus);
+
         img_back = findViewById(R.id.img_back);
 
         dateFormatSources = new SimpleDateFormat("yyyy-MM-dd");
@@ -117,8 +115,6 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         card_status_approve.setVisibility(View.GONE);
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 
-        linearOption = findViewById(R.id.lLDetOption);
-        linearKeputusan = findViewById(R.id.lLDetKeputusanAprove);
         llAlasan = findViewById(R.id.llAlasan);
         lin_approve_btn = findViewById(R.id.lin_approve_btn);
         lin_status_approve = findViewById(R.id.lin_status_approve);
@@ -197,6 +193,96 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
 
                                 lampiran_file = dataArray.getJSONObject(0).getString("lampiran_file");
 
+                                if (access.equals("HEAD")) {
+                                    Log.d("TAG_HEAD", "onResponse: " + access);
+                                    if (approve_head.equals("0")) {
+                                        tx_status.setText("Ditolak oleh "+head_name);
+                                        tx_tgl_status.setText(head_approve_date);
+                                        lin_approve_btn.setVisibility(View.GONE);
+                                        card_status_approve.setVisibility(View.VISIBLE);
+                                        lin_status_approve.setBackgroundResource(R.color.transparentRed);
+
+                                        llAlasan.setVisibility(View.VISIBLE);
+                                    } else if (approve_head.equals("1")) {
+                                        tx_status.setText("Diterima oleh "+head_name);
+                                        tx_tgl_status.setText(head_approve_date);
+                                        lin_approve_btn.setVisibility(View.GONE);
+                                        card_status_approve.setVisibility(View.VISIBLE);
+                                        lin_status_approve.setBackgroundResource(R.color.transparentGreen);
+
+                                    } else {
+
+                                        card_status_approve.setVisibility(View.GONE);
+                                        lin_approve_btn.setVisibility(View.VISIBLE);
+                                    }
+                                } else if ("EXECUTIV".equals(access)) {
+                                    Log.d("TAG_EXEC", "onResponse: " + access);
+                                    if (approve_exec.equals("0")) {
+                                        tx_status.setText("Ditolak oleh "+exec_name);
+                                        tx_tgl_status.setText(exec_approve_date);
+                                        lin_approve_btn.setVisibility(View.GONE);
+                                        card_status_approve.setVisibility(View.VISIBLE);
+                                        lin_status_approve.setBackgroundResource(R.color.transparentRed);
+
+                                        llAlasan.setVisibility(View.VISIBLE);
+                                    } else if (approve_exec.equals("1")) {
+                                        tx_status.setText("Diterima oleh "+exec_name);
+                                        tx_tgl_status.setText(exec_approve_date);
+                                        lin_approve_btn.setVisibility(View.GONE);
+                                        card_status_approve.setVisibility(View.VISIBLE);
+                                        lin_status_approve.setBackgroundResource(R.color.transparentGreen);
+
+                                    } else {
+
+                                        card_status_approve.setVisibility(View.GONE);
+                                        lin_approve_btn.setVisibility(View.VISIBLE);
+                                    }
+                                } else if ("DIRECTUR".equals(access)) {
+                                    Log.d("TAG_DIR", "onResponse: " + access);
+                                    if (approve_dir.equals("0")) {
+                                        tx_status.setText("Ditolak oleh "+exec_name);
+                                        tx_tgl_status.setText(dir_approve_date);
+                                        lin_approve_btn.setVisibility(View.GONE);
+                                        card_status_approve.setVisibility(View.VISIBLE);
+                                        lin_status_approve.setBackgroundResource(R.color.transparentRed);
+
+                                        llAlasan.setVisibility(View.VISIBLE);
+                                    } else if (approve_dir.equals("1")) {
+                                        tx_status.setText("Diterima oleh "+exec_name);
+                                        tx_tgl_status.setText(dir_approve_date);
+                                        lin_approve_btn.setVisibility(View.GONE);
+                                        card_status_approve.setVisibility(View.VISIBLE);
+                                        lin_status_approve.setBackgroundResource(R.color.transparentGreen);
+
+                                    } else {
+
+                                        card_status_approve.setVisibility(View.GONE);
+                                        lin_approve_btn.setVisibility(View.VISIBLE);
+                                    }
+                                } else if ("HRD".equals(access)) {
+                                    Log.d("TAG_HRD", "onResponse: " + access);
+                                    if (approve_hrd.equals("0")) {
+                                        tx_status.setText("Ditolak oleh "+hrd_name);
+                                        tx_tgl_status.setText(hrd_approve_date);
+                                        lin_approve_btn.setVisibility(View.GONE);
+                                        card_status_approve.setVisibility(View.VISIBLE);
+                                        lin_status_approve.setBackgroundResource(R.color.transparentRed);
+
+                                        llAlasan.setVisibility(View.VISIBLE);
+                                    } else if (approve_hrd.equals("1")) {
+                                        tx_status.setText("Diterima oleh "+hrd_name);
+                                        tx_tgl_status.setText(hrd_approve_date);
+                                        lin_approve_btn.setVisibility(View.GONE);
+                                        card_status_approve.setVisibility(View.VISIBLE);
+                                        lin_status_approve.setBackgroundResource(R.color.transparentGreen);
+
+                                    } else {
+
+                                        card_status_approve.setVisibility(View.GONE);
+                                        lin_approve_btn.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
                                 /*
                                  * GET DATA TO STRING END
                                  */
@@ -209,15 +295,11 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                 dateSource = dateFormatSources.parse(mulai_sakit_tanggal);
                                 dateSource1 = dateFormatSources.parse(selesai_sakit_tanggal);
 
-                                txNama_title.setText(name);
                                 tx_nama.setText(name);
                                 tx_indikasi_sakit.setText(indikasi_sakit);
                                 tx_catatan.setText(catatan);
                                 tx_tgl_pengajuan.setText(created_at);
                                 tx_alasan.setText(comment);
-
-                                tx_tanggal_title.setText(dateFormat_day.format(dateSource));
-                                tx_bulan_tahun_title.setText(dateFormat_month_year.format(dateSource));
 
                                 mulai_sakit_tanggal = dateFormat_standart.format(dateSource);
                                 selesai_sakit_tanggal = dateFormat_standart.format(dateSource1);
@@ -227,109 +309,13 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                  * SET DATA TO TEXTVIEW END
                                  */
 
-                                switch (access) {
-                                    case "HEAD" :
-                                        Log.d("TAG_HEAD", "onResponse: "+access);
-                                        if (approve_head.equals("0")) {
-                                            tx_status.setText("Ditolak oleh ");
-                                            tx_tgl_status.setText(head_approve_date);
-                                            lin_approve_btn.setVisibility(View.GONE);
-                                            card_status_approve.setVisibility(View.VISIBLE);
-                                            lin_status_approve.setBackgroundResource(R.color.transparentRed);
-                                            imStatus.setImageResource(R.drawable.ic_dot_red);
-                                            llAlasan.setVisibility(View.VISIBLE);
-                                        } else if (approve_head.equals("1")) {
-                                            tx_status.setText("Diterima oleh ");
-                                            tx_tgl_status.setText(head_approve_date);
-                                            lin_approve_btn.setVisibility(View.GONE);
-                                            card_status_approve.setVisibility(View.VISIBLE);
-                                            lin_status_approve.setBackgroundResource(R.color.transparentGreen);
-                                            imStatus.setImageResource(R.drawable.ic_dot_sukses);
-                                        } else {
-                                            imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
-                                            card_status_approve.setVisibility(View.GONE);
-                                            lin_approve_btn.setVisibility(View.VISIBLE);
-                                        }
-                                        break;
-                                    case "EXECUTIVE" :
-                                        Log.d("TAG_EXEC", "onResponse: "+access);
-                                        if (approve_exec.equals("0")) {
-                                            tx_status.setText("Ditolak oleh ");
-                                            tx_tgl_status.setText(exec_approve_date);
-                                            lin_approve_btn.setVisibility(View.GONE);
-                                            card_status_approve.setVisibility(View.VISIBLE);
-                                            lin_status_approve.setBackgroundResource(R.color.transparentRed);
-                                            imStatus.setImageResource(R.drawable.ic_dot_red);
-                                            llAlasan.setVisibility(View.VISIBLE);
-                                        } else if (approve_exec.equals("1")) {
-                                            tx_status.setText("Diterima oleh ");
-                                            tx_tgl_status.setText(exec_approve_date);
-                                            lin_approve_btn.setVisibility(View.GONE);
-                                            card_status_approve.setVisibility(View.VISIBLE);
-                                            lin_status_approve.setBackgroundResource(R.color.transparentGreen);
-                                            imStatus.setImageResource(R.drawable.ic_dot_sukses);
-                                        } else {
-                                            imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
-                                            card_status_approve.setVisibility(View.GONE);
-                                            lin_approve_btn.setVisibility(View.VISIBLE);
-                                        }
-                                        break;
-                                    case "DIRECTUR" :
-                                        Log.d("TAG_DIR", "onResponse: "+access);
-                                        if (approve_dir.equals("0")) {
-                                            tx_status.setText("Ditolak oleh ");
-                                            tx_tgl_status.setText(dir_approve_date);
-                                            lin_approve_btn.setVisibility(View.GONE);
-                                            card_status_approve.setVisibility(View.VISIBLE);
-                                            lin_status_approve.setBackgroundResource(R.color.transparentRed);
-                                            imStatus.setImageResource(R.drawable.ic_dot_red);
-                                            llAlasan.setVisibility(View.VISIBLE);
-                                        } else if (approve_dir.equals("1")) {
-                                            tx_status.setText("Diterima oleh ");
-                                            tx_tgl_status.setText(dir_approve_date);
-                                            lin_approve_btn.setVisibility(View.GONE);
-                                            card_status_approve.setVisibility(View.VISIBLE);
-                                            lin_status_approve.setBackgroundResource(R.color.transparentGreen);
-                                            imStatus.setImageResource(R.drawable.ic_dot_sukses);
-                                        } else {
-                                            imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
-                                            card_status_approve.setVisibility(View.GONE);
-                                            lin_approve_btn.setVisibility(View.VISIBLE);
-                                        }
-                                        break;
-                                    case "HRD" :
-                                        Log.d("TAG_HRD", "onResponse: "+access);
-                                        if (approve_hrd.equals("0")) {
-                                            tx_status.setText("Ditolak oleh ");
-                                            tx_tgl_status.setText(hrd_approve_date);
-                                            lin_approve_btn.setVisibility(View.GONE);
-                                            card_status_approve.setVisibility(View.VISIBLE);
-                                            lin_status_approve.setBackgroundResource(R.color.transparentRed);
-                                            imStatus.setImageResource(R.drawable.ic_dot_red);
-                                            llAlasan.setVisibility(View.VISIBLE);
-                                        } else if (approve_hrd.equals("1")) {
-                                            tx_status.setText("Diterima oleh ");
-                                            tx_tgl_status.setText(hrd_approve_date);
-                                            lin_approve_btn.setVisibility(View.GONE);
-                                            card_status_approve.setVisibility(View.VISIBLE);
-                                            lin_status_approve.setBackgroundResource(R.color.transparentGreen);
-                                            imStatus.setImageResource(R.drawable.ic_dot_sukses);
-                                        } else {
-                                            imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
-                                            card_status_approve.setVisibility(View.GONE);
-                                            lin_approve_btn.setVisibility(View.VISIBLE);
-                                        }
-                                        break;
-                                    default:
-                                }
-
                                 /*if (approve_head.equals("1") || approve_exec.equals("0") && approve_hrd.equals("0")) {
                                     tx_status.setText("Ditolak oleh ");
                                     tx_tgl_status.setText(hrd_approve_date);
                                     lin_approve_btn.setVisibility(View.GONE);
                                     card_status_approve.setVisibility(View.VISIBLE);
                                     lin_status_approve.setBackgroundResource(R.color.transparentOranye);
-                                    imStatus.setImageResource(R.drawable.ic_dot_oranye);
+
                                 } else */
                                 /*if (approve_head.equals("0")) {
                                     tx_status.setText("Ditolak oleh ");
@@ -337,16 +323,16 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                     lin_approve_btn.setVisibility(View.GONE);
                                     card_status_approve.setVisibility(View.VISIBLE);
                                     lin_status_approve.setBackgroundResource(R.color.transparentRed);
-                                    imStatus.setImageResource(R.drawable.ic_dot_red);
+
                                 } else if (approve_head.equals("1")) {
                                     tx_status.setText("Diterima oleh ");
                                     tx_tgl_status.setText(head_approve_date);
                                     lin_approve_btn.setVisibility(View.GONE);
                                     card_status_approve.setVisibility(View.VISIBLE);
                                     lin_status_approve.setBackgroundResource(R.color.transparentGreen);
-                                    imStatus.setImageResource(R.drawable.ic_dot_sukses);
+
                                 } else {
-                                    imStatus.setImageResource(R.drawable.ic_dot_point_abu_abu);
+
                                     card_status_approve.setVisibility(View.GONE);
                                     lin_approve_btn.setVisibility(View.VISIBLE);
                                 }*/
@@ -487,6 +473,10 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             status = response.getString("status");
+                            String responseResult = response.toString();
+
+                            Log.d("TAG_RES_UPDATE", "onResponse: " + responseResult);
+
                             if (status.equals("200")) {
                                 Log.d("APPROVE_SUKSES", "onResponse: " + response.toString());
                                 startActivity(getIntent());

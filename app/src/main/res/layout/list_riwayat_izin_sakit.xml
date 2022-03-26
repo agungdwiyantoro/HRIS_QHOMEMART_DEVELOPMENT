@@ -60,8 +60,8 @@
 
                     <TextView
                         android:id="@+id/tvStatusIzin"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Menunggu"
                         android:textStyle="bold"
@@ -73,7 +73,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/tvKetEmp"
+                    android:id="@+id/tvNamaEmp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -82,13 +82,28 @@
                     android:textSize="18sp"
                     android:autoSizeMaxTextSize="24sp"
                     android:includeFontPadding="true"
-                    android:text="Demam Berdarah Dengue"
+                    android:text="Nama Employee"
                     android:textColor="@color/main_color_black"
                     android:textStyle="bold"
                     tools:ignore="NestedWeights" />
 
                 <TextView
-                    android:id="@+id/tvAlasanEmp"
+                    android:id="@+id/tvDivisiEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Divisi Employee"
+                    android:textColor="@color/main_color_black"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="18sp"
+                    android:autoSizeMaxTextSize="24sp"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:id="@+id/tvKetEmp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

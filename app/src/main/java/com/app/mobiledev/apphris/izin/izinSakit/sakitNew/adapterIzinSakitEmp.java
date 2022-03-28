@@ -115,7 +115,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public class ViewHolder extends BaseViewHolder {
-        private TextView tvKetEmp, tvNamaEmp;
+        private TextView tvKetEmp, tvNamaEmp, tvDivisiEmp;
         private LinearLayout line1;
         private TextView tx_tanggal, tx_bulan_tahun, tvStatusIzin;
         private SimpleDateFormat dateFormatSources, dateFormat_day, dateFormat_month_year;
@@ -128,6 +128,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
             tvNamaEmp = itemView.findViewById(R.id.tvNamaEmp);
+            tvDivisiEmp = itemView.findViewById(R.id.tvDivisiEmp);
             tvKetEmp = itemView.findViewById(R.id.tvKetEmp);
             line1 = itemView.findViewById(R.id.line1Emp);
             tx_tanggal = itemView.findViewById(R.id.tx_tanggalEmp);
@@ -152,6 +153,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
             modelIzinSakitNew Object = modelIzinSakitNews.get(position);
 
             tvNamaEmp.setText("" + Object.getName());
+            tvDivisiEmp.setText(""+Object.getDvnama());
             tvKetEmp.setText("" + Object.getIndikasiSakit());
 
             if (Object.getStatus().equals("ON PROGRESS")) {

@@ -335,35 +335,34 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                         modelIzinSakitNew model = new modelIzinSakitNew();
 
                                         model.setName(data.getString("name"));
+                                        model.setDvnama(data.getString("dvnama"));
                                         model.setId(data.getString("id"));
                                         model.setKyano(data.getString("kyano"));
                                         model.setIndikasiSakit(data.getString("indikasi_sakit"));
                                         model.setMulaiSakitTanggal(data.getString("mulai_sakit_tanggal"));
                                         model.setSelesaiSakitTanggal(data.getString("selesai_sakit_tanggal"));
                                         model.setSelectDate(data.getString("select_date"));
+                                        model.setJmlIzin(data.getString("jml_izin"));
                                         model.setCatatan(data.getString("catatan"));
                                         model.setLampiranFile(data.getString("lampiran_file"));
-
                                         model.setCreatedAt(data.getString("created_at"));
                                         model.setUpdatedAt(data.getString("updated_at"));
                                         model.setApproveHead(data.getString("approve_head"));
                                         model.setApproveHrd(data.getString("approve_hrd"));
-
                                         model.setApproveExecutiv(data.getString("approve_executiv"));
                                         model.setApproveDirectur(data.getString("approve_directur"));
-
                                         model.setExecutivKyano(data.getString("executiv_kyano"));
                                         model.setDirecturKyano(data.getString("directur_kyano"));
                                         model.setHrdKyano(data.getString("hrd_kyano"));
-
                                         model.setHeadApproveDate(data.getString("head_approve_date"));
                                         model.setHrdApproveDate(data.getString("hrd_approve_date"));
                                         model.setExecutivApproveDate(data.getString("executiv_approve_date"));
                                         model.setDirecturApproveDate(data.getString("directur_approve_date"));
-
+                                        model.setComment(data.getString("comment"));
                                         model.setHeadName(data.getString("head_name"));
                                         model.setHrdName(data.getString("hrd_name"));
-
+                                        model.setExecutiv(data.getString("executiv"));
+                                        model.setDir(data.getString("dir"));
                                         model.setStatus(data.getString("status"));
 
                                         items.add(model);

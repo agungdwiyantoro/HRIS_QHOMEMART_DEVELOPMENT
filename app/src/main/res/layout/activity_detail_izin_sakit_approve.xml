@@ -187,7 +187,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
-                            android:text=""
+                            android:text="20-Mar-2022, 21-Mar-2022"
                             android:textColor="@color/main_color_black"
                             android:textSize="18dp" />
 
@@ -197,6 +197,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/padd_10"
+                        android:layout_marginBottom="16dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -218,6 +219,142 @@
                             android:textSize="18dp" />
 
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llRiwayatPengajuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_input"
+                        android:padding="16dp"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/llCheckHRD"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/icCheckHRD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_check_box_24_grey"
+                                android:layout_weight="8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvCheckHRD"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Menunggu HRD"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llCheckDir"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/icCheckDir"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_check_box_24_grey"
+                                android:layout_weight="8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvCheckDir"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Menunggu Direktur"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llCheckExec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/icCheckExec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_check_box_24_grey"
+                                android:layout_weight="8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvCheckExec"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Menunggu Eksekutif"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llCheckHead"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/icCheckHead"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_check_box_24_grey"
+                                android:layout_weight="8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvCheckHead"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Menunggu Head/SPV"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvDetRiwayatPengajuan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Detail Riwayat Pengajuan"
+                            android:gravity="center"
+                            android:textColor="@color/blue"
+                            android:layout_marginTop="16dp"
+                            />
 
                     </LinearLayout>
 
@@ -338,7 +475,9 @@
                             android:id="@+id/lin_approve_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            >
 
                             <Button
                                 android:elevation="@dimen/padd_10"

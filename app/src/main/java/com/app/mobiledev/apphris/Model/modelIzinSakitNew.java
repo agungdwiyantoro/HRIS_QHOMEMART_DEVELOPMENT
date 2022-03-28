@@ -4,12 +4,14 @@ import android.util.Log;
 
 public class modelIzinSakitNew {
     String name;
+    String dvnama;
     String id;
     String kyano;
     String indikasiSakit;
     String mulaiSakitTanggal;
     String selesaiSakitTanggal;
     String selectDate;
+    String jmlIzin;
     String catatan;
     String lampiranFile;
     String createdAt;
@@ -31,6 +33,7 @@ public class modelIzinSakitNew {
     String headName;
     String hrdName;
     String executiv;
+    String dir;
 
     public String getName() {
         return name;
@@ -38,6 +41,14 @@ public class modelIzinSakitNew {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDvnama() {
+        return dvnama;
+    }
+
+    public void setDvnama(String dvnama) {
+        this.dvnama = dvnama;
     }
 
     public String getId() {
@@ -86,6 +97,14 @@ public class modelIzinSakitNew {
 
     public void setSelectDate(String selectDate) {
         this.selectDate = selectDate;
+    }
+
+    public String getJmlIzin() {
+        return jmlIzin;
+    }
+
+    public void setJmlIzin(String jmlIzin) {
+        this.jmlIzin = jmlIzin;
     }
 
     public String getCatatan() {
@@ -254,5 +273,13 @@ public class modelIzinSakitNew {
 
     public void setExecutiv(String executiv) {
         this.executiv = executiv;
+    }
+
+    public String getDir() {
+        return dir;
+    }
+
+    public void setDir(String dir) {
+        this.dir = dir;
     }
 }

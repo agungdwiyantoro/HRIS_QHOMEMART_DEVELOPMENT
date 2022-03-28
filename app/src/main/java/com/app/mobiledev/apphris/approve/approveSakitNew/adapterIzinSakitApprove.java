@@ -165,6 +165,7 @@ public class adapterIzinSakitApprove extends RecyclerView.Adapter<BaseViewHolder
             modelIzinSakitNew Object = modelIzinSakitNews.get(position);
 
             tvNamaEmp.setText("" + Object.getName());
+            tvDivisiEmp.setText(""+Object.getDvnama());
             tvKetEmp.setText("" + Object.getIndikasiSakit());
 
             approve_head = Object.getApproveHead();

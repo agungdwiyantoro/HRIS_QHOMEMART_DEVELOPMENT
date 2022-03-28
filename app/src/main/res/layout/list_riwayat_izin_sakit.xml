@@ -47,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
+                    android:layout_marginBottom="4dp"
                     android:layout_weight="5"
                     >
 
@@ -61,7 +62,7 @@
                     <TextView
                         android:id="@+id/tvStatusIzin"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="Menunggu"
                         android:textStyle="bold"
@@ -99,7 +100,6 @@
                     app:autoSizeTextType="uniform"
                     android:autoSizeMinTextSize="18sp"
                     android:autoSizeMaxTextSize="24sp"
-                    android:visibility="gone"
                     />
 
                 <TextView

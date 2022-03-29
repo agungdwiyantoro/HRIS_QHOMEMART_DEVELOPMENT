@@ -31,7 +31,7 @@
             android:gravity="center"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/roboto_regular"
-            android:text="Muhamad Dios Pratama"
+            android:text="Nama User"
             android:textColor="#000"
             android:textStyle="bold" />
 
@@ -98,7 +98,7 @@
                     android:id="@+id/tvSubmitDialog"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Submit"
+                    android:text="Setuju"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
                     android:gravity="center"

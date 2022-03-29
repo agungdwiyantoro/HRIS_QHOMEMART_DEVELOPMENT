@@ -47,7 +47,8 @@
             android:text="Persetujuan"
             android:textColor="@color/main_color_black"
             android:textSize="24sp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:layout_marginBottom="8dp"/>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -242,7 +243,7 @@
                                 android:id="@+id/icCheckHRD"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_check_box_24_grey"
+                                android:src="@drawable/ic_baseline_watch_later_24_wait"
                                 android:layout_weight="8"
                                 />
 
@@ -271,7 +272,7 @@
                                 android:id="@+id/icCheckDir"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_check_box_24_grey"
+                                android:src="@drawable/ic_baseline_watch_later_24_wait"
                                 android:layout_weight="8"
                                 />
 
@@ -300,7 +301,7 @@
                                 android:id="@+id/icCheckExec"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_check_box_24_grey"
+                                android:src="@drawable/ic_baseline_watch_later_24_wait"
                                 android:layout_weight="8"
                                 />
 
@@ -329,7 +330,7 @@
                                 android:id="@+id/icCheckHead"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_baseline_check_box_24_grey"
+                                android:src="@drawable/ic_baseline_watch_later_24_wait"
                                 android:layout_weight="8"
                                 />
 

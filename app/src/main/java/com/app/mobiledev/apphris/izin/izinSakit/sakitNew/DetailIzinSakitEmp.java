@@ -5,6 +5,7 @@ import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -19,6 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
@@ -26,6 +33,8 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.Model.modelIzinSakitNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
+import com.app.mobiledev.apphris.approve.menu_approve;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -37,19 +46,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DetailIzinSakitEmp extends AppCompatActivity {
 
     private List<modelIzinSakitNew> modelIzinSakitNews;
-    private TextView text_keterangan, text_status, text_alasan, text_status_hrd, text_status_head, text_status_exec, tx_nama, tx_indikasi_sakit, tx_catatan, tx_selengkapnya, text_head, text_hrd, text_exec;
-    private ImageView dot_hrd, dot_head, dot_exec, dot_result, img_status;
+    private TextView text_keterangan, text_status, text_alasan, text_status_hrd,
+            text_status_head, text_status_exec, text_status_dir, tx_nama, tx_indikasi_sakit,
+            tx_catatan, tx_selengkapnya, text_head, text_exec, text_dir, text_hrd;
+    private ImageView dot_head, dot_exec, dot_dir, dot_hrd, dot_result, img_status;
     private Bundle bundle;
-    private String kyano="",idDetailIzin = "", kodeStatus = "", status_approve = "", token, nama = "", lampiran_file="", jabatan;
+    private String kyano="",idDetailIzin = "", kodeStatus = "", status_approve = "",
+            token, nama = "", lampiran_file="", jabatan, hak_akses;
     private SessionManager msession;
-    private LinearLayout lin_hrd, lin_exec, lin_head, lin_result;
-    private RelativeLayout rlExecSakit;
-    private View view_hrd, view_head, view_exec, view_result, inc_backPage;
+    private LinearLayout lin_head, lin_exec, lin_dir, lin_hrd, lin_result;
+    private RelativeLayout rlExecSakit, rlDirSakit;
+    private View view_head, view_exec, view_dir, view_hrd, view_result, inc_backPage;
 
     //dialog
     private Dialog dialogFoto;
@@ -67,26 +81,33 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         text_status = findViewById(R.id.text_status);
         text_alasan = findViewById(R.id.text_alasan);
 
-        text_head = findViewById(R.id.text_head);
         text_status_hrd = findViewById(R.id.text_status_hrd);
         text_status_head = findViewById(R.id.text_status_head);
         text_status_exec = findViewById(R.id.text_status_exec);
+        text_status_dir = findViewById(R.id.text_status_dir);
 
-        text_exec = findViewById(R.id.text_exec);
         text_hrd = findViewById(R.id.text_hrd);
+        text_dir = findViewById(R.id.text_dir);
+        text_exec = findViewById(R.id.text_exec);
+        text_head = findViewById(R.id.text_head);
+
         lin_hrd = findViewById(R.id.lin_hrd);
-        lin_head = findViewById(R.id.lin_head);
+        lin_dir = findViewById(R.id.lin_dir);
         lin_exec = findViewById(R.id.lin_exec);
+        lin_head = findViewById(R.id.lin_head);
 
         rlExecSakit = findViewById(R.id.rlExecSakit);
+        rlDirSakit = findViewById(R.id.rlDirSakit);
 
         dot_hrd = findViewById(R.id.dot_hrd);
-        dot_head = findViewById(R.id.dot_head);
+        dot_dir = findViewById(R.id.dot_dir);
         dot_exec = findViewById(R.id.dot_exec);
+        dot_head = findViewById(R.id.dot_head);
 
-        view_head = findViewById(R.id.view_head);
-        view_exec = findViewById(R.id.view_exec);
         view_hrd = findViewById(R.id.view_hrd);
+        view_dir = findViewById(R.id.view_dir);
+        view_exec = findViewById(R.id.view_exec);
+        view_head = findViewById(R.id.view_head);
 
         img_status = findViewById(R.id.img_status);
         inc_backPage = findViewById(R.id.inc_backPage);
@@ -108,7 +129,10 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         tx_selengkapnya = findViewById(R.id.tx_selengkapnya);
         bundle = getIntent().getExtras();
         idDetailIzin = bundle.getString("id");
+
         getRiwayatStatusApprove(idDetailIzin);
+        checkJabatan();
+
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 
         inc_backPage.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +151,58 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         });
     }
 
+    private void checkJabatan() {
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,
+                "http://192.168.50.24/all/hris_ci_3/api/akses", null,
+                //"http://hris.qhomedata.id/api/akses", null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.d("TAG_RESPONSE_MENU", "checkJabatan: onMethod"+response.toString());
+
+                            int status = response.getInt("status");
+
+                            JSONObject message = response.getJSONObject("message");
+                            String hak = message.getString("hak_akses");
+
+                            Log.d("TAG_TAG_MSG_HAK", "run: " + status + message.toString()+ hak);
+
+                            if (status == 200) {
+
+                                hak_akses = hak;
+
+                                if (hak_akses.equals("HEAD") || hak_akses.equals("EXECUTIV")) {
+                                    rlDirSakit.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                            Log.d("JSON_RIWYAT_IZIN_SAKIT", "onResponse: " + e);
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error_Volley_MENU_APP: ", error.toString());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", "Bearer "+token);
+                return headers;
+            }
+        };
+
+        Volley.newRequestQueue(DetailIzinSakitEmp.this).add(req);
+    }
 
     private void getRiwayatStatusApprove(String id) {
         AndroidNetworking.get(api.URL_IzinSakit + "?id=" + id)
@@ -256,39 +332,56 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                  * ====================== Executive Division Condition START ======================
                  */
 
-                if (data.getString("executiv_kyano").equals("null") && data.getString("approve_executiv").equals("1")) {
-                    dot_exec.setVisibility(View.GONE);
-                    lin_exec.setVisibility(View.GONE);
-                    view_exec.setVisibility(View.GONE);
-                    text_status_exec.setVisibility(View.GONE);
-                    text_exec.setVisibility(View.GONE);
-                    rlExecSakit.setVisibility(View.GONE);
-
+                if (data.getString("approve_executiv").equals("1")) {
+                    lin_exec.setBackgroundResource(R.drawable.ic_boxtext_green);
+                    dot_exec.setBackgroundResource(R.drawable.ic_dot_sukses);
+                    view_exec.setBackgroundResource(R.color.greennew);
+                    text_status_exec.setText(data.getString("executiv"));
+                } else if (data.getString("approve_executiv").equals("0")) {
+                    lin_exec.setBackgroundResource(R.drawable.ic_boxtext_red);
+                    dot_exec.setBackgroundResource(R.drawable.ic_dot_red);
+                    view_exec.setBackgroundResource(R.color.red_btn_bg_pressed_color);
+                    text_status_exec.setText(data.getString("executiv"));
+                    lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
+                    dot_dir.setBackgroundResource(R.drawable.ic_dot_red);
+                    lin_dir.setBackgroundResource(R.drawable.ic_boxtext_red);
                 } else {
-                    Log.d("TAG_DITOLAK", "loadDataFormAPI: "+data.getString("approve_executiv"));
-                    if (data.getString("approve_executiv").equals("1")) {
-                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_green);
-                        dot_exec.setBackgroundResource(R.drawable.ic_dot_sukses);
-                        view_exec.setBackgroundResource(R.color.greennew);
-                        text_status_exec.setText(data.getString("executiv"));
-                    } else if (data.getString("approve_executiv").equals("0")) {
-                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_red);
-                        dot_exec.setBackgroundResource(R.drawable.ic_dot_red);
-                        view_exec.setBackgroundResource(R.color.red_btn_bg_pressed_color);
-                        text_status_exec.setText(data.getString("executiv"));
-                        lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
-                        dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
-                        lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
-                    } else {
-                        text_status_exec.setText("----");
-                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_grey);
-                        dot_exec.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
-                        view_exec.setBackgroundResource(R.color.abu_abu);
-                    }
+                    text_status_exec.setText("----");
+                    lin_exec.setBackgroundResource(R.drawable.ic_boxtext_grey);
+                    dot_exec.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
+                    view_exec.setBackgroundResource(R.color.abu_abu);
                 }
 
                 /*
                  * ====================== Executive Division Condition END ======================
+                 */
+
+                /*
+                 * ====================== Director Condition START ======================
+                 */
+
+                if (data.getString("approve_directur").equals("1")) {
+                    lin_dir.setBackgroundResource(R.drawable.ic_boxtext_green);
+                    dot_dir.setBackgroundResource(R.drawable.ic_dot_sukses);
+                    view_dir.setBackgroundResource(R.color.greennew);
+                    text_status_dir.setText(data.getString("dir"));
+                } else if (data.getString("approve_directur").equals("0")) {
+                    lin_dir.setBackgroundResource(R.drawable.ic_boxtext_red);
+                    dot_dir.setBackgroundResource(R.drawable.ic_dot_red);
+                    view_dir.setBackgroundResource(R.color.red_btn_bg_pressed_color);
+                    text_status_dir.setText(data.getString("dir"));
+                    lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
+                    dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
+                    lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
+                } else {
+                    text_status_dir.setText("----");
+                    lin_dir.setBackgroundResource(R.drawable.ic_boxtext_grey);
+                    dot_dir.setBackgroundResource(R.drawable.ic_dot_point_abu_abu);
+                    view_dir.setBackgroundResource(R.color.abu_abu);
+                }
+
+                /*
+                 * ====================== Director Condition END ======================
                  */
 
                 /*

@@ -335,7 +335,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                         modelIzinSakitNew model = new modelIzinSakitNew();
 
                                         model.setName(data.getString("name"));
-                                        model.setDvnama(data.getString("dvnama"));
+
                                         model.setId(data.getString("id"));
                                         model.setKyano(data.getString("kyano"));
                                         model.setIndikasiSakit(data.getString("indikasi_sakit"));

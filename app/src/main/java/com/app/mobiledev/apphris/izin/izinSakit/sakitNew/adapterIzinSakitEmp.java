@@ -153,7 +153,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
             modelIzinSakitNew Object = modelIzinSakitNews.get(position);
 
             tvNamaEmp.setText("" + Object.getName());
-            tvDivisiEmp.setText(""+Object.getDvnama());
+            tvDivisiEmp.setVisibility(View.GONE);
             tvKetEmp.setText("" + Object.getIndikasiSakit());
 
             if (Object.getStatus().equals("ON PROGRESS")) {

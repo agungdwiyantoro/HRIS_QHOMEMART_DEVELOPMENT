@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -35,10 +36,11 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             cvSakitApproveDirect, cvDinasApproveDirect, cvTinggalTugasApproveDirect, cvCutiApproveDirect,
             cvSakitApproveHRD, cvDinasApproveHRD, cvTinggalTugasApproveHRD, cvCutiApproveHRD;
     private SessionManager session;
-    private String token, spinSelected, spinResult, noJabatan, appHead, appExec, appDirect, appHRD, hak_akses="";
+    private String token, spinSelected, spinResult="HRD", noJabatan, appHead, appExec, appDirect, appHRD, hak_akses="";
     private SessionManager msession;
     private Spinner dropdown;
     private View incPageBack;
+    private LinearLayout llSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
 
         noJabatan = msession.getNoJabatan();
 
+        llSpinner = findViewById(R.id.llSpinner);
+
         cvSakitApproveHead = findViewById(R.id.cvSakitApproveHead);
         cvCutiApproveHead = findViewById(R.id.cvCutiApproveHead);
         cvDinasApproveHead = findViewById(R.id.cvDinasApproveHead);
@@ -71,6 +75,10 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
+
+        if (hak_akses.equals("HRD,EXECUTIV")) {
+            llSpinner.setVisibility(View.VISIBLE);
+        }
 
         /*cvSakitApproveExec = findViewById(R.id.cvSakitApproveExec);
         cvCutiApproveExec = findViewById(R.id.cvCutiApproveExec);
@@ -108,11 +116,11 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                         onRefresh();
                         break;
                     case "Eksekutif":
-                        spinResult = "EXECUTIVE";
+                        spinResult = "EXECUTIV";
                         onRefresh();
                         break;
                     case "Direktur":
-                        spinResult = "DIRECTOR";
+                        spinResult = "DIRECTUR";
                         onRefresh();
                         break;
                 }
@@ -129,7 +137,21 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onClick(View v) {
 
-                checkJabatan();
+                if (hak_akses.equals("HRD,EXECUTIV")) {
+                    switch (spinResult) {
+                        case "HRD":
+                            checkJabatanHRDEXEC(spinResult);
+                            break;
+                        case "EXECUTIV":
+                            checkJabatanHRDEXEC(spinResult);
+                            break;
+                        case "DIRECTUR":
+                            checkJabatanHRDEXEC(spinResult);
+                            break;
+                    }
+                } else {
+                    checkJabatan();
+                }
 
             }
         });
@@ -180,7 +202,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                     Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
                                     intent.putExtra("kyJabatan", "HRD");
                                     startActivity(intent);
-                                } else if(hak_akses.equals("DIRECTUR, EXECUTIV")){
+                                } else if(hak_akses.equals("HRD,EXECUTIV")){
                                     Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
                                     intent.putExtra("kyJabatan", "DIRECTUR");
                                     startActivity(intent);
@@ -213,6 +235,24 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         };
 
         Volley.newRequestQueue(menu_approve.this).add(req);
+    }
+
+    private void checkJabatanHRDEXEC(String _spinResult) {
+
+        if(_spinResult.equals("HRD")){
+            Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+            intent.putExtra("kyJabatan", "HRD");
+            startActivity(intent);
+        } else if(_spinResult.equals("EXECUTIV")){
+            Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+            intent.putExtra("kyJabatan", "EXECUTIV");
+            startActivity(intent);
+        } else if(_spinResult.equals("DIRECTUR")){
+            Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+            intent.putExtra("kyJabatan", "DIRECTUR");
+            startActivity(intent);
+        }
+
     }
 
 }

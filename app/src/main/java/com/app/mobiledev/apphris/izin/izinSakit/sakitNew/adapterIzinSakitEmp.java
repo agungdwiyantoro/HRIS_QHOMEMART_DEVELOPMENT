@@ -152,9 +152,9 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
             super.onBind(position);
             modelIzinSakitNew Object = modelIzinSakitNews.get(position);
 
-            tvNamaEmp.setText("" + Object.getName());
+            tvNamaEmp.setText("" + Object.getIndikasiSakit());
             tvDivisiEmp.setVisibility(View.GONE);
-            tvKetEmp.setText("" + Object.getIndikasiSakit());
+            tvKetEmp.setText("" + Object.getCatatan());
 
             if (Object.getStatus().equals("ON PROGRESS")) {
                 tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.second_color_black));

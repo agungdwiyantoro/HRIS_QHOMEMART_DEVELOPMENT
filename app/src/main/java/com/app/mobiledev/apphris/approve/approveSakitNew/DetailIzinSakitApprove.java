@@ -347,13 +347,26 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                             lin_approve_btn.setVisibility(View.VISIBLE);
                                         } else if (access.equals("EXECUTIV") && (approve_exec.equals("null"))) {
                                             Log.d("TAG_ACC_BTN", "onResponse: "+access);
-                                            lin_approve_btn.setVisibility(View.VISIBLE);
+                                            if (approve_head.equals("null")) {
+                                                lin_approve_btn.setVisibility(View.GONE);
+                                            } else {
+                                                lin_approve_btn.setVisibility(View.VISIBLE);
+                                            }
                                         } else if (access.equals("DIRECTUR") && (approve_dir.equals("null"))) {
                                             Log.d("TAG_ACC_BTN", "onResponse: "+access);
-                                            lin_approve_btn.setVisibility(View.VISIBLE);
+                                            if (approve_exec.equals("null") || approve_head.equals("null")) {
+                                                lin_approve_btn.setVisibility(View.GONE);
+                                            } else {
+                                                lin_approve_btn.setVisibility(View.VISIBLE);
+                                            }
                                         } else if (access.equals("HRD") && (approve_hrd.equals("null"))) {
                                             Log.d("TAG_ACC_BTN", "onResponse: "+access);
-                                            lin_approve_btn.setVisibility(View.VISIBLE);
+                                            if (approve_dir.equals("null") || approve_exec.equals("null") || approve_head.equals("null")) {
+                                                lin_approve_btn.setVisibility(View.GONE);
+                                            } else {
+                                                lin_approve_btn.setVisibility(View.VISIBLE);
+                                            }
+
                                         }
 
                                         Log.d("TAG_GET_STATUS", "onResponse: "+status);

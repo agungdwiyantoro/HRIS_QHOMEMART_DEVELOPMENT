@@ -381,7 +381,6 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
 
                                         if (approve_head.equals("1") && approve_exec.equals("null") && approve_dir.equals("null") && approve_hrd.equals("null")) {
                                             icCheckHead.setImageResource(R.drawable.ic_baseline_check_box_24_blue);
-
                                             icCheckDir.setVisibility(View.GONE);
                                             icCheckHRD.setVisibility(View.GONE);
 
@@ -399,7 +398,6 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
 
                                         } else if (approve_head.equals("1") && approve_exec.equals("null") && approve_dir.equals("1") && approve_hrd.equals("null")) {
                                             icCheckHead.setImageResource(R.drawable.ic_baseline_check_box_24_blue);
-
                                             icCheckDir.setVisibility(View.GONE);
                                             icCheckHRD.setVisibility(View.GONE);
 
@@ -418,12 +416,13 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                         } else if (approve_head.equals("1") && approve_exec.equals("1") && approve_dir.equals("null") && approve_hrd.equals("null")) {
                                             icCheckHead.setImageResource(R.drawable.ic_baseline_check_box_24_green);
                                             icCheckExec.setImageResource(R.drawable.ic_baseline_check_box_24_blue);
-
+                                            icCheckDir.setVisibility(View.GONE);
                                             icCheckHRD.setVisibility(View.GONE);
 
                                             tvCheckHead.setText("Disetujui " + "Head/SPV");
                                             tvCheckExec.setText("Disetujui " + "Eksekutif");
 
+                                            tvCheckDir.setVisibility(View.GONE);
                                             tvCheckHRD.setVisibility(View.GONE);
 
                                             card_status_approve.setVisibility(View.VISIBLE);

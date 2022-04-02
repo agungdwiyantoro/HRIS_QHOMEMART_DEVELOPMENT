@@ -260,7 +260,7 @@ public class login extends AppCompatActivity {
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             String version = pInfo.versionName;
-            tx_versi.setText("Copyright@IT PT Bangunan Jaya Mandiri \n (Qhomemart) V.0320"+"."+version);
+            tx_versi.setText("Copyright@IT PT Qhome Sukses Abadi \n (Qhomemart) V.0320"+"."+version);
 
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

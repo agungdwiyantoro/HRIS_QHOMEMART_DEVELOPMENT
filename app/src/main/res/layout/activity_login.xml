@@ -50,6 +50,7 @@
                     android:drawablePadding="8dp"
                     android:inputType="number"
                     android:padding="12dp"
+                    android:maxLength="16"
                     android:textColor="@color/black" />
             </android.support.design.widget.TextInputLayout>
 

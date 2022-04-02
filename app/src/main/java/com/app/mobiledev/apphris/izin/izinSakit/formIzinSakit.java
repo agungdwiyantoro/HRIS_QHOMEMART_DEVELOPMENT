@@ -309,8 +309,8 @@ public class formIzinSakit extends AppCompatActivity {
         }/*else if(selasaiSakit.isEmpty()){
             tx_input_tgl_selesai_sakit.setError("tanggal mulai sakit harus diisi");
             tx_input_tgl_selesai_sakit.requestFocus();
-        }*/ else if (chosedfile == null) {
-            Toast.makeText(formIzinSakit.this, "foto izin sakit belum disii", toast.LENGTH_SHORT).show();
+        }*/ else if (chosedfile == null && cbSkdView.isChecked()) {
+            Toast.makeText(formIzinSakit.this, "foto izin sakit belum disi", toast.LENGTH_SHORT).show();
         } else {
             //mProgressDialog.show();
             tx_input_indikasi.setErrorEnabled(false);
@@ -349,14 +349,20 @@ public class formIzinSakit extends AppCompatActivity {
                         try {
                             String status = response.getString("status");
                             Log.d("RESULT_RESPONSE_INSERT", "onResponse: " + response);
+                            String message = response.getString("message");
                             if (status.equals("200")) {
-                                String message = response.getString("message");
                                 dialogConfirm.dismiss();
                                 notifDialogSukses();
+                                message = response.getString("message");
+                                Toast.makeText(formIzinSakit.this, "" + message, toast.LENGTH_SHORT).show();
+                            } else if(status.equals("201")){
+                                dialogConfirm.dismiss();
+                                notifDialogSukses();
+                                message = response.getString("message");
+                                Toast.makeText(formIzinSakit.this, "" + message, toast.LENGTH_SHORT).show();
                             } else {
-                                JSONObject object = response.getJSONObject("message");
-                                String pesan = object.getString("lampiran_file");
-                                Toast.makeText(formIzinSakit.this, "" + pesan, toast.LENGTH_SHORT).show();
+                                message = response.getString("message");
+                                Toast.makeText(formIzinSakit.this, "" + message, toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

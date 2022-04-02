@@ -370,6 +370,15 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                         }
 
                                         Log.d("TAG_GET_STATUS", "onResponse: "+status);
+
+                                        boolean staff = true;
+
+                                        if (approve_head.equals("1") && approve_dir.equals("null")) {
+                                            staff = false;
+                                        } else {
+                                            staff = true;
+                                        }
+
                                         if (approve_head.equals("1") && approve_exec.equals("null") && approve_dir.equals("null") && approve_hrd.equals("null")) {
                                             icCheckHead.setImageResource(R.drawable.ic_baseline_check_box_24_blue);
 
@@ -381,13 +390,35 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                             tvCheckDir.setVisibility(View.GONE);
                                             tvCheckHRD.setVisibility(View.GONE);
 
+                                            card_status_approve.setVisibility(View.VISIBLE);
+                                            lin_status_approve.setBackgroundResource(R.color.greennew);
                                             tx_status.setText("Disetujui oleh " + head_name);
                                             tx_tgl_status.setText(head_approve_date);
+
+                                            Log.d("TAG1", "onResponse: ");
+
+                                        } else if (approve_head.equals("1") && approve_exec.equals("null") && approve_dir.equals("1") && approve_hrd.equals("null")) {
+                                            icCheckHead.setImageResource(R.drawable.ic_baseline_check_box_24_blue);
+
+                                            icCheckDir.setVisibility(View.GONE);
+                                            icCheckHRD.setVisibility(View.GONE);
+
+                                            tvCheckHead.setText("Disetujui " + "Head/SPV");
+
+                                            tvCheckDir.setVisibility(View.GONE);
+                                            tvCheckHRD.setVisibility(View.GONE);
+
+                                            card_status_approve.setVisibility(View.VISIBLE);
+                                            lin_status_approve.setBackgroundResource(R.color.greennew);
+                                            tx_status.setText("Disetujui oleh " + head_name);
+                                            tx_tgl_status.setText(head_approve_date);
+
+                                            Log.d("TAG2", "onResponse: ");
 
                                         } else if (approve_head.equals("1") && approve_exec.equals("1") && approve_dir.equals("null") && approve_hrd.equals("null")) {
                                             icCheckHead.setImageResource(R.drawable.ic_baseline_check_box_24_green);
                                             icCheckExec.setImageResource(R.drawable.ic_baseline_check_box_24_blue);
-                                            
+
                                             icCheckHRD.setVisibility(View.GONE);
 
                                             tvCheckHead.setText("Disetujui " + "Head/SPV");
@@ -395,8 +426,12 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
 
                                             tvCheckHRD.setVisibility(View.GONE);
 
+                                            card_status_approve.setVisibility(View.VISIBLE);
+                                            lin_status_approve.setBackgroundResource(R.color.greennew);
                                             tx_status.setText("Disetujui oleh " + exec_name);
                                             tx_tgl_status.setText(exec_approve_date);
+
+                                            Log.d("TAG3", "onResponse: ");
 
                                         } else if (approve_head.equals("1") && approve_exec.equals("1") && approve_dir.equals("1") && approve_hrd.equals("null")) {
                                             icCheckHead.setImageResource(R.drawable.ic_baseline_check_box_24_green);
@@ -412,7 +447,12 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                                 tx_status.setText("Disetujui oleh " + dir_name);
                                             }
 
+                                            card_status_approve.setVisibility(View.VISIBLE);
+                                            lin_status_approve.setBackgroundResource(R.color.greennew);
+                                            tx_status.setText("Disetujui oleh " + dir_name);
                                             tx_tgl_status.setText(dir_approve_date);
+
+                                            Log.d("TAG4", "onResponse: ");
 
                                         } else if (approve_head.equals("1") && approve_exec.equals("1") && approve_dir.equals("1") && approve_hrd.equals("1")) {
                                             icCheckHead.setImageResource(R.drawable.ic_baseline_check_box_24_green);
@@ -425,6 +465,8 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
                                             tvCheckDir.setText("Disetujui " + "Direktur");
                                             tvCheckHRD.setText("Disetujui " + "HRD");
 
+                                            card_status_approve.setVisibility(View.VISIBLE);
+                                            lin_status_approve.setBackgroundResource(R.color.greennew);
                                             tx_status.setText("Disetujui oleh " + hrd_name);
                                             tx_tgl_status.setText(hrd_approve_date);
 

@@ -312,7 +312,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     lin_head.setBackgroundResource(R.drawable.ic_boxtext_red);
                     dot_head.setBackgroundResource(R.drawable.ic_dot_red);
                     view_head.setBackgroundResource(R.color.red_btn_bg_pressed_color);
-                    text_status_head.setText(data.getString("approve_head"));
+                    text_status_head.setText(data.getString("head_name"));
                     lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
                     dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
                     lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
@@ -335,11 +335,14 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                 if (data.getString("approve_executiv").equals("1")) {
 
                     if (data.getString("approve_head").equals("1") && data.getString("executiv_kyano").equals("null")) {
-                        lin_exec.setBackgroundResource(R.drawable.ic_boxtext_green);
+                        /*lin_exec.setBackgroundResource(R.drawable.ic_boxtext_green);
                         dot_exec.setBackgroundResource(R.drawable.ic_dot_sukses);
                         view_exec.setBackgroundResource(R.color.greennew);
                         //text_status_exec.setText(data.getString("executiv"));
-                        text_status_exec.setVisibility(View.GONE);
+                        text_status_exec.setVisibility(View.GONE);*/
+                        rlExecSakit.setVisibility(View.GONE);
+                    } else if(data.getString("approve_head").equals("null") && data.getString("executiv_kyano").equals("null")) {
+                        rlExecSakit.setVisibility(View.GONE);
                     } else {
                         lin_exec.setBackgroundResource(R.drawable.ic_boxtext_green);
                         dot_exec.setBackgroundResource(R.drawable.ic_dot_sukses);
@@ -407,7 +410,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
                     dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
                     view_hrd.setBackgroundResource(R.color.red_btn_bg_pressed_color);
-                    text_status_hrd.setText(data.getString("approve_hrd"));
+                    text_status_hrd.setText(data.getString("hrd_name"));
                     lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
                 } else {
                     lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_green);

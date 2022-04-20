@@ -76,7 +76,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
 //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
 
-        if (hak_akses.equals("HRD,EXECUTIV")) {
+        if (hak_akses.equals("HRD,EXECUTIV,DIRECTUR")) {
             llSpinner.setVisibility(View.VISIBLE);
         }
 
@@ -137,7 +137,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onClick(View v) {
 
-                if (hak_akses.equals("HRD,EXECUTIV")) {
+                if (hak_akses.equals("HRD,EXECUTIV,DIRECTUR")) {
                     switch (spinResult) {
                         case "HRD":
                             checkJabatanHRDEXEC(spinResult);
@@ -202,7 +202,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                     Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
                                     intent.putExtra("kyJabatan", "HRD");
                                     startActivity(intent);
-                                } else if(hak_akses.equals("HRD,EXECUTIV")){
+                                } else if(hak_akses.equals("HRD,EXECUTIV,DIRECTUR")){
                                     Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
                                     intent.putExtra("kyJabatan", "DIRECTUR");
                                     startActivity(intent);

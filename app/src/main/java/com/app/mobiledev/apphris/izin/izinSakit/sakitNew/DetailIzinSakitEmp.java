@@ -304,10 +304,17 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                  */
 
                 if (data.getString("approve_head").equals("1")) {
-                    lin_head.setBackgroundResource(R.drawable.ic_boxtext_green);
-                    dot_head.setBackgroundResource(R.drawable.ic_dot_sukses);
-                    view_head.setBackgroundResource(R.color.greennew);
-                    text_status_head.setText(data.getString("head_name"));
+                    if (data.getString("head_kyano").equals("null")) {
+                        lin_head.setVisibility(View.GONE);
+                        dot_head.setVisibility(View.GONE);
+                        view_head.setVisibility(View.GONE);
+                        text_status_head.setVisibility(View.GONE);
+                    } else {
+                        lin_head.setBackgroundResource(R.drawable.ic_boxtext_green);
+                        dot_head.setBackgroundResource(R.drawable.ic_dot_sukses);
+                        view_head.setBackgroundResource(R.color.greennew);
+                        text_status_head.setText(data.getString("head_name"));
+                    }
                 } else if (data.getString("approve_head").equals("0")) {
                     lin_head.setBackgroundResource(R.drawable.ic_boxtext_red);
                     dot_head.setBackgroundResource(R.drawable.ic_dot_red);

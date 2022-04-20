@@ -227,7 +227,7 @@ public class fragment_menu extends Fragment {
                                 } else if(hak_akses.equals("HRD")){
                                     cvApprove.setVisibility(View.VISIBLE);
                                     hak_akses = message.getString("hak_akses");
-                                } else if(hak_akses.equals("HRD,EXECUTIV")){
+                                } else if(hak_akses.equals("HRD,EXECUTIV,DIRECTUR")){
                                     cvApprove.setVisibility(View.VISIBLE);
                                     hak_akses = message.getString("hak_akses");
                                 }

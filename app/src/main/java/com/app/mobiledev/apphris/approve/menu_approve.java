@@ -21,6 +21,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
@@ -167,7 +168,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
     private void checkJabatan() {
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,
-                "http://192.168.50.24/all/hris_ci_3/api/akses", null,
+                api.URL_Akses, null,
                 //"http://hris.qhomedata.id/api/akses", null,
                 new Response.Listener<JSONObject>() {
                     @Override

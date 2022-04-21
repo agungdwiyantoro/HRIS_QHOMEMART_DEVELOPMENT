@@ -36,7 +36,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
-            android:name=".izin.izinSakit.sakitNew.ListInfinitySakitEmp"
+            android:name=".izin.izinSakit.ListInfinitySakitEmp"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
             <!--<intent-filter>
@@ -102,7 +102,7 @@
 
         </activity>
         <activity
-            android:name=".izin.dashboardIzin"
+            android:name=".izin.izinSakit.dashboardIzin"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
@@ -229,9 +229,6 @@
         <activity android:name=".izin.izinDinas.riwayatIzinDinas" />
         <activity
             android:name=".izin.izinMT.form_izin_meninggalkan_tugas"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".izin.menu_izin"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".izin.izinDinas.map_place_picker_izin_lokasi"
@@ -478,12 +475,7 @@
             -->
         </activity>
         <activity
-            android:name=".izin.izinSakit.listIzinSakit"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".izin.izinSakit.sakitNew.DetailIzinSakitEmp"
+            android:name=".izin.izinSakit.DetailIzinSakitEmp"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" >

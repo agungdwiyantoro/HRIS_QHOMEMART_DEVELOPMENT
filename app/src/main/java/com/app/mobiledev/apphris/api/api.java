@@ -103,6 +103,7 @@ public class api {
     //data ip aws
     public  static  final String URL_uploadIzinSakit=ip.getIp()+"uploadimage";
     public  static  final String URL_IzinSakit=ip.getIp()+"izinsakit";
+    public  static  final String URL_Akses=ip.getIp()+"akses";
     //public  static  final String URL_IzinSakit_approve_head=ip.getIp()+"approvehead";
     public  static  final String URL_IzinSakit_approve=ip.getIp()+"approvesakit";
     public  static  final String URL_IzinSakit_approve_hrd=ip.getIp()+"approvehrd";

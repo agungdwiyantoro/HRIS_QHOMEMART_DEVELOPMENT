@@ -1,11 +1,10 @@
-package com.app.mobiledev.apphris.izin.izinSakit.sakitNew;
+package com.app.mobiledev.apphris.izin.izinSakit;
 
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -33,8 +32,6 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.Model.modelIzinSakitNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
-import com.app.mobiledev.apphris.approve.menu_approve;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -62,7 +59,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
             token, nama = "", lampiran_file="", jabatan, hak_akses;
     private SessionManager msession;
     private LinearLayout lin_head, lin_exec, lin_dir, lin_hrd, lin_result;
-    private RelativeLayout rlExecSakit, rlDirSakit;
+    private RelativeLayout rlExecSakit, rlDirSakit, rlHrdSakit;
     private View view_head, view_exec, view_dir, view_hrd, view_result, inc_backPage;
 
     //dialog
@@ -96,6 +93,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         lin_exec = findViewById(R.id.lin_exec);
         lin_head = findViewById(R.id.lin_head);
 
+        rlHrdSakit = findViewById(R.id.rlHrdSakit);
         rlExecSakit = findViewById(R.id.rlExecSakit);
         rlDirSakit = findViewById(R.id.rlDirSakit);
 
@@ -154,8 +152,8 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
     private void checkJabatan() {
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,
-                "http://192.168.50.24/all/hris_ci_3/api/akses", null,
-                //"http://hris.qhomedata.id/api/akses", null,
+                //"http://192.168.50.24/all/hris_ci_3/api/akses", null,
+                api.URL_Akses, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -320,9 +318,9 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     dot_head.setBackgroundResource(R.drawable.ic_dot_red);
                     view_head.setBackgroundResource(R.color.red_btn_bg_pressed_color);
                     text_status_head.setText(data.getString("head_name"));
-                    lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
-                    dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
-                    lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
+                    rlExecSakit.setVisibility(View.GONE);
+                    rlDirSakit.setVisibility(View.GONE);
+                    rlHrdSakit.setVisibility(View.GONE);
                 } else {
                     text_status_head.setText("----");
                     Log.d("TAG_IS", "loadDataFormAPI: " + data.getString("approve_head"));
@@ -362,9 +360,8 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     dot_exec.setBackgroundResource(R.drawable.ic_dot_red);
                     view_exec.setBackgroundResource(R.color.red_btn_bg_pressed_color);
                     text_status_exec.setText(data.getString("executiv"));
-                    lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
-                    dot_dir.setBackgroundResource(R.drawable.ic_dot_red);
-                    lin_dir.setBackgroundResource(R.drawable.ic_boxtext_red);
+                    rlDirSakit.setVisibility(View.GONE);
+                    rlHrdSakit.setVisibility(View.GONE);
                 } else {
                     text_status_exec.setText("----");
                     lin_exec.setBackgroundResource(R.drawable.ic_boxtext_grey);
@@ -390,9 +387,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                     dot_dir.setBackgroundResource(R.drawable.ic_dot_red);
                     view_dir.setBackgroundResource(R.color.red_btn_bg_pressed_color);
                     text_status_dir.setText(data.getString("dir"));
-                    lin_result.setBackgroundResource(R.drawable.ic_boxtext_result_red);
-                    dot_hrd.setBackgroundResource(R.drawable.ic_dot_red);
-                    lin_hrd.setBackgroundResource(R.drawable.ic_boxtext_red);
+                    rlHrdSakit.setVisibility(View.GONE);
                 } else {
                     text_status_dir.setText("----");
                     lin_dir.setBackgroundResource(R.drawable.ic_boxtext_grey);

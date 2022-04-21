@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.izin;
+package com.app.mobiledev.apphris.izin.izinSakit;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.izin.izinSakit.formIzinSakit;
-import com.app.mobiledev.apphris.izin.izinSakit.listIzinSakit;
-import com.app.mobiledev.apphris.izin.izinSakit.sakitNew.ListInfinitySakitEmp;
 
 public class dashboardIzin extends AppCompatActivity {
 

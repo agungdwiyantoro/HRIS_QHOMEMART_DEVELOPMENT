@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.izin.izinSakit.sakitNew;
+package com.app.mobiledev.apphris.izin.izinSakit;
 
 import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
 
@@ -18,19 +18,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.Model.modelIzinSakitNew;
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.sesion.SessionManager;
@@ -283,7 +279,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                     offset = (itemCount - totalPage);
                 }
                 recyler_izin_sakit.setHasFixedSize(true);
-                Log.d("cek_url_all", "run: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset +"&first_date="+ dateMonthDate +"&limit=" + itemCount + "&status="+spinResult);
+
                 //getRiwayatSakitAll(itemCount, offset, items);
                 getData(itemCount, offset, items);
             }
@@ -310,9 +306,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
     private void getData(int page, int offset, ArrayList items) {
 
-        Log.d("TAG_CHECK_LIST", "getData: "+ offset + dateMonthDate + page + spinResult);
-
-        JsonObjectRequest req = new JsonObjectRequest("http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset
+        JsonObjectRequest req = new JsonObjectRequest(api.URL_IzinSakit+"?offset=" + offset
                 +"&first_date="+ dateMonthDate
                 +"&limit=" + page
                 + "&status="+spinResult, null,

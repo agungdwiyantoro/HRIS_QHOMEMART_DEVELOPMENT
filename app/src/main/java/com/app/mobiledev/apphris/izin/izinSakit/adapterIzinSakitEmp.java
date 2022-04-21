@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.izin.izinSakit.sakitNew;
+package com.app.mobiledev.apphris.izin.izinSakit;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

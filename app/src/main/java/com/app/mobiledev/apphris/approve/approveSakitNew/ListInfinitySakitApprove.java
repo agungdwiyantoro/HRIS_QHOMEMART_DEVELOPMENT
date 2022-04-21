@@ -32,6 +32,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.Model.modelIzinSakitNew;
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.sesion.SessionManager;
@@ -302,7 +303,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                     offset = (itemCount - totalPage);
                 }
                 recyler_izin_sakit.setHasFixedSize(true);
-                Log.d("cek_url_all", "run: http://192.168.50.24/all/hris_ci_3/api/izinsakit?offset=" + offset + "&first_date=" + dateMonthDate + "&limit=" + itemCount + "&status=" + spinResult);
+
                 //getRiwayatSakitAll(itemCount, offset, items);
                 getData(itemCount, offset, items);
             }
@@ -326,7 +327,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
     }
 
     private void getData(int limit, int offset, ArrayList items) {
-        //http://192.168.50.24/all/hris_ci_3/api/approvesakit?status=&hak_akses=HEAD&limit=10&offset=0
+
         JsonObjectRequest req = new JsonObjectRequest(
                 /*"http://192.168.50.24/all/hris_ci_3/api/approvesakit?" +
                         "offset=" + offset +
@@ -334,8 +335,8 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
                         "&first_date="+ dateMonthDate +
                         "&limit=" + page +
                         "&status="+spinResult, null,*/
-                "http://192.168.50.24/all/hris_ci_3/api/approvesakit?" +
-                        "status=" + spinResult +
+                api.URL_IzinSakit_approve +
+                        "?status=" + spinResult +
                         "&hak_akses=" + access +
                         "&limit=" + limit +
                         "&offset=" + offset +

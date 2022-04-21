@@ -161,7 +161,6 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     }
 
     private void getDetailSakitApprove(String _id) {
-        //http://192.168.50.24/all/hris_ci_3/api/approvesakit?id=7
         AndroidNetworking.get(api.URL_IzinSakit_approve + "?id=" + _id)
                 /*AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/approvesakit?id=7")*/
                 .addHeaders("Authorization", "Bearer " + token)

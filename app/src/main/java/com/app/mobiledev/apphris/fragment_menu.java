@@ -1,7 +1,6 @@
 package com.app.mobiledev.apphris;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
@@ -17,17 +16,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
 import com.app.mobiledev.apphris.approve.menu_approve;
 import com.app.mobiledev.apphris.bonus.menu_bonus;
 import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
 import com.app.mobiledev.apphris.helperPackage.helper;
-import com.app.mobiledev.apphris.izin.dashboardIzin;
+import com.app.mobiledev.apphris.izin.izinSakit.dashboardIzin;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.slipGaji.riwayatSlipGaji;
 import com.app.mobiledev.apphris.training.menu_training;
@@ -37,7 +31,6 @@ import com.app.mobiledev.apphris.kasbon.kasbon_karyawan;
 import com.app.mobiledev.apphris.pinjaman.pinjamanUang;
 import com.app.mobiledev.apphris.visitor.Visitor;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -201,7 +194,7 @@ public class fragment_menu extends Fragment {
 
     private void checkJabatan() {
         JsonObjectRequest req = new JsonObjectRequest(
-                "http://192.168.50.24/all/hris_ci_3/api/akses", null,
+                api.URL_Akses, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

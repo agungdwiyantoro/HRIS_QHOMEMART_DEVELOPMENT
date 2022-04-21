@@ -324,8 +324,8 @@ public class formIzinSakit extends AppCompatActivity {
 
     private void insertIzinSakit(String indikasiSakit, String catatan, String selectDate, File file, String option) {
         Log.d("TAG_INPUT_CEK", "insertIzinSakit: "+ indikasiSakit + catatan + selectDate + file + option);
-        //AndroidNetworking.upload(api.URL_IzinSakit)
-        AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izinsakit")
+        AndroidNetworking.upload(api.URL_IzinSakit)
+        //AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izinsakit")
                 .addHeaders("Authorization", "Bearer " + token)
                 .addMultipartParameter("indikasi_sakit", indikasiSakit)
                 .addMultipartParameter("catatan", catatan)

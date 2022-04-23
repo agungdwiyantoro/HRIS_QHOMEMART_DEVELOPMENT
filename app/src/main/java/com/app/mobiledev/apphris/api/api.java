@@ -34,7 +34,7 @@ public class api {
     public static final String URL_updatePassword= ip.getIp() + "updatePassword/";
     public static final String URL_getPassword= ip.getIp() + "getPassword/";
     public static final String URL_getLamaCuti= ip.getIp() + "getLamaCuti/";
-    public static final String URL_getRiwayatAbsen2= ip.getIp() + "getRiwayatAbsen3/";
+    public static final String URL_getRiwayatAbsen= ip.getIp() + "getRiwayatAbsen3/";
     public static final String URL_get_url_version= ip.getIp() + "get_url_version/";
     public static final String URL_get_cekWaktu= ip.getIp() + "cekWaktu/";
     public static final String URL_insertIzinMt= ip.getIp() + "insertIzinMt/";

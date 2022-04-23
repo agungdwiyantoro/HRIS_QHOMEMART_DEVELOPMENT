@@ -13,6 +13,7 @@ public class modelRiwayatAbsen {
     private String masuk_lembur;
     private String keluar_lembur;
     private String tgl="";
+    private String status;
 
     public String getTgl() {
         return tgl;
@@ -79,6 +80,13 @@ public class modelRiwayatAbsen {
     }
     public void setKeluar_lembur(String keluar_lembur) {
         this.keluar_lembur = keluar_lembur;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

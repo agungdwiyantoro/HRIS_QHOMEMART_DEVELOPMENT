@@ -122,7 +122,7 @@ public class formIzinSakit extends AppCompatActivity {
 
         Calendar prevMonth = Calendar.getInstance();
 
-        prevMonth.add(Calendar.MONTH, -1);
+        prevMonth.add(Calendar.MONTH, -5);
 
         CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
         Date today = new Date();

@@ -92,6 +92,7 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_slip_gaji.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_timeline_izin_status.xml" value="0.5" />
         <entry key="app/src/main/res/drawable/bg_round.xml" value="0.14444444444444443" />
+        <entry key="app/src/main/res/drawable/bg_round_dropdown.xml" value="0.2898148148148148" />
         <entry key="app/src/main/res/drawable/bg_rounded_blue.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/drawable/bg_rounded_end.xml" value="0.24351851851851852" />
         <entry key="app/src/main/res/drawable/ic_baseline_block_24_end.xml" value="0.26666666666666666" />
@@ -128,6 +129,7 @@
         <entry key="app/src/main/res/layout/activity_detail_izin_sakit_approve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_izin_sakit_approve_hrd.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_detail_sakit_emp.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_form_izin_cuti.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_form_izin_sakit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_fragment_menu.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_fragment_pinjaman.xml" value="0.22" />

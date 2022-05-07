@@ -3,9 +3,9 @@ package com.app.mobiledev.apphris.api;
 public class set_ip {
     //private String ip_utama="http://192.168.50.22/svn_all/hris/";
     //private String ip_utama="http://192.168.50.22/svn_all/hris/";
-    //private String ip_utama = "http://192.168.50.24/all/hris_ci_3/";
+    private String ip_utama = "http://192.168.50.24/all/hris_ci_3/";
 
-    private String ip_utama="http://hris.qhomedata.id/";
+    //private String ip_utama="http://hris.qhomedata.id/";
 
     //private String ip_utama="http://qclean.co.id/";
     //private String ip_server="http://192.168.50.22/svn_all/hris/api/";

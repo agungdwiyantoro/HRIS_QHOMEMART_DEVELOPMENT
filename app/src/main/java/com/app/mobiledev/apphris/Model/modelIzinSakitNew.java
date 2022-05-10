@@ -1,7 +1,5 @@
 package com.app.mobiledev.apphris.Model;
 
-import android.util.Log;
-
 public class modelIzinSakitNew {
     String name;
     String dvnama;

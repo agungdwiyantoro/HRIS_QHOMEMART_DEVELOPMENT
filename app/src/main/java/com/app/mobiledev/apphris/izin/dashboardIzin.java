@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.izin.izinSakit;
+package com.app.mobiledev.apphris.izin;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.izin.izinCuti.ListInfinityCutiEmp;
 import com.app.mobiledev.apphris.izin.izinCuti.formIzinCuti;
+import com.app.mobiledev.apphris.izin.izinSakit.ListInfinitySakitEmp;
+import com.app.mobiledev.apphris.izin.izinSakit.formIzinSakit;
 
 public class dashboardIzin extends AppCompatActivity {
 
@@ -74,6 +77,14 @@ public class dashboardIzin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(dashboardIzin.this, formIzinCuti.class);
+                startActivity(i);
+            }
+        });
+
+        btn_status_izin_cuti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(dashboardIzin.this, ListInfinityCutiEmp.class);
                 startActivity(i);
             }
         });

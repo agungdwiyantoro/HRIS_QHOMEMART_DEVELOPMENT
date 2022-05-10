@@ -21,7 +21,7 @@ import com.app.mobiledev.apphris.approve.menu_approve;
 import com.app.mobiledev.apphris.bonus.menu_bonus;
 import com.app.mobiledev.apphris.formKunjungan.list_formKunjungan;
 import com.app.mobiledev.apphris.helperPackage.helper;
-import com.app.mobiledev.apphris.izin.izinSakit.dashboardIzin;
+import com.app.mobiledev.apphris.izin.dashboardIzin;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.slipGaji.riwayatSlipGaji;
 import com.app.mobiledev.apphris.training.menu_training;

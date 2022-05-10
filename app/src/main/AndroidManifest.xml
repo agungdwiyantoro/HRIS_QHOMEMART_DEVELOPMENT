@@ -36,17 +36,28 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
+            android:name=".izin.izinCuti.ListInfinityCutiEmp"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity
             android:name=".izin.izinCuti.formIzinCuti"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            >
+            android:theme="@style/Theme.AppCompat.NoActionBar">
 
-            <!--<intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
 
         </activity>
         <activity
@@ -110,7 +121,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".izin.izinSakit.dashboardIzin"
+            android:name=".izin.dashboardIzin"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity

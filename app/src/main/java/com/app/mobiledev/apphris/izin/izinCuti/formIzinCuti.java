@@ -84,7 +84,7 @@ public class formIzinCuti extends AppCompatActivity {
         session = new SessionManager(formIzinCuti.this);
         helper.verifyStoragePermissions(formIzinCuti.this);
         kyano = session.getIdUser();
-        token = session.getToken();
+        token = /*session.getToken()*/"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjA1MjMxOTA0MjIxMDc5NSIsImt5cGFzc3dvcmQiOiIxMjM0NTY3Iiwia3lqYWJhdGFuIjoiSFIxNDciLCJreWRpdmlzaSI6IkhSMDA0Iiwia3liYWdpYW4iOiJCRzA0NiIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjUyMTY3MzgzLCJleHAiOjE2NTIxODUzODN9.Vax2borGc18EggAO4UzYvzS55PM7fFqQdks6zc1Iyts";
 
         tvNamaEmp = findViewById(R.id.tvNamaEmp);
         tvDivisiEmp = findViewById(R.id.tvDivisiEmp);
@@ -286,7 +286,7 @@ public class formIzinCuti extends AppCompatActivity {
 
     private void getJenisCuti() {
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/jenis_cuti")
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImt5YmFnaWFuIjoiQkcwNDYiLCJqYWJhdGFuIjoibnVsbCIsImlhdCI6MTY1MTg4NzkzNCwiZXhwIjoxNjUxOTA1OTM0fQ.LLIIkD_T_AwL-G3-hjZu_w8_PbagC0XB4ZOWOR9y8ks"/*+token*/)
+                .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -325,7 +325,7 @@ public class formIzinCuti extends AppCompatActivity {
 
     private void getDelegasi() {
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/list_delegasi")
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImt5YmFnaWFuIjoiQkcwNDYiLCJqYWJhdGFuIjoibnVsbCIsImlhdCI6MTY1MTg4NzkzNCwiZXhwIjoxNjUxOTA1OTM0fQ.LLIIkD_T_AwL-G3-hjZu_w8_PbagC0XB4ZOWOR9y8ks"/*+token*/)
+                .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -360,7 +360,7 @@ public class formIzinCuti extends AppCompatActivity {
 
     private void getKuotaCuti(int periode) {
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/kuota_cuti?periode="+periode)
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImt5YmFnaWFuIjoiQkcwNDYiLCJqYWJhdGFuIjoibnVsbCIsImlhdCI6MTY1MTg4NzkzNCwiZXhwIjoxNjUxOTA1OTM0fQ.LLIIkD_T_AwL-G3-hjZu_w8_PbagC0XB4ZOWOR9y8ks"/*+token*/)
+                .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -370,8 +370,8 @@ public class formIzinCuti extends AppCompatActivity {
                         Log.d("TAG_GET_KUOTA", "onResponse: "+response);
                         try {
                             JSONObject object = response.getJSONObject("message");
-                            kuotaCuti = object.getString("day");
-                            tvSisaCuti.setText(kuotaCuti+" Hari");
+                            kuotaCuti = object.getString("sisa_cuti");
+                            tvSisaCuti.setText(kuotaCuti);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -386,7 +386,7 @@ public class formIzinCuti extends AppCompatActivity {
 
     private void getHakCuti() {
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/kuota_cuti")
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjEyMzQ1Njc4OTAxMjM0NTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImt5YmFnaWFuIjoiQkcwNDYiLCJqYWJhdGFuIjoibnVsbCIsImlhdCI6MTY1MTg4NzkzNCwiZXhwIjoxNjUxOTA1OTM0fQ.LLIIkD_T_AwL-G3-hjZu_w8_PbagC0XB4ZOWOR9y8ks"/*+token*/)
+                .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -396,7 +396,7 @@ public class formIzinCuti extends AppCompatActivity {
                         Log.d("TAG_GET_KUOTA", "onResponse: "+response);
                         try {
                             JSONObject object = response.getJSONObject("message");
-                            hakCuti = object.getString("jml_cuti");
+                            hakCuti = object.getString("hak_cuti");
                             tvHakCuti.setText(hakCuti+" Hari");
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -470,10 +470,11 @@ public class formIzinCuti extends AppCompatActivity {
         dialogConfirm.show();
     }
 
-    private void insertCuti(String id_jenis, String select_cuti, String delegasi_to, String alasan, String periode) {
+    /*private void insertCuti(String id_jenis, String select_cuti, String delegasi_to, String alasan, String periode) {
         Log.d("TAG_INPUT_CEK", "insertIzinSakit: "+ id_jenis + select_cuti + delegasi_to + alasan + periode);
         AndroidNetworking.post("http://192.168.50.24/all/hris_ci_3/api/izinsakit")
-                .addHeaders("Authorization", "Bearer " + token)
+                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjA2NTIyMDA1MTMwNTEyOTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImt5YmFnaWFuIjoiQkcwNDYiLCJqYWJhdGFuIjoibnVsbCIsImlhdCI6MTY1MjE0NzEwMywiZXhwIjoxNjUyMTY1MTAzfQ.DHPQJxio_iNxD3uOoIWXDR3z7l6-e87LSqzOSeUKu5s"+ token)
+                .addHeaders("Content-Type", "application/json")
                 .addQueryParameter("id_jenis", id_jenis)
                 .addQueryParameter("select_cuti", select_cuti)
                 .addQueryParameter("delegasi_to", delegasi_to)
@@ -519,6 +520,54 @@ public class formIzinCuti extends AppCompatActivity {
                     }
 
 
+
+                    @Override
+                    public void onError(ANError anError) {
+                        lin_transparant.setVisibility(View.GONE);
+                        Log.d("ERROR_INSERT_CODE", "onError: " + anError.getErrorCode());
+                        Log.d("ERROR_INSERT_DETAIL", "onError: " + anError.getErrorDetail());
+                        Log.d("ERROR_INSERT_RESPONSE", "onError: " + anError.getResponse());
+                    }
+                });
+
+    }*/
+
+    private void insertCuti(String id_jenis, String select_cuti, String delegasi_to, String alasan, String periode) {
+        Log.d("TAG_INPUT_CEK", "insertIzinCuti: "+ id_jenis + " | " + select_cuti + " | " + delegasi_to + " | " + alasan + " | " + periode);
+        AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izincuti")
+                .addHeaders("Authorization", "Bearer " + token)
+                //.addHeaders("Content-Type", "application/json")
+                //.addHeaders("Content-Type", "multipart/form-data")
+                .addMultipartParameter("id_jenis", /*"1"*/id_jenis)
+                .addMultipartParameter("select_cuti", /*"2022-06-17, 2022-06-16"*/select_cuti)
+                .addMultipartParameter("delegasi_to", /*"ANWARUL MUSLIMIN"*/delegasi_to)
+                .addMultipartParameter("alasan", /*"test alasan"*/alasan)
+                .addMultipartParameter("periode", /*"2022"*/periode)
+                .setPriority(Priority.HIGH)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        lin_transparant.setVisibility(View.GONE);
+                        try {
+                            String status = response.getString("status");
+                            Log.d("RESULT_RESPONSE_INSERT", "onResponse: " + response.toString());
+                            String message = response.getString("message");
+                            if (status.equals("200")) {
+                                dialogConfirm.dismiss();
+                                notifDialogSukses();
+                                message = response.getString("message");
+                                Toast.makeText(formIzinCuti.this, "" + message, Toast.LENGTH_SHORT).show();
+                            } else {
+                                message = response.getString("message");
+                                Toast.makeText(formIzinCuti.this, "" + message, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            lin_transparant.setVisibility(View.GONE);
+                            Log.d("JSON_insert", "onResponse: " + e);
+                        }
+                    }
 
                     @Override
                     public void onError(ANError anError) {

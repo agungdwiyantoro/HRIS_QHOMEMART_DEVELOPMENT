@@ -41,12 +41,12 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             >
 
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
 
         </activity>
         <activity
@@ -102,12 +102,12 @@
             android:name=".splashScreen"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-            <!--<intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity
             android:name=".izin.izinSakit.dashboardIzin"

@@ -371,8 +371,6 @@ public class formIzinSakit extends AppCompatActivity {
                         }
                     }
 
-
-
                     @Override
                     public void onError(ANError anError) {
                         lin_transparant.setVisibility(View.GONE);

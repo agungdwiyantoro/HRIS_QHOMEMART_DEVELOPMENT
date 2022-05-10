@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.izin.izinCuti.formIzinCuti;
 
 public class dashboardIzin extends AppCompatActivity {
 
@@ -68,6 +69,14 @@ public class dashboardIzin extends AppCompatActivity {
         linear_izin_meninggalkan_tugas.setVisibility(View.GONE);
         linear_izin_dinas.setVisibility(View.GONE);
         linear_izin_cuti.setVisibility(View.GONE);
+
+        btn_tambah_izin_cuti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(dashboardIzin.this, formIzinCuti.class);
+                startActivity(i);
+            }
+        });
 
         imStatus.setOnClickListener(new View.OnClickListener() {
             @Override

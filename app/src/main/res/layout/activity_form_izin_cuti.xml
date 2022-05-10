@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/padd_10"
-                        android:fontFamily="@font/roboto_medium"
+
                         android:text="Surat"
                         android:textColor="@color/main_color_black"
                         android:textSize="36dp" />
@@ -65,7 +65,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
+
                         android:text="Izin Cuti"
                         android:textColor="@color/main_color_black"
                         android:textSize="18dp" />

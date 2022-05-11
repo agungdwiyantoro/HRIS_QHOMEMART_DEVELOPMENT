@@ -150,11 +150,11 @@ public class adapterIzinCutiEmp extends RecyclerView.Adapter<BaseViewHolder> {
             tvDivisiEmp.setVisibility(View.GONE);
             tvKetEmp.setText("" + Object.getCtjenis());
 
-            if (Object.getStatus().equals("ON PROGRESS")) {
+            if (Object.getStatusApprove().equals("ON PROGRESS")) {
                 tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.second_color_black));
                 ivStatus.setImageResource(R.drawable.ic_circle_grey_48);
                 tvStatusIzin.setText("Menunggu");
-            } else if (Object.getStatus().equals("SELESAI")) {
+            } else if (Object.getStatusApprove().equals("SELESAI")) {
                 tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.greennew));
                 ivStatus.setImageResource(R.drawable.ic_circle_green_48);
                 tvStatusIzin.setText("Diterima");
@@ -165,7 +165,7 @@ public class adapterIzinCutiEmp extends RecyclerView.Adapter<BaseViewHolder> {
             }
 
             try {
-                dateSource = dateFormatSources.parse(Object.getCtmulai());
+                dateSource = dateFormatSources.parse(Object.getCreatedAt());
                 tx_tanggal.setText(dateFormat_day.format(dateSource));
                 tx_bulan_tahun.setText(dateFormat_month_year.format(dateSource));
             } catch (ParseException e) {
@@ -177,11 +177,11 @@ public class adapterIzinCutiEmp extends RecyclerView.Adapter<BaseViewHolder> {
             card_list_riwayat_izin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*Intent i = new Intent(mCtx, DetailIzinCutiEmp.class);
+                    Intent i = new Intent(mCtx, DetailIzinCutiEmp.class);
                     Bundle x = new Bundle();
-                    x.putString("id", Object.getCtano());
+                    x.putString("ctano", Object.getCtano());
                     i.putExtras(x);
-                    mCtx.startActivity(i);*/
+                    mCtx.startActivity(i);
 
                 }
             });

@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.approve.approveCutiNew.ListInfinityCutiApprove;
 import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
@@ -32,10 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class menu_approve extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    CardView cvSakitApproveHead, cvDinasApproveHead, cvTinggalTugasApproveHead, cvCutiApproveHead,
-            cvSakitApproveExec, cvDinasApproveExec, cvTinggalTugasApproveExec, cvCutiApproveExec,
-            cvSakitApproveDirect, cvDinasApproveDirect, cvTinggalTugasApproveDirect, cvCutiApproveDirect,
-            cvSakitApproveHRD, cvDinasApproveHRD, cvTinggalTugasApproveHRD, cvCutiApproveHRD;
+    CardView cvSakitApprove, cvDinasApprove, cvTinggalTugasApprove, cvCutiApprove;
     private SessionManager session;
     private String token, spinSelected, spinResult="HRD", noJabatan, appHead, appExec, appDirect, appHRD, hak_akses="";
     private SessionManager msession;
@@ -61,10 +59,10 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
 
         llSpinner = findViewById(R.id.llSpinner);
 
-        cvSakitApproveHead = findViewById(R.id.cvSakitApproveHead);
-        cvCutiApproveHead = findViewById(R.id.cvCutiApproveHead);
-        cvDinasApproveHead = findViewById(R.id.cvDinasApproveHead);
-        cvTinggalTugasApproveHead = findViewById(R.id.cvTinggalTugasApproveHead);
+        cvSakitApprove = findViewById(R.id.cvSakitApprove);
+        cvCutiApprove = findViewById(R.id.cvCutiApprove);
+        cvDinasApprove = findViewById(R.id.cvDinasApprove);
+        cvTinggalTugasApprove = findViewById(R.id.cvTinggalTugasApprove);
 
         //get the spinner from the xml.
         dropdown = findViewById(R.id.spinDDown);
@@ -80,24 +78,6 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         if (hak_akses.equals("HRD,EXECUTIV,DIRECTUR")) {
             llSpinner.setVisibility(View.VISIBLE);
         }
-
-        /*cvSakitApproveExec = findViewById(R.id.cvSakitApproveExec);
-        cvCutiApproveExec = findViewById(R.id.cvCutiApproveExec);
-        cvDinasApproveExec = findViewById(R.id.cvDinasApproveExec);
-        cvTinggalTugasApproveExec = findViewById(R.id.cvTinggalTugasApproveExec);
-
-        cvSakitApproveDirect = findViewById(R.id.cvSakitApproveDirect);
-        cvCutiApproveDirect = findViewById(R.id.cvCutiApproveDirect);
-        cvDinasApproveDirect = findViewById(R.id.cvDinasApproveDirect);
-        cvTinggalTugasApproveDirect = findViewById(R.id.cvTinggalTugasApproveDirect);
-
-        cvSakitApproveHRD = findViewById(R.id.cvSakitApproveHRD);
-        cvCutiApproveHRD = findViewById(R.id.cvCutiApproveHRD);
-        cvDinasApproveHRD = findViewById(R.id.cvDinasApproveHRD);
-        cvTinggalTugasApproveHRD = findViewById(R.id.cvTinggalTugasApproveHRD);*/
-
-        /*checkProduct();
-        checkJabatan();*/
 
         incPageBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,29 +114,38 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
-        cvSakitApproveHead.setOnClickListener(new View.OnClickListener() {
+        cvSakitApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (hak_akses.equals("HRD,EXECUTIV,DIRECTUR")) {
-                    switch (spinResult) {
-                        case "HRD":
-                            checkJabatanHRDEXEC(spinResult);
-                            break;
-                        case "EXECUTIV":
-                            checkJabatanHRDEXEC(spinResult);
-                            break;
-                        case "DIRECTUR":
-                            checkJabatanHRDEXEC(spinResult);
-                            break;
-                    }
-                } else {
-                    checkJabatan();
-                }
-
+                checkMenu("sakit");
             }
         });
 
+        cvCutiApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkMenu("cuti");
+            }
+        });
+
+    }
+
+    void checkMenu(String menu){
+        if (hak_akses.equals("HRD,EXECUTIV,DIRECTUR")) {
+            switch (spinResult) {
+                case "HRD":
+                    checkJabatanHRDEXEC(spinResult, menu);
+                    break;
+                case "EXECUTIV":
+                    checkJabatanHRDEXEC(spinResult, menu);
+                    break;
+                case "DIRECTUR":
+                    checkJabatanHRDEXEC(spinResult, menu);
+                    break;
+            }
+        } else {
+            checkJabatan(menu);
+        }
     }
 
 
@@ -165,7 +154,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
-    private void checkJabatan() {
+    private void checkJabatan(String menu) {
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,
                 api.URL_Akses, null,
@@ -188,25 +177,56 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                 hak_akses = hak;
 
                                 if (hak_akses.equals("HEAD")) {
-                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                                    intent.putExtra("kyJabatan", "HEAD");
-                                    startActivity(intent);
+                                    if (menu.equals("sakit")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                        intent.putExtra("kyJabatan", "HEAD");
+                                        startActivity(intent);
+                                    } else if (menu.equals("cuti")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                                        intent.putExtra("kyJabatan", "HEAD");
+                                        startActivity(intent);
+                                    }
+
                                 } else if(hak_akses.equals("EXECUTIV")){
-                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                                    intent.putExtra("kyJabatan", "EXECUTIV");
-                                    startActivity(intent);
+                                    if (menu.equals("sakit")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                        intent.putExtra("kyJabatan", "EXECUTIV");
+                                        startActivity(intent);
+                                    } else if (menu.equals("cuti")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                                        intent.putExtra("kyJabatan", "EXECUTIV");
+                                        startActivity(intent);
+                                    }
                                 } else if(hak_akses.equals("DIRECTUR")){
-                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                                    intent.putExtra("kyJabatan", "DIRECTUR");
-                                    startActivity(intent);
+                                    if (menu.equals("sakit")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                        intent.putExtra("kyJabatan", "DIRECTUR");
+                                        startActivity(intent);
+                                    } else if (menu.equals("cuti")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                                        intent.putExtra("kyJabatan", "DIRECTUR");
+                                        startActivity(intent);
+                                    }
                                 } else if(hak_akses.equals("HRD")){
-                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                                    intent.putExtra("kyJabatan", "HRD");
-                                    startActivity(intent);
+                                    if (menu.equals("sakit")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                        intent.putExtra("kyJabatan", "HRD");
+                                        startActivity(intent);
+                                    } else if (menu.equals("cuti")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                                        intent.putExtra("kyJabatan", "HRD");
+                                        startActivity(intent);
+                                    }
                                 } else if(hak_akses.equals("HRD,EXECUTIV,DIRECTUR")){
-                                    Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                                    intent.putExtra("kyJabatan", "DIRECTUR");
-                                    startActivity(intent);
+                                    if (menu.equals("sakit")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                                        intent.putExtra("kyJabatan", "HRD,EXECUTIV,DIRECTUR");
+                                        startActivity(intent);
+                                    } else if (menu.equals("cuti")) {
+                                        Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                                        intent.putExtra("kyJabatan", "HRD,EXECUTIV,DIRECTUR");
+                                        startActivity(intent);
+                                    }
                                 }
 
                             } /*else if (status.equals("404")) {
@@ -238,20 +258,38 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         Volley.newRequestQueue(menu_approve.this).add(req);
     }
 
-    private void checkJabatanHRDEXEC(String _spinResult) {
+    private void checkJabatanHRDEXEC(String _spinResult, String menu) {
 
         if(_spinResult.equals("HRD")){
-            Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-            intent.putExtra("kyJabatan", "HRD");
-            startActivity(intent);
+            if (menu.equals("sakit")) {
+                Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                intent.putExtra("kyJabatan", "HRD");
+                startActivity(intent);
+            } else if (menu.equals("cuti")) {
+                Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                intent.putExtra("kyJabatan", "HRD");
+                startActivity(intent);
+            }
         } else if(_spinResult.equals("EXECUTIV")){
-            Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-            intent.putExtra("kyJabatan", "EXECUTIV");
-            startActivity(intent);
+            if (menu.equals("sakit")) {
+                Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                intent.putExtra("kyJabatan", "EXECUTIV");
+                startActivity(intent);
+            } else if (menu.equals("cuti")) {
+                Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                intent.putExtra("kyJabatan", "EXECUTIV");
+                startActivity(intent);
+            }
         } else if(_spinResult.equals("DIRECTUR")){
-            Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-            intent.putExtra("kyJabatan", "DIRECTUR");
-            startActivity(intent);
+            if (menu.equals("sakit")) {
+                Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
+                intent.putExtra("kyJabatan", "DIRECTUR");
+                startActivity(intent);
+            } else if (menu.equals("cuti")) {
+                Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                intent.putExtra("kyJabatan", "DIRECTUR");
+                startActivity(intent);
+            }
         }
 
     }

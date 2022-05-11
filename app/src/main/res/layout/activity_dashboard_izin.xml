@@ -34,7 +34,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
                 android:text="Izin"
                 android:textColor="@color/main_color_black"
                 android:textSize="36dp" />
@@ -87,7 +86,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/purple"
-                            android:fontFamily="@font/roboto_regular"
                             android:padding="15dp"
                             android:text="@string/tambah"
                             android:textAlignment="center"
@@ -112,7 +110,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/greennew"
-                            android:fontFamily="@font/roboto_regular"
                             android:padding="15dp"
                             android:text="@string/status"
                             android:textAlignment="center"
@@ -139,7 +136,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:fontFamily="@font/roboto_regular"
                         android:padding="15dp"
                         android:text="@string/izin_sakit"
                         android:textAlignment="center"
@@ -175,7 +171,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/purple"
-                            android:fontFamily="@font/roboto_regular"
                             android:padding="15dp"
                             android:text="@string/tambah"
                             android:textAlignment="center"
@@ -200,7 +195,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/greennew"
-                            android:fontFamily="@font/roboto_regular"
                             android:padding="15dp"
                             android:text="@string/status"
                             android:textAlignment="center"
@@ -227,7 +221,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:fontFamily="@font/roboto_regular"
+
                         android:padding="15dp"
                         android:text="@string/izin_meninggalkan_tugas"
                         android:textAlignment="center"
@@ -263,7 +257,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/purple"
-                            android:fontFamily="@font/roboto_regular"
+
                             android:padding="15dp"
                             android:text="@string/tambah"
                             android:textAlignment="center"
@@ -288,7 +282,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/greennew"
-                            android:fontFamily="@font/roboto_regular"
+
                             android:padding="15dp"
                             android:text="@string/status"
                             android:textAlignment="center"
@@ -316,7 +310,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:fontFamily="@font/roboto_regular"
+
                         android:padding="15dp"
                         android:text="@string/izin_dinas"
                         android:textAlignment="center"
@@ -351,7 +345,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/purple"
-                            android:fontFamily="@font/roboto_regular"
+
                             android:padding="15dp"
                             android:text="@string/tambah"
                             android:textAlignment="center"
@@ -376,7 +370,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/greennew"
-                            android:fontFamily="@font/roboto_regular"
+
                             android:padding="15dp"
                             android:text="@string/status"
                             android:textAlignment="center"
@@ -403,7 +397,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:fontFamily="@font/roboto_regular"
+
                         android:padding="15dp"
                         android:text="@string/cuti"
                         android:textAlignment="center"

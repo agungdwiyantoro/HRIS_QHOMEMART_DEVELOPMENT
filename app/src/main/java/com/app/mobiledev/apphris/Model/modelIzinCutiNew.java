@@ -5,6 +5,7 @@ public class modelIzinCutiNew{
     private String approveHrd;
     private String hrdName;
     private String nmcuti;
+    private String dvnama;
     private String ctsisahak;
     private String createdAt;
     private String statusApprove;
@@ -73,6 +74,14 @@ public class modelIzinCutiNew{
 
     public String getNmcuti(){
         return nmcuti;
+    }
+
+    public void setDvnama(String dvnama){
+        this.dvnama = dvnama;
+    }
+
+    public String getDvnama(){
+        return dvnama;
     }
 
     public void setCtsisahak(String ctsisahak){

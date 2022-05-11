@@ -306,6 +306,8 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
     private void getData(int page, int offset, ArrayList items) {
 
+
+
         JsonObjectRequest req = new JsonObjectRequest(api.URL_IzinSakit+"?offset=" + offset
                 +"&first_date="+ dateMonthDate
                 +"&limit=" + page

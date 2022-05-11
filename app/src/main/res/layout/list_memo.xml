@@ -19,7 +19,6 @@
                 >
 
                 <TextView
-                    android:fontFamily="@font/exo_variablefont_wght"
                     android:padding="2dp"
                     android:id="@+id/tvJudul"
                     android:layout_width="match_parent"
@@ -41,7 +40,6 @@
 
                     <TextView
                         android:id="@+id/tvJenis"
-                        android:fontFamily="@font/exo_variablefont_wght"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
@@ -53,7 +51,6 @@
                         />
 
                     <TextView
-                        android:fontFamily="@font/exo_variablefont_wght"
                         android:id="@+id/tvTgl"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

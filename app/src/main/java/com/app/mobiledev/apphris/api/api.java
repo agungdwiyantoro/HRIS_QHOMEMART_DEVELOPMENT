@@ -107,6 +107,7 @@ public class api {
     public  static  final String URL_Akses=ip.getIp()+"akses";
     //public  static  final String URL_IzinSakit_approve_head=ip.getIp()+"approvehead";
     public  static  final String URL_IzinSakit_approve=ip.getIp()+"approvesakit";
+    public  static  final String URL_IzinCuti_approve=ip.getIp()+"approvecuti";
     public  static  final String URL_IzinSakit_approve_hrd=ip.getIp()+"approvehrd";
     public  static  final String URL_foto_izinsakit=ip.getURL()+"upload/karyawan/";
 

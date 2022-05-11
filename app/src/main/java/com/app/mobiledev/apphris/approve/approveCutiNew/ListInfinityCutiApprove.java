@@ -1,12 +1,14 @@
-package com.app.mobiledev.apphris.izin.izinCuti;
+package com.app.mobiledev.apphris.approve.approveCutiNew;
 
 import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,15 +26,10 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.app.mobiledev.apphris.Model.modelIzinCutiNew;
-import com.app.mobiledev.apphris.Model.modelIzinCutiNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
 import com.app.mobiledev.apphris.helperPackage.helper;
-import com.app.mobiledev.apphris.izin.izinCuti.adapterIzinCutiEmp;
-import com.app.mobiledev.apphris.izin.izinCuti.ListInfinityCutiEmp;
-import com.app.mobiledev.apphris.izin.izinCuti.ListInfinityCutiEmp;
-import com.app.mobiledev.apphris.izin.izinCuti.adapterIzinCutiEmp;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.dewinjm.monthyearpicker.MonthYearPickerDialogFragment;
@@ -47,12 +44,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ListInfinityCutiApprove extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     Spinner dropdown;
     RecyclerView recyler_izin_cuti;
     private List<modelIzinCutiNew> modelIzinCutiNews;
-    private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="null";
+    private String token, dateMonthDate = "", dateMonthString = "", spinSelected, spinResult = "", access = "";
     private SessionManager msession;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
@@ -66,33 +63,44 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
     private boolean isLoading = false;
     int itemCount = 0;
     LinearLayoutManager layoutManager;
-    com.app.mobiledev.apphris.izin.izinCuti.adapterIzinCutiEmp adapterIzinCutiEmp;
+    adapterIzinCutiApprove adapterIzinCutiApprove;
     private ShimmerFrameLayout mShimmerViewContainer;
 
     MonthYearPickerDialogFragment dialogFragment;
     int yearSelected, monthSelected, daySelected;
     long minDate, maxDate;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_infinity_cuti_emp);
 
+        Intent intent = getIntent();
+        access = intent.getStringExtra("kyJabatan");
+
         inc_backPage = findViewById(R.id.inc_backPage);
 
-        //get the spinner from the xml.
         dropdown = findViewById(R.id.spinDDown);
-//create a list of items for the spinner.
-        String[] items = new String[]{"Menunggu", "Diterima", "Ditolak"};
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//set the spinners adapter to the previously created one.
-        dropdown.setAdapter(adapter);
+        String[] items;
+        if (access.equals("HRD")) {
+            Log.d("TAG_JABJAB", "onCreate: "+access);
+
+            items = new String[]{"Proses", "Diterima", "Ditolak"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dropdown.setAdapter(adapter);
+
+        } else {
+
+            items = new String[]{"Menunggu", "Proses", "Diterima", "Ditolak"};
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            dropdown.setAdapter(adapter);
+        }
 
         tvTitleInfinityList = findViewById(R.id.tvTitleInfinityList);
-        tvTitleInfinityList.setText("Daftar Izin Cuti");
+        tvTitleInfinityList.setText("Daftar Pengajuan Izin Cuti");
         tvMessage = findViewById(R.id.tvMessage);
         tvMessage.setText("Pengajuan izin cuti kosong");
 
@@ -107,8 +115,8 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
         lin_transparant = findViewById(R.id.lin_transparant);
         swipeRefresh = findViewById(R.id.swipeRefresh);
         tx_approve = findViewById(R.id.tx_approve);
-        swipeRefresh.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) ListInfinityCutiEmp.this);
-        msession = new SessionManager(ListInfinityCutiEmp.this);
+        swipeRefresh.setOnRefreshListener((SwipeRefreshLayout.OnRefreshListener) ListInfinityCutiApprove.this);
+        msession = new SessionManager(ListInfinityCutiApprove.this);
         modelIzinCutiNews = new ArrayList<>();
         token = msession.getToken();
         layoutManager = new LinearLayoutManager(this);
@@ -125,7 +133,7 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
         daySelected = calendar.get(Calendar.DAY_OF_MONTH);
 
         calendar.clear();
-        calendar.set(yearSelected, monthSelected-1, 1); // Set minimum date to show in dialog
+        calendar.set(yearSelected, monthSelected - 1, 1); // Set minimum date to show in dialog
         minDate = calendar.getTimeInMillis(); // Get milliseconds of the modified date
 
         calendar.clear();
@@ -135,8 +143,8 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
         dialogFragment = MonthYearPickerDialogFragment
                 .getInstance(monthSelected, yearSelected, minDate, maxDate, "Tanggal Izin");
 
-        adapterIzinCutiEmp = new adapterIzinCutiEmp(ListInfinityCutiEmp.this, new ArrayList<>());
-        recyler_izin_cuti.setAdapter(adapterIzinCutiEmp);
+        adapterIzinCutiApprove = new adapterIzinCutiApprove(ListInfinityCutiApprove.this, new ArrayList<>(), access, spinResult);
+        recyler_izin_cuti.setAdapter(adapterIzinCutiApprove);
         getMonth();
         paginationCall();
 
@@ -183,14 +191,22 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
                 switch (spinSelected) {
                     case "Menunggu":
                         spinResult = "";
+                        adapterIzinCutiApprove = new adapterIzinCutiApprove(ListInfinityCutiApprove.this, new ArrayList<>(), access, spinResult);
+                        onRefresh();
+                        break;
+                    case "Proses":
+                        spinResult = "2";
+                        adapterIzinCutiApprove = new adapterIzinCutiApprove(ListInfinityCutiApprove.this, new ArrayList<>(), access, spinResult);
                         onRefresh();
                         break;
                     case "Diterima":
                         spinResult = "1";
+                        adapterIzinCutiApprove = new adapterIzinCutiApprove(ListInfinityCutiApprove.this, new ArrayList<>(), access, spinResult);
                         onRefresh();
                         break;
                     case "Ditolak":
                         spinResult = "0";
+                        adapterIzinCutiApprove = new adapterIzinCutiApprove(ListInfinityCutiApprove.this, new ArrayList<>(), access, spinResult);
                         onRefresh();
                         break;
                 }
@@ -230,7 +246,7 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
 
             tvDate.setText(monthYear);
 
-            Log.d("TAG_TAG_MY", "getMonthOfYear: " + dateMonthDate + " | "+ dateMonthString);
+            Log.d("TAG_TAG_MY", "getMonthOfYear: " + dateMonthDate + " | " + dateMonthString);
 
             onRefresh();
         });
@@ -261,7 +277,7 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
 
         tvDate.setText(monthYear);
 
-        Log.d("TAG_TAG_MY", "getMonthOfYear: " + dateMonthDate + " | "+ dateMonthString);
+        Log.d("TAG_TAG_MY", "getMonthOfYear: " + dateMonthDate + " | " + dateMonthString);
     }
 
     private void paginationCall() {
@@ -296,23 +312,30 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
         itemCount = 0;
         currentPage = PAGE_START;
         isLastPage = false;
-        adapterIzinCutiEmp.clear();
+        adapterIzinCutiApprove.clear();
         mShimmerViewContainer.startShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         recyler_izin_cuti.setVisibility(View.GONE);
-        recyler_izin_cuti.setAdapter(adapterIzinCutiEmp);
-
-
+        recyler_izin_cuti.setAdapter(adapterIzinCutiApprove);
 
         paginationCall();
     }
 
-    private void getData(int page, int offset, ArrayList items) {
+    private void getData(int limit, int offset, ArrayList items) {
 
-        JsonObjectRequest req = new JsonObjectRequest(api.URL_IzinCuti+"?offset=" + offset
-                +"&limit=" + page
-                +"&first_date="+ dateMonthDate
-                + "&status="+spinResult, null,
+        JsonObjectRequest req = new JsonObjectRequest(
+                /*"http://192.168.50.24/all/hris_ci_3/api/approvecuti?" +
+                        "offset=" + offset +
+                        "&hak_akses="+ access +
+                        "&first_date="+ dateMonthDate +
+                        "&limit=" + page +
+                        "&status="+spinResult, null,*/
+                api.URL_IzinCuti_approve +
+                        "?status=" + spinResult +
+                        "&hak_akses=" + access +
+                        "&limit=" + limit +
+                        "&offset=" + offset +
+                        "&first_date=" + dateMonthDate, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -331,10 +354,11 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
                                         JSONObject data = jsonArray.getJSONObject(i);
                                         modelIzinCutiNew model = new modelIzinCutiNew();
 
-                                        model.setKynm(data.getString("kynm"));
+                                        model.setKynm(data.getString("name"));
                                         model.setCtano(data.getString("ctano"));
                                         model.setKyano(data.getString("kyano"));
                                         model.setNmcuti(data.getString("nmcuti"));
+                                        model.setDvnama(data.getString("dvnama"));
                                         model.setCtmulai(data.getString("ctmulai"));
                                         model.setCtselesai(data.getString("ctselesai"));
                                         model.setSelectCuti(data.getString("select_cuti"));
@@ -376,14 +400,12 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
                                         emptyHistory.setVisibility(View.GONE);
                                     }
 
-                                    onRefresh();
-
                                     break;
                                 case "201":
-                                    emptyHistory.setVisibility(View.VISIBLE);
+                                    /*emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
-                                    recyler_izin_cuti.setVisibility(View.GONE);
-                                    //onRestart();
+                                    recyler_izin_cuti.setVisibility(View.GONE);*/
+
                                     break;
                                 case "404":
                                     emptyHistory.setVisibility(View.VISIBLE);
@@ -393,8 +415,8 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
                             }
 
                             if (currentPage != PAGE_START)
-                                adapterIzinCutiEmp.removeLoading();
-                            adapterIzinCutiEmp.addItems(items);
+                                adapterIzinCutiApprove.removeLoading();
+                            adapterIzinCutiApprove.addItems(items);
                             swipeRefresh.setRefreshing(false);
                             Log.d("CUURENT_PAGE", "onResponse: " + items.size());
 
@@ -421,32 +443,28 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("ERROR_VOLLEY_EMP: ", error.toString());
+                VolleyLog.e("ERROR_VOLLEY_APP: ", error.toString());
 
-                emptyHistory.setVisibility(View.VISIBLE);
-                mShimmerViewContainer.setVisibility(View.GONE);
-                recyler_izin_cuti.setVisibility(View.GONE);
-
-                /*if (error.toString().equals("")) {
+                if (error.toString().equals("")) {
                     emptyHistory.setVisibility(View.VISIBLE);
                     mShimmerViewContainer.setVisibility(View.GONE);
                     recyler_izin_cuti.setVisibility(View.GONE);
                     //refresh dibawah digunakan untuk
                     // menanggulangi error
                     // BasicNetwork.performRequest: Unexpected response code 404
-                }*/
+                }
             }
         }) {
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer "+token);
+                headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
         };
 
         //ApplicationController.getInstance().addToRequestQueue(req);
-        Volley.newRequestQueue(ListInfinityCutiEmp.this).add(req);
+        Volley.newRequestQueue(ListInfinityCutiApprove.this).add(req);
     }
 
     @Override
@@ -461,4 +479,10 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
         mShimmerViewContainer.stopShimmerAnimation();
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
+        startActivity(getIntent());
+    }
 }

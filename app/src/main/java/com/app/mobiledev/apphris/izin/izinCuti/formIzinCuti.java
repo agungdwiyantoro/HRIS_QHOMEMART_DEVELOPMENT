@@ -7,6 +7,7 @@ import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,34 +22,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.androidnetworking.interfaces.UploadProgressListener;
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.sesion.SessionManager;
+import com.google.common.base.CharMatcher;
 import com.squareup.timessquare.CalendarPickerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class formIzinCuti extends AppCompatActivity {
 
@@ -56,17 +47,22 @@ public class formIzinCuti extends AppCompatActivity {
     private EditText etTglCuti, etKetCuti, etLamaCuti;
     private ImageView ivTgl, imStatus;
     private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp, tvSisaCuti, tvPeriode, tvHakCuti;
-    private TextInputLayout tilTglCuti, tilLamaCuti;
+    private TextInputLayout tilTglCuti, tilLamaCuti, tilKetCuti;
     private Dialog dialogResign, dialogConfirm;
-    private LinearLayout lin_transparant, llViewCalendar, llViewGetDates;
+    private LinearLayout lin_transparant, llViewCalendar, llViewGetDates, linearLayout;
 
     private Button btn_ajukan, btnDate, btnCancelDate, dialogBtnSubmit, dialogBtnCancel;
     private String kyano, token, lamaCuti = "", ketCuti = "", tglCuti = "", kuotaCuti = "", hakCuti = "", namaEmp, divisiEmp, jabatanEmp, spinJenisSelected, spinDelegasiSelected, spinResultJenis, spinResultDelegasi;
     private Toast toast;
     Spinner spinJenis, spinDelegasi;
+    Snackbar snackbar;
+
+    String jenis1, jenis2, jenis3, jenis4, jenis5, jenis6, jenis7, jenis8, jenis9, jenis10;
 
     ArrayList<String> list = new ArrayList<String>();
     ArrayList<String> jenisList, delegasiList;
+
+    CalendarPickerView calendar;
 
     SessionManager session;
 
@@ -81,10 +77,12 @@ public class formIzinCuti extends AppCompatActivity {
         * GET DATA SHAREPREF START
         * */
 
+        linearLayout = findViewById(R.id.linearLayout);
+
         session = new SessionManager(formIzinCuti.this);
         helper.verifyStoragePermissions(formIzinCuti.this);
         kyano = session.getIdUser();
-        token = /*session.getToken()*/"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjA1MjMxOTA0MjIxMDc5NSIsImt5cGFzc3dvcmQiOiIxMjM0NTY3Iiwia3lqYWJhdGFuIjoiSFIxNDciLCJreWRpdmlzaSI6IkhSMDA0Iiwia3liYWdpYW4iOiJCRzA0NiIsImphYmF0YW4iOiJudWxsIiwiaWF0IjoxNjUyMTY3MzgzLCJleHAiOjE2NTIxODUzODN9.Vax2borGc18EggAO4UzYvzS55PM7fFqQdks6zc1Iyts";
+        token = session.getToken();
 
         tvNamaEmp = findViewById(R.id.tvNamaEmp);
         tvDivisiEmp = findViewById(R.id.tvDivisiEmp);
@@ -111,6 +109,7 @@ public class formIzinCuti extends AppCompatActivity {
         etKetCuti = findViewById(R.id.etKetCuti);
 
         tilLamaCuti = findViewById(R.id.tilLamaCuti);
+        tilKetCuti = findViewById(R.id.tilKetCuti);
         tilTglCuti = findViewById(R.id.tilTglCuti);
 
         lin_transparant = findViewById(R.id.lin_transparant);
@@ -150,9 +149,9 @@ public class formIzinCuti extends AppCompatActivity {
 
         Calendar nextMonth = Calendar.getInstance();
 
-        nextMonth.add(Calendar.MONTH, +2);
+        nextMonth.add(Calendar.MONTH, +4);
 
-        CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
+        calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
         Date today = new Date();
         calendar.init(today, nextMonth.getTime())
                 .inMode(CalendarPickerView.SelectionMode.MULTIPLE);
@@ -166,7 +165,7 @@ public class formIzinCuti extends AppCompatActivity {
                 String clearFormatDate = dateFormat.format(date);
                 System.out.println("Date :" + clearFormatDate);
 
-                Toast.makeText(formIzinCuti.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(formIzinCuti.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
 
                 Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
 
@@ -181,7 +180,7 @@ public class formIzinCuti extends AppCompatActivity {
                 String clearFormatDate = dateFormat.format(date);
                 System.out.println("Date :" + clearFormatDate);
 
-                Toast.makeText(formIzinCuti.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(formIzinCuti.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
 
                 Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
 
@@ -196,12 +195,72 @@ public class formIzinCuti extends AppCompatActivity {
         });
 
         btnDate.setOnClickListener(v -> {
-            etTglCuti.setText(list.toString().replace("[", "").replace("]", ""));
-            calendar.setVisibility(View.GONE);
-            llViewGetDates.setVisibility(View.GONE);
-            Log.d("TAG_DATE_ARRAY", "onCreate: " + list.toString().replace("[", "").replace("]", ""));
-            Log.d("TAG_LIST_LENGTH", "onCreate: "+list.size());
-            etLamaCuti.setText(String.valueOf(list.size()));
+
+            Log.d("TAG_SPIN_SELECTED", "onCreate: "+spinJenisSelected);
+
+            if (spinJenisSelected.substring(0,2).equals("1.")) {
+                if (list.size() > Integer.parseInt(jenis1)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+
+            } else if (spinJenisSelected.substring(0,2).equals("2.")) {
+                if (list.size() > Integer.parseInt(jenis2)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            } else if (spinJenisSelected.substring(0,2).equals("3.")) {
+                if (list.size() > Integer.parseInt(jenis3)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            } else if (spinJenisSelected.substring(0,2).equals("4.")) {
+                if (list.size() > Integer.parseInt(jenis4)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            } else if (spinJenisSelected.substring(0,2).equals("5.")) {
+                if (list.size() > Integer.parseInt(jenis5)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            } else if (spinJenisSelected.substring(0,2).equals("6.")) {
+                if (list.size() > Integer.parseInt(jenis6)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            } else if (spinJenisSelected.substring(0,2).equals("7.")) {
+                if (list.size() > Integer.parseInt(jenis7)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            } else if (spinJenisSelected.substring(0,2).equals("8.")) {
+                if (list.size() > Integer.parseInt(jenis8)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            } else if (spinJenisSelected.substring(0,2).equals("9.")) {
+                if (list.size() > Integer.parseInt(jenis9)) {
+                    showToast("Tanggal melebihi batas cuti");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            } else if (spinJenisSelected.substring(0,2).equals("10")) {
+                if (list.size() > Integer.parseInt(kuotaCuti)) {
+                    showToast("Tanggal melebihi batas Cuti Tahunan");
+                } else {
+                    getAfterCheckDateSelected();
+                }
+            }
+
         });
 
         /*
@@ -284,6 +343,19 @@ public class formIzinCuti extends AppCompatActivity {
 
     }
 
+    private void getAfterCheckDateSelected() {
+        etTglCuti.setText(list.toString().replace("[", "").replace("]", ""));
+        calendar.setVisibility(View.GONE);
+        llViewGetDates.setVisibility(View.GONE);
+        Log.d("TAG_DATE_ARRAY", "onCreate: " + list.toString().replace("[", "").replace("]", ""));
+        Log.d("TAG_LIST_LENGTH", "onCreate: "+list.size());
+        etLamaCuti.setText(String.valueOf(list.size()));
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(formIzinCuti.this, text, Toast.LENGTH_SHORT).show();
+    }
+
     private void getJenisCuti() {
         AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/jenis_cuti")
                 .addHeaders("Authorization", "Bearer "+token)
@@ -298,13 +370,36 @@ public class formIzinCuti extends AppCompatActivity {
                             //JSONObject response = new JSONObject();
                             if (response.getString("status").equals("200")) {
                                 JSONArray jsonArray = response.getJSONArray("message");
-                                for (int i = 1; i < jsonArray.length(); i++) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     String seri = data.getString("nmcuti");
+
+                                    JSONObject dataJenis1 = jsonArray.getJSONObject(0);
+                                    jenis1 = dataJenis1.getString("hrcuti");
+                                    JSONObject dataJenis2 = jsonArray.getJSONObject(1);
+                                    jenis2 = dataJenis2.getString("hrcuti");
+                                    JSONObject dataJenis3 = jsonArray.getJSONObject(2);
+                                    jenis3 = dataJenis3.getString("hrcuti");
+                                    JSONObject dataJenis4 = jsonArray.getJSONObject(3);
+                                    jenis4 = dataJenis4.getString("hrcuti");
+                                    JSONObject dataJenis5 = jsonArray.getJSONObject(4);
+                                    jenis5 = dataJenis5.getString("hrcuti");
+                                    JSONObject dataJenis6 = jsonArray.getJSONObject(5);
+                                    jenis6 = dataJenis6.getString("hrcuti");
+                                    JSONObject dataJenis7 = jsonArray.getJSONObject(6);
+                                    jenis7 = dataJenis7.getString("hrcuti");
+                                    JSONObject dataJenis8 = jsonArray.getJSONObject(7);
+                                    jenis8 = dataJenis8.getString("hrcuti");
+                                    JSONObject dataJenis9 = jsonArray.getJSONObject(8);
+                                    jenis9 = dataJenis9.getString("hrcuti");
+                                    JSONObject dataJenis10 = jsonArray.getJSONObject(9);
+                                    jenis10 = dataJenis10.getString("hrcuti");
+
+
                                     if (seri.length()<40) {
-                                        jenisList.add(i+"."+seri);
+                                        jenisList.add((i+1)+"."+seri);
                                     } else {
-                                        jenisList.add(i+"."+seri+"...");
+                                        jenisList.add((i+1)+"."+seri+"...");
                                     }
                                     Log.d("LIST_JENIS", "onResponse: "+seri);
                                 }
@@ -371,7 +466,7 @@ public class formIzinCuti extends AppCompatActivity {
                         try {
                             JSONObject object = response.getJSONObject("message");
                             kuotaCuti = object.getString("sisa_cuti");
-                            tvSisaCuti.setText(kuotaCuti);
+                            tvSisaCuti.setText(kuotaCuti+" Hari");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -414,10 +509,14 @@ public class formIzinCuti extends AppCompatActivity {
 
         tglCuti = etTglCuti.getText().toString();
         lamaCuti = etLamaCuti.getText().toString();
+        ketCuti = etKetCuti.getText().toString();
 
         if (tglCuti.isEmpty()) {
             tilTglCuti.setError("Tanggal Cuti masih kosong");
             tilTglCuti.requestFocus();
+        } else if (ketCuti.isEmpty()) {
+            tilKetCuti.setError("Keterangan Cuti masih kosong");
+            tilKetCuti.requestFocus();
         } else {
             dialog_confirm();
         }
@@ -453,8 +552,8 @@ public class formIzinCuti extends AppCompatActivity {
         dialogBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+spinJenisSelected.substring(0,1)+" | "+ tglCuti+" | "+lamaCuti+" | "+ spinDelegasiSelected +" | "+tvPeriode.getText().toString()+" | "+etKetCuti.getText().toString());
-                insertCuti(spinJenisSelected.substring(0,1),tglCuti,spinDelegasiSelected,etKetCuti.getText().toString(),tvPeriode.getText().toString());
+                Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+spinJenisSelected.substring(0,2)+" | "+ tglCuti+" | "+lamaCuti+" | "+ spinDelegasiSelected +" | "+tvPeriode.getText().toString()+" | "+etKetCuti.getText().toString());
+                insertCuti(spinJenisSelected.substring(0,2),tglCuti,spinDelegasiSelected,etKetCuti.getText().toString(),tvPeriode.getText().toString());
 
             }
         });
@@ -534,11 +633,12 @@ public class formIzinCuti extends AppCompatActivity {
 
     private void insertCuti(String id_jenis, String select_cuti, String delegasi_to, String alasan, String periode) {
         Log.d("TAG_INPUT_CEK", "insertIzinCuti: "+ id_jenis + " | " + select_cuti + " | " + delegasi_to + " | " + alasan + " | " + periode);
+        String extractNumber = CharMatcher.inRange('0', '9').retainFrom(id_jenis); // 123
         AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izincuti")
                 .addHeaders("Authorization", "Bearer " + token)
                 //.addHeaders("Content-Type", "application/json")
                 //.addHeaders("Content-Type", "multipart/form-data")
-                .addMultipartParameter("id_jenis", /*"1"*/id_jenis)
+                .addMultipartParameter("id_jenis", extractNumber/*"1"*/)
                 .addMultipartParameter("select_cuti", /*"2022-06-17, 2022-06-16"*/select_cuti)
                 .addMultipartParameter("delegasi_to", /*"ANWARUL MUSLIMIN"*/delegasi_to)
                 .addMultipartParameter("alasan", /*"test alasan"*/alasan)

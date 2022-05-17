@@ -445,7 +445,7 @@ public class ListInfinityCutiApprove extends AppCompatActivity implements SwipeR
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("ERROR_VOLLEY_APP: ", error.toString());
 
-                if (error.toString().equals("")) {
+                if (error.toString().equals("404")) {
                     emptyHistory.setVisibility(View.VISIBLE);
                     mShimmerViewContainer.setVisibility(View.GONE);
                     recyler_izin_cuti.setVisibility(View.GONE);

@@ -374,21 +374,30 @@
                     android:textSize="12dp" />
 
 
-                <EditText
-                    android:maxLength="200"
-                    android:id="@+id/etKetCuti"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilKetCuti"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_round_dropdown"
-                    android:gravity="top|left"
-                    android:inputType="textMultiLine"
-                    android:lines="6"
-                    android:overScrollMode="always"
-                    android:scrollbars="vertical"
-                    android:scrollHorizontally="false"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/main_color_black" />
+                    android:textColorHint="@color/red_btn_bg_pressed_color"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+                    <EditText
+                        android:maxLength="200"
+                        android:id="@+id/etKetCuti"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_round_dropdown"
+                        android:gravity="top|left"
+                        android:inputType="textMultiLine"
+                        android:lines="6"
+                        android:overScrollMode="always"
+                        android:scrollbars="vertical"
+                        android:scrollHorizontally="false"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/main_color_black" />
+
+
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/btn_ajukan"

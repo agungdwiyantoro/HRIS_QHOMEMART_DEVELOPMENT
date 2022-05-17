@@ -37,10 +37,14 @@
         tools:replace="android:icon">
         <activity
             android:name=".approve.approveCutiNew.DetailIzinCutiApprove"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
         <activity
             android:name=".approve.approveCutiNew.ListInfinityCutiApprove"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            >
 
         </activity>
         <activity

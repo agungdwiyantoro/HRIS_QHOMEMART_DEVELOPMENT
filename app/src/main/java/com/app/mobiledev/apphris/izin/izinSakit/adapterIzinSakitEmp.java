@@ -43,7 +43,7 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
                 return new ViewHolder(
@@ -81,12 +81,6 @@ public class adapterIzinSakitEmp extends RecyclerView.Adapter<BaseViewHolder> {
         Log.d("add_items_all", "addItems: "+modelIzinSakitNews.size());
         notifyDataSetChanged();
     }
-
-    /*public void addLoading() {
-        isLoaderVisible = true;
-        modelIzinSakitNews.add(new modelIzinSakitNew());
-        notifyItemInserted(modelIzinSakitNews.size() - 1);
-    }*/
 
     public void removeLoading() {
         try{

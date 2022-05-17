@@ -610,8 +610,8 @@ public class DetailIzinCutiApprove extends AppCompatActivity {
     private void updateApprove(String _id, String value, String hak_akses, String comment) {
         AndroidNetworking.put(api.URL_IzinCuti_approve)
                 .addHeaders("Authorization", "Bearer " + token)
-                .addBodyParameter("id", _id)
-                .addBodyParameter("status", value)
+                .addBodyParameter("ctano", _id)
+                .addBodyParameter("status_approve", value)
                 .addBodyParameter("hak_akses", hak_akses)
                 .addBodyParameter("comment", comment)
                 .setPriority(Priority.HIGH)

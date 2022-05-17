@@ -32,10 +32,9 @@ import java.util.List;
 public class adapterIzinCutiApprove extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_NORMAL = 1;
-
+    private Context mCtx;
     private boolean isLoaderVisible = false;
 
-    private Context mCtx;
     private final List<modelIzinCutiNew> modelIzinCutiNews;
     private String access, status;
 
@@ -181,7 +180,7 @@ public class adapterIzinCutiApprove extends RecyclerView.Adapter<BaseViewHolder>
                 tvDivisiEmp.setText("" + divisi);
             }*/
 
-            if (status.equals("2") && Object.getStatus().equals("ON PROGRESS")) {
+            if (status.equals("2") && Object.getStatusApprove().equals("ON PROGRESS")) {
                 tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.main_blue_color));
                 ivStatus.setImageResource(R.drawable.ic_circle_blue_48);
                 //tvStatusIzin.setText("Proses");

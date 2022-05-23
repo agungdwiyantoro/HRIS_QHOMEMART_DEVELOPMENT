@@ -40,7 +40,6 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/onprogress"
                 />
 
             <TextView

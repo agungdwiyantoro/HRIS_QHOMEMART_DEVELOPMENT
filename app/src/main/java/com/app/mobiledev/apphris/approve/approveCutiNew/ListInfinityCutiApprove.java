@@ -443,7 +443,7 @@ public class ListInfinityCutiApprove extends AppCompatActivity implements SwipeR
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("ERROR_VOLLEY_APP: ", error.toString());
+                VolleyLog.e("ERROR_VOLLEY_APP: ", error.networkResponse);
 
                 if (error.toString().equals("404")) {
                     emptyHistory.setVisibility(View.VISIBLE);

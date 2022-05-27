@@ -52,7 +52,7 @@ public class formIzinCuti extends AppCompatActivity {
     private LinearLayout lin_transparant, llViewCalendar, llViewGetDates, linearLayout;
 
     private Button btn_ajukan, btnDate, btnCancelDate, dialogBtnSubmit, dialogBtnCancel;
-    private String kyano, token, lamaCuti = "", ketCuti = "", tglCuti = "", kuotaCuti = "", hakCuti = "", namaEmp, divisiEmp, jabatanEmp, spinJenisSelected, spinDelegasiSelected, spinResultJenis, spinResultDelegasi;
+    private String kyano, token, lamaCuti = "", ketCuti = "", tglCuti = "", kuotaCuti = "", hakCuti = "", namaEmp, divisiEmp, jabatanEmp, spinJenisSelected, spinDelegasiSelected, spinResultJenis, spinResultDelegasi, splitKuotaCuti;
     private Toast toast;
     Spinner spinJenis, spinDelegasi;
     Snackbar snackbar;
@@ -76,6 +76,14 @@ public class formIzinCuti extends AppCompatActivity {
         /*
         * GET DATA SHAREPREF START
         * */
+
+        imStatus = findViewById(R.id.imStatus);
+        imStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         linearLayout = findViewById(R.id.linearLayout);
 
@@ -254,10 +262,23 @@ public class formIzinCuti extends AppCompatActivity {
                     getAfterCheckDateSelected();
                 }
             } else if (spinJenisSelected.substring(0,2).equals("10")) {
-                if (list.size() > Integer.parseInt(kuotaCuti)) {
-                    showToast("Tanggal melebihi batas Cuti Tahunan");
+
+                if (kuotaCuti.contains(",")) {
+                    splitKuotaCuti = kuotaCuti.split(",")[0];
+                    Log.d("TAG_TEST_CONVERT", "onCreate: "+splitKuotaCuti);
+
+                    if (list.size() > Integer.parseInt(splitKuotaCuti)) {
+                        showToast("Tanggal melebihi batas Cuti Tahunan");
+                    } else {
+                        getAfterCheckDateSelected();
+                    }
+
                 } else {
-                    getAfterCheckDateSelected();
+                    if (list.size() > Integer.parseInt(kuotaCuti)) {
+                        showToast("Tanggal melebihi batas Cuti Tahunan");
+                    } else {
+                        getAfterCheckDateSelected();
+                    }
                 }
             }
 
@@ -466,7 +487,7 @@ public class formIzinCuti extends AppCompatActivity {
                         try {
                             JSONObject object = response.getJSONObject("message");
                             kuotaCuti = object.getString("sisa_cuti");
-                            tvSisaCuti.setText(kuotaCuti+" Hari");
+                            tvSisaCuti.setText(kuotaCuti.split(",")[0]+" Hari");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -425,14 +425,14 @@ public class DetailIzinCutiApprove extends AppCompatActivity {
                                             tvCheckExec.setText("Disetujui " + "Eksekutif");
                                             tvCheckDir.setText("Disetujui " + "Direktur");
 
-                                            /*if (approve_dir.equals("1")) {
+                                            if (approve_dir.equals("1")) {
                                                 dir_name = "Henky";
                                                 tx_status.setText("Disetujui oleh " + dir_name);
-                                            }*/
+                                            }
 
                                             card_status_approve.setVisibility(View.VISIBLE);
                                             lin_status_approve.setBackgroundResource(R.color.greennew);
-                                            tx_status.setText("Disetujui oleh " + dir_name);
+                                            //tx_status.setText("Disetujui oleh " + dir_name);
                                             tx_tgl_status.setText(dir_approve_date);
 
                                             Log.d("TAG4", "onResponse: ");
@@ -477,7 +477,7 @@ public class DetailIzinCutiApprove extends AppCompatActivity {
 
                                 mulai_cuti_tanggal = dateFormat_standart.format(dateSource);
                                 selesai_cuti_tanggal = dateFormat_standart.format(dateSource1);
-                                tx_waktu_cuti.setText(mulai_cuti_tanggal + "   " + selesai_cuti_tanggal);
+                                tx_waktu_cuti.setText(select_date);
 
                                 /*
                                  * SET DATA TO TEXTVIEW END

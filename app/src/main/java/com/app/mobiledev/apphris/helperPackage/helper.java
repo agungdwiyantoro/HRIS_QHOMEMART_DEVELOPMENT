@@ -53,6 +53,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -476,6 +477,12 @@ public class helper extends AsyncTask {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = df.format(c);
         return  formattedDate;
+    }
+
+    public static Date formatDate(DateFormat dataDate, String formatDate) throws ParseException {
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat(formatDate);
+        Date date = formatter.parse(String.valueOf(dataDate));
+        return date;
     }
 
     public static void cekAkses( final Context mctx, final View view ,String menu,Class classMenu, String hakAkses) {

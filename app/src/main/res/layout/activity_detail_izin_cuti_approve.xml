@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
@@ -183,7 +184,8 @@
                             android:layout_height="wrap_content"
                             android:text="20-Mar-2022, 21-Mar-2022"
                             android:textColor="@color/main_color_black"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"
+                            android:layout_marginBottom="16dp"/>
 
                     </LinearLayout>
 

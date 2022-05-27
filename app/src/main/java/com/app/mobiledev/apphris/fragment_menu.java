@@ -1,6 +1,7 @@
 package com.app.mobiledev.apphris;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
@@ -24,6 +25,7 @@ import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.izin.dashboardIzin;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.slipGaji.riwayatSlipGaji;
+import com.app.mobiledev.apphris.test.SecurityTest.SecVerTest;
 import com.app.mobiledev.apphris.training.menu_training;
 import com.app.mobiledev.apphris.training.soal_training.ModelLatihan;
 import com.app.mobiledev.apphris.helperPackage.DataSoalSQLite;
@@ -40,43 +42,46 @@ import java.util.List;
 import java.util.Map;
 
 public class fragment_menu extends Fragment {
-    public fragment_menu(){}
+    public fragment_menu() {
+    }
+
     private View rootView;
-    private CardView pinjaman,kasbon,cuti,izin,bonus, latihan,projectManage,jadwalSales, visitor,cvApprove,slipGaji;
+    private CardView pinjaman, kasbon, cuti, izin, bonus, latihan, projectManage, jadwalSales, visitor, cvApprove, slipGaji, cvSecVerIzin;
     private DataSoalSQLite db;
     private List<ModelLatihan> modelLatihan;
-    private  double lat=0,lon=0;
+    private double lat = 0, lon = 0;
     private TooltipCompat tooltipCompat;
     private SessionManager sessionmanager;
-    private String jabatan,kyano, hak_akses, token;
+    private String jabatan, kyano, hak_akses, token;
     private ConstraintLayout lmenu;
-    private String idtraining="",index="";
+    private String idtraining = "", index = "";
     private TextView txnotif_latihan;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView= inflater.inflate(R.layout.activity_fragment_menu, container, false);
-        pinjaman=rootView.findViewById(R.id.pinjaman);
-        kasbon=rootView.findViewById(R.id.kasbon);
-        cuti=rootView.findViewById(R.id.cuti);
-        cvApprove=rootView.findViewById(R.id.cvApprove);
-        slipGaji=rootView.findViewById(R.id.slipGaji);
-        projectManage=rootView.findViewById(R.id.projectManage);
-        izin=rootView.findViewById(R.id.izin);
-        bonus=rootView.findViewById(R.id.bonus);
-        txnotif_latihan=rootView.findViewById(R.id.txnotif_latihan);
-        jadwalSales=rootView.findViewById(R.id.jadwalSales);
+        rootView = inflater.inflate(R.layout.activity_fragment_menu, container, false);
+        pinjaman = rootView.findViewById(R.id.pinjaman);
+        kasbon = rootView.findViewById(R.id.kasbon);
+        cuti = rootView.findViewById(R.id.cuti);
+        cvApprove = rootView.findViewById(R.id.cvApprove);
+        slipGaji = rootView.findViewById(R.id.slipGaji);
+        projectManage = rootView.findViewById(R.id.projectManage);
+        izin = rootView.findViewById(R.id.izin);
+        bonus = rootView.findViewById(R.id.bonus);
+        cvSecVerIzin = rootView.findViewById(R.id.cvSecVerIzin);
+        txnotif_latihan = rootView.findViewById(R.id.txnotif_latihan);
+        jadwalSales = rootView.findViewById(R.id.jadwalSales);
         latihan = rootView.findViewById(R.id.latihan);
         visitor = rootView.findViewById(R.id.cvVisitor);
         modelLatihan = new ArrayList<>();
         db = new DataSoalSQLite(getActivity());
         sessionmanager = new SessionManager(getActivity());
         token = sessionmanager.getToken();
-        kyano=sessionmanager.getIdUser();
-        jabatan=sessionmanager.getCekStaff();
-        idtraining=sessionmanager.getIdtraning();
-        lmenu=rootView.findViewById(R.id.lmenu);
+        kyano = sessionmanager.getIdUser();
+        jabatan = sessionmanager.getCekStaff();
+        idtraining = sessionmanager.getIdtraning();
+        lmenu = rootView.findViewById(R.id.lmenu);
         txnotif_latihan.setVisibility(View.GONE);
 
         checkJabatan();
@@ -84,14 +89,14 @@ public class fragment_menu extends Fragment {
         cvApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // startActivity(new Intent(getActivity(), ListIzinSakitApproveHead.class));
+                // startActivity(new Intent(getActivity(), ListIzinSakitApproveHead.class));
 //                if(helper.regexKata("MANAGER",sessionmanager.getJabatan())){
 //                    startActivity(new Intent(getActivity(), menu_approve.class));
 //                }else{
 //                    helper.snackBar(lmenu,"anda tidak memiliki akses ke menu ini...!!");
 //                }
 
-                helper.cekAkses(getActivity(),lmenu,"approve", menu_approve.class, hak_akses);
+                helper.cekAkses(getActivity(), lmenu, "approve", menu_approve.class, hak_akses);
 
             }
         });
@@ -99,14 +104,14 @@ public class fragment_menu extends Fragment {
         pinjaman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"pinjaman", pinjamanUang.class, "");
+                helper.cekAkses(getActivity(), lmenu, "pinjaman", pinjamanUang.class, "");
             }
         });
 
         kasbon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"kasbon", kasbon_karyawan.class, "");
+                helper.cekAkses(getActivity(), lmenu, "kasbon", kasbon_karyawan.class, "");
 
             }
         });
@@ -114,7 +119,7 @@ public class fragment_menu extends Fragment {
         cuti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               helper.cekAkses(getActivity(),lmenu,"cuti", cuti.class, "");
+                helper.cekAkses(getActivity(), lmenu, "cuti", cuti.class, "");
             }
         });
 
@@ -123,14 +128,14 @@ public class fragment_menu extends Fragment {
             public void onClick(View v) {
 //                Intent i = new Intent(getActivity(), dashboardIzin.class, ");
 //                startActivity(i);
-                  helper.cekAkses(getActivity(),lmenu,"izin", dashboardIzin.class, "");
+                helper.cekAkses(getActivity(), lmenu, "izin", dashboardIzin.class, "");
             }
         });
 
         bonus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"bonus", menu_bonus.class, "");
+                helper.cekAkses(getActivity(), lmenu, "bonus", menu_bonus.class, "");
 
             }
         });
@@ -138,7 +143,7 @@ public class fragment_menu extends Fragment {
         jadwalSales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.snackBar(lmenu,"menu ini belum tersedia....!!!");
+                helper.snackBar(lmenu, "menu ini belum tersedia....!!!");
 
             }
         });
@@ -146,7 +151,7 @@ public class fragment_menu extends Fragment {
         latihan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"latihan", menu_training.class, "");
+                helper.cekAkses(getActivity(), lmenu, "latihan", menu_training.class, "");
 
             }
         });
@@ -154,14 +159,22 @@ public class fragment_menu extends Fragment {
         projectManage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"projek_manage", list_formKunjungan.class, "");
+                helper.cekAkses(getActivity(), lmenu, "projek_manage", list_formKunjungan.class, "");
+            }
+        });
+
+        cvSecVerIzin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SecVerTest.class);
+                startActivity(intent);
             }
         });
 
         visitor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                helper.cekAkses(getActivity(),lmenu,"pengunjung", Visitor.class, "");
+                helper.cekAkses(getActivity(), lmenu, "pengunjung", Visitor.class, "");
 
             }
         });
@@ -169,25 +182,25 @@ public class fragment_menu extends Fragment {
         slipGaji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                helper.cekAkses(getActivity(),lmenu,"slip gaji", riwayatSlipGaji.class, "");
+                helper.cekAkses(getActivity(), lmenu, "slip gaji", riwayatSlipGaji.class, "");
 
             }
         });
 
-       // deleteTrsoal();
+        // deleteTrsoal();
         index = getArguments().getString("index_notif");
-        Log.d("CEWK_INDEX", "onCreateView: "+index);
+        Log.d("CEWK_INDEX", "onCreateView: " + index);
         cekNotigLatihan(index);
 
         return rootView;
-    };
+    }
 
-    private void cekNotigLatihan(String index){
-        if(index.equals("")||index.equals("0")){
+    private void cekNotigLatihan(String index) {
+        if (index.equals("") || index.equals("0")) {
             txnotif_latihan.setVisibility(View.GONE);
-        }else{
+        } else {
             txnotif_latihan.setVisibility(View.VISIBLE);
-            txnotif_latihan.setText(""+index);
+            txnotif_latihan.setText("" + index);
 
         }
     }
@@ -211,16 +224,16 @@ public class fragment_menu extends Fragment {
                                 if (hak_akses.equals("HEAD")) {
                                     cvApprove.setVisibility(View.VISIBLE);
                                     hak_akses = message.getString("hak_akses");
-                                } else if(hak_akses.equals("EXECUTIV")){
+                                } else if (hak_akses.equals("EXECUTIV")) {
                                     cvApprove.setVisibility(View.VISIBLE);
                                     hak_akses = message.getString("hak_akses");
-                                } else if(hak_akses.equals("DIRECTUR")){
+                                } else if (hak_akses.equals("DIRECTUR")) {
                                     cvApprove.setVisibility(View.VISIBLE);
                                     hak_akses = message.getString("hak_akses");
-                                } else if(hak_akses.equals("HRD")){
+                                } else if (hak_akses.equals("HRD")) {
                                     cvApprove.setVisibility(View.VISIBLE);
                                     hak_akses = message.getString("hak_akses");
-                                } else if(hak_akses.equals("HRD,EXECUTIV,DIRECTUR")){
+                                } else if (hak_akses.equals("HRD,EXECUTIV,DIRECTUR")) {
                                     cvApprove.setVisibility(View.VISIBLE);
                                     hak_akses = message.getString("hak_akses");
                                 }
@@ -242,7 +255,7 @@ public class fragment_menu extends Fragment {
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer "+token);
+                headers.put("Authorization", "Bearer " + token);
                 return headers;
             }
         };

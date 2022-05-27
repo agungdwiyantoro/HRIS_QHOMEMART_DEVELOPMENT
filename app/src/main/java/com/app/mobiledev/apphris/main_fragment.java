@@ -595,7 +595,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
                                     String npwp=data.getString("npwp");
                                     String tgl_masuk=data.getString("kytglmasuk");
                                     String kyemail=data.getString("kyemail");
-                                    String kyalamat_skrang=data.getString("kyalamat_skrang");
+                                    String kyalamat_skrang=data.getString("");
                                     String hashtag=data.getString("hashtag");
                                     String kyjenis=data.getString("kyjenis");
                                     String kytptlhr=data.getString("kytptlhr");

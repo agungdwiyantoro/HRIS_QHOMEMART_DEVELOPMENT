@@ -1,13 +1,11 @@
-package com.app.mobiledev.apphris.test.SecurityVerifikasi;
+package com.app.mobiledev.apphris.izin.securityVerifikasi;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
-
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.visitor.RiwayatVisit;
 
 public class SecurityVerifikasi extends AppCompatActivity {
 

@@ -1,9 +1,9 @@
-package com.app.mobiledev.apphris.test.SecurityVerifikasi;
+package com.app.mobiledev.apphris.izin.securityVerifikasi;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 

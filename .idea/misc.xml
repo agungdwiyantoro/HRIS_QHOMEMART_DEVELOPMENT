@@ -91,6 +91,7 @@
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_riwayat_izin_sakit_unapprove_head.xml" value="0.20208333333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_slip_gaji.xml" value="0.11820652173913043" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/layout/list_timeline_izin_status.xml" value="0.5" />
+        <entry key="app/src/main/res/drawable/bg_input.xml" value="0.1638888888888889" />
         <entry key="app/src/main/res/drawable/bg_round.xml" value="0.14444444444444443" />
         <entry key="app/src/main/res/drawable/bg_round_dropdown.xml" value="0.2898148148148148" />
         <entry key="app/src/main/res/drawable/bg_rounded_blue.xml" value="0.14444444444444443" />
@@ -126,17 +127,21 @@
         <entry key="app/src/main/res/layout/activity_bonus.xml" value="0.3074074074074074" />
         <entry key="app/src/main/res/layout/activity_calendar_test.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dashboard_izin.xml" value="0.26666666666666666" />
-        <entry key="app/src/main/res/layout/activity_detail_izin_cuti_approve.xml" value="0.33152173913043476" />
+        <entry key="app/src/main/res/layout/activity_detail_izin_cuti_approve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_izin_cuti_emp.xml" value="0.319047619047619" />
         <entry key="app/src/main/res/layout/activity_detail_izin_sakit_approve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_izin_sakit_approve_hrd.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_detail_sakit_emp.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_first_frag.xml" value="0.16844919786096257" />
         <entry key="app/src/main/res/layout/activity_form_izin_cuti.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_form_izin_sakit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_form_poject.xml" value="0.4036458333333333" />
-        <entry key="app/src/main/res/layout/activity_fragment_menu.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_fragment_activity.xml" value="1.8928571428571428" />
+        <entry key="app/src/main/res/layout/activity_fragment_menu.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_fragment_pinjaman.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_fragment_report.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/activity_fragment_riwayat_presensi.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_fragment_riwayat_presensi_new.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/layout/activity_jenis_verifikasi.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/activity_list_bonus_proyek.xml" value="0.3074074074074074" />
         <entry key="app/src/main/res/layout/activity_list_infinity_cuti_approve.xml" value="0.38958333333333334" />
@@ -154,9 +159,15 @@
         <entry key="app/src/main/res/layout/activity_report_absensi.xml" value="0.15" />
         <entry key="app/src/main/res/layout/activity_riwayat_verifikasi_security.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_scan_qr.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_sec_ver_list_mt.xml" value="0.26832641770401106" />
         <entry key="app/src/main/res/layout/activity_security_verifikasi.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_status_approve.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_tab1.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_tab2.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/activity_tab3.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/activity_tab4.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/activity_tab_layout.xml" value="0.3328125" />
         <entry key="app/src/main/res/layout/activity_test_lib.xml" value="0.2712962962962963" />
         <entry key="app/src/main/res/layout/activity_test_reduce_image.xml" value="0.3453125" />
         <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.3458333333333333" />
@@ -168,15 +179,18 @@
         <entry key="app/src/main/res/layout/dialog_reset_password.xml" value="0.33" />
         <entry key="app/src/main/res/layout/dialog_sukses.xml" value="0.262037037037037" />
         <entry key="app/src/main/res/layout/dialog_tolak_izin.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_tab_layout_test.xml" value="0.3328125" />
         <entry key="app/src/main/res/layout/item_loading_progress.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/layout.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/layout_back_page.xml" value="0.3458333333333333" />
         <entry key="app/src/main/res/layout/layout_empty_history.xml" value="0.21851851851851853" />
         <entry key="app/src/main/res/layout/layout_riwayat.xml" value="0.11585365853658537" />
+        <entry key="app/src/main/res/layout/layout_riwayat_new.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/list_memo.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/layout/list_riwayat_izin_cuti.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/list_riwayat_izin_sakit.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_riwayat_izin_sakit_approve_head.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/list_riwayat_security_mt.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/list_riwayat_ver_security.xml" value="0.33" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.3074074074074074" />
         <entry key="app/src/main/res/layout/toollbar.xml" value="0.3405128205128205" />

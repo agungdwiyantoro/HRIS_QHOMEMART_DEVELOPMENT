@@ -1,8 +1,8 @@
-package com.app.mobiledev.apphris.test.SecurityVerifikasi;
+package com.app.mobiledev.apphris.izin.securityVerifikasi;
 
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.app.mobiledev.apphris.R;

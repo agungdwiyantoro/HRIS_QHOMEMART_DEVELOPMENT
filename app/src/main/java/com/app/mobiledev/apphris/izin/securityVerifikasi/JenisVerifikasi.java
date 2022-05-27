@@ -1,12 +1,11 @@
-package com.app.mobiledev.apphris.test.SecurityVerifikasi;
+package com.app.mobiledev.apphris.izin.securityVerifikasi;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.app.mobiledev.apphris.R;
 

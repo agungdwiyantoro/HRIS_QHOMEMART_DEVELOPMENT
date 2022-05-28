@@ -110,8 +110,10 @@ public class api {
     public  static  final String URL_IzinCuti_approve=ip.getIp()+"approvecuti";
     public  static  final String URL_IzinSakit_approve_hrd=ip.getIp()+"approvehrd";
     public  static  final String URL_foto_izinsakit=ip.getURL()+"upload/karyawan/";
-
-
+    public  static  final String URL_IzinCuti_jenis=ip.getIp()+"jenis_cuti";
+    public  static  final String URL_IzinCuti_delegasi=ip.getIp()+"list_delegasi";
+    public  static  final String URL_IzinCuti_kuotaTahunanPeriode=ip.getIp()+"kuota_cuti?periode=";
+    public  static  final String URL_IzinCuti_hakCuti=ip.getIp()+"kuota_cuti";
 
     //Server api.qhome.id
     public static final String URL_API_QHOME_ID="http://api.qhome.id/hris/UnderMaintanceMobile";

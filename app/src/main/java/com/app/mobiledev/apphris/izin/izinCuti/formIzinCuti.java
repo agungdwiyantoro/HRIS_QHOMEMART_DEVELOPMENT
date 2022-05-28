@@ -27,6 +27,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.google.common.base.CharMatcher;
@@ -378,7 +379,7 @@ public class formIzinCuti extends AppCompatActivity {
     }
 
     private void getJenisCuti() {
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/jenis_cuti")
+        AndroidNetworking.get(api.URL_IzinCuti_jenis)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -440,7 +441,7 @@ public class formIzinCuti extends AppCompatActivity {
     }
 
     private void getDelegasi() {
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/list_delegasi")
+        AndroidNetworking.get(api.URL_IzinCuti_delegasi)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -475,7 +476,7 @@ public class formIzinCuti extends AppCompatActivity {
     }
 
     private void getKuotaCuti(int periode) {
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/kuota_cuti?periode="+periode)
+        AndroidNetworking.get(api.URL_IzinCuti_kuotaTahunanPeriode+periode)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -501,7 +502,8 @@ public class formIzinCuti extends AppCompatActivity {
     }
 
     private void getHakCuti() {
-        AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/kuota_cuti")
+        //AndroidNetworking.get("http://192.168.50.24/all/hris_ci_3/api/kuota_cuti")
+        AndroidNetworking.get(api.URL_IzinCuti_hakCuti)
                 .addHeaders("Authorization", "Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
@@ -655,7 +657,8 @@ public class formIzinCuti extends AppCompatActivity {
     private void insertCuti(String id_jenis, String select_cuti, String delegasi_to, String alasan, String periode) {
         Log.d("TAG_INPUT_CEK", "insertIzinCuti: "+ id_jenis + " | " + select_cuti + " | " + delegasi_to + " | " + alasan + " | " + periode);
         String extractNumber = CharMatcher.inRange('0', '9').retainFrom(id_jenis); // 123
-        AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izincuti")
+        //AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izincuti")
+        AndroidNetworking.upload(api.URL_IzinCuti)
                 .addHeaders("Authorization", "Bearer " + token)
                 //.addHeaders("Content-Type", "application/json")
                 //.addHeaders("Content-Type", "multipart/form-data")

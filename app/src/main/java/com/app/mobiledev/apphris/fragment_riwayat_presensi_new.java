@@ -27,7 +27,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
-import com.app.mobiledev.apphris.riwayat_absen.adapterRiwayatAbsen;
+import com.app.mobiledev.apphris.riwayat_absen.adapterRiwayatAbsenNew;
 import com.app.mobiledev.apphris.riwayat_absen.modelRiwayatAbsen;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
@@ -68,7 +68,7 @@ public class fragment_riwayat_presensi_new extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.activity_fragment_riwayat_presensi, container, false);
+        rootView = inflater.inflate(R.layout.activity_fragment_riwayat_presensi_new, container, false);
         btnCalender1 = rootView.findViewById(R.id.btnCalender1);
         btnCalender2 = rootView.findViewById(R.id.btnCalender2);
         tgl1 = rootView.findViewById(R.id.tgl1);
@@ -225,8 +225,8 @@ public class fragment_riwayat_presensi_new extends Fragment {
                                     model.setStatus(status);
                                     modelRiwayatAbsens.add(model);
                                 }
-                                adapterRiwayatAbsen mAdapter;
-                                mAdapter = new adapterRiwayatAbsen(modelRiwayatAbsens, getActivity());
+                                adapterRiwayatAbsenNew mAdapter;
+                                mAdapter = new adapterRiwayatAbsenNew(modelRiwayatAbsens, getActivity());
                                 mAdapter.notifyDataSetChanged();
                                 rcRiwayatAbsen.setLayoutManager(new LinearLayoutManager(getActivity()));
                                 rcRiwayatAbsen.setItemAnimator(new DefaultItemAnimator());

@@ -352,6 +352,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_round_dropdown"
+                    android:orientation="vertical"
+                    android:visibility="gone"
                     >
 
                     <Spinner
@@ -359,9 +361,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+                        android:visibility="gone"
                         />
 
                 </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilDelegasiAutoComp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/red_btn_bg_pressed_color"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/black"
+                        tools:ignore="LabelFor" />
+
+                </android.support.design.widget.TextInputLayout>
 
                 <TextView
                     android:layout_width="match_parent"

@@ -321,7 +321,7 @@ public class main_fragment extends AppCompatActivity implements  BottomNavigatio
             }
 
             else if (id == R.id.report) {
-                fragment = new fragment_riwayat_presensi();
+                fragment = new fragment_riwayat_presensi_new();
                 callFragment(fragment);
             }
 

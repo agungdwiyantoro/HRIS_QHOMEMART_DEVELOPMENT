@@ -50,7 +50,7 @@ import java.util.Map;
 public class DetailIzinSakitEmp extends AppCompatActivity {
 
     private List<modelIzinSakitNew> modelIzinSakitNews;
-    private TextView text_keterangan, text_status, text_alasan, text_status_hrd,
+    private TextView text_keterangan, text_status, text_alasan, text_status_hrd, tx_date,
             text_status_head, text_status_exec, text_status_dir, tx_nama, tx_indikasi_sakit,
             tx_catatan, tx_selengkapnya, text_head, text_exec, text_dir, text_hrd;
     private ImageView dot_head, dot_exec, dot_dir, dot_hrd, dot_result, img_status;
@@ -77,6 +77,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
         text_keterangan = findViewById(R.id.text_keterangan);
         text_status = findViewById(R.id.text_status);
         text_alasan = findViewById(R.id.text_alasan);
+        tx_date = findViewById(R.id.tx_date);
 
         text_status_hrd = findViewById(R.id.text_status_hrd);
         text_status_head = findViewById(R.id.text_status_head);
@@ -243,6 +244,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                 tx_nama.setText(data.getString("name"));
                 tx_indikasi_sakit.setText(data.getString("indikasi_sakit"));
                 tx_catatan.setText(data.getString("catatan"));
+                tx_date.setText(data.getString("select_date"));
 
                 status = data.getString("status");
                 data.getString("id");

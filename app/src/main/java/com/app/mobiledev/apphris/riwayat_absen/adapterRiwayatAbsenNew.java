@@ -30,7 +30,7 @@ public class adapterRiwayatAbsenNew extends RecyclerView.Adapter<adapterRiwayatA
     @Override
     public ReyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.layout_riwayat, null);
+        View view = inflater.inflate(R.layout.layout_riwayat_new, null);
         return new ReyclerViewHolder(view);
     }
 

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -48,7 +49,7 @@ public class formIzinCuti extends AppCompatActivity {
     private EditText etTglCuti, etKetCuti, etLamaCuti;
     private ImageView ivTgl, imStatus;
     private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp, tvSisaCuti, tvPeriode, tvHakCuti;
-    private TextInputLayout tilTglCuti, tilLamaCuti, tilKetCuti;
+    private TextInputLayout tilTglCuti, tilLamaCuti, tilKetCuti, tilDelegasiAutoComp;
     private Dialog dialogResign, dialogConfirm;
     private LinearLayout lin_transparant, llViewCalendar, llViewGetDates, linearLayout;
 
@@ -66,6 +67,8 @@ public class formIzinCuti extends AppCompatActivity {
     CalendarPickerView calendar;
 
     SessionManager session;
+
+    AutoCompleteTextView actv;
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -120,6 +123,7 @@ public class formIzinCuti extends AppCompatActivity {
         tilLamaCuti = findViewById(R.id.tilLamaCuti);
         tilKetCuti = findViewById(R.id.tilKetCuti);
         tilTglCuti = findViewById(R.id.tilTglCuti);
+        tilDelegasiAutoComp = findViewById(R.id.tilDelegasiAutoComp);
 
         lin_transparant = findViewById(R.id.lin_transparant);
 
@@ -363,6 +367,10 @@ public class formIzinCuti extends AppCompatActivity {
             }
         });
 
+        actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        actv.setThreshold(1);//will start working from first character
+        actv.setTextColor(Color.BLACK);
+
     }
 
     private void getAfterCheckDateSelected() {
@@ -462,6 +470,8 @@ public class formIzinCuti extends AppCompatActivity {
                                 }
                             }
                             spinDelegasi.setAdapter(new ArrayAdapter<String>(formIzinCuti.this, android.R.layout.simple_spinner_dropdown_item, delegasiList));
+                            actv.setAdapter(new ArrayAdapter<String>(formIzinCuti.this, android.R.layout.simple_spinner_dropdown_item, delegasiList));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d("JSONExceptionSeri", "onResponse: " + e);
@@ -537,7 +547,13 @@ public class formIzinCuti extends AppCompatActivity {
         if (tglCuti.isEmpty()) {
             tilTglCuti.setError("Tanggal Cuti masih kosong");
             tilTglCuti.requestFocus();
-        } else if (ketCuti.isEmpty()) {
+        } else if(actv.getText().toString().isEmpty()) {
+            tilDelegasiAutoComp.setError("Delegasi masih kosong");
+            tilDelegasiAutoComp.requestFocus();
+        } else if(actv.length() < 5 && !actv.getText().toString().contains(" ") ) {
+            tilDelegasiAutoComp.setError("Delegasi Tidak Valid");
+            tilDelegasiAutoComp.requestFocus();
+        }else if (ketCuti.isEmpty()) {
             tilKetCuti.setError("Keterangan Cuti masih kosong");
             tilKetCuti.requestFocus();
         } else {
@@ -576,7 +592,7 @@ public class formIzinCuti extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+spinJenisSelected.substring(0,2)+" | "+ tglCuti+" | "+lamaCuti+" | "+ spinDelegasiSelected +" | "+tvPeriode.getText().toString()+" | "+etKetCuti.getText().toString());
-                insertCuti(spinJenisSelected.substring(0,2),tglCuti,spinDelegasiSelected,etKetCuti.getText().toString(),tvPeriode.getText().toString());
+                insertCuti(spinJenisSelected.substring(0,2),tglCuti,actv.getText().toString(),etKetCuti.getText().toString(),tvPeriode.getText().toString());
 
             }
         });
@@ -662,6 +678,7 @@ public class formIzinCuti extends AppCompatActivity {
                 .addHeaders("Authorization", "Bearer " + token)
                 //.addHeaders("Content-Type", "application/json")
                 //.addHeaders("Content-Type", "multipart/form-data")
+                .addHeaders("MediaType","text/plain")
                 .addMultipartParameter("id_jenis", extractNumber/*"1"*/)
                 .addMultipartParameter("select_cuti", /*"2022-06-17, 2022-06-16"*/select_cuti)
                 .addMultipartParameter("delegasi_to", /*"ANWARUL MUSLIMIN"*/delegasi_to)

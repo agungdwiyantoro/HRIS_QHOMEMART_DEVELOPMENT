@@ -592,6 +592,31 @@
                     />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Tanggal Diajukan"
+                    android:textColor="@color/second_color_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tx_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="2022-05-22"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="20sp"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

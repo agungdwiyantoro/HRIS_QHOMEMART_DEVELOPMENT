@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.test.SecurityTest.dataIzinSec.mt;
+package com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt;
 
 import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
 
@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class SecVerListMt extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ListInfinityMt extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     Spinner dropdown;
     RecyclerView recyler_izin_sakit;
@@ -63,7 +63,7 @@ public class SecVerListMt extends android.support.v4.app.Fragment implements Swi
     private boolean isLoading = false;
     int itemCount = 0;
     LinearLayoutManager layoutManager;
-    com.app.mobiledev.apphris.test.SecurityTest.dataIzinSec.mt.adapterSecIzinMt adapterSecIzinMt;
+    com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt.adapterSecIzinMt adapterSecIzinMt;
     private ShimmerFrameLayout mShimmerViewContainer;
 
     MonthYearPickerDialogFragment dialogFragment;

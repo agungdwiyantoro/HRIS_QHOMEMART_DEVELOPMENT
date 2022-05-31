@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.izin.izinCuti.ListInfinityCutiEmp;
 import com.app.mobiledev.apphris.izin.izinCuti.formIzinCuti;
+import com.app.mobiledev.apphris.izin.izinDinasMT.IzinDinasMT;
 import com.app.mobiledev.apphris.izin.izinSakit.ListInfinitySakitEmp;
 import com.app.mobiledev.apphris.izin.izinSakit.formIzinSakit;
 
@@ -51,26 +52,26 @@ public class dashboardIzin extends AppCompatActivity {
 
         btn_izin_sakit=findViewById(R.id.btn_izin_sakit);
         btn_izin_meninggalkan_tugas=findViewById(R.id.btn_izin_meninggalkan_tugas);
-        btn_izin_dinas=findViewById(R.id.btn_izin_dinas);
+        //btn_izin_dinas=findViewById(R.id.btn_izin_dinas);
         btn_izin_cuti=findViewById(R.id.btn_izin_cuti);
 
         btn_tambah_izin_sakit=findViewById(R.id.btn_tambah_izin_sakit);
         btn_status_izin_sakit=findViewById(R.id.btn_status_izin_sakit);
-        btn_tambah_izin_meninggalkan_tugas=findViewById(R.id.btn_tambah_izin_meninggalkan_tugas);
-        btn_status_izin_meninggalkan_tugas=findViewById(R.id.btn_status_izin_meninggalkan_tugas);
-        btn_tambah_izin_dinas=findViewById(R.id.btn_tambah_izin_dinas);
-        btn_status_izin_dinas=findViewById(R.id.btn_status_izin_dinas);
+        //btn_tambah_izin_meninggalkan_tugas=findViewById(R.id.btn_tambah_izin_meninggalkan_tugas);
+        //btn_status_izin_meninggalkan_tugas=findViewById(R.id.btn_status_izin_meninggalkan_tugas);
+        //btn_tambah_izin_dinas=findViewById(R.id.btn_tambah_izin_dinas);
+        //btn_status_izin_dinas=findViewById(R.id.btn_status_izin_dinas);
         btn_tambah_izin_cuti=findViewById(R.id.btn_tambah_izin_cuti);
         btn_status_izin_cuti=findViewById(R.id.btn_status_izin_cuti);
         linear_izin_sakit=findViewById(R.id.linear_izin_sakit);
-        linear_izin_meninggalkan_tugas=findViewById(R.id.linear_izin_meninggalkan_tugas);
-        linear_izin_dinas=findViewById(R.id.linear_izin_dinas);
+        //linear_izin_meninggalkan_tugas=findViewById(R.id.linear_izin_meninggalkan_tugas);
+        //linear_izin_dinas=findViewById(R.id.linear_izin_dinas);
         linear_izin_cuti=findViewById(R.id.linear_izin_cuti);
 
         relativeMain=findViewById(R.id.relativeMain);
         linear_izin_sakit.setVisibility(View.GONE);
-        linear_izin_meninggalkan_tugas.setVisibility(View.GONE);
-        linear_izin_dinas.setVisibility(View.GONE);
+        //linear_izin_meninggalkan_tugas.setVisibility(View.GONE);
+        //linear_izin_dinas.setVisibility(View.GONE);
         linear_izin_cuti.setVisibility(View.GONE);
 
         btn_tambah_izin_cuti.setOnClickListener(new View.OnClickListener() {
@@ -128,20 +129,24 @@ public class dashboardIzin extends AppCompatActivity {
         btn_izin_meninggalkan_tugas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_izin_meninggalkan_tugas.setVisibility(View.GONE);
+
+                Intent i = new Intent(dashboardIzin.this, IzinDinasMT.class);
+                startActivity(i);
+
+                /*btn_izin_meninggalkan_tugas.setVisibility(View.GONE);
                 linear_izin_meninggalkan_tugas.setVisibility(View.VISIBLE);
-                izin_meninggalkan_tugas=true;
+                izin_meninggalkan_tugas=true;*/
             }
         });
 
-        btn_izin_dinas.setOnClickListener(new View.OnClickListener() {
+        /*btn_izin_dinas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 btn_izin_dinas.setVisibility(View.GONE);
                 linear_izin_dinas.setVisibility(View.VISIBLE);
                 izin_dinas=true;
             }
-        });
+        });*/
 
 
         btn_izin_cuti.setOnClickListener(new View.OnClickListener() {
@@ -165,17 +170,17 @@ public class dashboardIzin extends AppCompatActivity {
 
                 }
 
-                if(izin_meninggalkan_tugas=true){
+                /*if(izin_meninggalkan_tugas=true){
                     btn_izin_meninggalkan_tugas.setVisibility(View.VISIBLE);
                     linear_izin_meninggalkan_tugas.setVisibility(View.GONE);
 
-                }
+                }*/
 
-                if(izin_dinas=true){
+                /*if(izin_dinas=true){
                     btn_izin_dinas.setVisibility(View.VISIBLE);
                     linear_izin_dinas.setVisibility(View.GONE);
 
-                }
+                }*/
 
                 if(izin_cuti=true){
                     btn_izin_cuti.setVisibility(View.VISIBLE);

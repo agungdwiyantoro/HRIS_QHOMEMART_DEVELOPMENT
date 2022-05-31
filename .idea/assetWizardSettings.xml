@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/qr_code_2/baseline_qr_code_2_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/playlist_add/baseline_playlist_add_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -34,7 +34,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_baseline_qr_code_2_48" />
+                            <entry key="outputName" value="ic_baseline_playlist_add_24" />
                             <entry key="sourceFile" value="$USER_HOME$/Downloads/empty_history.svg" />
                           </map>
                         </option>

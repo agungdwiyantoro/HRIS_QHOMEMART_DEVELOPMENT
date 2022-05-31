@@ -9,12 +9,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +56,7 @@ public class profil extends AppCompatActivity {
     private  TextView txtSampleDesc;
     private ProgressDialog mProgressDialog;
     private TextInputLayout tlNama;
-    private CircleImageView foto_profil;
+    //private CircleImageView foto_profil;
     private Uri resultUri;
     private Bitmap image_bmap;
     int currentIndex = 0;
@@ -68,18 +70,25 @@ public class profil extends AppCompatActivity {
 
     TextInputLayout tilUbahPass;
 
+    private CardView cvUpdateDataDiri, cvPerjanjianKerja, cvUbahPassword;
+    private ImageView foto_profil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil);
+        setContentView(R.layout.activity_profil_new);
         mToolbar = findViewById(R.id.toolbar_abs);
         foto_profil=findViewById(R.id.foto_profil);
-        txNik = findViewById(R.id.txtNik);
+        //txNik = findViewById(R.id.txtNik);
         txNama = findViewById(R.id.txtNamaFull);
         txDivisi = findViewById(R.id.txtDivisi);
         txJabatan = findViewById(R.id.txtJabatan);
         txHastag = findViewById(R.id.txtHastag);
         txUpdate = findViewById(R.id.txtUpdateDataDiri);
+
+        cvUpdateDataDiri = findViewById(R.id.cvUpdateDataDiri);
+        cvUbahPassword = findViewById(R.id.cvUbahPassword);
+        cvPerjanjianKerja = findViewById(R.id.cvPerjanjianKerja);
 
         setSupportActionBar(mToolbar);
         mToolbar.setTitle("Profil");
@@ -89,8 +98,6 @@ public class profil extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Loading ...");
         AndroidNetworking.initialize(getApplicationContext());
-
-
 
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -113,7 +120,7 @@ public class profil extends AppCompatActivity {
 
         getInformasiKaryawan(kyano);
 
-        txNik.setText(nik);
+        //txNik.setText(nik);
         txNama.setText(namaLengkap);
         txDivisi.setText(cekStaff);
         txHastag.setText("#"+hastag);
@@ -158,8 +165,8 @@ public class profil extends AppCompatActivity {
             }
         });
 
-        tilUbahPass = findViewById(R.id.tilUbahPass);
-        tilUbahPass.setOnClickListener(new View.OnClickListener() {
+        //tilUbahPass = findViewById(R.id.tilUbahPass);
+        cvUbahPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(profil.this, UbahPass.class);
@@ -168,11 +175,20 @@ public class profil extends AppCompatActivity {
             }
         });
 
-        txUpdate.setOnClickListener(new View.OnClickListener() {
+        cvUpdateDataDiri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(profil.this, UpdateDataDiri.class);
                 startActivity(intent);
+            }
+        });
+
+        cvPerjanjianKerja.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intent = new Intent(profil.this, PerjanjianKerja.class);
+                startActivity(intent);*/
+                Toast.makeText(profil.this, "Coming Soon", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -201,7 +217,7 @@ public class profil extends AppCompatActivity {
                                 RequestOptions requestOptions = new RequestOptions()
                                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                                         .skipMemoryCache(true);
-                                Glide.with(profil.this).load(api.get_url_foto_profil(kyano,url_foto)).thumbnail(Glide.with(profil.this).load(R.drawable.loading)).apply(requestOptions).into(foto_profil);
+                                Glide.with(profil.this).load(api.get_url_foto_profil(kyano,url_foto)).apply(requestOptions).into(foto_profil);
                             } else {
                                 Log.d("", "onResponse: "+data);
                             }
@@ -253,7 +269,12 @@ public class profil extends AppCompatActivity {
                                     String jbano=data.getString("jbano");
                                     String dvano=data.getString("dvano");
 
-                                    txDivisi.setText(dvnama);
+                                    if (dvnama.equals("BUMI BERLIAN MEGA INDONESIA")) {
+                                        txDivisi.setText("BBMI");
+                                    } else {
+                                        txDivisi.setText(dvnama);
+                                    }
+
                                     txJabatan.setText(jbnama);
 
                                 }

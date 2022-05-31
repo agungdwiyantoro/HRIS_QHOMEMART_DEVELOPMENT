@@ -144,74 +144,13 @@
 
                 </android.support.design.card.MaterialCardView>
 
-                <LinearLayout
-                    android:id="@+id/linear_izin_meninggalkan_tugas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-                    <android.support.design.card.MaterialCardView
-                        android:layout_width="0dp"
-
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:backgroundTint="@color/white"
-                        android:elevation="10dp"
-                        app:cardCornerRadius="5dp">
-
-
-                        <TextView
-                            android:id="@+id/btn_tambah_izin_meninggalkan_tugas"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/purple"
-                            android:padding="15dp"
-                            android:text="@string/tambah"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="18dp" />
-
-                    </android.support.design.card.MaterialCardView>
-
-                    <android.support.design.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:backgroundTint="@color/white"
-                        android:elevation="10dp"
-                        app:cardCornerRadius="5dp">
-
-
-                        <TextView
-                            android:id="@+id/btn_status_izin_meninggalkan_tugas"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/greennew"
-                            android:padding="15dp"
-                            android:text="@string/status"
-                            android:textAlignment="center"
-                            android:textColor="@color/white"
-                            android:textSize="18dp" />
-
-                    </android.support.design.card.MaterialCardView>
-
-
-                </LinearLayout>
-
                 <android.support.design.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="30dp"
                     android:elevation="10dp"
                     app:cardCornerRadius="5dp">
 
@@ -223,14 +162,14 @@
                         android:background="@color/white"
 
                         android:padding="15dp"
-                        android:text="@string/izin_meninggalkan_tugas"
+                        android:text="Izin Dinas dan Tinggal Tugas"
                         android:textAlignment="center"
                         android:textColor="@color/main_color_black"
                         android:textSize="18dp" />
 
                 </android.support.design.card.MaterialCardView>
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:id="@+id/linear_izin_dinas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -317,7 +256,7 @@
                         android:textColor="@color/main_color_black"
                         android:textSize="18dp" />
 
-                </android.support.design.card.MaterialCardView>
+                </android.support.design.card.MaterialCardView>-->
 
                 <LinearLayout
                     android:id="@+id/linear_izin_cuti"

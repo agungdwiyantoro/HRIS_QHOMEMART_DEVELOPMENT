@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.test.SecurityTest.dataIzinSec.mt;
+package com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

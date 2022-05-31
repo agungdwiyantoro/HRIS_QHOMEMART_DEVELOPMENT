@@ -101,7 +101,7 @@
         app:fabSize="normal"
         app:borderWidth="0dp"
         android:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_baseline_qr_code_2_48"
+        android:src="@drawable/ic_baseline_playlist_add_24"
         app:maxImageSize="30dp"
         app:elevation="8dp"
         />

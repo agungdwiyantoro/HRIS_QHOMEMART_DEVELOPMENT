@@ -1,4 +1,4 @@
-package com.app.mobiledev.apphris.test.SecurityTest.dataIzinSec.dinas;
+package com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.dinas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

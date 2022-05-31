@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F2FFFFFF"
     android:orientation="vertical"
-    tools:context=".profil">
+    tools:context=".profile.profil">
 
     <LinearLayout
         android:id="@+id/lytoolbar"

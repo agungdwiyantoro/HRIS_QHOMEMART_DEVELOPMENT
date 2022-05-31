@@ -25,7 +25,7 @@ import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.izin.dashboardIzin;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.app.mobiledev.apphris.slipGaji.riwayatSlipGaji;
-import com.app.mobiledev.apphris.test.SecurityTest.SecVerTest;
+import com.app.mobiledev.apphris.izin.izinDinasMT.IzinDinasMT;
 import com.app.mobiledev.apphris.training.menu_training;
 import com.app.mobiledev.apphris.training.soal_training.ModelLatihan;
 import com.app.mobiledev.apphris.helperPackage.DataSoalSQLite;
@@ -166,7 +166,7 @@ public class fragment_menu extends Fragment {
         cvSecVerIzin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SecVerTest.class);
+                Intent intent = new Intent(getActivity(), IzinDinasMT.class);
                 startActivity(intent);
             }
         });

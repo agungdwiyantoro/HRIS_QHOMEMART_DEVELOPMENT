@@ -1,6 +1,7 @@
-package com.app.mobiledev.apphris.test.SecurityTest;
+package com.app.mobiledev.apphris.izin.izinDinasMT;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,16 +9,27 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.test.SecurityTest.dataIzinSec.dinas.Tab2;
-import com.app.mobiledev.apphris.test.SecurityTest.dataIzinSec.mt.SecVerListMt;
+import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.dinas.Tab2;
+import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt.ListInfinityMt;
 
-public class SecVerTest extends AppCompatActivity {
+public class IzinDinasMT extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +38,13 @@ public class SecVerTest extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -57,8 +76,8 @@ public class SecVerTest extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    SecVerListMt secVerListMt = new SecVerListMt();
-                    return secVerListMt;
+                    ListInfinityMt listInfinityMt = new ListInfinityMt();
+                    return listInfinityMt;
                 case 1:
                     Tab2 tab2 = new Tab2();
                     return tab2;

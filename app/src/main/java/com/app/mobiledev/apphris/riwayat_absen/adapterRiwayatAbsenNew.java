@@ -45,7 +45,9 @@ public class adapterRiwayatAbsenNew extends RecyclerView.Adapter<adapterRiwayatA
         holder.absLembur=Object.getMasuk_lembur();
         holder.tx_presensi.setText("Presensi "+Object.getFINGER());
 
-        if (Object.getStatus().equals("DOFF_MT")) { //tidak berangkat tanpa keterangan
+        if(Object.getStatus().equals("null")){
+
+        } else if (Object.getStatus().equals("DOFF_MT")) { //tidak berangkat tanpa keterangan
             holder.tvStatusPresensi.setText("DAY OFF");
         } else if (Object.getStatus().equals("DOFF_SAKIT")) { //sakit tanpa SKD
             holder.tvStatusPresensi.setText("DAY OFF");
@@ -99,7 +101,7 @@ public class adapterRiwayatAbsenNew extends RecyclerView.Adapter<adapterRiwayatA
             holder.abs_lembur.setText(""+holder.absLembur);
         }
 
-        if (holder.status.equals("status")) {
+        if (holder.status.equals("status") || holder.status.equals("null")) {
             holder.llRiwayatPresensi.setVisibility(View.VISIBLE);
             holder.llRiwayatPresensiStatus.setVisibility(View.GONE);
         } else {

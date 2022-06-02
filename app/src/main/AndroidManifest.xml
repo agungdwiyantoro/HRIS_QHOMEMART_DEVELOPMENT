@@ -40,7 +40,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
-            android:name=".profile.PerjanjianKerja"
+            android:name=".profile.PerjanjianKerja.PerjanjianKerja"
             android:exported="false" />
         <activity
             android:name=".izin.izinDinasMT.IzinDinasMT"

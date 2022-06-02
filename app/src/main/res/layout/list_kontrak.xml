@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        android:layout_margin="16dp"
+        >
+
+        <TextView
+            android:id="@+id/tvJudul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Perjanjian Kerja I"
+            android:layout_margin="16dp"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/ic_wave"
+            android:layout_gravity="bottom"
+            />
+
+        <TextView
+            android:id="@+id/tvTgl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 Mei 2020"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

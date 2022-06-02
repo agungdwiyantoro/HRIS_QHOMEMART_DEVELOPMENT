@@ -28,6 +28,7 @@ import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.main_fragment;
+import com.app.mobiledev.apphris.profile.PerjanjianKerja.PerjanjianKerja;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -186,9 +187,9 @@ public class profil extends AppCompatActivity {
         cvPerjanjianKerja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(profil.this, PerjanjianKerja.class);
-                startActivity(intent);*/
-                Toast.makeText(profil.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(profil.this, PerjanjianKerja.class);
+                startActivity(intent);
+                //Toast.makeText(profil.this, "Coming Soon", Toast.LENGTH_SHORT).show();
             }
         });
 

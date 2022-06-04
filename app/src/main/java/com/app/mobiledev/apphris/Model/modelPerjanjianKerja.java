@@ -1,31 +1,58 @@
 package com.app.mobiledev.apphris.Model;
 
 public class modelPerjanjianKerja {
-    private String phone;
-    private String email;
-    private String username;
+    private String mkstatuskerja;
+    private String file;
+    private String mkano;
+    private String mktglDari;
+    private String judulKontrak;
+    private String mktglSampai;
 
-    public String getPhone() {
-        return phone;
+    public void setMkstatuskerja(String mkstatuskerja){
+        this.mkstatuskerja = mkstatuskerja;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public String getMkstatuskerja(){
+        return mkstatuskerja;
     }
 
-    public String getEmail() {
-        return email;
+    public void setFile(String  file){
+        this.file = file;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String  getFile(){
+        return file;
     }
 
-    public String getUsername() {
-        return username;
+    public void setMkano(String mkano){
+        this.mkano = mkano;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getMkano(){
+        return mkano;
+    }
+
+    public void setMktglDari(String mktglDari){
+        this.mktglDari = mktglDari;
+    }
+
+    public String getMktglDari(){
+        return mktglDari;
+    }
+
+    public void setJudulKontrak(String  judulKontrak){
+        this.judulKontrak = judulKontrak;
+    }
+
+    public String  getJudulKontrak(){
+        return judulKontrak;
+    }
+
+    public void setMktglSampai(String mktglSampai){
+        this.mktglSampai = mktglSampai;
+    }
+
+    public String getMktglSampai(){
+        return mktglSampai;
     }
 }

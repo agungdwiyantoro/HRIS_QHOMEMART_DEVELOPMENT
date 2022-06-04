@@ -1,8 +1,12 @@
 package com.app.mobiledev.apphris.profile.PerjanjianKerja;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,7 @@ import android.widget.TextView;
 
 import com.app.mobiledev.apphris.Model.modelPerjanjianKerja;
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.memo.DetailMemo;
 
 import java.util.List;
 
@@ -35,8 +40,22 @@ public class adapterPerjanjianKerja extends RecyclerView.Adapter<adapterPerjanji
     @Override
     public void onBindViewHolder(@NonNull final HolderPK holderPK, int i) {
         modelPerjanjianKerja kerja = modelPerjanjianKerjas.get(i);
-        holderPK.tvEmail.setText("Perjanjian Kerja "+i);
-        holderPK.tvPhone.setText(kerja.getPhone());
+        holderPK.tvJudul.setText(kerja.getMkano());
+        holderPK.tvTglDari.setText(kerja.getMktglDari());
+
+        holderPK.cvListPK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DetPerjanjianKerja.class);
+                Bundle x = new Bundle();
+                x.putString("file", kerja.getFile());
+                intent.putExtras(x);
+                v.getContext().startActivity(intent);
+
+                Log.d("TAG_FILE_KONTRAK", "onClick: "+kerja.getFile());
+                //  helper2.showMsg(v.getContext(),"");
+            }
+        });
 
     }
 
@@ -47,13 +66,15 @@ public class adapterPerjanjianKerja extends RecyclerView.Adapter<adapterPerjanji
 
     public static class HolderPK extends RecyclerView.ViewHolder {
 
-        TextView tvUsername, tvEmail, tvPhone;
+        TextView tvJudul, tvTglDari;
+        CardView cvListPK;
 
         public HolderPK(View view) {
             super(view);
 
-            tvEmail = view.findViewById(R.id.tvJudul);
-            tvPhone = view.findViewById(R.id.tvTgl);
+            tvJudul = view.findViewById(R.id.tvJudul);
+            tvTglDari = view.findViewById(R.id.tvTglDari);
+            cvListPK = view.findViewById(R.id.cvListPK);
 
         }
     }

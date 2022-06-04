@@ -17,9 +17,11 @@ import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.Model.modelPerjanjianKerja;
 import com.app.mobiledev.apphris.R;
+import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.memo.ModelMemo;
 import com.app.mobiledev.apphris.memo.adapterMemoList;
 import com.app.mobiledev.apphris.memo.listMemo.memo_list;
+import com.app.mobiledev.apphris.sesion.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,11 +36,17 @@ public class PerjanjianKerja extends AppCompatActivity {
 
     private List<modelPerjanjianKerja> modelPerjanjianKerjaList;
     private RecyclerView rvKontrak;
+    private String token;
+    private SessionManager sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perjanjian_kerja);
+
+        sp = new SessionManager(this);
+        token = sp.getToken();
+        Log.d("TAG_GET_TOKEN_KONTRAK", "onCreate: "+token);
 
         toolbar = findViewById(R.id.toolbar_kontrak);
         toolbar.setTitle("Daftar Perjanjian Kerja");
@@ -54,24 +62,30 @@ public class PerjanjianKerja extends AppCompatActivity {
     }
 
     private void getListKontrak() {
-        AndroidNetworking.get("https://fakestoreapi.com/users")
+        //AndroidNetworking.get("https://fakestoreapi.com/users")
+        AndroidNetworking.get(api.URL_getListKontrak)
+                .addHeaders("Authorization","Bearer "+token)
                 .setPriority(Priority.HIGH)
                 .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
+                .getAsJSONObject(new JSONObjectRequestListener() {
+
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         try {
 
-                            //JSONArray jsonArray = response.getJSONArray();
-                            Log.d("TAG_RESULT", "onResponse: "+response.toString());
+                            JSONArray jsonArray = response.getJSONArray("message");
+                            Log.d("TAG_RESULT", "onResponse: "+jsonArray.toString());
 
                             for (int i = 0; i < response.length(); i++) {
-                                JSONObject data = response.getJSONObject(i);
+                                JSONObject data = jsonArray.getJSONObject(i);
 
                                 modelPerjanjianKerja model = new modelPerjanjianKerja();
-                                model.setUsername(data.getString("username"));
-                                model.setEmail(data.getString("email"));
-                                model.setPhone(data.getString("phone"));
+                                model.setMkano(data.getString("mkano"));
+                                model.setJudulKontrak(data.getString("judul_kontrak"));
+                                model.setMkstatuskerja(data.getString("mkstatuskerja"));
+                                model.setMktglDari(data.getString("mktgl_dari"));
+                                model.setMktglSampai(data.getString("mktgl_sampai"));
+                                //model.setFile(data.getString("file"));
 
                                 modelPerjanjianKerjaList.add(model);
                             }

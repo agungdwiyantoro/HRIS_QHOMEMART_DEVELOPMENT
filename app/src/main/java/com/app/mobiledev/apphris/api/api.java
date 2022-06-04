@@ -99,6 +99,7 @@ public class api {
     public static  final String URL_getSlipGaji=ip.getIp()+"getSlipGaji";
     public static  final String URL_saveTokenFcm=ip.getIp()+"saveTokenFcm";
     public static  final String URL_updateTokenFCM=ip.getIp()+"updateTokenFCM";
+    public static  final String URL_getListKontrak=ip.getIp()+"kontrak_user";
 
     //data ip aws
     public  static  final String URL_uploadIzinSakit=ip.getIp()+"uploadimage";
@@ -110,6 +111,7 @@ public class api {
     public  static  final String URL_IzinCuti_approve=ip.getIp()+"approvecuti";
     public  static  final String URL_IzinSakit_approve_hrd=ip.getIp()+"approvehrd";
     public  static  final String URL_foto_izinsakit=ip.getURL()+"upload/karyawan/";
+    public  static  final String URL_pdf_kontrak=ip.getURL()+"upload/karyawan/";
     public  static  final String URL_IzinCuti_jenis=ip.getIp()+"jenis_cuti";
     public  static  final String URL_IzinCuti_delegasi=ip.getIp()+"list_delegasi";
     public  static  final String URL_IzinCuti_kuotaTahunanPeriode=ip.getIp()+"kuota_cuti?periode=";

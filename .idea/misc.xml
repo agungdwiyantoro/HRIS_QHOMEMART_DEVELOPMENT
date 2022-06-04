@@ -128,10 +128,13 @@
         <entry key="app/src/main/res/layout/activity_bonus.xml" value="0.3074074074074074" />
         <entry key="app/src/main/res/layout/activity_calendar_test.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dashboard_izin.xml" value="0.22846441947565543" />
+        <entry key="app/src/main/res/layout/activity_det_perjanjian_kerja.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/activity_detail_izin_cuti_approve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_izin_cuti_emp.xml" value="0.319047619047619" />
         <entry key="app/src/main/res/layout/activity_detail_izin_sakit_approve.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_izin_sakit_approve_hrd.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_detail_lampiran_memo.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_detail_memo.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_detail_sakit_emp.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/activity_first_frag.xml" value="0.16844919786096257" />
         <entry key="app/src/main/res/layout/activity_form_izin_cuti.xml" value="0.25" />
@@ -191,7 +194,7 @@
         <entry key="app/src/main/res/layout/layout_empty_history.xml" value="0.21851851851851853" />
         <entry key="app/src/main/res/layout/layout_riwayat.xml" value="0.11585365853658537" />
         <entry key="app/src/main/res/layout/layout_riwayat_new.xml" value="0.346875" />
-        <entry key="app/src/main/res/layout/list_kontrak.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_kontrak.xml" value="0.2" />
         <entry key="app/src/main/res/layout/list_memo.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/layout/list_riwayat_izin_cuti.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/list_riwayat_izin_sakit.xml" value="0.33" />
@@ -199,7 +202,7 @@
         <entry key="app/src/main/res/layout/list_riwayat_security_mt.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout/list_riwayat_ver_security.xml" value="0.33" />
         <entry key="app/src/main/res/layout/list_view_items.xml" value="0.35833333333333334" />
-        <entry key="app/src/main/res/layout/toolbar.xml" value="0.3074074074074074" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.18" />
         <entry key="app/src/main/res/layout/toollbar.xml" value="0.3405128205128205" />
       </map>
     </option>

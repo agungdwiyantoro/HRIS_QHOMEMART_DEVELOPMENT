@@ -70,25 +70,35 @@ public class DetPerjanjianKerja extends AppCompatActivity {
             }
         });
 
-        //http://hris.qhomedata.id/upload/karyawan/0718210504120192/lampiran/kontrak/20220604-KONTRAK-001_HR-PKWT_QSA_IV_2022-0718210504120192.pdf
-        String link = api.URL_pdf_kontrak+kyano+"/lampiran/kontrak/";
-        new PDFHelper(this, filename, link, new Callable() {
-            @Override
-            public Void call() {
-                showPDF();
-                return null;
-            }
-        }, new Callable<Void>() {
-            @Override
-            public Void call() {
-                showError();
-                //mprogressdialog.dismiss();
-                return null;
-            }
-        });
+        if (filename.isEmpty() || filename.equals("null")) {
+            mProgressDialog.dismiss();
+            Toast.makeText(this, "Dokumen Perjanjian Kerja masih kosong", Toast.LENGTH_LONG).show();
+        } else {
+            //http://hris.qhomedata.id/upload/karyawan/0718210504120192/lampiran/kontrak/20220604-KONTRAK-001_HR-PKWT_QSA_IV_2022-0718210504120192.pdf
+            String link = api.URL_pdf_kontrak+kyano+"/lampiran/kontrak/";
+            new PDFHelper(this, filename, link, new Callable() {
+                @Override
+                public Void call() {
+                    showPDF();
+                    return null;
+                }
+            }, new Callable<Void>() {
+                @Override
+                public Void call() {
+                    showError();
+                    //mprogressdialog.dismiss();
+                    return null;
+                }
+            });
+        }
 
         fabDownload.setOnClickListener(v -> {
-            downloadKontrak(fileHal, filename);
+
+            if (filename.isEmpty() || filename.equals("null")) {
+                Toast.makeText(this, "Dokumen Perjanjian Kerja masih kosong", Toast.LENGTH_LONG).show();
+            } else {
+                downloadKontrak(fileHal, filename);
+            }
 
         });
 

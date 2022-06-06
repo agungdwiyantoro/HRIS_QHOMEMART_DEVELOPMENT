@@ -120,7 +120,7 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
         daySelected = calendar.get(Calendar.DAY_OF_MONTH);
 
         calendar.clear();
-        calendar.set(yearSelected, monthSelected-1, 1); // Set minimum date to show in dialog
+        calendar.set(yearSelected, monthSelected-6, 1); // Set minimum date to show in dialog
         minDate = calendar.getTimeInMillis(); // Get milliseconds of the modified date
 
         calendar.clear();

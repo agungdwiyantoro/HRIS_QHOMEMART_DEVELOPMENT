@@ -37,6 +37,7 @@ import java.io.File;
 import java.util.concurrent.Callable;
 
 public class DetailLampiranMemo extends AppCompatActivity {
+
     private PDFView pdf_view;
     private String fileName = "", fileHal = "";
     private Toolbar mToolbar;
@@ -68,7 +69,7 @@ public class DetailLampiranMemo extends AppCompatActivity {
                 finish();
             }
         });
-        new PDFHelper(this, fileName, new Callable() {
+        new PDFHelper(this, fileName, api.URL_Link_lampiran_memo, new Callable() {
             @Override
             public Void call() {
 

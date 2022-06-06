@@ -31,12 +31,12 @@ public class PDFHelper {
     //Retrofit service
     private PDFServices pdfServices;
 
-    public PDFHelper(Context ctx, String fileName, Callable downloaded, Callable error) {
+    public PDFHelper(Context ctx, String fileName, String endpoint, Callable downloaded, Callable error) {
         this.ctx = ctx;
         this.fileName = fileName;
         this.downloaded = downloaded;
         this.error = error;
-        pdfServices = RetrofitSettings.createRetrofitService(PDFServices.class, api.URL_Link_lampiran_memo);
+        pdfServices = RetrofitSettings.createRetrofitService(PDFServices.class, endpoint/*api.URL_Link_lampiran_memo*/);
         getPDF();
     }
 

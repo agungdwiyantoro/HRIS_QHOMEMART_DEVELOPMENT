@@ -18,9 +18,6 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.Model.modelPerjanjianKerja;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.memo.ModelMemo;
-import com.app.mobiledev.apphris.memo.adapterMemoList;
-import com.app.mobiledev.apphris.memo.listMemo.memo_list;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
 import org.json.JSONArray;
@@ -85,7 +82,9 @@ public class PerjanjianKerja extends AppCompatActivity {
                                 model.setMkstatuskerja(data.getString("mkstatuskerja"));
                                 model.setMktglDari(data.getString("mktgl_dari"));
                                 model.setMktglSampai(data.getString("mktgl_sampai"));
-                                //model.setFile(data.getString("file"));
+                                model.setFile(data.getString("file"));
+
+
 
                                 modelPerjanjianKerjaList.add(model);
                             }

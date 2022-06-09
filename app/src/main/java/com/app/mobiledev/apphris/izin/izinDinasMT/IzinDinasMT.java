@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.dinas.Tab2;
-import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt.ListInfinityMt;
+import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt.ListInfinityMtEmp;
 
 public class IzinDinasMT extends AppCompatActivity {
 
@@ -76,8 +76,8 @@ public class IzinDinasMT extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    ListInfinityMt listInfinityMt = new ListInfinityMt();
-                    return listInfinityMt;
+                    ListInfinityMtEmp listInfinityMtEmp = new ListInfinityMtEmp();
+                    return listInfinityMtEmp;
                 case 1:
                     Tab2 tab2 = new Tab2();
                     return tab2;

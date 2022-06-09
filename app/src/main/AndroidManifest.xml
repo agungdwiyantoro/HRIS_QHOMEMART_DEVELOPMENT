@@ -40,6 +40,12 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
         <activity
+            android:name=".izin.izinDinasMT.dataIzinDMT.mt.DetailIzinMtEmp"
+            android:exported="false" />
+        <activity
+            android:name=".izin.izinDinasMT.dataIzinDMT.mt.formIzinMt"
+            android:exported="false" />
+        <activity
             android:name=".profile.PerjanjianKerja.DetPerjanjianKerja"
             android:exported="false" />
         <activity
@@ -128,24 +134,6 @@
             </intent-filter>
             -->
         </activity>
-        <activity
-            android:name=".izin.securityVerifikasi.ScanQR"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".izin.securityVerifikasi.JenisVerifikasi"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".test.CalendarTest"
-            android:exported="true" />
-        <activity
-            android:name=".izin.securityVerifikasi.RiwayatVerifikasiSecurity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".izin.securityVerifikasi.SecurityVerifikasi"
-            android:exported="true" />
         <activity
             android:name=".approve.approveSakitNew.DetailIzinSakitApprove"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

@@ -37,7 +37,7 @@ public class api {
     public static final String URL_getRiwayatAbsen= ip.getIp() + "getRiwayatAbsen3/";
     public static final String URL_get_url_version= ip.getIp() + "get_url_version/";
     public static final String URL_get_cekWaktu= ip.getIp() + "cekWaktu/";
-    public static final String URL_insertIzinMt= ip.getIp() + "insertIzinMt/";
+    public static final String URL_IzinMt= ip.getIp() + "izinmt/";
     public static final String URL_uploadIzin= ip.getIp() + "uploadIzin/";
     public static final String URL_getIzin= ip.getIp() + "getIzin/";
     public static final String URL_getBonus= ip.getIp() + "getBonus/";
@@ -105,6 +105,7 @@ public class api {
     public  static  final String URL_uploadIzinSakit=ip.getIp()+"uploadimage";
     public  static  final String URL_IzinSakit=ip.getIp()+"izinsakit";
     public  static  final String URL_IzinCuti=ip.getIp()+"izincuti";
+    public  static  final String URL_IzinDinasMT=ip.getIp()+"izinmt";
     public  static  final String URL_Akses=ip.getIp()+"akses";
     //public  static  final String URL_IzinSakit_approve_head=ip.getIp()+"approvehead";
     public  static  final String URL_IzinSakit_approve=ip.getIp()+"approvesakit";

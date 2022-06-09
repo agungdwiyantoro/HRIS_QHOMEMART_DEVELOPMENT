@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.app.mobiledev.apphris.Model.modelIzinSecVer;
+import com.app.mobiledev.apphris.Model.modelIzinMtNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.helperPackage.BaseViewHolder;
 import com.app.mobiledev.apphris.izin.izinSakit.DetailIzinSakitEmp;
@@ -28,17 +28,17 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-public class adapterSecIzinMt extends RecyclerView.Adapter<BaseViewHolder> {
+public class adapterIzinMtEmp extends RecyclerView.Adapter<BaseViewHolder> {
     private static final int VIEW_TYPE_LOADING = 0;
     private static final int VIEW_TYPE_NORMAL = 1;
     private Context mCtx;
     private boolean isLoaderVisible = false;
 
-    private final List<modelIzinSecVer> modelIzinSecVers;
+    private final List<modelIzinMtNew> modelIzinMtNews;
 
-    public adapterSecIzinMt(Context mCtx, List<modelIzinSecVer> modelIzinSecVers) {
+    public adapterIzinMtEmp(Context mCtx, List<modelIzinMtNew> modelIzinMtNews) {
         this.mCtx = mCtx;
-        this.modelIzinSecVers = modelIzinSecVers;
+        this.modelIzinMtNews = modelIzinMtNews;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -47,10 +47,10 @@ public class adapterSecIzinMt extends RecyclerView.Adapter<BaseViewHolder> {
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_NORMAL:
-                return new adapterSecIzinMt.ViewHolder(
+                return new adapterIzinMtEmp.ViewHolder(
                         LayoutInflater.from(parent.getContext()).inflate(R.layout.list_riwayat_security_mt, parent, false));
             case VIEW_TYPE_LOADING:
-                return new adapterSecIzinMt.ProgressHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading_progress, parent, false));
+                return new adapterIzinMtEmp.ProgressHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading_progress, parent, false));
 
             default:
                 return null;
@@ -66,7 +66,7 @@ public class adapterSecIzinMt extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if (isLoaderVisible) {
-            return position == modelIzinSecVers.size() ? VIEW_TYPE_LOADING : VIEW_TYPE_NORMAL;
+            return position == modelIzinMtNews.size() ? VIEW_TYPE_LOADING : VIEW_TYPE_NORMAL;
         } else {
             return VIEW_TYPE_NORMAL;
         }
@@ -74,23 +74,23 @@ public class adapterSecIzinMt extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemCount() {
-        return modelIzinSecVers == null ? 0 : modelIzinSecVers.size();
+        return modelIzinMtNews == null ? 0 : modelIzinMtNews.size();
     }
 
-    public void addItems(List<modelIzinSecVer> modelIzinsakit) {
-        modelIzinSecVers.addAll(modelIzinsakit);
-        Log.d("add_items_all", "addItems: "+modelIzinSecVers.size());
+    public void addItems(List<modelIzinMtNew> modelIzinsakit) {
+        modelIzinMtNews.addAll(modelIzinsakit);
+        Log.d("add_items_all", "addItems: "+modelIzinMtNews.size());
         notifyDataSetChanged();
     }
 
     public void removeLoading() {
         try{
             isLoaderVisible = false;
-            int position = modelIzinSecVers.size();
+            int position = modelIzinMtNews.size();
             Log.d("ADAPTER_POSITION_IZIN", "removeLoading: "+position);
-            modelIzinSecVer item = getItem(position);
+            modelIzinMtNew item = getItem(position);
             if (item != null) {
-                modelIzinSecVers.remove(position);
+                modelIzinMtNews.remove(position);
                 notifyItemRemoved(position);
             }
 
@@ -101,12 +101,12 @@ public class adapterSecIzinMt extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public void clear() {
-        modelIzinSecVers.clear();
+        modelIzinMtNews.clear();
         notifyDataSetChanged();
     }
 
-    modelIzinSecVer getItem(int position) {
-        return modelIzinSecVers.get(position);
+    modelIzinMtNew getItem(int position) {
+        return modelIzinMtNews.get(position);
     }
 
     public class ViewHolder extends BaseViewHolder {
@@ -145,17 +145,17 @@ public class adapterSecIzinMt extends RecyclerView.Adapter<BaseViewHolder> {
         @RequiresApi(api = Build.VERSION_CODES.N)
         public void onBind(int position) {
             super.onBind(position);
-            modelIzinSecVer Object = modelIzinSecVers.get(position);
+            modelIzinMtNew Object = modelIzinMtNews.get(position);
 
-            tvNamaEmp.setText("" + Object.getIndikasiSakit());
+            tvNamaEmp.setText("" + Object.getName());
             tvDivisiEmp.setVisibility(View.GONE);
             tvKetEmp.setText("" + Object.getCatatan());
 
-            if (Object.getStatus().equals("ON PROGRESS")) {
+            if (Object.getStatusApprove().equals("ON PROGRESS")) {
                 tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.second_color_black));
                 ivStatus.setImageResource(R.drawable.ic_circle_grey_48);
                 tvStatusIzin.setText("Menunggu");
-            } else if (Object.getStatus().equals("SELESAI")) {
+            } else if (Object.getStatusApprove().equals("SELESAI")) {
                 tvStatusIzin.setTextColor(ContextCompat.getColor(mCtx, R.color.greennew));
                 ivStatus.setImageResource(R.drawable.ic_circle_green_48);
                 tvStatusIzin.setText("Diterima");
@@ -166,7 +166,7 @@ public class adapterSecIzinMt extends RecyclerView.Adapter<BaseViewHolder> {
             }
 
             try {
-                dateSource = dateFormatSources.parse(Object.getMulaiSakitTanggal());
+                dateSource = dateFormatSources.parse(Object.getTgl());
                 tx_tanggal.setText(dateFormat_day.format(dateSource));
                 tx_bulan_tahun.setText(dateFormat_month_year.format(dateSource));
             } catch (ParseException e) {
@@ -178,9 +178,9 @@ public class adapterSecIzinMt extends RecyclerView.Adapter<BaseViewHolder> {
             card_list_riwayat_izin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(mCtx, DetailIzinSakitEmp.class);
+                    Intent i = new Intent(mCtx, DetailIzinMtEmp.class);
                     Bundle x = new Bundle();
-                    x.putString("id", Object.getId());
+                    x.putString("jtano", Object.getTjano());
                     i.putExtras(x);
                     mCtx.startActivity(i);
 

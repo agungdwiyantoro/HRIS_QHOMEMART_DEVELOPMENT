@@ -2,9 +2,11 @@ package com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt;
 
 import static com.app.mobiledev.apphris.helperPackage.PaginationListener.PAGE_START;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.app.mobiledev.apphris.Model.modelIzinSecVer;
+import com.app.mobiledev.apphris.Model.modelIzinMtNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.PaginationListener;
@@ -44,11 +46,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class ListInfinityMt extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ListInfinityMtEmp extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     Spinner dropdown;
     RecyclerView recyler_izin_sakit;
-    private List<modelIzinSecVer> modelIzinSecVers;
+    private List<modelIzinMtNew> modelIzinMtNews;
     private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="null";
     private SessionManager msession;
     private LinearLayout lin_transparant;
@@ -63,17 +65,19 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
     private boolean isLoading = false;
     int itemCount = 0;
     LinearLayoutManager layoutManager;
-    com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt.adapterSecIzinMt adapterSecIzinMt;
+    adapterIzinMtEmp adapterIzinMtEmp;
     private ShimmerFrameLayout mShimmerViewContainer;
 
     MonthYearPickerDialogFragment dialogFragment;
     int yearSelected, monthSelected, daySelected;
     long minDate, maxDate;
 
+    FloatingActionButton fabAddMt;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_sec_ver_list_mt, container, false);
+        View rootView = inflater.inflate(R.layout.activity_list_mt_emp, container, false);
 
         inc_backPage = rootView.findViewById(R.id.inc_backPage);
 
@@ -99,9 +103,11 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
         lin_transparant = rootView.findViewById(R.id.lin_transparant);
         swipeRefresh = rootView.findViewById(R.id.swipeRefresh);
         tx_approve = rootView.findViewById(R.id.tx_approve);
+        fabAddMt = rootView.findViewById(R.id.fabAddMt);
+
         swipeRefresh.setOnRefreshListener(this);
         msession = new SessionManager(Objects.requireNonNull(getActivity()));
-        modelIzinSecVers = new ArrayList<>();
+        modelIzinMtNews = new ArrayList<>();
         token = msession.getToken();
         layoutManager = new LinearLayoutManager(Objects.requireNonNull(getActivity()));
         recyler_izin_sakit.setLayoutManager(layoutManager);
@@ -127,10 +133,18 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
         dialogFragment = MonthYearPickerDialogFragment
                 .getInstance(monthSelected, yearSelected, minDate, maxDate, "Tanggal Izin");
 
-        adapterSecIzinMt = new adapterSecIzinMt(Objects.requireNonNull(getActivity()), new ArrayList<>());
-        recyler_izin_sakit.setAdapter(adapterSecIzinMt);
+        adapterIzinMtEmp = new adapterIzinMtEmp(Objects.requireNonNull(getActivity()), new ArrayList<>());
+        recyler_izin_sakit.setAdapter(adapterIzinMtEmp);
         getMonth();
         paginationCall();
+
+        fabAddMt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), formIzinMt.class);
+                startActivity(intent);
+            }
+        });
 
         ivMonthFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,7 +267,7 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
     private void paginationCall() {
         emptyHistory.setVisibility(View.GONE);
 
-        final ArrayList<modelIzinSecVer> items = new ArrayList<>();
+        final ArrayList<modelIzinMtNew> items = new ArrayList<>();
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -270,7 +284,7 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
                 recyler_izin_sakit.setHasFixedSize(true);
 
                 //getRiwayatSakitAll(itemCount, offset, items);
-                getData(itemCount, offset, items);
+                getData(itemCount, offset, items, "MT");
             }
         }, 1500);
     }
@@ -282,25 +296,25 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
         itemCount = 0;
         currentPage = PAGE_START;
         isLastPage = false;
-        adapterSecIzinMt.clear();
+        adapterIzinMtEmp.clear();
         mShimmerViewContainer.startShimmerAnimation();
         mShimmerViewContainer.setVisibility(View.VISIBLE);
         recyler_izin_sakit.setVisibility(View.GONE);
-        recyler_izin_sakit.setAdapter(adapterSecIzinMt);
+        recyler_izin_sakit.setAdapter(adapterIzinMtEmp);
 
 
 
         paginationCall();
     }
 
-    private void getData(int page, int offset, ArrayList items) {
-
-
-
-        JsonObjectRequest req = new JsonObjectRequest(api.URL_IzinSakit+"?offset=" + offset
-                +"&first_date="+ dateMonthDate
+    private void getData(int page, int offset, ArrayList items, String jenis) {
+        JsonObjectRequest req = new JsonObjectRequest(api.URL_IzinMt+"?jenis="+jenis
+        //JsonObjectRequest req = new JsonObjectRequest("http://192.168.50.24/all/hris_ci_3/api/izinmt"+"?jenis="+jenis
+                +"&status="+spinResult
+                +"&offset=" + offset
                 +"&limit=" + page
-                + "&status="+spinResult, null,
+                +"&first_date="+ dateMonthDate,
+                null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -309,7 +323,6 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
                             String message = response.getString("message");
                             Log.d("TAG_TAG_STATUS", "run: " + status);
                             Log.d("TAG_TAG_MESSAGE", "run: " + message);
-
                             switch (status) {
                                 case "200":
                                     JSONArray jsonArray = response.getJSONArray("message");
@@ -317,19 +330,22 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
 
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject data = jsonArray.getJSONObject(i);
-                                        modelIzinSecVer model = new modelIzinSecVer();
+                                        modelIzinMtNew model = new modelIzinMtNew();
+
+                                        model.setTjano(data.getString("tjano"));
 
                                         model.setName(data.getString("name"));
-
-                                        model.setId(data.getString("id"));
                                         model.setKyano(data.getString("kyano"));
-                                        model.setIndikasiSakit(data.getString("indikasi_sakit"));
-                                        model.setMulaiSakitTanggal(data.getString("mulai_sakit_tanggal"));
-                                        model.setSelesaiSakitTanggal(data.getString("selesai_sakit_tanggal"));
-                                        model.setSelectDate(data.getString("select_date"));
-                                        model.setJmlIzin(data.getString("jml_izin"));
+                                        model.setDvano(data.getString("dvano"));
+                                        model.setJbano(data.getString("jbano"));
+                                        model.setTgl(data.getString("tgl"));
+                                        model.setJam(data.getString("jam"));
+                                        model.setSampai(data.getString("sampai"));
+                                        model.setKepentingan(data.getString("kepentingan"));
                                         model.setCatatan(data.getString("catatan"));
-                                        model.setLampiranFile(data.getString("lampiran_file"));
+
+                                        model.setImage(data.getString("image"));
+
                                         model.setCreatedAt(data.getString("created_at"));
                                         model.setUpdatedAt(data.getString("updated_at"));
                                         model.setApproveHead(data.getString("approve_head"));
@@ -343,18 +359,20 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
                                         model.setHrdApproveDate(data.getString("hrd_approve_date"));
                                         model.setExecutivApproveDate(data.getString("executiv_approve_date"));
                                         model.setDirecturApproveDate(data.getString("directur_approve_date"));
-                                        model.setComment(data.getString("comment"));
                                         model.setHeadName(data.getString("head_name"));
                                         model.setHrdName(data.getString("hrd_name"));
                                         model.setExecutiv(data.getString("executiv"));
                                         model.setDir(data.getString("dir"));
+
+                                        model.setComment(data.getString("comment"));
                                         model.setStatus(data.getString("status"));
+                                        model.setStatusApprove(data.getString("status_approve"));
 
                                         items.add(model);
                                         //modelIzinSakits.add(model);
-                                        //modelIzinSecVers.add(model);
+                                        //modelIzinMtNews.add(model);
 
-                                        Log.d("TAG_INDIKASI", "onResponse: " + data.getString("indikasi_sakit"));
+                                        Log.d("TAG_INDIKASI", "onResponse: " + data.getString("tjano"));
                                         emptyHistory.setVisibility(View.GONE);
                                     }
 
@@ -373,13 +391,13 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
                             }
 
                             if (currentPage != PAGE_START)
-                                adapterSecIzinMt.removeLoading();
-                            adapterSecIzinMt.addItems(items);
+                                adapterIzinMtEmp.removeLoading();
+                            adapterIzinMtEmp.addItems(items);
                             swipeRefresh.setRefreshing(false);
                             Log.d("CUURENT_PAGE", "onResponse: " + items.size());
 
                             if (currentPage < totalPage) {
-                                //adapterSecIzinMt.addLoading();
+                                //adapterIzinMtEmp.addLoading();
                             } else {
                                 isLastPage = true;
                             }
@@ -416,7 +434,7 @@ public class ListInfinityMt extends android.support.v4.app.Fragment implements S
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjA2NTIyMDA1MTMwNTEyOTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImt5YmFnaWFuIjoiQkcwNDYiLCJqYWJhdGFuIjoibnVsbCIsImlhdCI6MTY1MzYzNTAzMywiZXhwIjoxNjUzNjUzMDMzfQ.bHik5pw7mXSZfECVifGJ4oUYAj0rrZT9Woefl1QIyzU"/*+token*/);
+                headers.put("Authorization", "Bearer "+token);
                 return headers;
             }
         };

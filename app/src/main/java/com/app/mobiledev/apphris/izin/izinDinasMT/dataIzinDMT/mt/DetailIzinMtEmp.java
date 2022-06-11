@@ -166,7 +166,7 @@ public class DetailIzinMtEmp extends AppCompatActivity {
                 .skipMemoryCache(true);
         Glide.with(DetailIzinMtEmp.this)
                 //.load("https://hris.qhomedata.id/upload/karyawan/1234567890123456/lampiran/surat_mt_dinas/20220609140520-surat-1234567890123456.jpg")
-                .load(api.URL_foto_izinsakit+kyano+"/lampiran/surat_mt_dinas/"+lampiran_file)
+                .load(api.URL_foto_izinLampiran+kyano+"/lampiran/surat_mt_dinas/"+lampiran_file)
                 .thumbnail(Glide.with(DetailIzinMtEmp.this)
                         .load(R.drawable.loading))
                 .apply(requestOptions)
@@ -184,7 +184,7 @@ public class DetailIzinMtEmp extends AppCompatActivity {
     private void downloadIzin(String fileName) {
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
         //Uri uri = Uri.parse("https://hris.qhomedata.id/upload/karyawan/1234567890123456/lampiran/surat_mt_dinas/20220609140520-surat-1234567890123456.jpg");
-        Uri uri = Uri.parse(api.URL_foto_izinsakit+kyano+"/lampiran/surat_mt_dinas/"+fileName);
+        Uri uri = Uri.parse(api.URL_foto_izinLampiran+kyano+"/lampiran/surat_mt_dinas/"+fileName);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName + ".png");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

@@ -3,8 +3,15 @@ package com.app.mobiledev.apphris.approve.approveCutiNew;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,8 +30,12 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.approve.approveSakitNew.DetailIzinSakitApprove;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.sesion.SessionManager;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import org.json.JSONArray;
@@ -39,7 +50,7 @@ public class DetailIzinCutiApprove extends AppCompatActivity {
 
     private String ctano, access, name, jenis_cuti, kyano,
             mulai_cuti_tanggal, selesai_cuti_tanggal,
-            status, token, comment,
+            lampiran_file, status, token, comment,
             catatan, created_at, updated_at, select_date;
     private String
             head_kyano, head_name, approve_head, head_approve_date,
@@ -146,6 +157,13 @@ public class DetailIzinCutiApprove extends AppCompatActivity {
                 finish();
             }
         });
+
+        tx_link_lihat_dokumen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogFoto();
+            }
+        });
     }
 
     private void getDetailCutiApprove(String _id) {
@@ -204,6 +222,8 @@ public class DetailIzinCutiApprove extends AppCompatActivity {
                                 hrd_name = data.getString("hrd_name");
                                 approve_hrd = data.getString("approve_hrd");
                                 hrd_approve_date = data.getString("hrd_approve_date");
+
+                                lampiran_file = data.getString("ctgambar");
 
                                 switch (status) {
                                     case "TOLAK":
@@ -647,6 +667,75 @@ public class DetailIzinCutiApprove extends AppCompatActivity {
                         Log.d("ERROR_DET_SAKIT_APRVE", "onError: " + anError.getErrorDetail());
                     }
                 });
+    }
+
+    private void dialogFoto() {
+        dialogFoto = new Dialog(DetailIzinCutiApprove.this);
+        dialogFoto.setContentView(R.layout.dialog_foto_izin_sakit);
+        dialogFoto.setCancelable(true);
+        dialogFoto.setCanceledOnTouchOutside(true);
+        img_izin_cuti = dialogFoto.findViewById(R.id.img_izin_sakit);
+        fabDownloadIzin = dialogFoto.findViewById(R.id.fabDownloadIzin);
+        RequestOptions requestOptions = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true);
+        Glide.with(DetailIzinCutiApprove.this).load(api.URL_foto_izinLampiran + kyano + "/lampiran/cuti/" + lampiran_file).thumbnail(Glide.with(DetailIzinCutiApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_cuti);
+        fabDownloadIzin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadIzin(lampiran_file);
+            }
+        });
+        dialogFoto.show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
+    private void downloadIzin(String fileName) {
+        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(api.URL_foto_izinLampiran + kyano + "/lampiran/cuti/" + fileName);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName + ".png");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        Long reference = downloadManager.enqueue(request);
+        showProgressDownload(reference);
+    }
+
+    private void showProgressDownload(Long reference) {
+        final ProgressDialog progressBarDialog = new ProgressDialog(this);
+        progressBarDialog.setTitle("Mengunduh Memo");
+        progressBarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressBarDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, whichButton) -> {
+        });
+        progressBarDialog.setProgress(0);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean downloading = true;
+                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                while (downloading) {
+                    DownloadManager.Query q = new DownloadManager.Query();
+                    q.setFilterById(reference);
+                    Cursor cursor = manager.query(q);
+                    cursor.moveToFirst();
+                    int bytes_downloaded = cursor.getInt(cursor
+                            .getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
+                    int bytes_total = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
+                    if (cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) {
+                        downloading = false;
+                    }
+                    final int dl_progress = (int) ((bytes_downloaded * 100l) / bytes_total);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBarDialog.setProgress((int) dl_progress);
+                        }
+                    });
+                    cursor.close();
+                }
+
+            }
+        }).start();
+        progressBarDialog.show();
     }
 
 }

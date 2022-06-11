@@ -637,7 +637,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true);
-        Glide.with(DetailIzinSakitApprove.this).load(api.URL_foto_izinsakit + kyano + "/lampiran/surat_sakit/" + lampiran_file).thumbnail(Glide.with(DetailIzinSakitApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
+        Glide.with(DetailIzinSakitApprove.this).load(api.URL_foto_izinLampiran + kyano + "/lampiran/surat_sakit/" + lampiran_file).thumbnail(Glide.with(DetailIzinSakitApprove.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_sakit);
         fabDownloadIzin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -692,7 +692,7 @@ public class DetailIzinSakitApprove extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     private void downloadIzin(String fileName) {
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri uri = Uri.parse(api.URL_foto_izinsakit + kyano + "/lampiran/surat_sakit/" + fileName);
+        Uri uri = Uri.parse(api.URL_foto_izinLampiran + kyano + "/lampiran/surat_sakit/" + fileName);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName + ".png");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

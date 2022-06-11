@@ -617,6 +617,31 @@
                     />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Lampiran Cuti"
+                    android:textColor="@color/second_color_black"
+                    />
+
+                <TextView
+                    android:id="@+id/tx_link_lihat_dokumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lihat Dokumen"
+                    android:textColor="@color/main_blue_color"
+                    android:textSize="18dp"
+                    />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

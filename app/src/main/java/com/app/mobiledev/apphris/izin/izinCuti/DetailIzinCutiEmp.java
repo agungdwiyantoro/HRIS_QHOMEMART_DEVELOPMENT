@@ -1,5 +1,6 @@
 package com.app.mobiledev.apphris.izin.izinCuti;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
@@ -8,8 +9,10 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,6 +35,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.Model.modelIzinCutiNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.approve.approveCutiNew.DetailIzinCutiApprove;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -52,10 +56,10 @@ public class DetailIzinCutiEmp extends AppCompatActivity {
     private List<modelIzinCutiNew> modelIzinCutiNews;
     private TextView text_keterangan, text_status, text_alasan, tx_date, text_status_hrd,
             text_status_head, text_status_exec, text_status_dir, tx_nama, tx_jenis_cuti,
-            tx_keterangan, tx_selengkapnya, text_head, text_exec, text_dir, text_hrd;
+            tx_keterangan, tx_selengkapnya, text_head, text_exec, text_dir, text_hrd, tx_link_lihat_dokumen;
     private ImageView dot_head, dot_exec, dot_dir, dot_hrd, dot_result, img_status;
     private Bundle bundle;
-    private String kyano="",idDetailIzin = "", kodeStatus = "", status_approve = "",
+    private String kyano="",idDetailIzin = "", kodeStatus = "", status_approve = "", lampiran_file,
             token, nama = "", jabatan, hak_akses;
     private SessionManager msession;
     private LinearLayout lin_head, lin_exec, lin_dir, lin_hrd, lin_result;
@@ -129,6 +133,8 @@ public class DetailIzinCutiEmp extends AppCompatActivity {
         bundle = getIntent().getExtras();
         idDetailIzin = bundle.getString("ctano");
 
+        tx_link_lihat_dokumen = findViewById(R.id.tx_link_lihat_dokumen);
+
         getRiwayatStatusApprove(idDetailIzin);
         checkJabatan();
 
@@ -138,6 +144,13 @@ public class DetailIzinCutiEmp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        tx_link_lihat_dokumen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogFoto();
             }
         });
     }
@@ -221,6 +234,7 @@ public class DetailIzinCutiEmp extends AppCompatActivity {
                             Log.d("TAG_IMAGE", "loadDataFormAPI: "+data.getString("nmcuti"));
 
                             kyano = data.getString("kyano");
+                            lampiran_file = data.getString("ctgambar");
 
                             switch (status_approve) {
                                 case "ON PROGRESS":
@@ -402,6 +416,75 @@ public class DetailIzinCutiEmp extends AppCompatActivity {
         if (status.equals("200")) {
 
         }
+    }
+
+    private void dialogFoto() {
+        dialogFoto = new Dialog(DetailIzinCutiEmp.this);
+        dialogFoto.setContentView(R.layout.dialog_foto_izin_sakit);
+        dialogFoto.setCancelable(true);
+        dialogFoto.setCanceledOnTouchOutside(true);
+        img_izin_cuti = dialogFoto.findViewById(R.id.img_izin_sakit);
+        fabDownloadIzin = dialogFoto.findViewById(R.id.fabDownloadIzin);
+        RequestOptions requestOptions = new RequestOptions()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true);
+        Glide.with(DetailIzinCutiEmp.this).load(api.URL_foto_izinLampiran + kyano + "/lampiran/cuti/" + lampiran_file).thumbnail(Glide.with(DetailIzinCutiEmp.this).load(R.drawable.loading)).apply(requestOptions).into(img_izin_cuti);
+        fabDownloadIzin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                downloadIzin(lampiran_file);
+            }
+        });
+        dialogFoto.show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
+    private void downloadIzin(String fileName) {
+        downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(api.URL_foto_izinLampiran + kyano + "/lampiran/cuti/" + fileName);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName + ".png");
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        Long reference = downloadManager.enqueue(request);
+        showProgressDownload(reference);
+    }
+
+    private void showProgressDownload(Long reference) {
+        final ProgressDialog progressBarDialog = new ProgressDialog(this);
+        progressBarDialog.setTitle("Mengunduh Memo");
+        progressBarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressBarDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, whichButton) -> {
+        });
+        progressBarDialog.setProgress(0);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean downloading = true;
+                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                while (downloading) {
+                    DownloadManager.Query q = new DownloadManager.Query();
+                    q.setFilterById(reference);
+                    Cursor cursor = manager.query(q);
+                    cursor.moveToFirst();
+                    int bytes_downloaded = cursor.getInt(cursor
+                            .getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
+                    int bytes_total = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
+                    if (cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) {
+                        downloading = false;
+                    }
+                    final int dl_progress = (int) ((bytes_downloaded * 100l) / bytes_total);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBarDialog.setProgress((int) dl_progress);
+                        }
+                    });
+                    cursor.close();
+                }
+
+            }
+        }).start();
+        progressBarDialog.show();
     }
 
 }

@@ -449,7 +449,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true);
         Glide.with(DetailIzinSakitEmp.this)
-                .load(api.URL_foto_izinsakit+kyano+"/lampiran/surat_sakit/"+lampiran_file)
+                .load(api.URL_foto_izinLampiran+kyano+"/lampiran/surat_sakit/"+lampiran_file)
                 .thumbnail(Glide.with(DetailIzinSakitEmp.this)
                         .load(R.drawable.loading))
                 .apply(requestOptions)
@@ -466,7 +466,7 @@ public class DetailIzinSakitEmp extends AppCompatActivity {
 
     private void downloadIzin(String fileName) {
         downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri uri = Uri.parse(api.URL_foto_izinsakit+kyano+"/lampiran/surat_sakit/"+fileName);
+        Uri uri = Uri.parse(api.URL_foto_izinLampiran+kyano+"/lampiran/surat_sakit/"+fileName);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOCUMENTS, fileName + ".png");
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

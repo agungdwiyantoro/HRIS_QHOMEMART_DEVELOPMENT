@@ -1,11 +1,17 @@
 package com.app.mobiledev.apphris.izin.izinCuti;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -30,6 +36,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
+import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt.formIzinMt;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.google.common.base.CharMatcher;
 import com.squareup.timessquare.CalendarPickerView;
@@ -38,23 +45,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
+
+import id.zelory.compressor.Compressor;
 
 public class formIzinCuti extends AppCompatActivity {
 
     private SimpleDateFormat dateFormatter;
     private EditText etTglCuti, etKetCuti, etLamaCuti;
-    private ImageView ivTgl, imStatus;
+    private ImageView ivTgl, imStatus, image_surat_izin_cuti;
     private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp, tvSisaCuti, tvPeriode, tvHakCuti;
     private TextInputLayout tilTglCuti, tilLamaCuti, tilKetCuti, tilDelegasiAutoComp;
     private Dialog dialogResign, dialogConfirm;
-    private LinearLayout lin_transparant, llViewCalendar, llViewGetDates, linearLayout;
+    private LinearLayout lin_transparant, llViewCalendar, llViewGetDates, linearLayout, llUploadLamp;
 
     private Button btn_ajukan, btnDate, btnCancelDate, dialogBtnSubmit, dialogBtnCancel;
-    private String kyano, token, lamaCuti = "", ketCuti = "", tglCuti = "", kuotaCuti = "", hakCuti = "", namaEmp, divisiEmp, jabatanEmp, spinJenisSelected, spinDelegasiSelected, spinResultJenis, spinResultDelegasi, splitKuotaCuti;
+    private String kyano, token, lamaCuti = "", ketCuti = "", tglCuti = "", kuotaCuti = "", hakCuti = "", namaEmp, divisiEmp, jabatanEmp, spinJenisSelected, spinDelegasiSelected, spinResultJenis, spinResultDelegasi, splitKuotaCuti, lamp = "1";
     private Toast toast;
     Spinner spinJenis, spinDelegasi;
     Snackbar snackbar;
@@ -69,6 +80,9 @@ public class formIzinCuti extends AppCompatActivity {
     SessionManager session;
 
     AutoCompleteTextView actv;
+
+    private Uri resultUri;
+    private File chosedfile;
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -108,6 +122,10 @@ public class formIzinCuti extends AppCompatActivity {
         tvDivisiEmp.setText(divisiEmp);
         tvJabatanEmp.setText(jabatanEmp);
 
+        llUploadLamp = findViewById(R.id.llUploadLamp);
+        tx_image_name = findViewById(R.id.tx_image_name);
+        image_surat_izin_cuti = findViewById(R.id.image_surat_izin_cuti);
+
         /*
          * GET DATA SHAREPREF END
          * */
@@ -135,18 +153,6 @@ public class formIzinCuti extends AppCompatActivity {
         //get the spinner from the xml.
         spinJenis = findViewById(R.id.spinJenisCuti);
         spinDelegasi = findViewById(R.id.spinDelegasi);
-
-        String[] itemJenis = new String[]{"Cuti Tahunan", "Cuti Pernikahan", "Cuti Istri Melahirkan"};
-        String[] itemDelegasi = new String[]{"Mas'ud", "Anwar", "Septi"};
-
-        ArrayAdapter<String> adapterJenis = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, itemJenis);
-        adapterJenis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        ArrayAdapter<String> adapterDelegasi = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, itemDelegasi);
-        adapterDelegasi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        //spinJenis.setAdapter(adapterJenis);
-        //spinDelegasi.setAdapter(adapterDelegasi);
 
         /*
          * START OPEN MULTIPLE CALENDAR
@@ -307,6 +313,15 @@ public class formIzinCuti extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinJenisSelected = parent.getItemAtPosition(position).toString();
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
+
+                if (spinJenisSelected.contains("10")) {
+                    llUploadLamp.setVisibility(View.GONE);
+                    lamp = "0";
+                } else {
+                    llUploadLamp.setVisibility(View.VISIBLE);
+                    lamp = "1";
+                }
+
                 /*switch (spinJenisSelected) {
                     case "Menunggu":
                         spinResultJenis = "";
@@ -347,6 +362,16 @@ public class formIzinCuti extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        image_surat_izin_cuti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tx_image_name.setVisibility(View.GONE);
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -435,6 +460,7 @@ public class formIzinCuti extends AppCompatActivity {
                                 }
                             }
                             spinJenis.setAdapter(new ArrayAdapter<String>(formIzinCuti.this, android.R.layout.simple_spinner_dropdown_item, jenisList));
+                            spinJenis.setSelection(9);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d("JSONExceptionSeri", "onResponse: " + e);
@@ -538,6 +564,65 @@ public class formIzinCuti extends AppCompatActivity {
                 });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+                final Uri imageUri = data.getData();
+                chosedfile = new File(Objects.requireNonNull(getRealPathFormURI(imageUri, formIzinCuti.this)));
+                resultUri = imageUri;
+                image_surat_izin_cuti.setImageURI(resultUri);
+
+                long fileSizeInBytes = chosedfile.length();
+                long fileSizeInKB = fileSizeInBytes / 1024;
+                long fileSizeInMB = fileSizeInKB / 1024;
+
+                Log.d("TAG_IMG_SIZE", "onActivityResult: " + fileSizeInBytes + " | " + fileSizeInKB + " | " + fileSizeInMB);
+
+                if (chosedfile != null) {
+                    if (fileSizeInMB < 1) {
+                        Toast.makeText(formIzinCuti.this, "Ukuran foto adalah " + fileSizeInKB + " Kb", toast.LENGTH_SHORT).show();
+
+                        Log.d("TAG1", "onActivityResult: " + chosedfile.toString());
+                    } else {
+
+                        File compressedImageFile =
+                                new Compressor(this)
+                                        .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                                        .compressToFile(chosedfile);
+
+                        long fileSizeInBytesNew = compressedImageFile.length();
+                        long fileSizeInKBNew = fileSizeInBytesNew / 1024;
+
+                        Log.d("TAG2", "onActivityResult: Real: " + fileSizeInBytesNew + " | New: " + fileSizeInKBNew);
+
+                        Toast.makeText(formIzinCuti.this, "Sekarang ukuran foto adalah " + fileSizeInKBNew + " Kb", toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.d("TAKE_GALERI", "onActivityResult: " + e);
+        }
+
+
+    }
+
+    private String getRealPathFormURI(Uri contenturi, Activity context) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.managedQuery(contenturi, projection, null, null, null);
+        if (cursor == null)
+            return null;
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+        if (cursor.moveToFirst()) {
+            String s = cursor.getString(column_index);
+            return s;
+        }
+
+        return null;
+    }
+
     private void cekInputFormInsert() {
 
         tglCuti = etTglCuti.getText().toString();
@@ -556,6 +641,8 @@ public class formIzinCuti extends AppCompatActivity {
         }else if (ketCuti.isEmpty()) {
             tilKetCuti.setError("Keterangan Cuti masih kosong");
             tilKetCuti.requestFocus();
+        } else if (chosedfile == null && lamp.equals("0")) {
+            Toast.makeText(formIzinCuti.this, "Foto Lampiran masih kosong", toast.LENGTH_SHORT).show();
         } else {
             dialog_confirm();
         }
@@ -592,7 +679,7 @@ public class formIzinCuti extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+spinJenisSelected.substring(0,2)+" | "+ tglCuti+" | "+lamaCuti+" | "+ spinDelegasiSelected +" | "+tvPeriode.getText().toString()+" | "+etKetCuti.getText().toString());
-                insertCuti(spinJenisSelected.substring(0,2),tglCuti,actv.getText().toString(),etKetCuti.getText().toString(),tvPeriode.getText().toString());
+                insertCuti(spinJenisSelected.substring(0,2),tglCuti,actv.getText().toString(),etKetCuti.getText().toString(),tvPeriode.getText().toString(), chosedfile , lamp);
 
             }
         });
@@ -608,69 +695,7 @@ public class formIzinCuti extends AppCompatActivity {
         dialogConfirm.show();
     }
 
-    /*private void insertCuti(String id_jenis, String select_cuti, String delegasi_to, String alasan, String periode) {
-        Log.d("TAG_INPUT_CEK", "insertIzinSakit: "+ id_jenis + select_cuti + delegasi_to + alasan + periode);
-        AndroidNetworking.post("http://192.168.50.24/all/hris_ci_3/api/izinsakit")
-                .addHeaders("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJreWFubyI6IjA2NTIyMDA1MTMwNTEyOTYiLCJreXBhc3N3b3JkIjoiMTIzNDU2NyIsImt5amFiYXRhbiI6IkhSMTQ3Iiwia3lkaXZpc2kiOiJIUjAwNCIsImt5YmFnaWFuIjoiQkcwNDYiLCJqYWJhdGFuIjoibnVsbCIsImlhdCI6MTY1MjE0NzEwMywiZXhwIjoxNjUyMTY1MTAzfQ.DHPQJxio_iNxD3uOoIWXDR3z7l6-e87LSqzOSeUKu5s"+ token)
-                .addHeaders("Content-Type", "application/json")
-                .addQueryParameter("id_jenis", id_jenis)
-                .addQueryParameter("select_cuti", select_cuti)
-                .addQueryParameter("delegasi_to", delegasi_to)
-                .addQueryParameter("alasan", alasan)
-                .addQueryParameter("periode", periode)
-                .setPriority(Priority.HIGH)
-                .build()
-                .setUploadProgressListener(new UploadProgressListener() {
-                    @Override
-                    public void onProgress(long bytesUploaded, long totalBytes) {
-                        //Log.d("TAG_UPLOAD_PROGRESS", "onProgress: "+bytesUploaded);
-                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+totalBytes);
-                        lin_transparant.setVisibility(View.VISIBLE);
-                    }
-                })
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        lin_transparant.setVisibility(View.GONE);
-                        try {
-                            String status = response.getString("status");
-                            Log.d("RESULT_RESPONSE_INSERT", "onResponse: " + response);
-                            String message = response.getString("message");
-                            if (status.equals("200")) {
-                                dialogConfirm.dismiss();
-                                notifDialogSukses();
-                                message = response.getString("message");
-                                Toast.makeText(formIzinCuti.this, "" + message, toast.LENGTH_SHORT).show();
-                            } else if(status.equals("201")){
-                                dialogConfirm.dismiss();
-                                notifDialogSukses();
-                                message = response.getString("message");
-                                Toast.makeText(formIzinCuti.this, "" + message, toast.LENGTH_SHORT).show();
-                            } else {
-                                message = response.getString("message");
-                                Toast.makeText(formIzinCuti.this, "" + message, toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            lin_transparant.setVisibility(View.GONE);
-                            Log.d("JSON_insert", "onResponse: " + e);
-                        }
-                    }
-
-
-
-                    @Override
-                    public void onError(ANError anError) {
-                        lin_transparant.setVisibility(View.GONE);
-                        Log.d("ERROR_INSERT_CODE", "onError: " + anError.getErrorCode());
-                        Log.d("ERROR_INSERT_DETAIL", "onError: " + anError.getErrorDetail());
-                        Log.d("ERROR_INSERT_RESPONSE", "onError: " + anError.getResponse());
-                    }
-                });
-
-    }*/
-
-    private void insertCuti(String id_jenis, String select_cuti, String delegasi_to, String alasan, String periode) {
+    private void insertCuti(String id_jenis, String select_cuti, String delegasi_to, String alasan, String periode, File file, String option) {
         Log.d("TAG_INPUT_CEK", "insertIzinCuti: "+ id_jenis + " | " + select_cuti + " | " + delegasi_to + " | " + alasan + " | " + periode);
         String extractNumber = CharMatcher.inRange('0', '9').retainFrom(id_jenis); // 123
         //AndroidNetworking.upload("http://192.168.50.24/all/hris_ci_3/api/izincuti")
@@ -684,6 +709,8 @@ public class formIzinCuti extends AppCompatActivity {
                 .addMultipartParameter("delegasi_to", /*"ANWARUL MUSLIMIN"*/delegasi_to)
                 .addMultipartParameter("alasan", /*"test alasan"*/alasan)
                 .addMultipartParameter("periode", /*"2022"*/periode)
+                .addMultipartFile("lampiran_file", file)
+                .addMultipartParameter("option", option)
                 .setPriority(Priority.HIGH)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

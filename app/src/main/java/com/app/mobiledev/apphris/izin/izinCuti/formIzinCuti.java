@@ -641,7 +641,7 @@ public class formIzinCuti extends AppCompatActivity {
         }else if (ketCuti.isEmpty()) {
             tilKetCuti.setError("Keterangan Cuti masih kosong");
             tilKetCuti.requestFocus();
-        } else if (chosedfile == null && lamp.equals("0")) {
+        } else if (chosedfile == null && lamp.equals("1")) {
             Toast.makeText(formIzinCuti.this, "Foto Lampiran masih kosong", toast.LENGTH_SHORT).show();
         } else {
             dialog_confirm();
@@ -680,7 +680,8 @@ public class formIzinCuti extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+spinJenisSelected.substring(0,2)+" | "+ tglCuti+" | "+lamaCuti+" | "+ spinDelegasiSelected +" | "+tvPeriode.getText().toString()+" | "+etKetCuti.getText().toString());
                 insertCuti(spinJenisSelected.substring(0,2),tglCuti,actv.getText().toString(),etKetCuti.getText().toString(),tvPeriode.getText().toString(), chosedfile , lamp);
-
+                lin_transparant.setVisibility(View.VISIBLE);
+                dialogConfirm.dismiss();
             }
         });
 
@@ -722,7 +723,6 @@ public class formIzinCuti extends AppCompatActivity {
                             Log.d("RESULT_RESPONSE_INSERT", "onResponse: " + response.toString());
                             String message = response.getString("message");
                             if (status.equals("200")) {
-                                dialogConfirm.dismiss();
                                 notifDialogSukses();
                                 message = response.getString("message");
                                 Toast.makeText(formIzinCuti.this, "" + message, Toast.LENGTH_SHORT).show();

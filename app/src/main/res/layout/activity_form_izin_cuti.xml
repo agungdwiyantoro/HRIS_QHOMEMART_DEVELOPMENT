@@ -6,21 +6,6 @@
     android:background="@color/white"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/lin_transparant"
-        android:background="@color/transparentBlack"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
     <ImageView
         android:layout_marginTop="@dimen/padd_10"
         android:padding="15dp"
@@ -533,7 +518,22 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/lin_transparant"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparentBlack"
+        android:visibility="gone"
+        >
 
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
 
 
 

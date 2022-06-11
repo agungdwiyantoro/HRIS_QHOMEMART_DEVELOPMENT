@@ -344,7 +344,8 @@ public class formIzinMt extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: " + keperluanMt + " | " + catatan + " | " + dateSend + " | " + mulaiMt + " | " + selesaiMt + " | " + chosedfile + " | " + lamp);
                 insertIzinMt(keperluanMt, catatan, dateSend, mulaiMt, selesaiMt, chosedfile, lamp);
-
+                lin_transparant.setVisibility(View.VISIBLE);
+                dialogConfirm.dismiss();
             }
         });
 

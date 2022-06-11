@@ -413,7 +413,8 @@ public class formIzinSakit extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+indikasiSakit+" | "+ catatan +" | "+ nameImage +" | "+ mulaiSakit +" | "+ skd);
                 insertIzinSakit(indikasiSakit, catatan, mulaiSakit, chosedfile , skd);
-
+                lin_transparant.setVisibility(View.VISIBLE);
+                dialogConfirm.dismiss();
             }
         });
 

@@ -75,7 +75,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
 //set the spinners adapter to the previously created one.
         dropdown.setAdapter(adapter);
 
-        if (hak_akses.equals("HRD,EXECUTIV,DIRECTUR")) {
+        if (hak_akses.equals("EXECUTIV,DIRECTUR,HRD")) {
             llSpinner.setVisibility(View.VISIBLE);
         }
 
@@ -131,7 +131,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     void checkMenu(String menu){
-        if (hak_akses.equals("HRD,EXECUTIV,DIRECTUR")) {
+        if (hak_akses.equals("EXECUTIV,DIRECTUR,HRD")) {
             switch (spinResult) {
                 case "HRD":
                     checkJabatanHRDEXEC(spinResult, menu);
@@ -217,14 +217,14 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         intent.putExtra("kyJabatan", "HRD");
                                         startActivity(intent);
                                     }
-                                } else if(hak_akses.equals("HRD,EXECUTIV,DIRECTUR")){
+                                } else if(hak_akses.equals("EXECUTIV,DIRECTUR,HRD")){
                                     if (menu.equals("sakit")) {
                                         Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
-                                        intent.putExtra("kyJabatan", "HRD,EXECUTIV,DIRECTUR");
+                                        intent.putExtra("kyJabatan", "EXECUTIV,DIRECTUR,HRD");
                                         startActivity(intent);
                                     } else if (menu.equals("cuti")) {
                                         Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
-                                        intent.putExtra("kyJabatan", "HRD,EXECUTIV,DIRECTUR");
+                                        intent.putExtra("kyJabatan", "EXECUTIV,DIRECTUR,HRD");
                                         startActivity(intent);
                                     }
                                 }

@@ -376,14 +376,10 @@ public class ListInfinityMtEmp extends android.support.v4.app.Fragment implement
                                         emptyHistory.setVisibility(View.GONE);
                                     }
 
+                                    onRefresh();
+
                                     break;
-                                /*case "201":
-                                    emptyHistory.setVisibility(View.VISIBLE);
-                                    mShimmerViewContainer.setVisibility(View.GONE);
-                                    recyler_izin_sakit.setVisibility(View.GONE);
-                                    onRestart();
-                                    break;*/
-                                case "404":
+                                case "201":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
                                     recyler_izin_sakit.setVisibility(View.GONE);

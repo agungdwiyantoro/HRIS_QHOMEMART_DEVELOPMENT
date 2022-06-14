@@ -19,10 +19,11 @@
     <TextView
         android:id="@+id/tvMessage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:text="Riwayat Kosong"
         android:textSize="16dp"
         android:gravity="center"
+        android:maxLines="2"
         android:layout_marginTop="32dp"
         android:textColor="@color/black"
         />

@@ -48,7 +48,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
     Spinner dropdown;
     RecyclerView recyler_izin_sakit;
     private List<modelIzinSakitNew> modelIzinSakitNews;
-    private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="null";
+    private String token, dateMonthDate="", dateMonthString = "", spinSelected, spinResult="";
     private SessionManager msession;
     private LinearLayout lin_transparant;
     private SwipeRefreshLayout swipeRefresh;
@@ -370,13 +370,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                     }
 
                                     break;
-                                /*case "201":
-                                    emptyHistory.setVisibility(View.VISIBLE);
-                                    mShimmerViewContainer.setVisibility(View.GONE);
-                                    recyler_izin_sakit.setVisibility(View.GONE);
-                                    onRestart();
-                                    break;*/
-                                case "404":
+                                case "201":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
                                     recyler_izin_sakit.setVisibility(View.GONE);

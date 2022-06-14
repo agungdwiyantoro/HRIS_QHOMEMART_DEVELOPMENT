@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_list_riwayat_izinEmp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:layout_marginBottom="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    android:outlineSpotShadowColor="#8003A9F4"
+    >
+
+    <LinearLayout
+        android:id="@+id/line1Emp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            >
+
+            <!--<ImageView
+                android:id="@+id/imStatusEmp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="-10dp"
+                android:background="@drawable/ic_dot_point_red"
+                android:foregroundGravity="left" />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="5"
+                    >
+
+                    <ImageView
+                        android:id="@+id/ivStatusIzin"
+                        android:layout_width="18dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_circle_grey_48"
+                        android:layout_marginRight="4dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvStatusIzin"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Menunggu"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/quantum_grey500"
+                        android:gravity="center_vertical"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvNamaEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="fill"
+                    app:autoSizeTextType="uniform"
+                    android:textSize="18sp"
+                    android:autoSizeMaxTextSize="24sp"
+                    android:includeFontPadding="true"
+                    android:text="Nama Employee"
+                    android:textColor="@color/main_color_black"
+                    android:textStyle="bold"
+                    tools:ignore="NestedWeights" />
+
+                <TextView
+                    android:id="@+id/tvDivisiEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Divisi Employee"
+                    android:textColor="@color/main_color_black"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="18sp"
+                    android:autoSizeMaxTextSize="24sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tvKetEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginTop="8dp"
+                    android:text="terkadang pusing"
+                    android:textColor="@color/main_color_black"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="14sp"
+                    app:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="18sp"
+                    android:autoSizeMaxTextSize="24sp"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tx_tanggalEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="00"
+                    android:textAlignment="center"
+                    android:textColor="@color/main_color_black"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeMaxTextSize="100sp"/>
+
+                <TextView
+                    android:id="@+id/tx_bulan_tahunEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"
+                    android:text="Dec 2021"
+                    android:textAlignment="center"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeMaxTextSize="100sp"
+                    android:textColor="@color/main_color_black"
+                    android:textSize="9dp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.izin.izinCuti.ListInfinityCutiEmp;
@@ -35,7 +36,7 @@ public class dashboardIzin extends AppCompatActivity {
     LinearLayout linear_izin_meninggalkan_tugas;
     LinearLayout linear_izin_dinas;
     LinearLayout linear_izin_cuti;
-    RelativeLayout relativeMain;
+    LinearLayout llMain;
     Boolean izin_sakit=false;
     Boolean izin_meninggalkan_tugas=false;
     Boolean izin_dinas=false;
@@ -68,7 +69,7 @@ public class dashboardIzin extends AppCompatActivity {
         //linear_izin_dinas=findViewById(R.id.linear_izin_dinas);
         linear_izin_cuti=findViewById(R.id.linear_izin_cuti);
 
-        relativeMain=findViewById(R.id.relativeMain);
+        llMain=findViewById(R.id.llMain);
         linear_izin_sakit.setVisibility(View.GONE);
         //linear_izin_meninggalkan_tugas.setVisibility(View.GONE);
         //linear_izin_dinas.setVisibility(View.GONE);
@@ -130,12 +131,10 @@ public class dashboardIzin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(dashboardIzin.this, IzinDinasMT.class);
-                startActivity(i);
+                /*Intent i = new Intent(dashboardIzin.this, IzinDinasMT.class);
+                startActivity(i);*/
 
-                /*btn_izin_meninggalkan_tugas.setVisibility(View.GONE);
-                linear_izin_meninggalkan_tugas.setVisibility(View.VISIBLE);
-                izin_meninggalkan_tugas=true;*/
+                Toast.makeText(dashboardIzin.this, "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -161,7 +160,7 @@ public class dashboardIzin extends AppCompatActivity {
 
 
 
-        relativeMain.setOnClickListener(new View.OnClickListener() {
+        llMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(izin_sakit=true){

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -62,7 +63,19 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         cvSakitApprove = findViewById(R.id.cvSakitApprove);
         cvCutiApprove = findViewById(R.id.cvCutiApprove);
         cvDinasApprove = findViewById(R.id.cvDinasApprove);
+        cvDinasApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(menu_approve.this, "Masih dalam Pengembangan", Toast.LENGTH_SHORT).show();
+            }
+        });
         cvTinggalTugasApprove = findViewById(R.id.cvTinggalTugasApprove);
+        cvTinggalTugasApprove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(menu_approve.this, "Masih dalam Pengembangan", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //get the spinner from the xml.
         dropdown = findViewById(R.id.spinDDown);

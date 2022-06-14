@@ -147,6 +147,7 @@ public class ListInfinityCutiApprove extends AppCompatActivity implements SwipeR
         recyler_izin_cuti.setAdapter(adapterIzinCutiApprove);
         getMonth();
         paginationCall();
+        paginationCall();
 
         inc_backPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -295,9 +296,9 @@ public class ListInfinityCutiApprove extends AppCompatActivity implements SwipeR
 
                 int offset = 0;
                 if (itemCount > 10) {
-                    offset = (itemCount - totalPage);
+                    offset = (itemCount - totalPage)+1;
                 }
-                recyler_izin_cuti.setHasFixedSize(true);
+                //recyler_izin_cuti.setHasFixedSize(true);
 
                 //getRiwayatCutiAll(itemCount, offset, items);
                 getData(itemCount, offset, items);
@@ -402,15 +403,10 @@ public class ListInfinityCutiApprove extends AppCompatActivity implements SwipeR
 
                                     break;
                                 case "201":
-                                    /*emptyHistory.setVisibility(View.VISIBLE);
-                                    mShimmerViewContainer.setVisibility(View.GONE);
-                                    recyler_izin_cuti.setVisibility(View.GONE);*/
-
-                                    break;
-                                case "404":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
                                     recyler_izin_cuti.setVisibility(View.GONE);
+
                                     break;
                             }
 

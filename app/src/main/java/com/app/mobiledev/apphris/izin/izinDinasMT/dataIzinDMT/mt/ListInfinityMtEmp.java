@@ -137,6 +137,7 @@ public class ListInfinityMtEmp extends android.support.v4.app.Fragment implement
         recyler_izin_sakit.setAdapter(adapterIzinMtEmp);
         getMonth();
         paginationCall();
+        paginationCall();
 
         fabAddMt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -375,8 +376,6 @@ public class ListInfinityMtEmp extends android.support.v4.app.Fragment implement
                                         Log.d("TAG_INDIKASI", "onResponse: " + data.getString("tjano"));
                                         emptyHistory.setVisibility(View.GONE);
                                     }
-
-                                    onRefresh();
 
                                     break;
                                 case "201":

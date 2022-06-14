@@ -371,8 +371,6 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
                                         emptyHistory.setVisibility(View.GONE);
                                     }
 
-                                    onRefresh();
-
                                     break;
                                 case "201":
                                     emptyHistory.setVisibility(View.VISIBLE);
@@ -380,11 +378,7 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
                                     recyler_izin_cuti.setVisibility(View.GONE);
                                     //onRestart();
                                     break;
-                                case "404":
-                                    emptyHistory.setVisibility(View.VISIBLE);
-                                    mShimmerViewContainer.setVisibility(View.GONE);
-                                    recyler_izin_cuti.setVisibility(View.GONE);
-                                    break;
+
                             }
 
                             if (currentPage != PAGE_START)

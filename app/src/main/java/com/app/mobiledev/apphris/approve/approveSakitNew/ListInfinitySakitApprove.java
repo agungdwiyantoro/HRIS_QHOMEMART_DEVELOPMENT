@@ -152,6 +152,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
         recyler_izin_sakit.setAdapter(adapterIzinSakitApprove);
         getMonth();
         paginationCall();
+        paginationCall();
 
         inc_backPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -400,16 +401,16 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
 
                                     break;
                                 case "201":
-                                    /*emptyHistory.setVisibility(View.VISIBLE);
-                                    mShimmerViewContainer.setVisibility(View.GONE);
-                                    recyler_izin_sakit.setVisibility(View.GONE);*/
-
-                                    break;
-                                case "404":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
                                     recyler_izin_sakit.setVisibility(View.GONE);
+
                                     break;
+                                /*case "404":
+                                    emptyHistory.setVisibility(View.VISIBLE);
+                                    mShimmerViewContainer.setVisibility(View.GONE);
+                                    recyler_izin_sakit.setVisibility(View.GONE);
+                                    break;*/
                             }
 
                             if (currentPage != PAGE_START)

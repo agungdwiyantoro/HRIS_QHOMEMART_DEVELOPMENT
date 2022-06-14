@@ -136,6 +136,7 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
         recyler_izin_sakit.setAdapter(adapterIzinSakitEmp);
         getMonth();
         paginationCall();
+        paginationCall();
 
         inc_backPage.setOnClickListener(new View.OnClickListener() {
             @Override

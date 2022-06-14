@@ -73,7 +73,7 @@ public class PerjanjianKerja extends AppCompatActivity {
                             JSONArray jsonArray = response.getJSONArray("message");
                             Log.d("TAG_RESULT", "onResponse: "+jsonArray.toString());
 
-                            for (int i = 0; i < response.length(); i++) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject data = jsonArray.getJSONObject(i);
 
                                 modelPerjanjianKerja model = new modelPerjanjianKerja();

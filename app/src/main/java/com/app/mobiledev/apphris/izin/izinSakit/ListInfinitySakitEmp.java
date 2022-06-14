@@ -307,8 +307,6 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
 
     private void getData(int page, int offset, ArrayList items) {
 
-
-
         JsonObjectRequest req = new JsonObjectRequest(api.URL_IzinSakit+"?offset=" + offset
                 +"&first_date="+ dateMonthDate
                 +"&limit=" + page
@@ -371,11 +369,11 @@ public class ListInfinitySakitEmp extends AppCompatActivity implements SwipeRefr
                                     }
 
                                     break;
-                                case "201":
+                                /*case "201":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
                                     recyler_izin_sakit.setVisibility(View.GONE);
-                                    break;
+                                    break;*/
                             }
 
                             if (currentPage != PAGE_START)

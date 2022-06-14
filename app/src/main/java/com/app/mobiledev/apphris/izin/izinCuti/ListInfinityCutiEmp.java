@@ -372,12 +372,11 @@ public class ListInfinityCutiEmp extends AppCompatActivity implements SwipeRefre
                                     }
 
                                     break;
-                                case "201":
+                                /*case "201":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
                                     recyler_izin_cuti.setVisibility(View.GONE);
-                                    //onRestart();
-                                    break;
+                                    break;*/
 
                             }
 

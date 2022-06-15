@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -32,6 +33,7 @@ import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.approve.approveSakitNew.DetailIzinSakitApprove;
 import com.app.mobiledev.apphris.helperPackage.helper;
+import com.app.mobiledev.apphris.izin.izinSakit.DetailIzinSakitEmp;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -161,7 +163,11 @@ public class DetailIzinCutiApprove extends AppCompatActivity {
         tx_link_lihat_dokumen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogFoto();
+                if (lampiran_file.equals("null") || lampiran_file == null) {
+                    Toast.makeText(DetailIzinCutiApprove.this, "Foto cuti tidak ada", Toast.LENGTH_SHORT).show();
+                } else {
+                    dialogFoto();
+                }
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -22,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -54,7 +56,7 @@ public class formIzinMt extends AppCompatActivity {
     private SimpleDateFormat dateFormatter, dateFormatterView;
     private EditText edit_tgl_mt, edit_mulai, edit_selesai, edit_keperluan, edit_catatan;
     private ImageView image_surat_izin_mt, ivTgl, imStatus, ivClockM, ivClockS;
-    private TextView tx_image_name, txClose, tvNamaEmp, tvDivisiEmp, tvJabatanEmp;
+    private TextView tx_image_name, txClose, tvNamaEmp, tvDivisiEmp, tvJabatanEmp, tvOnProgress;
     private TextInputLayout tx_input_keperluan, tx_input_tgl_mt, tx_input_mulai_mt, tx_input_selesai_mt;
     private Dialog dialogResign, dialogConfirm;
     private LinearLayout lin_transparant, llUploadLamp;
@@ -71,6 +73,7 @@ public class formIzinMt extends AppCompatActivity {
     private Calendar calendar;
 
     private SessionManager session;
+    private ProgressBar pbUpload;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -126,6 +129,9 @@ public class formIzinMt extends AppCompatActivity {
 
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int min = calendar.get(Calendar.MINUTE);
+
+        pbUpload = findViewById(R.id.pbUpload);
+        tvOnProgress = findViewById(R.id.tvOnProgress);
 
         imStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -398,11 +404,24 @@ public class formIzinMt extends AppCompatActivity {
                 .setPriority(Priority.HIGH)
                 .build()
                 .setUploadProgressListener(new UploadProgressListener() {
+                    @SuppressLint("SetTextI18n")
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onProgress(long bytesUploaded, long totalBytes) {
                         //Log.d("TAG_UPLOAD_PROGRESS", "onProgress: "+bytesUploaded);
-                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: " + totalBytes);
-                        lin_transparant.setVisibility(View.VISIBLE);
+
+                        int up = Integer.parseInt(String.valueOf(bytesUploaded));
+                        int tot = Integer.parseInt(String.valueOf(totalBytes));
+                        int progress = 100 * up / tot;
+
+                        if (_file != null) {
+                            lin_transparant.setVisibility(View.VISIBLE);
+                            tvOnProgress.setText(progress+"%");
+                            pbUpload.setProgress(Integer.parseInt(String.valueOf(bytesUploaded)), true);
+                        } else {
+                            lin_transparant.setVisibility(View.VISIBLE);
+                        }
+                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+bytesUploaded+" Total : "+totalBytes);
                     }
                 })
                 .getAsJSONObject(new JSONObjectRequestListener() {

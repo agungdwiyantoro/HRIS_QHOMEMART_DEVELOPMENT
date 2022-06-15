@@ -1,5 +1,6 @@
 package com.app.mobiledev.apphris.izin.izinSakit;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -21,6 +22,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +55,7 @@ public class formIzinSakit extends AppCompatActivity {
     private SimpleDateFormat dateFormatter;
     private EditText edit_tgl_sakit, edit_tgl_selesai_sakit, edit_IndikasiPenyakit, edit_catatan;
     private ImageView image_surat_izin_sakit, ivTgl, imStatus;
-    private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp;
+    private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp, tvOnProgress;
     private TextInputLayout tx_input_indikasi, tx_input_tgl_sakit, tx_input_tgl_selesai_sakit;
     private Dialog dialogResign, dialogConfirm;
     private LinearLayout lin_transparant, llUploadSkd, llViewCalendar, llViewGetDates;
@@ -69,6 +71,8 @@ public class formIzinSakit extends AppCompatActivity {
     ArrayList<String> list = new ArrayList<String>();
 
     SessionManager session;
+
+    private ProgressBar pbUpload;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -107,6 +111,9 @@ public class formIzinSakit extends AppCompatActivity {
         tvNamaEmp.setText(namaEmp);
         tvDivisiEmp.setText(divisiEmp);
         tvJabatanEmp.setText(jabatanEmp);
+
+        pbUpload = findViewById(R.id.pbUpload);
+        tvOnProgress = findViewById(R.id.tvOnProgress);
 
         /*
          * START OPEN MULTIPLE CALENDAR
@@ -335,11 +342,24 @@ public class formIzinSakit extends AppCompatActivity {
                 .setPriority(Priority.HIGH)
                 .build()
                 .setUploadProgressListener(new UploadProgressListener() {
+                    @SuppressLint("SetTextI18n")
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onProgress(long bytesUploaded, long totalBytes) {
                         //Log.d("TAG_UPLOAD_PROGRESS", "onProgress: "+bytesUploaded);
-                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+totalBytes);
-                        lin_transparant.setVisibility(View.VISIBLE);
+
+                        int up = Integer.parseInt(String.valueOf(bytesUploaded));
+                        int tot = Integer.parseInt(String.valueOf(totalBytes));
+                        int progress = 100 * up / tot;
+
+                        if (file != null) {
+                            lin_transparant.setVisibility(View.VISIBLE);
+                            tvOnProgress.setText(progress+"%");
+                            pbUpload.setProgress(Integer.parseInt(String.valueOf(bytesUploaded)), true);
+                        } else {
+                            lin_transparant.setVisibility(View.VISIBLE);
+                        }
+                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+bytesUploaded+" Total : "+totalBytes);
                     }
                 })
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -377,6 +397,8 @@ public class formIzinSakit extends AppCompatActivity {
                         Log.d("ERROR_INSERT_CODE", "onError: " + anError.getErrorCode());
                         Log.d("ERROR_INSERT_DETAIL", "onError: " + anError.getErrorDetail());
                         Log.d("ERROR_INSERT_RESPONSE", "onError: " + anError.getResponse());
+
+                        Toast.makeText(formIzinSakit.this, "Error: "+anError.getErrorCode()+", "+anError.getErrorDetail(), Toast.LENGTH_SHORT).show();
                     }
                 });
 

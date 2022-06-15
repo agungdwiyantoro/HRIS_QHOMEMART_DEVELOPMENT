@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.UploadProgressListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
@@ -59,7 +61,7 @@ public class formIzinCuti extends AppCompatActivity {
     private SimpleDateFormat dateFormatter;
     private EditText etTglCuti, etKetCuti, etLamaCuti;
     private ImageView ivTgl, imStatus, image_surat_izin_cuti;
-    private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp, tvSisaCuti, tvPeriode, tvHakCuti;
+    private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp, tvSisaCuti, tvPeriode, tvHakCuti, tvOnProgress;
     private TextInputLayout tilTglCuti, tilLamaCuti, tilKetCuti, tilDelegasiAutoComp;
     private Dialog dialogResign, dialogConfirm;
     private LinearLayout lin_transparant, llViewCalendar, llViewGetDates, linearLayout, llUploadLamp;
@@ -83,6 +85,8 @@ public class formIzinCuti extends AppCompatActivity {
 
     private Uri resultUri;
     private File chosedfile;
+
+    private ProgressBar pbUpload;
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -153,6 +157,9 @@ public class formIzinCuti extends AppCompatActivity {
         //get the spinner from the xml.
         spinJenis = findViewById(R.id.spinJenisCuti);
         spinDelegasi = findViewById(R.id.spinDelegasi);
+
+        pbUpload = findViewById(R.id.pbUpload);
+        tvOnProgress = findViewById(R.id.tvOnProgress);
 
         /*
          * START OPEN MULTIPLE CALENDAR
@@ -714,6 +721,27 @@ public class formIzinCuti extends AppCompatActivity {
                 .addMultipartParameter("option", option)
                 .setPriority(Priority.HIGH)
                 .build()
+                .setUploadProgressListener(new UploadProgressListener() {
+                    @SuppressLint("SetTextI18n")
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onProgress(long bytesUploaded, long totalBytes) {
+                        //Log.d("TAG_UPLOAD_PROGRESS", "onProgress: "+bytesUploaded);
+
+                        int up = Integer.parseInt(String.valueOf(bytesUploaded));
+                        int tot = Integer.parseInt(String.valueOf(totalBytes));
+                        int progress = 100 * up / tot;
+
+                        if (file != null) {
+                            lin_transparant.setVisibility(View.VISIBLE);
+                            tvOnProgress.setText(progress+"%");
+                            pbUpload.setProgress(Integer.parseInt(String.valueOf(bytesUploaded)), true);
+                        } else {
+                            lin_transparant.setVisibility(View.VISIBLE);
+                        }
+                        Log.d("TAG_UPLOAD_TOTAL", "onProgress: "+bytesUploaded+" Total : "+totalBytes);
+                    }
+                })
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {

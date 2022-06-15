@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -33,7 +34,9 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.Model.modelIzinMtNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.izin.izinCuti.DetailIzinCutiEmp;
 import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt.DetailIzinMtEmp;
+import com.app.mobiledev.apphris.izin.izinSakit.DetailIzinSakitEmp;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -148,7 +151,11 @@ public class DetailIzinMtEmp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //URL_foto_izinsakit
-                dialogFotoIzinSakit();
+                if (lampiran_file.equals("null") || lampiran_file == null) {
+                    Toast.makeText(DetailIzinMtEmp.this, "Foto izin tidak ada", Toast.LENGTH_SHORT).show();
+                } else {
+                    dialogFotoIzinSakit();
+                }
             }
         });
 

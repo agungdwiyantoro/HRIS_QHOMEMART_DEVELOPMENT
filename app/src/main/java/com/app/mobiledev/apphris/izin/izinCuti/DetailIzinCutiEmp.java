@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -36,6 +37,7 @@ import com.app.mobiledev.apphris.Model.modelIzinCutiNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.approve.approveCutiNew.DetailIzinCutiApprove;
+import com.app.mobiledev.apphris.izin.izinSakit.DetailIzinSakitEmp;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -150,7 +152,11 @@ public class DetailIzinCutiEmp extends AppCompatActivity {
         tx_link_lihat_dokumen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogFoto();
+                if (lampiran_file.equals("null") || lampiran_file == null) {
+                    Toast.makeText(DetailIzinCutiEmp.this, "Foto cuti tidak ada", Toast.LENGTH_SHORT).show();
+                } else {
+                    dialogFoto();
+                }
             }
         });
     }
@@ -231,7 +237,7 @@ public class DetailIzinCutiEmp extends AppCompatActivity {
 
                             status_approve = data.getString("status_approve");
 
-                            Log.d("TAG_IMAGE", "loadDataFormAPI: "+data.getString("nmcuti"));
+                            Log.d("TAG_IMAGE", "loadDataFormAPI: "+data.getString("ctgambar"));
 
                             kyano = data.getString("kyano");
                             lampiran_file = data.getString("ctgambar");

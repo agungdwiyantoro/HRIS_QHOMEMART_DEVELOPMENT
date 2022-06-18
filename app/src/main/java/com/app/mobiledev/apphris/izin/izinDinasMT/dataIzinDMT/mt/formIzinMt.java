@@ -66,7 +66,7 @@ public class formIzinMt extends AppCompatActivity {
     private File chosedfile;
     private Bitmap image_bmap;
     private Button btn_ajukan, dialogBtnSubmit, dialogBtnCancel, btnTimeM, btnTimeS;
-    private String kyano, token, nameImage = "", keperluanMt = "", tglMt = "", mulaiMt = "", selesaiMt = "", catatan = "", lamp = "0", namaEmp, divisiEmp, jabatanEmp, dateSend, format;
+    private String kyano, token, nameImage = "", keperluanMt = "", tglMt = "", mulaiMt = "", selesaiMt = "", catatan = "", lamp = "0", namaEmp, divisiEmp, jabatanEmp, dateSend, format, add0HourM, add0MinM, add0HourS, add0MinS;
     private Toast toast;
 
     private TimePicker timePicker;
@@ -217,14 +217,38 @@ public class formIzinMt extends AppCompatActivity {
         int hour = timePicker.getCurrentHour();
         int min = timePicker.getCurrentMinute();
 
-        edit_mulai.setText(new StringBuilder().append(hour).append(":").append(min));
+        if (hour < 10) {
+            add0HourM = "0"+hour;
+        } else {
+            add0HourM = ""+hour;
+        }
+
+        if (min < 10) {
+            add0MinM = "0"+min;
+        } else {
+            add0MinM = ""+min;
+        }
+
+        edit_mulai.setText(add0HourM+":"+add0MinM);
     }
 
     public void setTimeS(View view) {
         int hour = timePicker.getCurrentHour();
         int min = timePicker.getCurrentMinute();
 
-        edit_selesai.setText(new StringBuilder().append(hour).append(":").append(min));
+        if (hour < 10) {
+            add0HourS = "0"+hour;
+        } else {
+            add0HourS = ""+hour;
+        }
+
+        if (min < 10) {
+            add0MinS = "0"+min;
+        } else {
+            add0MinS = ""+min;
+        }
+
+        edit_selesai.setText(add0HourS+":"+add0MinS);
     }
 
     @Override

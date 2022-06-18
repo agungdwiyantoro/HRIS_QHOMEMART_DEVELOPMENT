@@ -24,6 +24,8 @@ import com.android.volley.toolbox.Volley;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.approve.approveCutiNew.ListInfinityCutiApprove;
+import com.app.mobiledev.apphris.approve.approveDinasMt.ApproveDinasMT;
+import com.app.mobiledev.apphris.approve.approveDinasMt.mt.ListInfinityMtApprove;
 import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
@@ -66,7 +68,12 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         cvDinasApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(menu_approve.this, "Masih dalam Pengembangan", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(menu_approve.this, "Masih dalam Pengembangan", Toast.LENGTH_SHORT).show();
+                /*Intent intent = new Intent(menu_approve.this, ApproveDinasMT.class);
+                intent.putExtra("kyJabatan", "EXECUTIV");
+                startActivity(intent);*/
+                checkMenu("dinasMt");
+
             }
         });
         cvTinggalTugasApprove = findViewById(R.id.cvTinggalTugasApprove);
@@ -198,6 +205,10 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
                                         intent.putExtra("kyJabatan", "HEAD");
                                         startActivity(intent);
+                                    } else if (menu.equals("dinasMt")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveDinasMT.class);
+                                        intent.putExtra("kyJabatan", "HEAD");
+                                        startActivity(intent);
                                     }
 
                                 } else if(hak_akses.equals("EXECUTIV")){
@@ -207,6 +218,10 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         startActivity(intent);
                                     } else if (menu.equals("cuti")) {
                                         Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                                        intent.putExtra("kyJabatan", "EXECUTIV");
+                                        startActivity(intent);
+                                    } else if (menu.equals("dinasMt")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveDinasMT.class);
                                         intent.putExtra("kyJabatan", "EXECUTIV");
                                         startActivity(intent);
                                     }
@@ -219,6 +234,10 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
                                         intent.putExtra("kyJabatan", "DIRECTUR");
                                         startActivity(intent);
+                                    } else if (menu.equals("dinasMt")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveDinasMT.class);
+                                        intent.putExtra("kyJabatan", "DIRECTUR");
+                                        startActivity(intent);
                                     }
                                 } else if(hak_akses.equals("HRD")){
                                     if (menu.equals("sakit")) {
@@ -229,6 +248,10 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
                                         intent.putExtra("kyJabatan", "HRD");
                                         startActivity(intent);
+                                    } else if (menu.equals("dinasMt")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveDinasMT.class);
+                                        intent.putExtra("kyJabatan", "HRD");
+                                        startActivity(intent);
                                     }
                                 } else if(hak_akses.equals("EXECUTIV,DIRECTUR,HRD")){
                                     if (menu.equals("sakit")) {
@@ -237,6 +260,10 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         startActivity(intent);
                                     } else if (menu.equals("cuti")) {
                                         Intent intent = new Intent(menu_approve.this, ListInfinityCutiApprove.class);
+                                        intent.putExtra("kyJabatan", "EXECUTIV,DIRECTUR,HRD");
+                                        startActivity(intent);
+                                    } else if (menu.equals("dinasMt")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveDinasMT.class);
                                         intent.putExtra("kyJabatan", "EXECUTIV,DIRECTUR,HRD");
                                         startActivity(intent);
                                     }

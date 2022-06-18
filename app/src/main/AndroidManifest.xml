@@ -39,6 +39,13 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
+
+        <activity
+            android:name=".approve.approveDinasMt.mt.DetailIzinMtApprove"
+            android:exported="false" />
+        <activity
+            android:name=".approve.approveDinasMt.ApproveDinasMT"
+            android:exported="false" />
         <activity
             android:name=".izin.izinDinasMT.dataIzinDMT.mt.DetailIzinMtEmp"
             android:exported="false" />
@@ -246,40 +253,10 @@
             -->
 
         </activity>
-        <activity
-            android:name=".approve.adminIzinMt.detailIzinMtApprove"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".approve.adminIzinMt.listIzinMtApprove"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".approve.adminIzinDinas.detailListDinasApprove"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".approve.adminIzinDinas.listIzinDinasApprove"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".izin.izinMT.listIzinMt"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
         <activity
             android:name=".approve.menu_approve"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".izin.izinDinas.formDetailIzinDinas"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".izin.izinDinas.listDetailIzinDinas"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".izin.izinDinas.listIzinDinas"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".izin.izinDinas.riwayatIzinDinas" />
-        <activity
-            android:name=".izin.izinMT.form_izin_meninggalkan_tugas"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".izin.izinDinas.map_place_picker_izin_lokasi"
-            tools:ignore="Instantiatable" />
         <activity android:name=".memo.DetailLampiranVideo" />
         <activity
             android:name=".memo.DetailLampiranMemo"
@@ -374,11 +351,6 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".bonus.bonus_promosi_iklan.bonus"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".izin.izinDinas.form_izin_dinas"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />

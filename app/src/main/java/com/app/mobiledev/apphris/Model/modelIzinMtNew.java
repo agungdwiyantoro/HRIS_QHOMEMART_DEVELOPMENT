@@ -21,6 +21,7 @@ public class modelIzinMtNew {
 	private String approveDirectur;
 	private String kyano;
 	private String dvano;
+	private String dvnama;
 	private String kepentingan;
 	private String jbano;
 	private String catatan;
@@ -39,299 +40,307 @@ public class modelIzinMtNew {
 	private String verifDatang;
 	private String status;
 
-	public void setApproveHrd(String approveHrd){
-		this.approveHrd = approveHrd;
-	}
-
-	public String getApproveHrd(){
+	public String getApproveHrd() {
 		return approveHrd;
 	}
 
-	public void setHrdName(String hrdName){
-		this.hrdName = hrdName;
+	public void setApproveHrd(String approveHrd) {
+		this.approveHrd = approveHrd;
 	}
 
-	public String getHrdName(){
+	public String getHrdName() {
 		return hrdName;
 	}
 
-	public void setCreatedAt(String createdAt){
-		this.createdAt = createdAt;
+	public void setHrdName(String hrdName) {
+		this.hrdName = hrdName;
 	}
 
-	public String getCreatedAt(){
+	public String getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setLsUsr(String lsUsr){
-		this.lsUsr = lsUsr;
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public String getLsUsr(){
+	public String getLsUsr() {
 		return lsUsr;
 	}
 
-	public void setStatusApprove(String statusApprove){
-		this.statusApprove = statusApprove;
+	public void setLsUsr(String lsUsr) {
+		this.lsUsr = lsUsr;
 	}
 
-	public String getStatusApprove(){
+	public String getStatusApprove() {
 		return statusApprove;
 	}
 
-	public void setDir(String dir){
-		this.dir = dir;
+	public void setStatusApprove(String statusApprove) {
+		this.statusApprove = statusApprove;
 	}
 
-	public String getDir(){
+	public String getDir() {
 		return dir;
 	}
 
-	public void setVerifKeluar(String verifKeluar){
-		this.verifKeluar = verifKeluar;
+	public void setDir(String dir) {
+		this.dir = dir;
 	}
 
-	public String getVerifKeluar(){
+	public String getVerifKeluar() {
 		return verifKeluar;
 	}
 
-	public void setHrdApproveDate(String hrdApproveDate){
-		this.hrdApproveDate = hrdApproveDate;
+	public void setVerifKeluar(String verifKeluar) {
+		this.verifKeluar = verifKeluar;
 	}
 
-	public String getHrdApproveDate(){
+	public String getHrdApproveDate() {
 		return hrdApproveDate;
 	}
 
-	public void setSatpamKyanoDatang(String satpamKyanoDatang){
-		this.satpamKyanoDatang = satpamKyanoDatang;
+	public void setHrdApproveDate(String hrdApproveDate) {
+		this.hrdApproveDate = hrdApproveDate;
 	}
 
-	public String getSatpamKyanoDatang(){
+	public String getSatpamKyanoDatang() {
 		return satpamKyanoDatang;
 	}
 
-	public void setUpdatedAt(String updatedAt){
-		this.updatedAt = updatedAt;
+	public void setSatpamKyanoDatang(String satpamKyanoDatang) {
+		this.satpamKyanoDatang = satpamKyanoDatang;
 	}
 
-	public String getUpdatedAt(){
+	public String getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setJam(String jam){
-		this.jam = jam;
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public String getJam(){
+	public String getJam() {
 		return jam;
 	}
 
-	public void setTgl(String tgl){
-		this.tgl = tgl;
+	public void setJam(String jam) {
+		this.jam = jam;
 	}
 
-	public String getTgl(){
+	public String getTgl() {
 		return tgl;
 	}
 
-	public void setExecutiv(String executiv){
-		this.executiv = executiv;
+	public void setTgl(String tgl) {
+		this.tgl = tgl;
 	}
 
-	public String getExecutiv(){
+	public String getExecutiv() {
 		return executiv;
 	}
 
-	public void setHeadKyano(String headKyano){
-		this.headKyano = headKyano;
+	public void setExecutiv(String executiv) {
+		this.executiv = executiv;
 	}
 
-	public String getHeadKyano(){
+	public String getHeadKyano() {
 		return headKyano;
 	}
 
-	public void setSampai(String sampai){
-		this.sampai = sampai;
+	public void setHeadKyano(String headKyano) {
+		this.headKyano = headKyano;
 	}
 
-	public String getSampai(){
+	public String getSampai() {
 		return sampai;
 	}
 
-	public void setImage(String image){
-		this.image = image;
+	public void setSampai(String sampai) {
+		this.sampai = sampai;
 	}
 
-	public String getImage(){
+	public String getImage() {
 		return image;
 	}
 
-	public void setSatpamKyanoKeluar(String satpamKyanoKeluar){
-		this.satpamKyanoKeluar = satpamKyanoKeluar;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	public String getSatpamKyanoKeluar(){
+	public String getSatpamKyanoKeluar() {
 		return satpamKyanoKeluar;
 	}
 
-	public void setApproveDirectur(String approveDirectur){
-		this.approveDirectur = approveDirectur;
+	public void setSatpamKyanoKeluar(String satpamKyanoKeluar) {
+		this.satpamKyanoKeluar = satpamKyanoKeluar;
 	}
 
-	public String getApproveDirectur(){
+	public String getApproveDirectur() {
 		return approveDirectur;
 	}
 
-	public void setKyano(String kyano){
-		this.kyano = kyano;
+	public void setApproveDirectur(String approveDirectur) {
+		this.approveDirectur = approveDirectur;
 	}
 
-	public String getKyano(){
+	public String getKyano() {
 		return kyano;
 	}
 
-	public void setDvano(String dvano){
-		this.dvano = dvano;
+	public void setKyano(String kyano) {
+		this.kyano = kyano;
 	}
 
-	public String getDvano(){
+	public String getDvano() {
 		return dvano;
 	}
 
-	public void setKepentingan(String kepentingan){
-		this.kepentingan = kepentingan;
+	public void setDvano(String dvano) {
+		this.dvano = dvano;
 	}
 
-	public String getKepentingan(){
+	public String getDvnama() {
+		return dvnama;
+	}
+
+	public void setDvnama(String dvnama) {
+		this.dvnama = dvnama;
+	}
+
+	public String getKepentingan() {
 		return kepentingan;
 	}
 
-	public void setJbano(String jbano){
-		this.jbano = jbano;
+	public void setKepentingan(String kepentingan) {
+		this.kepentingan = kepentingan;
 	}
 
-	public String getJbano(){
+	public String getJbano() {
 		return jbano;
 	}
 
-	public void setCatatan(String catatan){
-		this.catatan = catatan;
+	public void setJbano(String jbano) {
+		this.jbano = jbano;
 	}
 
-	public String getCatatan(){
+	public String getCatatan() {
 		return catatan;
 	}
 
-	public void setExecutivKyano(String executivKyano){
-		this.executivKyano = executivKyano;
+	public void setCatatan(String catatan) {
+		this.catatan = catatan;
 	}
 
-	public String getExecutivKyano(){
+	public String getExecutivKyano() {
 		return executivKyano;
 	}
 
-	public void setExecutivApproveDate(String executivApproveDate){
-		this.executivApproveDate = executivApproveDate;
+	public void setExecutivKyano(String executivKyano) {
+		this.executivKyano = executivKyano;
 	}
 
-	public String getExecutivApproveDate(){
+	public String getExecutivApproveDate() {
 		return executivApproveDate;
 	}
 
-	public void setApproveHead(String approveHead){
-		this.approveHead = approveHead;
+	public void setExecutivApproveDate(String executivApproveDate) {
+		this.executivApproveDate = executivApproveDate;
 	}
 
-	public String getApproveHead(){
+	public String getApproveHead() {
 		return approveHead;
 	}
 
-	public void setHeadApproveDate(String headApproveDate){
-		this.headApproveDate = headApproveDate;
+	public void setApproveHead(String approveHead) {
+		this.approveHead = approveHead;
 	}
 
-	public String getHeadApproveDate(){
+	public String getHeadApproveDate() {
 		return headApproveDate;
 	}
 
-	public void setDirecturKyano(String directurKyano){
-		this.directurKyano = directurKyano;
+	public void setHeadApproveDate(String headApproveDate) {
+		this.headApproveDate = headApproveDate;
 	}
 
-	public String getDirecturKyano(){
+	public String getDirecturKyano() {
 		return directurKyano;
 	}
 
-	public void setApproveExecutiv(String approveExecutiv){
-		this.approveExecutiv = approveExecutiv;
+	public void setDirecturKyano(String directurKyano) {
+		this.directurKyano = directurKyano;
 	}
 
-	public String getApproveExecutiv(){
+	public String getApproveExecutiv() {
 		return approveExecutiv;
 	}
 
-	public void setHrdKyano(String hrdKyano){
-		this.hrdKyano = hrdKyano;
+	public void setApproveExecutiv(String approveExecutiv) {
+		this.approveExecutiv = approveExecutiv;
 	}
 
-	public String getHrdKyano(){
+	public String getHrdKyano() {
 		return hrdKyano;
 	}
 
-	public void setName(String name){
-		this.name = name;
+	public void setHrdKyano(String hrdKyano) {
+		this.hrdKyano = hrdKyano;
 	}
 
-	public String getName(){
+	public String getName() {
 		return name;
 	}
 
-	public void setTjano(String tjano){
-		this.tjano = tjano;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getTjano(){
+	public String getTjano() {
 		return tjano;
 	}
 
-	public void setDirecturApproveDate(String directurApproveDate){
-		this.directurApproveDate = directurApproveDate;
+	public void setTjano(String tjano) {
+		this.tjano = tjano;
 	}
 
-	public String getDirecturApproveDate(){
+	public String getDirecturApproveDate() {
 		return directurApproveDate;
 	}
 
-	public void setHeadName(String headName){
-		this.headName = headName;
+	public void setDirecturApproveDate(String directurApproveDate) {
+		this.directurApproveDate = directurApproveDate;
 	}
 
-	public String getHeadName(){
+	public String getHeadName() {
 		return headName;
 	}
 
-	public void setComment(String comment){
-		this.comment = comment;
+	public void setHeadName(String headName) {
+		this.headName = headName;
 	}
 
-	public String getComment(){
+	public String getComment() {
 		return comment;
 	}
 
-	public void setVerifDatang(String verifDatang){
-		this.verifDatang = verifDatang;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
-	public String getVerifDatang(){
+	public String getVerifDatang() {
 		return verifDatang;
 	}
 
-	public void setStatus(String status){
-		this.status = status;
+	public void setVerifDatang(String verifDatang) {
+		this.verifDatang = verifDatang;
 	}
 
-	public String getStatus(){
+	public String getStatus() {
 		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

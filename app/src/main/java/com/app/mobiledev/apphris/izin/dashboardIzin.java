@@ -131,10 +131,10 @@ public class dashboardIzin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*Intent i = new Intent(dashboardIzin.this, IzinDinasMT.class);
-                startActivity(i);*/
+                Intent i = new Intent(dashboardIzin.this, IzinDinasMT.class);
+                startActivity(i);
 
-                Toast.makeText(dashboardIzin.this, "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(dashboardIzin.this, "Masih dalam pengembangan", Toast.LENGTH_SHORT).show();
             }
         });
 

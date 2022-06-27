@@ -113,7 +113,7 @@ public class ListInfinityMtApprove extends android.support.v4.app.Fragment imple
         lin_transparant = rootView.findViewById(R.id.lin_transparant);
         swipeRefresh = rootView.findViewById(R.id.swipeRefresh);
         tx_approve = rootView.findViewById(R.id.tx_approve);
-        fabAddMt = rootView.findViewById(R.id.fabAddMt);
+        fabAddMt = rootView.findViewById(R.id.fabAddDns);
 
         swipeRefresh.setOnRefreshListener(this);
         msession = new SessionManager(Objects.requireNonNull(getActivity()));
@@ -146,7 +146,6 @@ public class ListInfinityMtApprove extends android.support.v4.app.Fragment imple
         adapterIzinMtApprove = new adapterIzinMtApprove(Objects.requireNonNull(getActivity()), new ArrayList<>(), access, spinResult);
         recyler_izin_sakit.setAdapter(adapterIzinMtApprove);
         getMonth();
-        paginationCall();
         paginationCall();
 
         ivMonthFilter.setOnClickListener(new View.OnClickListener() {
@@ -391,11 +390,11 @@ public class ListInfinityMtApprove extends android.support.v4.app.Fragment imple
                                     }
 
                                     break;
-                                case "201":
+                                /*case "201":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
                                     recyler_izin_sakit.setVisibility(View.GONE);
-                                    break;
+                                    break;*/
                             }
 
                             if (currentPage != PAGE_START)

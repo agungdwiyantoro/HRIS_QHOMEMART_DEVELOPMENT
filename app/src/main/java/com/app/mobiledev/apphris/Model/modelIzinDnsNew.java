@@ -26,6 +26,7 @@ public class modelIzinDnsNew {
 	private String approveDirectur;
 	private String kyano;
 	private String dvano;
+	private String dvnama;
 	private String jbano;
 	private String aproveBy;
 	private String executivKyano;
@@ -42,6 +43,7 @@ public class modelIzinDnsNew {
 	private String headName;
 	private String daerah;
 	private String trans;
+	private String latLong;
 
 	public void setAproveHrd(String aproveHrd){
 		this.aproveHrd = aproveHrd;
@@ -227,6 +229,14 @@ public class modelIzinDnsNew {
 		return dvano;
 	}
 
+	public String getDvnama() {
+		return dvnama;
+	}
+
+	public void setDvnama(String dvnama) {
+		this.dvnama = dvnama;
+	}
+
 	public void setJbano(String jbano){
 		this.jbano = jbano;
 	}
@@ -353,5 +363,13 @@ public class modelIzinDnsNew {
 
 	public String getTrans(){
 		return trans;
+	}
+
+	public String getLatLong() {
+		return latLong;
+	}
+
+	public void setLatLong(String latLong) {
+		this.latLong = latLong;
 	}
 }

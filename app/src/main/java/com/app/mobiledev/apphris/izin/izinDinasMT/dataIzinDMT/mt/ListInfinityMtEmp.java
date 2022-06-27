@@ -219,7 +219,7 @@ public class ListInfinityMtEmp extends android.support.v4.app.Fragment implement
             }
 
             if (spinResult.equals("")) {
-                dateMonthDate = "";
+                dateMonthDate = year + "-" + bil;
                 spinResult = "";
             } else {
                 dateMonthDate = year + "-" + bil/* + "-01"*/;
@@ -378,11 +378,11 @@ public class ListInfinityMtEmp extends android.support.v4.app.Fragment implement
                                     }
 
                                     break;
-                                case "201":
+                                /*case "201":
                                     emptyHistory.setVisibility(View.VISIBLE);
                                     mShimmerViewContainer.setVisibility(View.GONE);
                                     recyler_izin_sakit.setVisibility(View.GONE);
-                                    break;
+                                    break;*/
                             }
 
                             if (currentPage != PAGE_START)

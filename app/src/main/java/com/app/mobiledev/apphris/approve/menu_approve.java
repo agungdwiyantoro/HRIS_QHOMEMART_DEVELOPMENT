@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class menu_approve extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    CardView cvSakitApprove, cvDinasApprove, cvTinggalTugasApprove, cvCutiApprove;
+    CardView cvSakitApprove, cvMtDinasApprove, cvCutiApprove;
     private SessionManager session;
     private String token, spinSelected, spinResult="HRD", noJabatan, appHead, appExec, appDirect, appHRD, hak_akses="";
     private SessionManager msession;
@@ -64,8 +64,8 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
 
         cvSakitApprove = findViewById(R.id.cvSakitApprove);
         cvCutiApprove = findViewById(R.id.cvCutiApprove);
-        cvDinasApprove = findViewById(R.id.cvDinasApprove);
-        cvDinasApprove.setOnClickListener(new View.OnClickListener() {
+        cvMtDinasApprove = findViewById(R.id.cvMtDinasApprove);
+        cvMtDinasApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(menu_approve.this, "Masih dalam Pengembangan", Toast.LENGTH_SHORT).show();
@@ -74,13 +74,6 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                 startActivity(intent);*/
                 checkMenu("dinasMt");
 
-            }
-        });
-        cvTinggalTugasApprove = findViewById(R.id.cvTinggalTugasApprove);
-        cvTinggalTugasApprove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(menu_approve.this, "Masih dalam Pengembangan", Toast.LENGTH_SHORT).show();
             }
         });
 

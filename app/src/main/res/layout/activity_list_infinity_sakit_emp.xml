@@ -26,7 +26,6 @@
         android:paddingLeft="16dp"
         />
 
-
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
@@ -39,6 +38,12 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             >
+
+            <include
+                android:id="@+id/includeEmptyHistory"
+                layout="@layout/layout_empty_history"
+                android:visibility="gone"
+                />
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmer_view_container"
@@ -80,14 +85,6 @@
 
             </com.facebook.shimmer.ShimmerFrameLayout>
 
-            <include
-                android:id="@+id/includeEmptyHistory"
-                layout="@layout/layout_empty_history"
-                android:visibility="gone"
-                />
-
-
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyler_izin_sakit_emp"
                 android:layout_width="match_parent"
@@ -95,7 +92,6 @@
                 android:layout_margin="16sp"
                 android:layout_marginBottom="60dp"
                 android:paddingBottom="40dp"
-                android:visibility="gone"
                 tools:listitem="@layout/list_riwayat_izin_sakit"
                 />
 

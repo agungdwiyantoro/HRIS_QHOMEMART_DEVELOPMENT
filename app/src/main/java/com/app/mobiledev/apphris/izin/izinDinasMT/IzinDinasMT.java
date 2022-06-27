@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.dinas.Tab2;
+import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.dinas.ListInfinityDinasEmp;
 import com.app.mobiledev.apphris.izin.izinDinasMT.dataIzinDMT.mt.ListInfinityMtEmp;
 
 public class IzinDinasMT extends AppCompatActivity {
@@ -79,8 +79,8 @@ public class IzinDinasMT extends AppCompatActivity {
                     ListInfinityMtEmp listInfinityMtEmp = new ListInfinityMtEmp();
                     return listInfinityMtEmp;
                 case 1:
-                    Tab2 tab2 = new Tab2();
-                    return tab2;
+                    ListInfinityDinasEmp listInfinityDinasEmp = new ListInfinityDinasEmp();
+                    return listInfinityDinasEmp;
                 default:
                     return null;
             }

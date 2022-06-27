@@ -41,6 +41,15 @@
         tools:replace="android:icon">
 
         <activity
+            android:name=".approve.approveDinasMt.dinas.DetailIzinDinasApprove"
+            android:exported="false" />
+        <activity
+            android:name=".izin.izinDinasMT.dataIzinDMT.dinas.DetailIzinDinasEmp"
+            android:exported="false" />
+        <activity
+            android:name=".izin.izinDinasMT.dataIzinDMT.dinas.formIzinDinas"
+            android:exported="false" />
+        <activity
             android:name=".approve.approveDinasMt.mt.DetailIzinMtApprove"
             android:exported="false" />
         <activity

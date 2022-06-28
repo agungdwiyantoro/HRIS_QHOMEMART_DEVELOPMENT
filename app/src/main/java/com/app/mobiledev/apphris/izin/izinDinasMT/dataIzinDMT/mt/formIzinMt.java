@@ -63,7 +63,7 @@ public class formIzinMt extends AppCompatActivity {
     private CheckBox cbLamp;
 
     private Uri resultUri;
-    private File chosedfile;
+    private File chosedfile, compressedImageFile;
     private Bitmap image_bmap;
     private Button btn_ajukan, dialogBtnSubmit, dialogBtnCancel, btnTimeM, btnTimeS;
     private String kyano, token, nameImage = "", keperluanMt = "", tglMt = "", mulaiMt = "", selesaiMt = "", catatan = "", lamp = "0", namaEmp, divisiEmp, jabatanEmp, dateSend, format, add0HourM, add0MinM, add0HourS, add0MinS;
@@ -274,7 +274,7 @@ public class formIzinMt extends AppCompatActivity {
                         Log.d("TAG1", "onActivityResult: " + chosedfile.toString());
                     } else {
 
-                        File compressedImageFile =
+                        compressedImageFile =
                                 new Compressor(this)
                                         .setCompressFormat(Bitmap.CompressFormat.JPEG)
                                         .compressToFile(chosedfile);
@@ -373,7 +373,7 @@ public class formIzinMt extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: " + keperluanMt + " | " + catatan + " | " + dateSend + " | " + mulaiMt + " | " + selesaiMt + " | " + chosedfile + " | " + lamp);
-                insertIzinMt(keperluanMt, catatan, dateSend, mulaiMt, selesaiMt, chosedfile, lamp);
+                insertIzinMt(keperluanMt, catatan, dateSend, mulaiMt, selesaiMt, compressedImageFile, lamp);
                 lin_transparant.setVisibility(View.VISIBLE);
                 dialogConfirm.dismiss();
             }

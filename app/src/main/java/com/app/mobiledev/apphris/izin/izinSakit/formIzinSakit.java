@@ -62,7 +62,7 @@ public class formIzinSakit extends AppCompatActivity {
     private CheckBox cbSkdView;
 
     private Uri resultUri;
-    private File chosedfile;
+    private File chosedfile, compressedImageFile;
     private Bitmap image_bmap;
     private Button btn_ajukan, btnDate, btnCancelDate, dialogBtnSubmit, dialogBtnCancel;
     private String kyano, token, nameImage = "", indikasiSakit = "", mulaiSakit = "", selasaiSakit = "", catatan = "", skd = "0", namaEmp, divisiEmp, jabatanEmp;
@@ -264,7 +264,7 @@ public class formIzinSakit extends AppCompatActivity {
                         Log.d("TAG1", "onActivityResult: "+chosedfile.toString());
                     } else {
 
-                        File compressedImageFile =
+                        compressedImageFile =
                                 new Compressor(this)
                                         .setCompressFormat(Bitmap.CompressFormat.JPEG)
                                         .compressToFile(chosedfile);
@@ -434,7 +434,7 @@ public class formIzinSakit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+indikasiSakit+" | "+ catatan +" | "+ nameImage +" | "+ mulaiSakit +" | "+ skd);
-                insertIzinSakit(indikasiSakit, catatan, mulaiSakit, chosedfile , skd);
+                insertIzinSakit(indikasiSakit, catatan, mulaiSakit, compressedImageFile , skd);
                 lin_transparant.setVisibility(View.VISIBLE);
                 dialogConfirm.dismiss();
             }

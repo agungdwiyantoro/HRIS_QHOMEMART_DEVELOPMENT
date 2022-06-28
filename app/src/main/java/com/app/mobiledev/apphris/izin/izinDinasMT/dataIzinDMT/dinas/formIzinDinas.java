@@ -59,7 +59,7 @@ public class formIzinDinas extends AppCompatActivity {
     private LinearLayout lin_transparant, llUploadLamp, llViewCalendar, llViewGetDates;
 
     private Uri resultUri;
-    private File chosedfile;
+    private File chosedfile, compressedImageFile;
     private Bitmap image_bmap;
     private Button btn_ajukan, btnDate, btnCancelDate, dialogBtnSubmit, dialogBtnCancel, btnTimeM, btnTimeS;
     private String
@@ -382,7 +382,7 @@ public class formIzinDinas extends AppCompatActivity {
                         Log.d("TAG1", "onActivityResult: " + chosedfile.toString());
                     } else {
 
-                        File compressedImageFile =
+                        compressedImageFile =
                                 new Compressor(this)
                                         .setCompressFormat(Bitmap.CompressFormat.JPEG)
                                         .compressToFile(chosedfile);
@@ -492,7 +492,7 @@ public class formIzinDinas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: " + keperluanDns + " | " + catatan + " | " + dateSend + " | " + mulaiDns + " | " + selesaiDns + " | " + chosedfile + " | " + lamp);
-                insertIzinDns(keperluanDns, catatan, tglDns, mulaiDns, selesaiDns, chosedfile, lamp, trans, location, latLong);
+                insertIzinDns(keperluanDns, catatan, tglDns, mulaiDns, selesaiDns, compressedImageFile, lamp, trans, location, latLong);
                 lin_transparant.setVisibility(View.VISIBLE);
                 dialogConfirm.dismiss();
             }

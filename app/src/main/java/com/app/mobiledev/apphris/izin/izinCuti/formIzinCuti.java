@@ -84,7 +84,7 @@ public class formIzinCuti extends AppCompatActivity {
     AutoCompleteTextView actv;
 
     private Uri resultUri;
-    private File chosedfile;
+    private File chosedfile, compressedImageFile;
 
     private ProgressBar pbUpload;
 
@@ -594,7 +594,7 @@ public class formIzinCuti extends AppCompatActivity {
                         Log.d("TAG1", "onActivityResult: " + chosedfile.toString());
                     } else {
 
-                        File compressedImageFile =
+                        compressedImageFile =
                                 new Compressor(this)
                                         .setCompressFormat(Bitmap.CompressFormat.JPEG)
                                         .compressToFile(chosedfile);
@@ -686,7 +686,7 @@ public class formIzinCuti extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: "+spinJenisSelected.substring(0,2)+" | "+ tglCuti+" | "+lamaCuti+" | "+ spinDelegasiSelected +" | "+tvPeriode.getText().toString()+" | "+etKetCuti.getText().toString());
-                insertCuti(spinJenisSelected.substring(0,2),tglCuti,actv.getText().toString(),etKetCuti.getText().toString(),tvPeriode.getText().toString(), chosedfile , lamp);
+                insertCuti(spinJenisSelected.substring(0,2),tglCuti,actv.getText().toString(),etKetCuti.getText().toString(),tvPeriode.getText().toString(), compressedImageFile, lamp);
                 lin_transparant.setVisibility(View.VISIBLE);
                 dialogConfirm.dismiss();
             }

@@ -7,12 +7,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.CardView;
@@ -24,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,11 +74,12 @@ public class map_place_picker_izin_lokasi extends DialogFragment implements OnMa
     private PlacesClient placesClient;
     private List<com.google.android.libraries.places.api.model.AutocompletePrediction> predictionList;
     private ProgressDialog mProgressDialog;
+    private ProgressBar progressGetAddress;
 
     private Location mLastKnownLocation;
     private LocationCallback locationCallback;
 
-    private TextView tvAddressNow;
+    private TextView tvAddressNow, tvInCv;
     private EditText ed_cari_tempat;
     private View mapView;
     private CardView cvSetLocation;
@@ -120,6 +124,7 @@ public class map_place_picker_izin_lokasi extends DialogFragment implements OnMa
             /* map is already there, just return view as it is */
         }
 
+        tvInCv = view.findViewById(R.id.tvInCv);
         tvAddressNow = view.findViewById(R.id.tvAddressNow);
 
         //materialSearchBar = view.findViewById(R.id.searchBar);
@@ -127,6 +132,7 @@ public class map_place_picker_izin_lokasi extends DialogFragment implements OnMa
         predictionList = new ArrayList<>();
         mProgressDialog = new ProgressDialog(ctx);
         mProgressDialog.setMessage("Loading ...");
+        progressGetAddress = view.findViewById(R.id.progressGetAddress);
         mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map_izin);
         autocomplete_fragment=(AutocompleteSupportFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
         autocomplete_fragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
@@ -160,8 +166,6 @@ public class map_place_picker_izin_lokasi extends DialogFragment implements OnMa
         mapFragment.getMapAsync(this);
         mapView = mapFragment.getView();
 
-
-
         if (Build.VERSION.SDK_INT < 21) {
             mapFragment = (SupportMapFragment) getActivity()
                     .getSupportFragmentManager().findFragmentById(R.id.map_izin);
@@ -189,11 +193,17 @@ public class map_place_picker_izin_lokasi extends DialogFragment implements OnMa
                 geocoder = new Geocoder(getActivity(), Locale.getDefault());
 
                 try {
-                    addresses = geocoder.getFromLocation(lt, lo, 1);
-                    tvAddressNow.setText(addresses.get(0).getAddressLine(0));
-                    //to send location address from map to activity form dinas
-                    ((formIzinDinas) Objects.requireNonNull(getActivity())).setLocationSelected(addresses.get(0).getAddressLine(0), latLong);
-                    dismiss();
+
+                    if (tvInCv.getVisibility() == View.VISIBLE) {
+                        addresses = geocoder.getFromLocation(lt, lo, 1);
+                        tvAddressNow.setText(addresses.get(0).getAddressLine(0));
+                        //to send location address from map to activity form dinas
+                        ((formIzinDinas) Objects.requireNonNull(getActivity())).setLocationSelected(addresses.get(0).getAddressLine(0), latLong);
+                        dismiss();
+                    } else {
+                        Toast.makeText(getActivity(), "Alamat baru masih belum dimuat", Toast.LENGTH_SHORT).show();
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -263,6 +273,11 @@ public class map_place_picker_izin_lokasi extends DialogFragment implements OnMa
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
+
+                progressGetAddress.setVisibility(View.VISIBLE);
+                tvInCv.setVisibility(View.GONE);
+                cvSetLocation.setCardBackgroundColor(getResources().getColor(R.color.light_grey));
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -277,13 +292,24 @@ public class map_place_picker_izin_lokasi extends DialogFragment implements OnMa
 
                         try {
                             addresses = geocoder.getFromLocation(lt, lo, 1);
-                            tvAddressNow.setText(addresses.get(0).getAddressLine(0));
+
+                            if (addresses.size() == 0) {
+                                progressGetAddress.setVisibility(View.VISIBLE);
+                                tvInCv.setVisibility(View.GONE);
+                                cvSetLocation.setCardBackgroundColor(getResources().getColor(R.color.light_grey));
+                            } else {
+                                tvAddressNow.setText(addresses.get(0).getAddressLine(0));
+                            }
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
 
                         Log.d("TAG_ADDRESS_CURRENT", "onClick: "+currentMarkerLocation.toString());
 
+                        progressGetAddress.setVisibility(View.GONE);
+                        tvInCv.setVisibility(View.VISIBLE);
+                        cvSetLocation.setCardBackgroundColor(getResources().getColor(R.color.main_blue_color));
                     }
                 }, 2000);
             }

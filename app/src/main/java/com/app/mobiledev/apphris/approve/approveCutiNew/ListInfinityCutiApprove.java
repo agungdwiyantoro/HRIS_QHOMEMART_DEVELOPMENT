@@ -146,8 +146,7 @@ public class ListInfinityCutiApprove extends AppCompatActivity implements SwipeR
         adapterIzinCutiApprove = new adapterIzinCutiApprove(ListInfinityCutiApprove.this, new ArrayList<>(), access, spinResult);
         recyler_izin_cuti.setAdapter(adapterIzinCutiApprove);
         getMonth();
-        paginationCall();
-        paginationCall();
+        removeBug();
 
         inc_backPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,6 +219,20 @@ public class ListInfinityCutiApprove extends AppCompatActivity implements SwipeR
             }
         });
 
+    }
+
+    private void removeBug() {
+        paginationCall();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onRefresh();
+                Log.d("TAG", "removeBug: "+modelIzinCutiNews.size());
+
+            }
+        }, 2000);
     }
 
     private void getMonthOfYear() {

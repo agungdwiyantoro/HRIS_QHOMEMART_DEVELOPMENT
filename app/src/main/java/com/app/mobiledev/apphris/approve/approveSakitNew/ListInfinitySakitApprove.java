@@ -151,8 +151,7 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
         adapterIzinSakitApprove = new adapterIzinSakitApprove(ListInfinitySakitApprove.this, new ArrayList<>(), access, spinResult);
         recyler_izin_sakit.setAdapter(adapterIzinSakitApprove);
         getMonth();
-        paginationCall();
-        paginationCall();
+        removeBug();
 
         inc_backPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,6 +224,21 @@ public class ListInfinitySakitApprove extends AppCompatActivity implements Swipe
             }
         });
 
+    }
+
+    private void removeBug() {
+        paginationCall();
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onRefresh();
+                Log.d("TAG", "removeBug: "+modelIzinSakitNews.size());
+
+            }
+        }, 2000);
     }
 
     private void getMonthOfYear() {

@@ -17,6 +17,9 @@
         android:icon="@drawable/ic_add_circle"
         android:title="Menu" />
 
-
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_user_white"
+        android:title="Profile" />
 
 </menu>

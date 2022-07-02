@@ -1,22 +1,19 @@
-package com.app.mobiledev.apphris.profile;
+package com.app.mobiledev.apphris;
+
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,93 +21,66 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
-import com.app.mobiledev.apphris.main_fragment;
 import com.app.mobiledev.apphris.profile.PerjanjianKerja.PerjanjianKerja;
+import com.app.mobiledev.apphris.profile.UbahFoto;
+import com.app.mobiledev.apphris.profile.UbahPass;
+import com.app.mobiledev.apphris.profile.UpdateDataDiri;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.vision.face.FaceDetector;
-import com.mindorks.paracamera.Camera;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class profil extends AppCompatActivity {
+public class fragment_profile extends Fragment {
+    public fragment_profile() {
+    }
 
     private TextView txNama, txNik, txDivisi, txHastag, txJabatan, txUpdate;
-    private EditText pass;
-    private Camera camera;
-    private Button btnSimpan, btnPass;
-    private FaceDetector detector;
-    private CheckBox checkBox;
+
     private SessionManager sessionmanager;
     private String kyano,namas,namaLengkap,cekStaff,password, hastag, nik, divisi, jabatan;
-    private Toolbar mToolbar;
-    private  TextView txtSampleDesc;
-    private ProgressDialog mProgressDialog;
-    private TextInputLayout tlNama;
-    //private CircleImageView foto_profil;
-    private Uri resultUri;
-    private Bitmap image_bmap;
-    int currentIndex = 0;
-    private int[] imageArray;
-    private Uri imageUri;
-    private String url_foto="";
-    private String encodedimage="";
-    private Bitmap editedBitmap;
-    private Drawable drawable;
-    private int face_count=0;
 
-    TextInputLayout tilUbahPass;
+    private ProgressDialog mProgressDialog;
+    private String url_foto="";
 
     private CardView cvUpdateDataDiri, cvPerjanjianKerja, cvUbahPassword;
     private ImageView foto_profil;
+    private Button btnSubmit, btnCancel;
+
+    private LinearLayout llLogout, llOverlayKonfirmasi;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil_new);
-        mToolbar = findViewById(R.id.toolbar_abs);
-        foto_profil=findViewById(R.id.foto_profil);
-        //txNik = findViewById(R.id.txtNik);
-        txNama = findViewById(R.id.txtNamaFull);
-        txDivisi = findViewById(R.id.txtDivisi);
-        txJabatan = findViewById(R.id.txtJabatan);
-        txHastag = findViewById(R.id.txtHastag);
-        txUpdate = findViewById(R.id.txtUpdateDataDiri);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_profil_new, container, false);
 
-        cvUpdateDataDiri = findViewById(R.id.cvUpdateDataDiri);
-        cvUbahPassword = findViewById(R.id.cvUbahPassword);
-        cvPerjanjianKerja = findViewById(R.id.cvPerjanjianKerja);
+        foto_profil=rootView.findViewById(R.id.foto_profil);
+        //txNik = rootView.findViewById(R.id.txtNik);
+        txNama = rootView.findViewById(R.id.txtNamaFull);
+        txDivisi = rootView.findViewById(R.id.txtDivisi);
+        txJabatan = rootView.findViewById(R.id.txtJabatan);
+        txHastag = rootView.findViewById(R.id.txtHastag);
+        txUpdate = rootView.findViewById(R.id.txtUpdateDataDiri);
+        llLogout = rootView.findViewById(R.id.llLogout);
+        btnSubmit = rootView.findViewById(R.id.btnSubmit);
+        btnCancel = rootView.findViewById(R.id.btnCancel);
+        llOverlayKonfirmasi = rootView.findViewById(R.id.llOverlayKonfirmasi);
 
-        setSupportActionBar(mToolbar);
-        mToolbar.setTitle("Profil");
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mProgressDialog = new ProgressDialog(this);
+        cvUpdateDataDiri = rootView.findViewById(R.id.cvUpdateDataDiri);
+        cvUbahPassword = rootView.findViewById(R.id.cvUbahPassword);
+        cvPerjanjianKerja = rootView.findViewById(R.id.cvPerjanjianKerja);
+
+        mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Loading ...");
-        AndroidNetworking.initialize(getApplicationContext());
+        AndroidNetworking.initialize(getActivity().getApplicationContext());
 
 
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(profil.this, main_fragment.class);
-                startActivity(intent2);
-                finish();
-            }
-        });
-
-        sessionmanager = new SessionManager(profil.this);
+        sessionmanager = new SessionManager(getActivity());
         kyano       = sessionmanager.getIdUser();
         nik         = sessionmanager.getNik();
         namas       = sessionmanager.getUsername();
@@ -128,9 +98,9 @@ public class profil extends AppCompatActivity {
         txHastag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClipboardManager clipboardManager = (ClipboardManager) profil.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 clipboardManager.setText(txHastag.getText());
-                Toast.makeText(profil.this, "Hastag berhasil dicopy", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Hastag berhasil dicopy", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -143,43 +113,26 @@ public class profil extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent2 = new Intent(profil.this, UbahFoto.class);
-                startActivity(intent2);
-                finish();
-//                Intent intent = new Intent(Intent.ACTION_PICK);
-//                intent.setType("image/*");
-//                startActivityForResult(intent, 1);
-                /*camera = new Camera.Builder()
-                        .resetToCorrectOrientation(true)
-                        .setTakePhotoRequestCode(1)
-                        .setDirectory("pics")
-                        .setName("ali_" + System.currentTimeMillis())
-                        .setImageFormat(Camera.IMAGE_JPEG)
-                        .setCompression(75)
-                        .setImageHeight(1000)
-                        .build(profil.this);
-                try {
-                    camera.takePicture();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
+                Intent intent = new Intent(getActivity(), UbahFoto.class);
+                startActivity(intent);
+
             }
         });
 
-        //tilUbahPass = findViewById(R.id.tilUbahPass);
+        //tilUbahPass = rootView.findViewById(R.id.tilUbahPass);
         cvUbahPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(profil.this, UbahPass.class);
-                startActivity(intent2);
-                finish();
+                Intent intent = new Intent(getActivity(), UbahPass.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
         cvUpdateDataDiri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(profil.this, UpdateDataDiri.class);
+                Intent intent = new Intent(getActivity(), UpdateDataDiri.class);
                 startActivity(intent);
             }
         });
@@ -187,18 +140,46 @@ public class profil extends AppCompatActivity {
         cvPerjanjianKerja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(profil.this, PerjanjianKerja.class);
+                Intent intent = new Intent(getActivity(), PerjanjianKerja.class);
                 startActivity(intent);
-                //Toast.makeText(profil.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Coming Soon", Toast.LENGTH_SHORT).show();
             }
         });
 
-    }
+        llLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llOverlayKonfirmasi.setVisibility(View.VISIBLE);
+            }
+        });
 
-    @Override
-    public void onBackPressed() {
-        Intent intent2 = new Intent(profil.this, main_fragment.class);
-        startActivity(intent2);
+        llOverlayKonfirmasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llOverlayKonfirmasi.setVisibility(View.GONE);
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //logout
+                sessionmanager.logout();
+                Intent intent3 = new Intent(getActivity(), splashScreen.class);
+                startActivity(intent3);
+                getActivity().finish();
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //dismiss
+                llOverlayKonfirmasi.setVisibility(View.GONE);
+            }
+        });
+
+        return rootView;
     }
 
     private void getlImageProfil(final String kyano){
@@ -214,11 +195,11 @@ public class profil extends AppCompatActivity {
                             Boolean success = response.getBoolean("status");
                             String data = response.getString("data");
                             if (success) {
-                               url_foto=data;
+                                url_foto=data;
                                 RequestOptions requestOptions = new RequestOptions()
                                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                                         .skipMemoryCache(true);
-                                Glide.with(profil.this).load(api.get_url_foto_profil(kyano,url_foto)).apply(requestOptions).into(foto_profil);
+                                Glide.with(getActivity()).load(api.get_url_foto_profil(kyano,url_foto)).apply(requestOptions).into(foto_profil);
                             } else {
                                 Log.d("", "onResponse: "+data);
                             }
@@ -227,14 +208,14 @@ public class profil extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d("JSONERORABSEN", "onResponse: "+e);
-                            helper.showMsg(profil.this, "Peringatan", ""+helper.PESAN_SERVER, helper.ERROR_TYPE);
+                            helper.showMsg(getActivity(), "Peringatan", ""+helper.PESAN_SERVER, helper.ERROR_TYPE);
                             mProgressDialog.dismiss();
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        helper.showMsg(profil.this, "Peringatan", ""+helper.PESAN_KONEKSI, helper.ERROR_TYPE);
+                        helper.showMsg(getActivity(), "Peringatan", ""+helper.PESAN_KONEKSI, helper.ERROR_TYPE);
                         Log.d("EROOR_EXCEPTION", "onError: "+anError);
                         mProgressDialog.dismiss();
                     }
@@ -285,17 +266,20 @@ public class profil extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.d("JSONERORABSEN", "onResponse: "+e);
-                            helper.showMsg(profil.this, "Peringatan", ""+helper.PESAN_SERVER, helper.ERROR_TYPE);
+                            helper.showMsg(getActivity(), "Peringatan", ""+helper.PESAN_SERVER, helper.ERROR_TYPE);
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        helper.showMsg(profil.this, "Peringatan", ""+helper.PESAN_KONEKSI, helper.ERROR_TYPE);
+                        helper.showMsg(getActivity(), "Peringatan", ""+helper.PESAN_KONEKSI, helper.ERROR_TYPE);
                         Log.d("EROOR_EXCEPTION", "onError: "+anError);
 
                     }
                 });
 
     }
+
+
+
 }

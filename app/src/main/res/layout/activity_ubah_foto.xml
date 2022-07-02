@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4F4F4"
-    tools:context=".profile.profil">
+    >
 
     <LinearLayout
-        android:id="@+id/lytoolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
 
         <include
-            android:id="@+id/toolbar_abs"
+            android:id="@+id/toolbarUbahFoto"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <android.support.v7.widget.CardView

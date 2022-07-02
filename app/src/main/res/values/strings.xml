@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">HRIS MOBILE</string>
 
-    <string name="presensi_masuk">Presensi Masuk</string>
-    <string name="presensi_pulang">Presensi Pulang</string>
+    <string name="presensi_masuk">Masuk</string>
+    <string name="presensi_pulang">Pulang</string>
     <string name="get_lokasi">Get Lokasi</string>
     <string name="menu_training">Menu Training</string>
     <string name="nama_test">Nama Test</string>
@@ -68,7 +68,7 @@
     <string name="form_iklan_promo">form iklan promo</string>
     <string name="koneksi_bermaslah">Opps,,,, koneksi internet anda bermasalah</string>
     <string name="close">Close</string>
-    <string name="informasi_memo">Memo :</string>
+    <string name="informasi_memo">Memo</string>
     <string name="link_selengkapnya">Lihat Selengkapnya...</string>
     <string name="jenis_notulen">Notulen Meeting</string>
     <string name="slip_gaji_karyawan">Slip Gaji Karyawan</string>

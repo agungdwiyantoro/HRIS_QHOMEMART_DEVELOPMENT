@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFFFF"
+    android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".profile.profil">
+    >
 
     <!--<android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -26,265 +26,355 @@
     </android.support.v7.widget.CardView>-->
 
     <LinearLayout
-        android:id="@+id/lytoolbar"
+        android:id="@+id/llLogout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:padding="10dp"
+        android:background="@color/quantum_googred50"
+        >
 
-        <include
-            android:id="@+id/toolbar_abs"
-            layout="@layout/toolbar"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_baseline_logout_24"
+            android:tint="@color/red_btn_bg_color"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Keluar"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            />
+
     </LinearLayout>
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="0dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="20dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="vertical"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    >
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="0dp"
-                        >
-
-                        <ImageView
-                            android:id="@+id/foto_profil"
-                            android:layout_width="100dp"
-                            android:layout_height="125dp"
-                            android:src="@color/black"
-                            />
-
-                    </android.support.v7.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="0.6"
-                    >
-
-                    <TextView
-                        android:id="@+id/txtNamaFull"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Test Test"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:layout_marginBottom="8dp"
-                        />
-
-                    <TextView
-                        android:id="@+id/txtJabatan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="ASSISTANT CASHIER SUPERVISOR"
-                        android:textSize="14sp"
-                        android:textColor="@color/light_grey"
-                        android:layout_marginBottom="8dp"
-                        />
-
-                    <TextView
-                        android:id="@+id/txtDivisi"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="ASSISTANT CASHIER"
-                        android:textSize="14sp"
-                        android:textColor="@color/light_grey"
-                        android:layout_marginBottom="8dp"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        >
-
-                        <TextView
-                            android:id="@+id/txtHastag"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="#TY908"
-                            android:textSize="14sp"
-                            android:textColor="@color/light_grey"
-                            android:layout_gravity="center"
-                            android:gravity="center_vertical"
-                            android:layout_marginRight="16sp"
-                            android:drawableRight="@drawable/ic_content_copy_blue_24dp"
-                            android:drawablePadding="16dp"
-                            />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Pengaturan"
-                android:textSize="18sp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:textColor="@color/black"
-                />
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-
+                android:layout_weight="1"
                 >
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cvUpdateDataDiri"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp"
-                    android:layout_margin="8dp"
-                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                    app:cardElevation="0dp"
                     >
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="24dp"
-                        >
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="36dp"
-                            android:layout_weight="3"
-                            android:src="@drawable/ic_baseline_cloud_upload_24"
-                            android:tint="@color/colorPrimaryDark"
-                            />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="Update Data Diri"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cvPerjanjianKerja"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp"
-                    android:layout_margin="8dp"
-                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="24dp"
-                        >
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="36dp"
-                            android:layout_weight="3"
-                            android:src="@drawable/ic_baseline_description_24"
-                            android:tint="@color/colorPrimaryDark"
-                            />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="Perjanjian Kerja"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cvUbahPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp"
-                    android:layout_margin="8dp"
-                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="24dp"
-                        >
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="36dp"
-                            android:layout_weight="3"
-                            android:src="@drawable/ic_baseline_lock_24"
-                            android:tint="@color/colorPrimaryDark"
-                            />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="Ubah Password"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            />
-
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/foto_profil"
+                        android:layout_width="100dp"
+                        android:layout_height="125dp"
+                        android:src="@color/black"
+                        />
 
                 </android.support.v7.widget.CardView>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="0.6"
+                >
+
+                <TextView
+                    android:id="@+id/txtNamaFull"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Test"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtJabatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ASSISTANT CASHIER SUPERVISOR"
+                    android:textSize="14sp"
+                    android:textColor="@color/light_grey"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtDivisi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ASSISTANT CASHIER"
+                    android:textSize="14sp"
+                    android:textColor="@color/light_grey"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/txtHastag"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="#TY908"
+                        android:textSize="14sp"
+                        android:textColor="@color/light_grey"
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:layout_marginRight="16sp"
+                        android:drawableRight="@drawable/ic_content_copy_blue_24dp"
+                        android:drawablePadding="16dp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Pengaturan"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvUpdateDataDiri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_margin="8dp"
+                android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="24dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_baseline_cloud_upload_24"
+                        android:tint="@color/colorPrimaryDark"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Update Data Diri"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvPerjanjianKerja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_margin="8dp"
+                android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="24dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_baseline_description_24"
+                        android:tint="@color/colorPrimaryDark"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Perjanjian Kerja"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvUbahPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_margin="8dp"
+                android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="24dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_weight="3"
+                        android:src="@drawable/ic_baseline_lock_24"
+                        android:tint="@color/colorPrimaryDark"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Ubah Password"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llOverlayKonfirmasi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_overlay"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Konfirmasi"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="16dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Apakah anda yakin ingin keluar Akun?"
+                    android:textColor="@color/black"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tidak"
+                        android:textColor="@color/white"
+                        android:background="@color/main_blue_color"
+                        android:layout_marginEnd="4dp"
+                        />
+
+                    <Button
+                        android:id="@+id/btnSubmit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ya"
+                        android:background="@color/black_overlay"
+                        android:layout_marginStart="4dp"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -28,6 +28,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
+import com.app.mobiledev.apphris.main_fragment;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -81,23 +82,18 @@ public class UbahFoto extends AppCompatActivity {
 
         btnSimpan=findViewById(R.id.btnSimpan);
 
-        mToolbar = findViewById(R.id.toolbar_abs);
+        mToolbar = findViewById(R.id.toolbarUbahFoto);
+        mToolbar.setTitle("Ubah Foto Profile");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         txtSampleDesc = findViewById(R.id.txtSampleDescription);
         foto_profil=findViewById(R.id.foto_profil);
 
-        mToolbar.setTitle("Ubah Foto Profil");
-
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Loading ...");
         AndroidNetworking.initialize(getApplicationContext());
-
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         detector = new FaceDetector.Builder(UbahFoto.this)
                 .setTrackingEnabled(false)
@@ -158,8 +154,8 @@ public class UbahFoto extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent2 = new Intent(UbahFoto.this, profil.class);
-        startActivity(intent2);
+        super.onBackPressed();
+        finish();
     }
 
     @Override
@@ -259,8 +255,7 @@ public class UbahFoto extends AppCompatActivity {
                             String ket = response.getString("ket");
                             if(success){
                                 helper.showMsg(UbahFoto.this,"informasi",""+ket);
-                                Intent intent2 = new Intent(UbahFoto.this, profil.class);
-                                startActivity(intent2);
+
                                 finish();
                             }else{
                                 helper.showMsg(UbahFoto.this,"informasi",""+ket);

@@ -206,7 +206,7 @@
                             android:layout_height="wrap_content"
 
                             android:gravity="left"
-                            android:text="@string/lampiran_foto_surat_keterangan_dokter"
+                            android:text="Lampiran"
                             android:textColor="@color/second_color_black"
                             />
 

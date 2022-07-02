@@ -36,7 +36,6 @@ import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.memo.ModelMemo;
 import com.app.mobiledev.apphris.memo.listMemo.memo_list;
 import com.app.mobiledev.apphris.profile.UpdateDataDiri;
-import com.app.mobiledev.apphris.profile.profil;
 import com.app.mobiledev.apphris.service_location.LocationUpdate;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.bumptech.glide.Glide;
@@ -63,7 +62,7 @@ public class fragment_home extends Fragment {
     private SessionManager sessionmanager;
     private String kyano,namauser,nama,hashtag;
     private TextView txtusername;
-    private TextView txBantuan;
+    //private TextView txBantuan;
     private ImageView absensi_masuk,absensi_keluar;
     private LinearLayout mulai_istirahat,selesai_istirahat,mulai_lembur,selesai_lembur;
     private double lat=0;
@@ -74,7 +73,7 @@ public class fragment_home extends Fragment {
     private TextView txinformasi;
     private TextView txthastag;
     private LinearLayout lmenu;
-    private CircleImageView ic_user_account;
+    //private CircleImageView ic_user_account;
     private TextView tx_lihat_selengkapnya, txtNanti, txtUpdate,info_update,txInfo,txtClose;
     private Boolean cek_memo=false;
     private Boolean cek_info_update=false;
@@ -103,17 +102,17 @@ public class fragment_home extends Fragment {
         abs_masuk=rootView.findViewById(R.id.abs_masuk);
         abs_keluar=rootView.findViewById(R.id.abs_pulang);
         txthastag=rootView.findViewById(R.id.txthastag);
-        txBantuan=rootView.findViewById(R.id.btnBantuan);
+        //txBantuan=rootView.findViewById(R.id.btnBantuan);
         lmenu=rootView.findViewById(R.id.lmenu);
-        txthastag.setText("#"+hashtag);
+        //txthastag.setText("#"+hashtag);
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Loading ...");
         txinformasi=rootView.findViewById(R.id.txinformasi);
-        namauser=sessionmanager.getUsername();
-        nama=sessionmanager.getNamaLEngkap();
-        ic_user_account=rootView.findViewById(R.id.ic_user_account);
-        txtusername=rootView.findViewById(R.id.txtusername);
-        txtusername.setText(nama);
+        //namauser=sessionmanager.getUsername();
+        //nama=sessionmanager.getNamaLEngkap();
+        //ic_user_account=rootView.findViewById(R.id.ic_user_account);
+        //txtusername=rootView.findViewById(R.id.txtusername);
+        //txtusername.setText(nama);
         absensi_masuk=rootView.findViewById(R.id.absensiMasuk);
         absensi_keluar=rootView.findViewById(R.id.absensiKeluar);
         mulai_lembur=rootView.findViewById(R.id.mulaiLembur);
@@ -133,7 +132,7 @@ public class fragment_home extends Fragment {
             }
         });
         cekLokasiFakeGPS();
-        getlImageProfil(kyano);
+        //getlImageProfil(kyano);
         getMemo();
         getabsen(kyano);
         cek_info_update=sessionmanager.getUpdatePlayStore();
@@ -154,22 +153,14 @@ public class fragment_home extends Fragment {
             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
         }
 
-       ic_user_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent2 = new Intent(getActivity(), profil.class);
-                startActivity(intent2);
-                getActivity().finish();
-            }
-        });
-        txBantuan.setOnClickListener(new View.OnClickListener() {
+        /*txBantuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String nowa_admin=sessionmanager.getNo_hp_admin();
                 openWhatsApp(nowa_admin,""+sessionmanager.getNik()+" "+sessionmanager.getNamaLEngkap()+":  ");
 
             }
-        });
+        });*/
 
 
         absensi_masuk.setOnClickListener(new View.OnClickListener() {
@@ -471,7 +462,7 @@ public class fragment_home extends Fragment {
                                 RequestOptions requestOptions = new RequestOptions()
                                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                                         .skipMemoryCache(true);
-                                Glide.with(getActivity()).load(api.get_url_foto_profil(kyano,data)).thumbnail(Glide.with(getActivity()).load(R.drawable.loading)).apply(requestOptions).into(ic_user_account);
+                                //Glide.with(getActivity()).load(api.get_url_foto_profil(kyano,data)).thumbnail(Glide.with(getActivity()).load(R.drawable.loading)).apply(requestOptions).into(ic_user_account);
                             } else {
                                 Log.d("ERROR_foto_profil", "onResponse: ");
                             }

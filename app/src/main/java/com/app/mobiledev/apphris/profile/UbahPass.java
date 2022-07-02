@@ -28,6 +28,7 @@ import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.login;
+import com.app.mobiledev.apphris.main_fragment;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.mindorks.paracamera.Camera;
@@ -76,18 +77,15 @@ public class UbahPass extends AppCompatActivity {
         mToolbar = findViewById(R.id.toolbar_abs);
         tlNama=findViewById(R.id.tlNama);
 
+        mToolbar = findViewById(R.id.toolbarUbahFoto);
         mToolbar.setTitle("Ubah Password");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Loading ...");
         AndroidNetworking.initialize(getApplicationContext());
-
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         sessionmanager = new SessionManager(UbahPass.this);
         kyano=sessionmanager.getIdUser();
@@ -167,8 +165,8 @@ public class UbahPass extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent2 = new Intent(UbahPass.this, profil.class);
-        startActivity(intent2);
+        Intent intent = new Intent(UbahPass.this, main_fragment.class);
+        startActivity(intent);
         finish();
     }
 
@@ -193,8 +191,8 @@ public class UbahPass extends AppCompatActivity {
                                             @Override
                                             public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                 sessionmanager.logout();
-                                                Intent intent2 = new Intent(UbahPass.this, login.class);
-                                                startActivity(intent2);
+                                                Intent intent = new Intent(UbahPass.this, login.class);
+                                                startActivity(intent);
                                                 Toast.makeText(UbahPass.this, "Password anda berhasil diubah", Toast.LENGTH_SHORT).show();
                                                 Toast.makeText(UbahPass.this, "Silakan login kembali", Toast.LENGTH_SHORT).show();
                                                 sessionmanager.logout();

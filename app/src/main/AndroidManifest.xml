@@ -438,11 +438,6 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".profile.profil"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
             android:name=".fragment_home"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"

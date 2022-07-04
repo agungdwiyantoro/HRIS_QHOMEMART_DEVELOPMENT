@@ -54,7 +54,7 @@
     </LinearLayout>
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         app:cardElevation="0dp"
         android:backgroundTint="@color/white"
         android:layout_marginStart="15dp"
@@ -92,6 +92,6 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

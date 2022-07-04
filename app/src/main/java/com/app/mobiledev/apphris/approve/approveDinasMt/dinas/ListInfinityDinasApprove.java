@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +28,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.app.mobiledev.apphris.Model.modelIzinDnsNew;
 import com.app.mobiledev.apphris.Model.modelIzinDnsNew;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
@@ -47,7 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class ListInfinityDinasApprove extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ListInfinityDinasApprove extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     Spinner dropdown;
     RecyclerView recyler_izin_sakit;

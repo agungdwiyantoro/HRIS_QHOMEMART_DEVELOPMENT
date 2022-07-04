@@ -168,12 +168,12 @@
                 android:textColor="@color/white" />
         </RadioGroup>
 
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.CoordinatorLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -205,7 +205,7 @@
 
                 </com.facebook.shimmer.ShimmerFrameLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyler_izin_sakit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -213,10 +213,10 @@
                     android:visibility="gone"
                     tools:listitem="@layout/list_riwayat_izin_sakit_approve_head" />
 
-            </android.support.design.widget.CoordinatorLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     </LinearLayout>

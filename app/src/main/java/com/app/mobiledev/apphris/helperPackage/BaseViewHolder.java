@@ -1,7 +1,7 @@
 package com.app.mobiledev.apphris.helperPackage;
 
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder {

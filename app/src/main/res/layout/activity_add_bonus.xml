@@ -44,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="10dp"
@@ -58,7 +58,7 @@
                         android:paddingBottom="10dp"
                         android:orientation="vertical">
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/image"
                             android:layout_gravity="center"
                             android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                             android:textSize="16sp" />
 
 
-                        <android.support.design.widget.CoordinatorLayout
+                        <androidx.coordinatorlayout.widget.CoordinatorLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="8dp"
@@ -154,10 +154,10 @@
                                 android:layout_marginRight="8dp"
                                 />
 
-                        </android.support.design.widget.CoordinatorLayout>
+                        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="18dp"
@@ -176,11 +176,11 @@
                                 android:textSize="18sp"
                                 />
 
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
                     </LinearLayout>
 
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
 
 

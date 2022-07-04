@@ -1,8 +1,6 @@
 package com.app.mobiledev.apphris.pdfHelper;
 import android.content.Context;
-import android.support.annotation.NonNull;
-
-import com.app.mobiledev.apphris.api.api;
+import androidx.annotation.NonNull;
 
 
 import java.io.File;

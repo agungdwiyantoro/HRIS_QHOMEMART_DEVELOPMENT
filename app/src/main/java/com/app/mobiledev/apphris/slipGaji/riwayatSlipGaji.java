@@ -1,11 +1,11 @@
 package com.app.mobiledev.apphris.slipGaji;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
@@ -15,9 +15,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
-import com.app.mobiledev.apphris.helperPackage.helper;
-import com.app.mobiledev.apphris.riwayat_absen.adapterRiwayatAbsen;
-import com.app.mobiledev.apphris.riwayat_absen.modelRiwayatAbsen;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
 import org.json.JSONArray;
@@ -26,9 +23,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 
 public class riwayatSlipGaji extends AppCompatActivity {
 

@@ -127,7 +127,7 @@
 
             <!--HEAD START-->
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cvSakitApprove"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,9 +163,9 @@
                         android:layout_marginTop="16dp"
                         />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cvCutiApprove"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -201,9 +201,9 @@
                         android:layout_marginTop="16dp"
                         />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cvMtDinasApprove"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -239,7 +239,7 @@
                         android:layout_marginTop="16dp"
                         />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <!--HEAD END-->
 <!--

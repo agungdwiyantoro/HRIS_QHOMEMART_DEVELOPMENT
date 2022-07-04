@@ -40,7 +40,7 @@
         android:padding="16dp"
         >
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cvJenisVerMT"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -75,7 +75,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
@@ -86,7 +86,7 @@
         android:padding="16dp"
         >
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cvJenisVerDinas"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -121,7 +121,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

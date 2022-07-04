@@ -1,14 +1,12 @@
 package com.app.mobiledev.apphris.izin;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.izin.izinCuti.ListInfinityCutiEmp;

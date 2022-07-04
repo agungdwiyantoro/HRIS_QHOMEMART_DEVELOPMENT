@@ -3,9 +3,9 @@ package com.app.mobiledev.apphris.slipGaji;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.mobiledev.apphris.R;
-import com.app.mobiledev.apphris.memo.DetailMemo;
-import com.app.mobiledev.apphris.riwayat_cuti.adapterCuti;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

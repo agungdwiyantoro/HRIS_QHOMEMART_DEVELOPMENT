@@ -122,19 +122,12 @@ public class helper extends AsyncTask {
         }
     }
 
-    public static String format_tgl(String tgl) {
-        if (!tgl.equals("")) {
-            return tgl.substring(6, 8) + "/" + tgl.substring(4, 6) + "/" + tgl.substring(0, 4);
-        } else {
-            return "";
-        }
-    }
-
     public static  void disabledEditText(EditText edit){
         edit.setFocusable(false);
         edit.setCursorVisible(false);
         edit.setKeyListener(null);
     }
+
     public static void update(final String versi, final Context mctx) {
         AndroidNetworking.post(api.URL_get_url_version)
                 .addBodyParameter("versi", versi)
@@ -171,24 +164,6 @@ public class helper extends AsyncTask {
                 });
     }
 
-    public static String getLocalIpAddress() {
-        try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
-                 en.hasMoreElements(); ) {
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress()) {
-                        return inetAddress.getHostAddress();
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            Log.e("IP Address", ex.toString());
-        }
-        return null;
-    }
-
     public static void showMsg(Context context, String title, String msg) {
         showMsg(context, title, msg, NORMAL_TYPE);
     }
@@ -196,7 +171,6 @@ public class helper extends AsyncTask {
     public static void showMsg(Context context, String title, String msg, SweetAlertDialog.OnSweetClickListener callback) {
         showMsg(context, title, msg, helper.NORMAL_TYPE, callback);
     }
-
 
     public static void showMsg(Context context, String title, String msg, int type) {
         new SweetAlertDialog(context, type)
@@ -218,28 +192,6 @@ public class helper extends AsyncTask {
                 .setContentText(msg).show();
     }
 
-    public static String getMacAddress(Context context) {
-        WifiManager wimanager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        String macAddress = wimanager.getConnectionInfo().getMacAddress();
-        if (macAddress == null) {
-            showMsg(context, "Informasi", "hidupkan wifi", NORMAL_TYPE);
-        }
-        return macAddress;
-    }
-
-
-    public static String getKodeIme(Context ctx) {
-        String ts = Context.TELEPHONY_SERVICE;
-        String imei = "";
-        TelephonyManager mTelephonyMgr = (TelephonyManager) ctx.getSystemService(ts);
-        if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("CEK_IMEI", "getKodeIme: " + imei);
-
-        }
-        imei = mTelephonyMgr.getDeviceId();
-        return imei;
-    }
-
     public static void requestPermissions(Context ctx) {
         boolean shouldProvideRationale =
                 ActivityCompat.shouldShowRequestPermissionRationale((Activity) ctx,
@@ -255,36 +207,6 @@ public class helper extends AsyncTask {
                     REQUEST_READ_PHONE_STATE);
         }
     }
-
-
-    public static String getMacAddr() {
-        try {
-            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface nif : all) {
-                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
-
-                byte[] macBytes = nif.getHardwareAddress();
-                if (macBytes == null) {
-                    return "";
-                }
-                StringBuilder res1 = new StringBuilder();
-                for (byte b : macBytes) {
-                    String hex = Integer.toHexString(b & 0xFF);
-                    if (hex.length() == 1)
-                        hex = "0".concat(hex);
-                    res1.append(hex.concat(":"));
-                }
-
-                if (res1.length() > 0) {
-                    res1.deleteCharAt(res1.length() - 1);
-                }
-                return res1.toString();
-            }
-        } catch (Exception ex) {
-        }
-        return "";
-    }
-
 
     public static void requestPermissionsGps(Context ctx) {
         boolean shouldProvideRationale =

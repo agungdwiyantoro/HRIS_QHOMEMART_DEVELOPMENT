@@ -280,23 +280,20 @@ public class formIzinCuti extends AppCompatActivity {
                 }
             } else if (spinJenisSelected.substring(0,2).equals("10")) {
 
-                if (kuotaCuti.contains(",")) {
-                    splitKuotaCuti = kuotaCuti.split(",")[0];
-                    Log.d("TAG_TEST_CONVERT", "onCreate: "+splitKuotaCuti);
+                Log.d("TAG_GET_KUOTA_SPINNER", "onResponse: Kuota Cuti: "+kuotaCuti+" Spinner Selected: "+spinJenisSelected);
 
-                    if (list.size() > Integer.parseInt(splitKuotaCuti)) {
-                        showToast("Tanggal melebihi batas Cuti Tahunan");
-                    } else {
-                        getAfterCheckDateSelected();
+                if (kuotaCuti.equals("0")) {
+                    if (list.size() > Integer.parseInt(kuotaCuti)) {
+                        showToast("Anda belum memperoleh Cuti Tahunan");
                     }
-
                 } else {
                     if (list.size() > Integer.parseInt(kuotaCuti)) {
-                        showToast("Tanggal melebihi batas Cuti Tahunan");
+                        showToast("Tanggal melebihi sisa Cuti Tahunan");
                     } else {
                         getAfterCheckDateSelected();
                     }
                 }
+
             }
 
         });
@@ -404,6 +401,16 @@ public class formIzinCuti extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (llViewCalendar.getVisibility() == View.VISIBLE) {
+            llViewCalendar.setVisibility(View.GONE);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     private void getAfterCheckDateSelected() {
         etTglCuti.setText(list.toString().replace("[", "").replace("]", ""));
         calendar.setVisibility(View.GONE);
@@ -414,7 +421,7 @@ public class formIzinCuti extends AppCompatActivity {
     }
 
     private void showToast(String text) {
-        Toast.makeText(formIzinCuti.this, text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(formIzinCuti.this, text, Toast.LENGTH_LONG).show();
     }
 
     private void getJenisCuti() {
@@ -530,7 +537,15 @@ public class formIzinCuti extends AppCompatActivity {
                         try {
                             JSONObject object = response.getJSONObject("message");
                             kuotaCuti = object.getString("sisa_cuti");
-                            tvSisaCuti.setText(kuotaCuti.split(",")[0]+" Hari");
+                            //kuotaCuti = "";
+
+                            if (kuotaCuti.isEmpty() || kuotaCuti.equals("")) {
+                                kuotaCuti = "0";
+                                tvSisaCuti.setText(kuotaCuti+" Hari");
+                            } else {
+                                tvSisaCuti.setText(kuotaCuti+" Hari");
+                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -553,11 +568,12 @@ public class formIzinCuti extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("TAG_GET_KUOTA", "onResponse: "+response);
+
                         try {
                             JSONObject object = response.getJSONObject("message");
                             hakCuti = object.getString("hak_cuti");
                             tvHakCuti.setText(hakCuti+" Hari");
+                            Log.d("TAG_GET_HAK_CUTI", "onResponse: "+hakCuti);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

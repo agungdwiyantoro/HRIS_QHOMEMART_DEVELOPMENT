@@ -137,7 +137,13 @@ public class login extends AppCompatActivity {
                     //mProgressDialog.show();
                     validIDUser.setErrorEnabled(false);
                     validPassword.setErrorEnabled(false);
-                    auth_user(id_user, password);
+
+                    if (token.isEmpty() || token == null || token.equals("")) {
+                        helper.showMsg(login.this, "Peringatan", "Login Gagal, silakan coba beberapa saat lagi", helper.WARNING_TYPE);
+                    } else {
+                        auth_user(id_user, password);
+                    }
+
                 }
             }
         });
@@ -218,7 +224,7 @@ public class login extends AppCompatActivity {
                     e.printStackTrace();
                     Log.d("DATA_JSONEXCEPION", "onResponse: " + e);
 
-                    helper.showMsg(login.this, "Peringatan", "" + helper.PESAN_KONEKSI, helper.ERROR_TYPE);
+                    helper.showMsg(login.this, "Peringatan", "" + e.getMessage()/*helper.PESAN_KONEKSI*/, helper.ERROR_TYPE);
                 }
             }
         },
@@ -227,7 +233,8 @@ public class login extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         mProgressDialog.dismiss();
                         Log.d("DATA_JSONEXCEPION", "onResponse: " + error);
-                        helper.showMsg(login.this, "Peringatan", "" + helper.PESAN_KONEKSI, helper.ERROR_TYPE);
+
+                        helper.showMsg(login.this, "Peringatan", "" + error.toString() /*helper.PESAN_KONEKSI*/, helper.ERROR_TYPE);
                     }
                 }) {
             @RequiresApi(api = Build.VERSION_CODES.M)
@@ -366,14 +373,14 @@ public class login extends AppCompatActivity {
                             mProgressDialog.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            helper.showMsg(login.this, "Peringatan", "" + helper.PESAN_SERVER, helper.ERROR_TYPE);
+                            helper.showMsg(login.this, "Peringatan", "" + e.getMessage()/*helper.PESAN_SERVER*/, helper.ERROR_TYPE);
                             mProgressDialog.dismiss();
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        helper.showMsg(login.this, "Peringatan", "" + helper.PESAN_KONEKSI, helper.ERROR_TYPE);
+                        helper.showMsg(login.this, "Peringatan", "" + anError.getErrorCode()/*helper.PESAN_KONEKSI*/, helper.ERROR_TYPE);
                         mProgressDialog.dismiss();
                     }
                 });

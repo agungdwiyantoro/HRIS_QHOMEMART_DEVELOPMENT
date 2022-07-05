@@ -158,7 +158,7 @@ public class main_fragment extends AppCompatActivity implements BottomNavigation
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-        cekGps();
+        //cekGps();
 //        Intent background = new Intent(this, services_notif.class);
 //        stopService(background);
 //        startService(background);
@@ -191,13 +191,13 @@ public class main_fragment extends AppCompatActivity implements BottomNavigation
             fragment = new fragment_home();
             callFragment(fragment);
         }
-        new GpsUtils(this).turnGPSOn(new GpsUtils.onGpsListener() {
+        /*new GpsUtils(this).turnGPSOn(new GpsUtils.onGpsListener() {
             @Override
             public void gpsStatus(boolean isGPSEnable) {
                 isGPS = isGPSEnable;
 
             }
-        });
+        });*/
 
         helper.requestPermissionsGps(main_fragment.this);
         requestReadPhoneStatePermission();
@@ -352,15 +352,13 @@ public class main_fragment extends AppCompatActivity implements BottomNavigation
             } else {
                 new SweetAlertDialog(main_fragment.this, SweetAlertDialog.WARNING_TYPE)
                         .setTitleText("Informasi")
-                        .setContentText("aktifkan Gps anda terlebih dahulu")
+                        .setContentText("GPS anda masih belum aktif")
                         .setConfirmText("OK")
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                finish();
-                                moveTaskToBack(true);
-                                android.os.Process.killProcess(android.os.Process.myPid());
-                                System.exit(1);
+                                Intent intent3 = new Intent(main_fragment.this, login.class);
+                                startActivity(intent3);
                             }
                         }).show();
 
@@ -591,13 +589,13 @@ public class main_fragment extends AppCompatActivity implements BottomNavigation
                                     String npwp = data.getString("npwp");
                                     String tgl_masuk = data.getString("kytglmasuk");
                                     String kyemail = data.getString("kyemail");
-                                    String kyalamat_skrang = data.getString("");
+                                    //String kyalamat_skrang = data.getString("");
                                     String hashtag = data.getString("hashtag");
                                     String kyjenis = data.getString("kyjenis");
                                     String kytptlhr = data.getString("kytptlhr");
                                     Log.d("CEK_TGL_LAHIRKU", "loadprofile: " + kytgllahir);
                                     sessionmanager.Sessionprofile(nik, kynm, kyjenis, hashtag, kyjk, kyagama, kytptlhr, kytgllahir,
-                                            kystatus_kerja, kyalamat, kyhp, jbano, dvano, npwp, tgl_masuk, kyemail, kyalamat_skrang);
+                                            kystatus_kerja, kyalamat, kyhp, jbano, dvano, npwp, tgl_masuk, kyemail, "");
                                 }
                             } else {
                                 notifDialogResign();

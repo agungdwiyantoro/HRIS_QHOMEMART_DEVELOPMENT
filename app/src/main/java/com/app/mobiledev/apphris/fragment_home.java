@@ -146,10 +146,10 @@ public class fragment_home extends Fragment {
         //getMemo();
 
         AndroidNetworking.initialize(getActivity());
-        String locationProviders = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        /*String locationProviders = Settings.Secure.getString(getActivity().getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
         if (locationProviders == null || locationProviders.equals("")) {
             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-        }
+        }*/
 
         /*txBantuan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +227,7 @@ public class fragment_home extends Fragment {
 
             }
         });
-        helper.requestPermissionsGps(getActivity());
+        //helper.requestPermissionsGps(getActivity());
         notifUpdateData();
 
         return rootView;

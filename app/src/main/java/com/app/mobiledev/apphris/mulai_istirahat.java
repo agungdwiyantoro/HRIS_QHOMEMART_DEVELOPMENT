@@ -37,6 +37,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.cek_gps.GpsUtils;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -92,7 +93,7 @@ public class mulai_istirahat extends AppCompatActivity implements OnMapReadyCall
     //===maps//
     private GoogleMap mMap;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 34;
-    private Boolean mLocationPermissionGranted=false;
+    private Boolean mLocationPermissionGranted=false, isGPS = false;
     private LocationRequest mLastKnownLocation;
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest mLocationRequest;
@@ -209,11 +210,18 @@ public class mulai_istirahat extends AppCompatActivity implements OnMapReadyCall
         mapFragment.getMapAsync(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        String locationProviders = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        /*String locationProviders = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
         if (locationProviders == null || locationProviders.equals("")) {
             startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-        }
+        }*/
 
+        new GpsUtils(this).turnGPSOn(new GpsUtils.onGpsListener() {
+            @Override
+            public void gpsStatus(boolean isGPSEnable) {
+                isGPS = isGPSEnable;
+
+            }
+        });
 
         locationCallback = new LocationCallback(){
             @Override

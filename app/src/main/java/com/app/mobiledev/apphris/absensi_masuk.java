@@ -337,7 +337,7 @@ public class absensi_masuk extends AppCompatActivity implements OnMapReadyCallba
                 Bitmap bitmap= (Bitmap) data.getExtras().get("data");
                 image.setImageBitmap(bitmap);
                 imageFoto=bitmap;
-                imageFoto=Bitmap.createScaledBitmap(imageFoto, 500, 500, false);
+                imageFoto=Bitmap.createScaledBitmap(imageFoto, 360, 540, false);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 imageFoto.compress(Bitmap.CompressFormat.PNG, 50, bytes);
                 encodedimage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);

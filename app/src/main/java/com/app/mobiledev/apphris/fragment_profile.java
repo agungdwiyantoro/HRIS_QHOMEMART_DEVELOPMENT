@@ -5,8 +5,13 @@ import android.app.ProgressDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.cardview.widget.CardView;
+
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +41,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
+
 public class fragment_profile extends Fragment {
     public fragment_profile() {
     }
@@ -43,23 +50,23 @@ public class fragment_profile extends Fragment {
     private TextView txNama, txNik, txDivisi, txHastag, txJabatan, txUpdate;
 
     private SessionManager sessionmanager;
-    private String kyano,namas,namaLengkap,cekStaff,password, hastag, nik, divisi, jabatan;
+    private String kyano, namas, namaLengkap, cekStaff, password, hastag, nik, divisi, jabatan, no_admin;
 
     private ProgressDialog mProgressDialog;
-    private String url_foto="";
+    private String url_foto = "";
 
-    private CardView cvUpdateDataDiri, cvPerjanjianKerja, cvUbahPassword;
-    private ImageView foto_profil;
-    private Button btnSubmit, btnCancel;
+    private CardView cvUpdateDataDiri, cvPerjanjianKerja, cvUbahPassword, cvBantuan;
+    private ImageView foto_profil, ivClose;
+    private Button btnSubmit, btnCancel, btnOpenSetting, btnGuide, btnWa;
 
-    private LinearLayout llLogout, llOverlayKonfirmasi;
+    private LinearLayout llLogout, llOverlayKonfirmasi, llUserGuide, llHelpOption;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_profil_new, container, false);
 
-        foto_profil=rootView.findViewById(R.id.foto_profil);
+        foto_profil = rootView.findViewById(R.id.foto_profil);
         //txNik = rootView.findViewById(R.id.txtNik);
         txNama = rootView.findViewById(R.id.txtNamaFull);
         txDivisi = rootView.findViewById(R.id.txtDivisi);
@@ -69,11 +76,18 @@ public class fragment_profile extends Fragment {
         llLogout = rootView.findViewById(R.id.llLogout);
         btnSubmit = rootView.findViewById(R.id.btnSubmit);
         btnCancel = rootView.findViewById(R.id.btnCancel);
+        btnOpenSetting = rootView.findViewById(R.id.btnOpenSettingSystem);
+        btnGuide = rootView.findViewById(R.id.btnGuide);
+        btnWa = rootView.findViewById(R.id.btnWa);
+        ivClose = rootView.findViewById(R.id.ivClose);
         llOverlayKonfirmasi = rootView.findViewById(R.id.llOverlayKonfirmasi);
+        llUserGuide = rootView.findViewById(R.id.llUserGuide);
+        llHelpOption = rootView.findViewById(R.id.llHelpOption);
 
         cvUpdateDataDiri = rootView.findViewById(R.id.cvUpdateDataDiri);
         cvUbahPassword = rootView.findViewById(R.id.cvUbahPassword);
         cvPerjanjianKerja = rootView.findViewById(R.id.cvPerjanjianKerja);
+        cvBantuan = rootView.findViewById(R.id.cvBantuan);
 
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Loading ...");
@@ -81,20 +95,20 @@ public class fragment_profile extends Fragment {
 
 
         sessionmanager = new SessionManager(getActivity());
-        kyano       = sessionmanager.getIdUser();
-        nik         = sessionmanager.getNik();
-        namas       = sessionmanager.getUsername();
-        password    = sessionmanager.getPass();
+        kyano = sessionmanager.getIdUser();
+        nik = sessionmanager.getNik();
+        namas = sessionmanager.getUsername();
+        password = sessionmanager.getPass();
         namaLengkap = sessionmanager.getNamaLEngkap();
-        cekStaff    = sessionmanager.getCekStaff();
-        hastag      = sessionmanager.getHashtag();
+        cekStaff = sessionmanager.getCekStaff();
+        hastag = sessionmanager.getHashtag();
 
         getInformasiKaryawan(kyano);
 
         //txNik.setText(nik);
         txNama.setText(namaLengkap);
         txDivisi.setText(cekStaff);
-        txHastag.setText("#"+hastag);
+        txHastag.setText("#" + hastag);
         txHastag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,10 +118,12 @@ public class fragment_profile extends Fragment {
             }
         });
 
-        Log.d("DATA_DIRI", "onCreate: "+password+" USER : "+namaLengkap+" NIK : "+cekStaff+" HASTAG : "+hastag);
+        Log.d("DATA_DIRI", "onCreate: " + password + " USER : " + namaLengkap + " NIK : " + cekStaff + " HASTAG : " + hastag);
         mProgressDialog.show();
 
         getlImageProfil(kyano);
+
+        no_admin = sessionmanager.getNo_hp_admin();
 
         foto_profil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,10 +195,57 @@ public class fragment_profile extends Fragment {
             }
         });
 
+        btnOpenSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
+
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llUserGuide.setVisibility(View.GONE);
+            }
+        });
+
+        cvBantuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llHelpOption.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llUserGuide.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnWa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWhatsApp(no_admin, "(NIK)-(Nama Lengkap) : ");
+            }
+        });
+
+        llHelpOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llHelpOption.setVisibility(View.GONE
+                );
+            }
+        });
+
         return rootView;
     }
 
-    private void getlImageProfil(final String kyano){
+    private void getlImageProfil(final String kyano) {
         AndroidNetworking.post(api.URL_getfoto_profil)
                 .addBodyParameter("kyano", kyano)
                 .addBodyParameter("key", api.key)
@@ -195,34 +258,34 @@ public class fragment_profile extends Fragment {
                             Boolean success = response.getBoolean("status");
                             String data = response.getString("data");
                             if (success) {
-                                url_foto=data;
+                                url_foto = data;
                                 RequestOptions requestOptions = new RequestOptions()
                                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                                         .skipMemoryCache(true);
-                                Glide.with(getActivity()).load(api.get_url_foto_profil(kyano,url_foto)).apply(requestOptions).into(foto_profil);
+                                Glide.with(getActivity()).load(api.get_url_foto_profil(kyano, url_foto)).apply(requestOptions).into(foto_profil);
                             } else {
-                                Log.d("", "onResponse: "+data);
+                                Log.d("", "onResponse: " + data);
                             }
 
                             mProgressDialog.dismiss();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.d("JSONERORABSEN", "onResponse: "+e);
-                            helper.showMsg(getActivity(), "Peringatan", ""+helper.PESAN_SERVER, helper.ERROR_TYPE);
+                            Log.d("JSONERORABSEN", "onResponse: " + e);
+                            helper.showMsg(getActivity(), "Peringatan", "" + helper.PESAN_SERVER, helper.ERROR_TYPE);
                             mProgressDialog.dismiss();
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        helper.showMsg(getActivity(), "Peringatan", ""+helper.PESAN_KONEKSI, helper.ERROR_TYPE);
-                        Log.d("EROOR_EXCEPTION", "onError: "+anError);
+                        helper.showMsg(getActivity(), "Peringatan", "" + helper.PESAN_KONEKSI, helper.ERROR_TYPE);
+                        Log.d("EROOR_EXCEPTION", "onError: " + anError);
                         mProgressDialog.dismiss();
                     }
                 });
     }
 
-    private void getInformasiKaryawan(final String kyano){
+    private void getInformasiKaryawan(final String kyano) {
         AndroidNetworking.post(api.URL_informasiKaryawan)
                 .addBodyParameter("kyano", kyano)
                 .addBodyParameter("key", api.key)
@@ -237,19 +300,19 @@ public class fragment_profile extends Fragment {
                                 JSONArray jsonArray = response.getJSONArray("data");
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
-                                    String kyano=data.getString("kyano");
-                                    String nik=data.getString("nik");
-                                    String kynm=data.getString("kynm");
-                                    String kyjk=data.getString("kyjk");
-                                    String kyagama=data.getString("kyagama");
-                                    String kytgllahir=data.getString("kytgllhr");
-                                    String kystatus_kerja=data.getString("kystatus_kerja");
-                                    String kyalamat=data.getString("kyalamat");
-                                    String kyhp=data.getString("kyhp");
-                                    String jbnama=data.getString("jbnama");
-                                    String dvnama=data.getString("dvnama");
-                                    String jbano=data.getString("jbano");
-                                    String dvano=data.getString("dvano");
+                                    String kyano = data.getString("kyano");
+                                    String nik = data.getString("nik");
+                                    String kynm = data.getString("kynm");
+                                    String kyjk = data.getString("kyjk");
+                                    String kyagama = data.getString("kyagama");
+                                    String kytgllahir = data.getString("kytgllhr");
+                                    String kystatus_kerja = data.getString("kystatus_kerja");
+                                    String kyalamat = data.getString("kyalamat");
+                                    String kyhp = data.getString("kyhp");
+                                    String jbnama = data.getString("jbnama");
+                                    String dvnama = data.getString("dvnama");
+                                    String jbano = data.getString("jbano");
+                                    String dvano = data.getString("dvano");
 
                                     if (dvnama.equals("BUMI BERLIAN MEGA INDONESIA")) {
                                         txDivisi.setText("BBMI");
@@ -260,26 +323,34 @@ public class fragment_profile extends Fragment {
                                     txJabatan.setText(jbnama);
 
                                 }
-                            }else{
-                                Log.d("DATA_BOOLEAN", "onResponse: "+success);
+                            } else {
+                                Log.d("DATA_BOOLEAN", "onResponse: " + success);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.d("JSONERORABSEN", "onResponse: "+e);
-                            helper.showMsg(getActivity(), "Peringatan", ""+helper.PESAN_SERVER, helper.ERROR_TYPE);
+                            Log.d("JSONERORABSEN", "onResponse: " + e);
+                            helper.showMsg(getActivity(), "Peringatan", "" + helper.PESAN_SERVER, helper.ERROR_TYPE);
                         }
                     }
 
                     @Override
                     public void onError(ANError anError) {
-                        helper.showMsg(getActivity(), "Peringatan", ""+helper.PESAN_KONEKSI, helper.ERROR_TYPE);
-                        Log.d("EROOR_EXCEPTION", "onError: "+anError);
+                        helper.showMsg(getActivity(), "Peringatan", "" + helper.PESAN_KONEKSI, helper.ERROR_TYPE);
+                        Log.d("EROOR_EXCEPTION", "onError: " + anError);
 
                     }
                 });
 
     }
 
-
+    private void openWhatsApp(String number, String msg) {
+        try {
+            //mobile = /*"6288902829423"*/number;
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone=" + number + "&text=" + msg)));
+        }catch (Exception e){
+            //whatsapp app not install
+            Toast.makeText(getActivity(), "Whatsapp app not installed in your phone", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }

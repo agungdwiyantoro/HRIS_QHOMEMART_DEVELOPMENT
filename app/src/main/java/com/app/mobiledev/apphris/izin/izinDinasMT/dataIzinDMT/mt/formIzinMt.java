@@ -270,6 +270,8 @@ public class formIzinMt extends AppCompatActivity {
                         Toast.makeText(formIzinMt.this, "Ukuran foto adalah " + fileSizeInKB + " Kb", toast.LENGTH_SHORT).show();
 
                         Log.d("TAG1", "onActivityResult: " + chosedfile.toString());
+
+                        compressedImageFile = chosedfile;
                     } else {
 
                         compressedImageFile =
@@ -313,7 +315,7 @@ public class formIzinMt extends AppCompatActivity {
         tglMt = edit_tgl_mt.getText().toString();
         mulaiMt = edit_mulai.getText().toString();
         selesaiMt = edit_selesai.getText().toString();
-        //catatan = edit_catatan.getText().toString().trim();
+        catatan = edit_catatan.getText().toString().trim();
         nameImage = tx_image_name.getText().toString();
 
         if (keperluanMt.isEmpty()) {

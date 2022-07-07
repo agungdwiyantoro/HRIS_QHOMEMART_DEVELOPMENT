@@ -380,6 +380,9 @@ public class formIzinDinas extends AppCompatActivity {
                         Toast.makeText(formIzinDinas.this, "Ukuran foto adalah " + fileSizeInKB + " Kb", toast.LENGTH_SHORT).show();
 
                         Log.d("TAG1", "onActivityResult: " + chosedfile.toString());
+
+                        compressedImageFile = chosedfile;
+
                     } else {
 
                         compressedImageFile =
@@ -540,7 +543,7 @@ public class formIzinDinas extends AppCompatActivity {
                 .addMultipartParameter("jam", _mulai)
                 .addMultipartParameter("sampai", _selesai)
                 .addMultipartParameter("kepentingan", _keperluan)
-                .addMultipartParameter("ket", _catatan)
+                .addMultipartParameter("catatan", _catatan)
                 .addMultipartFile("lampiran_file", _file)
                 .addMultipartParameter("option", "1")
                 .addMultipartParameter("jenis", "DNS")

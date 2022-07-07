@@ -262,6 +262,9 @@ public class formIzinSakit extends AppCompatActivity {
                         Toast.makeText(formIzinSakit.this, "Ukuran foto adalah "+fileSizeInKB+" Kb", toast.LENGTH_SHORT).show();
 
                         Log.d("TAG1", "onActivityResult: "+chosedfile.toString());
+
+                        compressedImageFile = chosedfile;
+
                     } else {
 
                         compressedImageFile =

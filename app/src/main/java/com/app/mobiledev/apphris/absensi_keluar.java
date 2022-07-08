@@ -265,7 +265,7 @@ public class absensi_keluar extends AppCompatActivity implements OnMapReadyCallb
                 Bitmap bitmap= (Bitmap) data.getExtras().get("data");
                 image.setImageBitmap(bitmap);
                 imageFoto=bitmap;
-                imageFoto=Bitmap.createScaledBitmap(imageFoto, 360, 540, false);
+
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 imageFoto.compress(Bitmap.CompressFormat.PNG, 50, bytes);
                 encodedImage = Base64.encodeToString(bytes.toByteArray(), Base64.DEFAULT);

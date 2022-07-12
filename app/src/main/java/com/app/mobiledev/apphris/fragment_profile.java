@@ -230,7 +230,7 @@ public class fragment_profile extends Fragment {
         btnWa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openWhatsApp(no_admin, "(NIK)-(Nama Lengkap) : ");
+                openWhatsApp(no_admin, "NIK : "+nik+"\nNama Lengkap : "+namaLengkap+"\nKendala : \n");
             }
         });
 

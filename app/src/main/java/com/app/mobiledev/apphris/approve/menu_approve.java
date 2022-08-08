@@ -24,6 +24,7 @@ import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.approve.approveCutiNew.ListInfinityCutiApprove;
 import com.app.mobiledev.apphris.approve.approveDinasMt.ApproveDinasMT;
+import com.app.mobiledev.apphris.approve.approveOffTerlambat.ApproveOffTerlambat;
 import com.app.mobiledev.apphris.approve.approveSakitNew.ListInfinitySakitApprove;
 import com.app.mobiledev.apphris.sesion.SessionManager;
 
@@ -34,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class menu_approve extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    CardView cvSakitApprove, cvMtDinasApprove, cvCutiApprove;
+    CardView cvSakitApprove, cvMtDinasApprove, cvCutiApprove, cvOffTerlambat;
     private SessionManager session;
     private String token, spinSelected, spinResult="HRD", noJabatan, appHead, appExec, appDirect, appHRD, hak_akses="";
     private SessionManager msession;
@@ -63,6 +64,7 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         cvSakitApprove = findViewById(R.id.cvSakitApprove);
         cvCutiApprove = findViewById(R.id.cvCutiApprove);
         cvMtDinasApprove = findViewById(R.id.cvMtDinasApprove);
+        cvOffTerlambat = findViewById(R.id.cvOffTerlambat);
         cvMtDinasApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +141,13 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
             }
         });
 
+        cvOffTerlambat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkMenu("OffTerlambat");
+            }
+        });
+
     }
 
     void checkMenu(String menu){
@@ -202,6 +211,13 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         startActivity(intent);
                                     }
 
+                                    else if (menu.equals("OffTerlambat")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveOffTerlambat.class);
+                                        intent.putExtra("kyJabatan", "HEAD");
+                                        startActivity(intent);
+                                    }
+
+
                                 } else if(hak_akses.equals("EXECUTIV")){
                                     if (menu.equals("sakit")) {
                                         Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
@@ -213,6 +229,12 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         startActivity(intent);
                                     } else if (menu.equals("dinasMt")) {
                                         Intent intent = new Intent(menu_approve.this, ApproveDinasMT.class);
+                                        intent.putExtra("kyJabatan", "EXECUTIV");
+                                        startActivity(intent);
+                                    }
+
+                                    else if (menu.equals("OffTerlambat")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveOffTerlambat.class);
                                         intent.putExtra("kyJabatan", "EXECUTIV");
                                         startActivity(intent);
                                     }
@@ -230,6 +252,12 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         intent.putExtra("kyJabatan", "DIRECTUR");
                                         startActivity(intent);
                                     }
+
+                                    else if (menu.equals("OffTerlambat")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveOffTerlambat.class);
+                                        intent.putExtra("kyJabatan", "DIRECTUR");
+                                        startActivity(intent);
+                                    }
                                 } else if(hak_akses.equals("HRD")){
                                     if (menu.equals("sakit")) {
                                         Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
@@ -244,6 +272,12 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         intent.putExtra("kyJabatan", "HRD");
                                         startActivity(intent);
                                     }
+
+                                    else if (menu.equals("OffTerlambat")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveOffTerlambat.class);
+                                        intent.putExtra("kyJabatan", "HRD");
+                                        startActivity(intent);
+                                    }
                                 } else if(hak_akses.equals("EXECUTIV,DIRECTUR,HRD")){
                                     if (menu.equals("sakit")) {
                                         Intent intent = new Intent(menu_approve.this, ListInfinitySakitApprove.class);
@@ -255,6 +289,12 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
                                         startActivity(intent);
                                     } else if (menu.equals("dinasMt")) {
                                         Intent intent = new Intent(menu_approve.this, ApproveDinasMT.class);
+                                        intent.putExtra("kyJabatan", "EXECUTIV,DIRECTUR,HRD");
+                                        startActivity(intent);
+                                    }
+
+                                    else if (menu.equals("OffTerlambat")) {
+                                        Intent intent = new Intent(menu_approve.this, ApproveOffTerlambat.class);
                                         intent.putExtra("kyJabatan", "EXECUTIV,DIRECTUR,HRD");
                                         startActivity(intent);
                                     }
@@ -324,5 +364,4 @@ public class menu_approve extends AppCompatActivity implements SwipeRefreshLayou
         }
 
     }
-
 }

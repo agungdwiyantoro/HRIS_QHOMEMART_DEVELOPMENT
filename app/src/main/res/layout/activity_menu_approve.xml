@@ -241,6 +241,43 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvOffTerlambat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="?android:selectableItemBackground"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="4dp"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/telat" />
+
+                    <TextView
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom|center"
+                        android:text="@string/OffdanTerlambat"
+                        android:textColor="@color/second_color_black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="16dp"
+                        />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
             <!--HEAD END-->
 <!--
 

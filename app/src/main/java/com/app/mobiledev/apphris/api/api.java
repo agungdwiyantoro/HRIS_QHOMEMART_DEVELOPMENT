@@ -135,6 +135,12 @@ public class api {
     public static final String URL_getKecamatan = "http://192.168.8.74/svn_all/hris/wilayah/kecamatan?kode=";
     public static final String URL_getKelurahan = "http://192.168.8.74/svn_all/hris/wilayah/kelurahan?kode=";
 
+    public static final String URL_getIzinOff = ip.getIp() + "izinoff/";
+    public  static  final String URL_IzinOffTerlambat_approve=ip.getIp()+"approve_OT";
+
+
+    public  static  final String URL_IzinTelat_jenis=ip.getIp()+"jenis_telat";
+
 public static  String get_url_foto_profil(String kyano,String url_foto){
     String url=api.URL_foto_profil+kyano+"/foto_profil/"+url_foto;
     return  url;

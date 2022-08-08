@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lin_transparant"
+        android:background="@color/black_overlay"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_gravity="left"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_chevron_left_white_24dp"
+        android:backgroundTint="@color/abu_abu"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tvTitleDetailApp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="16dp"
+
+            android:text="Persetujuan"
+            android:textColor="@color/main_color_black"
+            android:textSize="24sp"
+            tools:ignore="RtlSymmetry"
+            android:layout_marginBottom="8dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:background="@drawable/bg_input"
+                    android:layout_margin="16dp"
+                    android:id="@+id/lin_from_izin_mt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_weight="1"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:text="@string/nama"
+                            android:textColor="@color/second_color_black"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_nama"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/main_color_black"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padd_10"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="@string/alasan"
+                            android:textColor="@color/second_color_black"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_alasan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:textColor="@color/main_color_black"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padd_10"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Tanggal dan Waktu Pengajuan"
+                            android:textColor="@color/second_color_black"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tanggal_dan_waktu_pengajuan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:textColor="@color/main_color_black"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padd_10"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="Lama Waktu Izin"
+                            android:textColor="@color/second_color_black"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_lama_waktu_izin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:textColor="@color/main_color_black"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padd_10"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:gravity="left"
+                            android:text="Lampiran"
+                            android:textColor="@color/second_color_black"
+                            />
+
+                        <TextView
+                            android:id="@+id/tx_link_lihat_dokumen"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:text="Lihat Dokumen"
+                            android:textColor="@color/blue"
+                            android:textSize="18dp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llRiwayatPengajuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_input"
+                        android:padding="16dp"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/llCheckHRD"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/icCheckHRD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_watch_later_24_wait"
+                                android:layout_weight="8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvCheckHRD"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Menunggu HRD"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llCheckDir"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/icCheckDir"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_watch_later_24_wait"
+                                android:layout_weight="8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvCheckDir"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Menunggu Direktur"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llCheckExec"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/icCheckExec"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_watch_later_24_wait"
+                                android:layout_weight="8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvCheckExec"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Menunggu Eksekutif"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llCheckHead"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <ImageView
+                                android:id="@+id/icCheckHead"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_watch_later_24_wait"
+                                android:layout_weight="8"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvCheckHead"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="Menunggu Head/SPV"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvDetRiwayatPengajuan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Detail Riwayat Pengajuan"
+                            android:gravity="center"
+                            android:textColor="@color/blue"
+                            android:layout_marginTop="16dp"
+                            android:visibility="gone"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginTop="16dp"
+                        >
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_status_approve"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardCornerRadius="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/lin_status_approve"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:elevation="10dp"
+                                android:background="@color/abu_abu"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:padding="@dimen/padd_10"
+                                        android:layout_weight="3"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+
+                                        <TextView
+                                            android:id="@+id/tx_status"
+                                            android:textStyle="bold"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+
+                                            android:gravity="left"
+                                            android:textColor="@color/white"
+                                            android:text="Ditolak"
+                                            android:textSize="18sp" />
+
+                                        <LinearLayout
+                                            android:id="@+id/llAlasan"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical"
+                                            android:visibility="gone"
+                                            >
+
+                                            <TextView
+                                                android:layout_marginTop="5dp"
+                                                android:layout_width="wrap_content"
+
+                                                android:layout_height="match_parent"
+                                                android:gravity="start|center"
+                                                android:textColor="@color/white"
+                                                android:text="Alasan"
+                                                />
+
+                                            <TextView
+                                                android:id="@+id/tx_alasan"
+                                                android:layout_width="wrap_content"
+
+                                                android:layout_height="match_parent"
+                                                android:gravity="start|center"
+                                                android:textColor="@color/white"
+                                                android:text="Alasan penolakan"
+                                                android:textSize="16sp" />
+
+                                        </LinearLayout>
+
+                                        <TextView
+                                            android:layout_marginTop="5dp"
+                                            android:layout_width="wrap_content"
+
+                                            android:layout_height="match_parent"
+                                            android:gravity="start|center"
+                                            android:textColor="@color/white"
+                                            android:text="Tanggal dan Waktu Keputusan"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/tx_tgl_status"
+                                            android:textStyle="bold"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+
+                                            android:gravity="left"
+                                            android:textColor="@color/white"
+                                            android:text="20 Desember 2021, 13.30 - 16.30"
+                                            android:textSize="18sp" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+
+
+
+
+
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:id="@+id/lin_approve_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            >
+
+                            <Button
+                                android:elevation="@dimen/padd_10"
+                                android:id="@+id/btn_tolak"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/white"
+                                android:text="@string/tolak"
+                                android:background="@color/abu_abu"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:layout_marginRight="4dp"
+                                />
+
+                            <Button
+                                android:background="@color/greennew"
+                                android:id="@+id/btn_setuju"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="14dp"
+                                android:text="@string/setuju"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:layout_marginLeft="4dp"
+                                />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/lLDetOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            >
+
+            <Button
+                android:id="@+id/tolak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round"
+                android:backgroundTint="@color/light_grey"
+                android:text="Tolak"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_margin="16dp"
+                />
+
+            <Button
+                android:id="@+id/setuju"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padd_10"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round"
+                android:backgroundTint="@color/greennew"
+                android:text="Setuju"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:layout_margin="16dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/lLDetKeputusanAprove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:padding="16dp"
+            >
+
+            <TextView
+                android:id="@+id/txKeputusan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disetujui"
+                android:layout_marginBottom="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal dan waktu keputusan"
+                />
+
+            <TextView
+                android:id="@+id/txTglKeputusanDetAprve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07 Desember 2021, 10:02 WIB"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

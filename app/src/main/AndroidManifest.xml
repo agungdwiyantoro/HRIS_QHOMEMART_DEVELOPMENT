@@ -497,6 +497,47 @@
             </intent-filter>
             -->
         </activity>
-    </application>
+
+        <activity
+            android:name=".izin.izinOffTerlambat.IzinOffTerlambat"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".izin.izinOffTerlambat.terlambat.formIzinTerlambat"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".izin.izinOffTerlambat.terlambat.DetailIzinTerlambatEmp"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".izin.izinOffTerlambat.off.formIzinOff"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".izin.izinOffTerlambat.off.DetailIzinOffEmp"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".approve.approveOffTerlambat.Off.DetailIzinOffApprove"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".approve.approveOffTerlambat.ApproveOffTerlambat"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".approve.approveOffTerlambat.terlambat.DetailIzinTerlambatApprove"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+</application>
 
 </manifest>

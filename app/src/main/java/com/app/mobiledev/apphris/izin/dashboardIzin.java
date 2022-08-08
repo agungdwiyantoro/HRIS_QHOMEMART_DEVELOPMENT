@@ -12,15 +12,16 @@ import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.izin.izinCuti.ListInfinityCutiEmp;
 import com.app.mobiledev.apphris.izin.izinCuti.formIzinCuti;
 import com.app.mobiledev.apphris.izin.izinDinasMT.IzinDinasMT;
+import com.app.mobiledev.apphris.izin.izinOffTerlambat.IzinOffTerlambat;
 import com.app.mobiledev.apphris.izin.izinSakit.ListInfinitySakitEmp;
 import com.app.mobiledev.apphris.izin.izinSakit.formIzinSakit;
 
 public class dashboardIzin extends AppCompatActivity {
-
     TextView btn_izin_sakit;
     TextView btn_izin_meninggalkan_tugas;
     TextView btn_izin_dinas;
     TextView btn_izin_cuti;
+    TextView tv_off_dan_terlambat;
 
     TextView btn_tambah_izin_sakit;
     TextView btn_status_izin_sakit;
@@ -53,6 +54,7 @@ public class dashboardIzin extends AppCompatActivity {
         btn_izin_meninggalkan_tugas=findViewById(R.id.btn_izin_meninggalkan_tugas);
         //btn_izin_dinas=findViewById(R.id.btn_izin_dinas);
         btn_izin_cuti=findViewById(R.id.btn_izin_cuti);
+        tv_off_dan_terlambat = findViewById(R.id.btn_izin_terlambat_dan_off);
 
         btn_tambah_izin_sakit=findViewById(R.id.btn_tambah_izin_sakit);
         btn_status_izin_sakit=findViewById(R.id.btn_status_izin_sakit);
@@ -184,6 +186,15 @@ public class dashboardIzin extends AppCompatActivity {
                     linear_izin_cuti.setVisibility(View.GONE);
                 }
 
+            }
+        });
+
+
+        tv_off_dan_terlambat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toIzinOffTerlambat = new Intent(dashboardIzin.this, IzinOffTerlambat.class);
+                startActivity(toIzinOffTerlambat);
             }
         });
     }

@@ -225,5 +225,45 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
 
+    <!-- dashboard title Off dan Terlambat -->
+    <string name="dashboard_title_off_terlambat">Off dan Terlambat</string>
+    <string name="Off">OFF</string>
+    <string name="TERLAMBAT">TERLAMBAT</string>
+
+
+    <!--menu izin terlambat-->
+    <string name="jenis_terlambat">Jenis Terlambat</string>
+    <string name="straight_tanggal">Tanggal</string>
+    <string name="jam_kedatangan">Jam Kedatangan</string>
+    <string name="alasan">Alasan</string>
+    <string name="lampirkan_foto">Lampirkan Foto</string>
+    <string name="til_tanggal_terlambat">Form tanggal masih kosong</string>
+    <string name="til_jam_kedatangan_terlambat">Form jam kedatangan masih kosong </string>
+    <string name="til_lampiran_terlambat">Form lampiran foto masih kosong</string>
+    <string name="til_alasan_terlambat">Form alasan masih kosong</string>
+
+
+    <!--menu izin off-->
+    <string name="izin_off">Izin Off</string>
+    <string name="tanggal_off">Tanggal Off</string>
+    <string name="lama_off">Lama Off</string>
+    <string name="alasan_off">Alasan Off</string>
+    <string name="Izin_off_dan_terlambat">Izin Off dan Terlambat</string>
+    <string name="lampiran_foto_off">Lampiran Foto</string>
+    <string name="til_tanggal_off_kosong">Form Tanggal masih kosong</string>
+    <string name="til_alasan_off_kosong">Form alasan masih kosong</string>
+    <string name="til_lampiran_off_kosong">Form lampiran masih kosong</string>
+    <string name="surat">Surat</string>
+
+    <!--form approve off dan terlambat-->
+    <string name="OffdanTerlambat">Daftar Pengajuan Off dan Terlambat</string>
+    <string name="til_jenis_terlambat">Form jenis terlambat masih kosong</string>
+    <string name="detail_persetujuan_izin_terlambat">"Detail Persetujuan Izin Terlambat"</string>
+    <string name="detail_persetujuan_izin_off">"Detail Persetujuan Izin Off"</string>
+
+    <string name="tanggal_dan_jam_kedatangan">Tanggal dan Jam Kedatangan</string>
+
+    <string name="data_telah_terkirim">Data telah terkirim</string>
+    <string name="menu_izin_terlambat">izin terlambat</string>
 
 </resources>

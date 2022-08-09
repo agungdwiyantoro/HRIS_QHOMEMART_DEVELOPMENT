@@ -129,12 +129,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="left"
-                            android:text="Tanggal dan Waktu Pengajuan"
+                            android:text="@string/tanggal_off"
                             android:textColor="@color/second_color_black"
                             />
 
                         <TextView
-                            android:id="@+id/tv_tanggal_dan_waktu_pengajuan"
+                            android:id="@+id/tv_tanggal_off"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 
@@ -159,6 +159,30 @@
 
                         <TextView
                             android:id="@+id/tv_lama_waktu_izin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:textColor="@color/main_color_black"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/padd_10"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="@string/tanggal_dan_waktu_pengajuan"
+                            android:textColor="@color/second_color_black"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_tanggal_dan_waktu_pengajuan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 

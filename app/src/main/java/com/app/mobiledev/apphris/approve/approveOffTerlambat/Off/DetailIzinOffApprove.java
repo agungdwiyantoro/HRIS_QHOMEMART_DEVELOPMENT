@@ -60,7 +60,7 @@ public class DetailIzinOffApprove extends AppCompatActivity {
             dir_kyano, dir_name, approve_directur, dir_approve_date,
             hrd_kyano, hrd_name, approve_hrd, hrd_approve_date, jenis;
     private TextView
-            tv_nama, tv_alasan, tv_tanggal_dan_waktu_pengajuan, tv_lama_waktu_izin, tx_link_lihat_dokumen,
+            tv_nama, tv_alasan, tv_tanggal_off, tv_tanggal_dan_waktu_pengajuan, tv_lama_waktu_izin, tx_link_lihat_dokumen,
             tx_status, tx_tgl_status, tx_waktu_mt, tx_nama_dialog, tvCancelDialog, tx_catatan,
             tvSubmitDialog, tx_info_dialog, tx_jenis_izin_dialog, tx_alasan, tvTitleDetailApp,
             tvCheckHead, tvCheckExec, tvCheckDir, tvCheckHRD;
@@ -99,6 +99,7 @@ public class DetailIzinOffApprove extends AppCompatActivity {
         tvTitleDetailApp.setText(R.string.detail_persetujuan_izin_off);
 
         tv_nama = findViewById(R.id.tv_nama);
+        tv_tanggal_off = findViewById(R.id.tv_tanggal_off);
         tv_alasan = findViewById(R.id.tv_alasan);
         tv_tanggal_dan_waktu_pengajuan = findViewById(R.id.tv_tanggal_dan_waktu_pengajuan);
         tv_lama_waktu_izin = findViewById(R.id.tv_lama_waktu_izin);
@@ -489,6 +490,7 @@ public class DetailIzinOffApprove extends AppCompatActivity {
                                 Log.d(TAG, "txxx_nama " + name );
                                 tv_nama.setText(name);
                                // tx_keperluan.setText(kepentingan);
+                                tv_tanggal_off.setText(select_off);
                                 tv_alasan.setText(alasan);
                                 tv_tanggal_dan_waktu_pengajuan.setText(created_at);
                                 tv_lama_waktu_izin.setText(lama_off);

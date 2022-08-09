@@ -630,7 +630,7 @@ public class DetailIzinDinasApprove extends AppCompatActivity {
             tilAlasan.setError("Alasan menolak masih kosong");
             tilAlasan.requestFocus();
         } else {
-            updateApprove(tdano, jenis, access, _value, _comment);
+            updateApprove(tdano, jenis, _value, access, _comment);
         }
     }
 

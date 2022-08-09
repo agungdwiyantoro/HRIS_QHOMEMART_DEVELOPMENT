@@ -50,6 +50,8 @@ import java.util.Objects;
 
 public class ListInfinityMtApprove extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private final String TAG = ListInfinityMtApprove.class.getName();
+
     Spinner dropdown;
     RecyclerView recyler_izin_sakit;
     private List<modelIzinMtNew> modelIzinMtNews;
@@ -296,6 +298,9 @@ public class ListInfinityMtApprove extends Fragment implements SwipeRefreshLayou
                 recyler_izin_sakit.setHasFixedSize(true);
 
                 //getRiwayatSakitAll(itemCount, offset, items);
+                if(offset>9){
+                    return;
+                }
                 getData(itemCount, offset, items, "MT");
             }
         }, 1500);
@@ -428,9 +433,10 @@ public class ListInfinityMtApprove extends Fragment implements SwipeRefreshLayou
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("ERROR_VOLLEY_EMP: ", error.toString());
-
-                if (error.toString().equals("")) {
+                VolleyLog.e(TAG, error.toString());
+                Log.d(TAG, "ahoy " + error.getMessage());
+                if (error.getMessage()==null) {
+                    Log.d(TAG, "ahoy2 " + error.getMessage());
                     emptyHistory.setVisibility(View.VISIBLE);
                     mShimmerViewContainer.setVisibility(View.GONE);
                     recyler_izin_sakit.setVisibility(View.GONE);

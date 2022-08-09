@@ -74,6 +74,8 @@ public class ListInfinityDinasApprove extends Fragment implements SwipeRefreshLa
     int yearSelected, monthSelected, daySelected;
     long minDate, maxDate;
 
+    private final String TAG = ListInfinityDinasApprove.class.getName();
+
     FloatingActionButton fabAddMt;
 
     @Override
@@ -264,8 +266,9 @@ public class ListInfinityDinasApprove extends Fragment implements SwipeRefreshLa
             dateMonthDate = "";
             spinResult = "";
         } else {
-            //dateMonthDate = yearSelected + "-" + bil/* + "-01"*/;
+            dateMonthDate = yearSelected + "-" + bil/* + "-01"*/;
         }
+
 
         dateMonthString = yearSelected + "-" + bil + "-01";
 
@@ -296,6 +299,9 @@ public class ListInfinityDinasApprove extends Fragment implements SwipeRefreshLa
                 recyler_izin_sakit.setHasFixedSize(true);
 
                 //getRiwayatSakitAll(itemCount, offset, items);
+                if(offset>9){
+                    return;
+                }
                 getData(itemCount, offset, items, "DNS");
             }
         }, 1500);
@@ -431,8 +437,8 @@ public class ListInfinityDinasApprove extends Fragment implements SwipeRefreshLa
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("ERROR_VOLLEY_APPROVE: ", error.toString());
-
-                if (error.toString().equals("")) {
+                if (error.getMessage()==null) {
+                    Log.d(TAG, "ahoy2 " + error.getMessage());
                     emptyHistory.setVisibility(View.VISIBLE);
                     mShimmerViewContainer.setVisibility(View.GONE);
                     recyler_izin_sakit.setVisibility(View.GONE);

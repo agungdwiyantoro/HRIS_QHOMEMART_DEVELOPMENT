@@ -473,4 +473,10 @@ public class ListInfinityOffApprove extends Fragment implements SwipeRefreshLayo
         super.onPause();
         mShimmerViewContainer.stopShimmerAnimation();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        paginationCall();
+    }
 }

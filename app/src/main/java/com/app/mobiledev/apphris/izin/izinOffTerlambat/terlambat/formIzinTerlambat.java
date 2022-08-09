@@ -34,6 +34,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.UploadProgressListener;
+import com.app.mobiledev.apphris.Model.modelJenisTelat;
 import com.app.mobiledev.apphris.R;
 import com.app.mobiledev.apphris.api.api;
 import com.app.mobiledev.apphris.helperPackage.helper;
@@ -50,7 +51,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
@@ -96,6 +100,8 @@ public class formIzinTerlambat extends AppCompatActivity implements View.OnClick
     private ArrayList<String> jenisTelatList;
 
     private static String checkLampiran;
+
+    private List<modelJenisTelat> jenisTelat;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -386,7 +392,7 @@ public class formIzinTerlambat extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View v) {
                 Log.d("TAGTAG_PARAMETER", "cekInputFormInsert: " + keperluanDns + " | " + catatan + " | " + dateSend + " | " + mulaiDns + " | " + selesaiDns + " | " + chosedfile + " | " + lamp);
-//                Log.d("XHXHX", etTanggal.getText().toString() + ", " + etJamKedatangan.getText().toString() + " , " + String.valueOf(spJenisTerlambat.getSelectedItem()) + " , " +  String.valueOf(spJenisTerlambat.getSelectedItemPosition()) + " , " + etAlasan.getText() + " , " + compressedImageFile.toString());
+                Log.d("XHXHX", "J " + jenisTelat.get(0).getJenis());
                 insertIzinTerlambat(dateSend, etJamKedatangan.getText().toString(), etAlasan.getText().toString(), compressedImageFile,  checkLampiran, String.valueOf(spJenisTerlambat.getSelectedItemPosition()));
                 lin_transparant.setVisibility(View.VISIBLE);
                 dialogConfirm.dismiss();
@@ -700,12 +706,14 @@ public class formIzinTerlambat extends AppCompatActivity implements View.OnClick
                         // do anything with response
                         try {
                             jenisTelatList = new ArrayList<>();
+                            jenisTelat = new ArrayList<>();
                             //JSONObject response = new JSONObject();
                             if (response.getString("status").equals("200")) {
                                 JSONArray jsonArray = response.getJSONArray("message");
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject data = jsonArray.getJSONObject(i);
                                     jenisTelatList.add(i, data.getString("jenis") );
+                                    jenisTelat.add(i, new modelJenisTelat(data.getString("id_terlambat"), data.getString("jenis"), data.getString("keterangan")));
                                 }
                             }
                             spJenisTerlambat.setAdapter(new ArrayAdapter<String>(formIzinTerlambat.this, android.R.layout.simple_spinner_dropdown_item, jenisTelatList));

@@ -77,7 +77,7 @@ public class DetailIzinMtApprove extends AppCompatActivity {
     private FloatingActionButton fabDownloadIzin;
     private TextInputLayout tilAlasan;
     private EditText etAlasan;
-
+    private final String TAG = DetailIzinMtApprove.class.getName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -623,7 +623,7 @@ public class DetailIzinMtApprove extends AppCompatActivity {
             tilAlasan.setError("Alasan menolak masih kosong");
             tilAlasan.requestFocus();
         } else {
-            updateApprove(tjano, jenis, access, _value, _comment);
+            updateApprove(tjano, jenis, _value, access, _comment);
         }
     }
 

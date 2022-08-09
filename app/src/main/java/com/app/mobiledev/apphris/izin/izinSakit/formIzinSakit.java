@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.icu.text.SimpleDateFormat;
+import android.net.ParseException;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -128,12 +129,17 @@ public class formIzinSakit extends AppCompatActivity {
         btnCancelDate = findViewById(R.id.btnCancelDate);
 
         Calendar prevMonth = Calendar.getInstance();
+        Calendar nextDays = Calendar.getInstance();
+        Date today = new Date();
+        nextDays.setTime(today);
+        nextDays.add(Calendar.DAY_OF_WEEK, 7);
 
         prevMonth.add(Calendar.MONTH, -5);
 
         CalendarPickerView calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
-        Date today = new Date();
-        calendar.init(prevMonth.getTime(), today)
+
+
+        calendar.init(prevMonth.getTime(), nextDays.getTime())
                 .inMode(CalendarPickerView.SelectionMode.MULTIPLE);
 
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {

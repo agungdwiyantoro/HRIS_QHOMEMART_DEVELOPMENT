@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tv_informasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/informasi"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/iv_image_informasi"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/bt_keluar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/xcancelexit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_image_informasi"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+
+        android:src="@drawable/ic_informasi"
+        app:layout_constraintTop_toBottomOf="@+id/tv_informasi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_akun_ini_telah_digunakan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/akun_ini_telah_login"
+        app:layout_constraintTop_toBottomOf="@+id/iv_image_informasi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/bt_hubungi_HRD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_akun_ini_telah_digunakan"
+        android:text="@string/hubungi_HRD"
+        android:textColor="@color/hubungiHRDButton"
+        android:textStyle="bold"
+        android:background="@drawable/round_blue_button_transparant"
+
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+
+        android:layout_marginTop="15dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

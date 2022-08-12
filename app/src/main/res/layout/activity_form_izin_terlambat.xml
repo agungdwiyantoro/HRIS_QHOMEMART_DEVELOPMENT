@@ -158,7 +158,7 @@
                         android:id="@+id/sp_jenis_terlambat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/black"/>
+                        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -445,13 +445,13 @@
                 android:id="@+id/timePicker"
                 android:layout_width="300dp"
                 android:layout_height="250dp"
-                android:background="@color/black"
                 android:layout_gravity="center"
                 android:timePickerMode="spinner"
                 android:elevation="4dp"
                 android:padding="8dp"
+                android:background="@color/white"
                 android:visibility="gone"
-                >
+                android:theme="@style/AppTheme.NoActionBar">
 
                 <Button
                     android:id="@+id/btnTime"
@@ -460,8 +460,7 @@
                     android:layout_gravity="bottom"
                     android:text="Pilih"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/main_blue_color"
-                    />
+                    android:backgroundTint="@color/main_blue_color" />
 
             </TimePicker>
 

@@ -39,7 +39,9 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:icon">
-
+        <activity
+            android:name=".getSystemInformation.getSystemInformation"
+            android:exported="false" />
         <activity
             android:name=".approve.approveDinasMt.dinas.DetailIzinDinasApprove"
             android:exported="false" />
@@ -262,7 +264,6 @@
             -->
 
         </activity>
-
         <activity
             android:name=".approve.menu_approve"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -497,47 +498,38 @@
             </intent-filter>
             -->
         </activity>
-
         <activity
             android:name=".izin.izinOffTerlambat.IzinOffTerlambat"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".izin.izinOffTerlambat.terlambat.formIzinTerlambat"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".izin.izinOffTerlambat.terlambat.DetailIzinTerlambatEmp"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".izin.izinOffTerlambat.off.formIzinOff"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".izin.izinOffTerlambat.off.DetailIzinOffEmp"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".approve.approveOffTerlambat.Off.DetailIzinOffApprove"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".approve.approveOffTerlambat.ApproveOffTerlambat"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="false" />
 
         <activity
             android:name=".approve.approveOffTerlambat.terlambat.DetailIzinTerlambatApprove"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
-</application>
+    </application>
 
 </manifest>

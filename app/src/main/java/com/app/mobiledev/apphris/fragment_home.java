@@ -85,6 +85,8 @@ public class fragment_home extends Fragment {
     Dialog dialogHubungan;
     Dialog dialoginfoUpdate;
 
+    private Dialog dialogInformasi;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -186,9 +188,8 @@ public class fragment_home extends Fragment {
             public void onClick(View v) {
                 mProgressDialog.show();
 
-                cek_absen("mulai istirahat",kyano);
-
-
+                new PopUpDialogInformasi().popUpInformasi(dialogInformasi, getActivity(), getContext(), sessionmanager).show();
+                // cek_absen("mulai istirahat",kyano);
             }
         });
         selesai_istirahat.setOnClickListener(new View.OnClickListener() {

@@ -27,6 +27,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.app.mobiledev.apphris.api.api;
+import com.app.mobiledev.apphris.getSystemInformation.getSystemInformation;
 import com.app.mobiledev.apphris.helperPackage.helper;
 import com.app.mobiledev.apphris.profile.PerjanjianKerja.PerjanjianKerja;
 import com.app.mobiledev.apphris.profile.UbahFoto;
@@ -109,6 +110,7 @@ public class fragment_profile extends Fragment {
         txNama.setText(namaLengkap);
         txDivisi.setText(cekStaff);
         txHastag.setText("#" + hastag);
+
         txHastag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

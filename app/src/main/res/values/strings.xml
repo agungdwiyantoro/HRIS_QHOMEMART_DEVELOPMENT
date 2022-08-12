@@ -267,4 +267,36 @@
     <string name="menu_izin_terlambat">izin terlambat</string>
     <string name="tanggal_dan_waktu_pengajuan">Tanggal dan Waktu Pengajuan</string>
 
+    <!-- informasi pop up -->
+    <string name="informasi">Informasi</string>
+    <string name="akun_ini_telah_login">Akun ini telah login pada perangkat lainnya, silakan hubungi HRD jika ingin melakukan pemindahan akun.</string>
+    <string name="hubungi_HRD">Hubungi HRD</string>
+
+    <!-- get device information -->
+    <string name="system_information">System Information</string>
+    <string name="get_information">Get Information</string>
+    <string name="hard_soft_info">Hardware and Software Information</string>
+    <string name="serial">SERIAL: </string>
+    <string name="model">MODEL: </string>
+    <string name="id">ID: </string>
+    <string name="manufacturer">MANUFACTURER: </string>
+    <string name="brand">BRAND: </string>
+    <string name="type">TYPE: </string>
+    <string name="user">USER: </string>
+    <string name="base">BASE: </string>
+    <string name="incremental">INCREMENTAL: </string>
+    <string name="sdk">SDK: </string>
+    <string name="board">BOARD: </string>
+    <string name="host">HOST: </string>
+    <string name="fingerprint">FINGERPRINT: </string>
+    <string name="versioncode">VERSION CODE: </string>
+    <string name="title_activity_get_system_information">GetSystemInformation</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

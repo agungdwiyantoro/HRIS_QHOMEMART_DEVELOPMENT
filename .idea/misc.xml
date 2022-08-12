@@ -4,13 +4,36 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../Library/Android/sdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.30277777777777776" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/drawable-xxxhdpi/testdrawable.xml" value="0.21770833333333334" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/drawable/bg_input.xml" value="0.10462962962962963" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/drawable/bg_input_rounded.xml" value="0.10462962962962963" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/drawable/round_blue_button_transparant.xml" value="0.1140625" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout-v26/pop_up_dialog_informasi.xml" value="0.2015625" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_absensi_masuk.xml" value="0.20208333333333334" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_approve_off_terlambat.xml" value="0.25" />
         <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_dashboard_izin.xml" value="0.1" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_detail_izin_cuti_emp.xml" value="0.1515625" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_detail_izin_dns_approve.xml" value="0.1515625" />
         <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_detail_izin_off_approve.xml" value="0.25" />
         <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_detail_izin_off_emp.xml" value="0.22" />
         <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_detail_izin_sakit_approve.xml" value="0.33" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_form_cuti.xml" value="0.151171875" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_form_izin.xml" value="0.151171875" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_form_izin_cuti.xml" value="0.151171875" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_form_izin_mt.xml" value="0.17962962962962964" />
         <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_form_izin_off.xml" value="0.20208333333333334" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_form_izin_sakit.xml" value="0.25" />
         <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_form_izin_terlambat.xml" value="0.16378162450066577" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_form_poject.xml" value="0.33" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_fragment_activity.xml" value="1.3857142857142857" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_fragment_menu.xml" value="0.33" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_fragment_profile.xml" value="0.17962962962962964" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_get_system_information.xml" value="0.14" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
         <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_menu_approve.xml" value="0.1" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/activity_profil_new.xml" value="0.33" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/pop_up_dialog_informasi.xml" value="0.22" />
+        <entry key="..\:/a_d/HRIS_IZIN_TELAT/app/src/main/res/layout/spinner_list.xml" value="0.1" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/bg_input.xml" value="0.20989583333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/bg_input_rounded.xml" value="0.20989583333333334" />
         <entry key="..\:/github/hris/appHris/app/src/main/res/drawable/bg_profile.xml" value="0.20989583333333334" />

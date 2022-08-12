@@ -1,5 +1,7 @@
 package com.app.mobiledev.apphris.izin.izinSakit;
 
+import static java.util.Locale.ENGLISH;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -7,7 +9,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.icu.text.SimpleDateFormat;
+//import android.icu.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 import android.net.ParseException;
 import android.net.Uri;
 import android.os.Build;
@@ -53,7 +56,11 @@ import id.zelory.compressor.Compressor;
 public class formIzinSakit extends AppCompatActivity {
 
     private DatePickerDialog datePickerDialog;
-    private SimpleDateFormat dateFormatter;
+   // private android.icu.text.SimpleDateFormat dateFormatter;
+   // private java.text.SimpleDateFormat dateFormatterL;
+
+    private final String TAG = formIzinSakit.class.getName();
+
     private EditText edit_tgl_sakit, edit_tgl_selesai_sakit, edit_IndikasiPenyakit, edit_catatan;
     private ImageView image_surat_izin_sakit, ivTgl, imStatus;
     private TextView tx_image_name, txClose, tvGetDate, tvNamaEmp,tvDivisiEmp, tvJabatanEmp, tvOnProgress;
@@ -90,7 +97,10 @@ public class formIzinSakit extends AppCompatActivity {
         lin_transparant = findViewById(R.id.lin_transparant);
         llUploadSkd = findViewById(R.id.llUploadSkd);
         edit_IndikasiPenyakit = findViewById(R.id.edit_IndikasiPenyakit);
-        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+        //dateFormatter = new android.icu.text.SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        //dateFormatterL = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
         image_surat_izin_sakit = findViewById(R.id.image_surat_izin_sakit);
         ivTgl = findViewById(R.id.ivTgl);
         tx_image_name = findViewById(R.id.tx_image_name);
@@ -142,37 +152,59 @@ public class formIzinSakit extends AppCompatActivity {
         calendar.init(prevMonth.getTime(), nextDays.getTime())
                 .inMode(CalendarPickerView.SelectionMode.MULTIPLE);
 
-        calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onDateSelected(Date date) {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N){
+            Log.d(TAG, "LOLLIPOP POP POP POP");
+            calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
+                @Override
+                public void onDateSelected(Date date) {
+                    java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd", ENGLISH);
+                    String clearFormatDate = dateFormat.format(date);
+                    list.add(clearFormatDate);
+                }
 
-                android.icu.text.SimpleDateFormat dateFormat = new android.icu.text.SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                String clearFormatDate = dateFormat.format(date);
-                System.out.println("Date :" + clearFormatDate);
+                @Override
+                public void onDateUnselected(Date date) {
+                    java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd", ENGLISH);
+                    String clearFormatDate = dateFormat.format(dateFormat);
+                    list.remove(clearFormatDate);
+                }
+            });
+        }
 
-                Toast.makeText(formIzinSakit.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Log.d(TAG, "NOUGHAT  GHAT GHAT");
+            calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onDateSelected(Date date) {
 
-                Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
+                    android.icu.text.SimpleDateFormat dateFormat = new android.icu.text.SimpleDateFormat("yyyy-MM-dd", ENGLISH);
+                    String clearFormatDate = dateFormat.format(date);
+                    System.out.println("Date :" + clearFormatDate);
 
-                list.add(clearFormatDate);
+                    Toast.makeText(formIzinSakit.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
 
-            }
+                    Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
 
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onDateUnselected(Date date) {
-                android.icu.text.SimpleDateFormat dateFormat = new android.icu.text.SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                String clearFormatDate = dateFormat.format(date);
-                System.out.println("Date :" + clearFormatDate);
+                    list.add(clearFormatDate);
 
-                Toast.makeText(formIzinSakit.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
+                }
 
-                Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onDateUnselected(Date date) {
+                    android.icu.text.SimpleDateFormat dateFormat = new android.icu.text.SimpleDateFormat("yyyy-MM-dd", ENGLISH);
+                    String clearFormatDate = dateFormat.format(date);
+                    System.out.println("Date :" + clearFormatDate);
 
-                list.remove(clearFormatDate);
-            }
-        });
+                    Toast.makeText(formIzinSakit.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
+
+                    Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
+
+                    list.remove(clearFormatDate);
+                }
+            });
+        }
 
         btnCancelDate.setOnClickListener(v -> {
 

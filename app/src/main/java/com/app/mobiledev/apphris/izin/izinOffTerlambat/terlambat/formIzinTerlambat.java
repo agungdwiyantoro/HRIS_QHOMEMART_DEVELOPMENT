@@ -128,10 +128,7 @@ public class formIzinTerlambat extends AppCompatActivity implements View.OnClick
                 "1", "2", "3", "4", "5", "6", "7"
         };
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arraySpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spJenisTerlambat.setAdapter(adapter);
+
 
         imStatus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -716,7 +713,7 @@ public class formIzinTerlambat extends AppCompatActivity implements View.OnClick
                                     jenisTelat.add(i, new modelJenisTelat(data.getString("id_terlambat"), data.getString("jenis"), data.getString("keterangan")));
                                 }
                             }
-                            spJenisTerlambat.setAdapter(new ArrayAdapter<String>(formIzinTerlambat.this, android.R.layout.simple_spinner_dropdown_item, jenisTelatList));
+                            spJenisTerlambat.setAdapter(new ArrayAdapter<String>(formIzinTerlambat.this, R.layout.spinner_list, jenisTelatList));
                             spJenisTerlambat.setSelection(0);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -729,5 +726,12 @@ public class formIzinTerlambat extends AppCompatActivity implements View.OnClick
                         // handle error
                     }
                 });
+/*
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.spinner_list, jenisTelatList);
+        adapter.setDropDownViewResource(R.layout.spinner_list);
+        spJenisTerlambat.setAdapter(adapter);
+
+ */
     }
 }

@@ -1,6 +1,7 @@
 package com.app.mobiledev.apphris;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -102,6 +103,7 @@ public class mulai_istirahat extends AppCompatActivity implements OnMapReadyCall
     private  Location mLastLocation;
 
 
+    private Dialog dialogInformasi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +139,7 @@ public class mulai_istirahat extends AppCompatActivity implements OnMapReadyCall
         btnAbsen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String lokasi=tvLokasi.getText().toString();
                 try {
                     if(imageFoto==null){
@@ -201,6 +204,7 @@ public class mulai_istirahat extends AppCompatActivity implements OnMapReadyCall
                     helper.showMsg(mulai_istirahat.this,"","Lokasi anda belum  terdeteksi \n pastikan gps anda aktif\n coba restart aplikasi",helper.WARNING_TYPE);
                     mProgressDialog.dismiss();
                 }
+
 
             }
         });

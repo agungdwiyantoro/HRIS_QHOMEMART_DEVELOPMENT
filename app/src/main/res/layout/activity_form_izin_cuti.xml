@@ -239,9 +239,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:elevation="8dp"
-                        android:popupElevation="8dp"
-                        android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-                        />
+                        android:popupElevation="8dp" />
 
                 </LinearLayout>
 

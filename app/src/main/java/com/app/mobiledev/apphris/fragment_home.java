@@ -188,8 +188,8 @@ public class fragment_home extends Fragment {
             public void onClick(View v) {
                 mProgressDialog.show();
 
-                new PopUpDialogInformasi().popUpInformasi(dialogInformasi, getActivity(), getContext(), sessionmanager).show();
-                // cek_absen("mulai istirahat",kyano);
+                //new PopUpDialogInformasi().popUpInformasi(dialogInformasi, getActivity(), getContext(), sessionmanager).show();
+                 cek_absen("mulai istirahat",kyano);
             }
         });
         selesai_istirahat.setOnClickListener(new View.OnClickListener() {

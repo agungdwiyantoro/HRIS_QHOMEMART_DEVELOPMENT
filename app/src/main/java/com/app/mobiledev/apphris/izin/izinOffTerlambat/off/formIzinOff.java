@@ -164,35 +164,45 @@ public class formIzinOff extends AppCompatActivity {
                 .inMode(CalendarPickerView.SelectionMode.MULTIPLE);
 
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
-                                               @RequiresApi(api = Build.VERSION_CODES.N)
-                                               @Override
-                                               public void onDateSelected(Date date) {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDateSelected(Date date) {
 
-                                                   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                                                   String clearFormatDate = dateFormat.format(date);
-                                                   System.out.println("Date :" + clearFormatDate);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
-                                                   //Toast.makeText(formIzinCuti.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
+                String clearFormatDate = dateFormat.format(date);
 
-                                                   Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
+                System.out.println("Date :" + clearFormatDate);
 
-                                                   list.add(clearFormatDate);
 
-                                               }
+                //Toast.makeText(formIzinCuti.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
 
-                                               @Override
-                                               public void onDateUnselected(Date date) {
-                                                   SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                                                   String clearFormatDate = dateFormat.format(date);
-                                                   System.out.println("Date :" + clearFormatDate);
 
-                                                   //Toast.makeText(formIzinCuti.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
+                Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
 
-                                                   Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
 
-                                                   list.remove(clearFormatDate);
-                                               }
-                                           });
+                list.add(clearFormatDate);
+
+
+            }
+
+
+            @Override
+
+            public void onDateUnselected(Date date) {
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+
+                String clearFormatDate = dateFormat.format(date);
+
+                System.out.println("Date :" + clearFormatDate);
+
+
+                //Toast.makeText(formIzinCuti.this, dateFormat.format(date), Toast.LENGTH_SHORT).show();
+                Log.d("TAG_DATE_SELECTED", "onDateSelected: " + clearFormatDate);
+                list.remove(clearFormatDate);
+            }
+        });
 
 
         pbUpload = findViewById(R.id.pbUpload);

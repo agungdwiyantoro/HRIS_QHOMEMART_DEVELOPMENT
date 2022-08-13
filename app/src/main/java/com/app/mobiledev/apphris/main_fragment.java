@@ -203,8 +203,6 @@ public class main_fragment extends AppCompatActivity implements BottomNavigation
         requestReadPhoneStatePermission();
         getInformasiKaryawan(kyano);
         cekTokenFCM(sessionmanager.getNik(), tokenFcm);
-
-
     }
 
     private InstallStateUpdatedListener installStateUpdatedListener = new InstallStateUpdatedListener() {
